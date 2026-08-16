@@ -3,36 +3,52 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>2DKR — Hub & Projets</title>
+  <title>2DKR — Official Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0b0f19;
-      --card-bg: #131a2a;
-      --accent-blue: #0088ff;
-      --accent-purple: #7928ca;
-      --discord-color: #5865f2;
-      --text-main: #f1f5f9;
-      --text-muted: #94a3b8;
-      --border-color: rgba(255, 255, 255, 0.08);
+      --bg-dark: #050811;
+      --card-bg: rgba(10, 16, 30, 0.75);
+      --neon-cyan: #00d9ff;
+      --neon-blue: #0077ff;
+      --electric-glow: rgba(0, 217, 255, 0.4);
+      --text-main: #f0f6ff;
+      --text-muted: #7b8ea8;
+      --border-glow: rgba(0, 217, 255, 0.2);
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      font-family: 'Rajdhani', sans-serif;
     }
 
     body {
-      background-color: var(--bg);
+      background-color: var(--bg-dark);
       color: var(--text-main);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      background-image: 
-        radial-gradient(circle at 15% 15%, rgba(0, 136, 255, 0.12) 0%, transparent 40%),
-        radial-gradient(circle at 85% 85%, rgba(121, 40, 202, 0.12) 0%, transparent 40%);
-      background-attachment: fixed;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Background FX (Vortex & Electric Glow) */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(0, 217, 255, 0.15) 0%, rgba(0, 119, 255, 0.08) 40%, transparent 70%);
+      filter: blur(60px);
+      z-index: -1;
+      pointer-events: none;
     }
 
     /* Navigation */
@@ -41,88 +57,99 @@
       justify-content: space-between;
       align-items: center;
       padding: 20px 8%;
-      background: rgba(11, 15, 25, 0.8);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border-color);
+      background: rgba(5, 8, 17, 0.85);
+      backdrop-filter: blur(15px);
+      border-bottom: 1px solid var(--border-glow);
       position: sticky;
       top: 0;
       z-index: 100;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
     }
 
     .logo {
-      font-size: 1.5rem;
-      font-weight: 800;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 900;
       text-decoration: none;
       color: #fff;
-      letter-spacing: 1px;
-      background: linear-gradient(135deg, #0088ff, #7928ca);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      letter-spacing: 2px;
+      text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-blue);
     }
 
     .nav-links {
       display: flex;
-      gap: 20px;
+      gap: 25px;
       align-items: center;
     }
 
     .nav-links a {
       color: var(--text-muted);
       text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s ease;
+      font-weight: 600;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
     }
 
     .nav-links a:hover {
-      color: #fff;
-    }
-
-    .btn-discord-nav {
-      background: var(--discord-color);
-      color: #fff !important;
-      padding: 8px 16px;
-      border-radius: 8px;
-      font-weight: 600 !important;
-      box-shadow: 0 4px 14px rgba(88, 101, 242, 0.3);
-      transition: transform 0.2s ease, box-shadow 0.2s ease !important;
-    }
-
-    .btn-discord-nav:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(88, 101, 242, 0.5);
+      color: var(--neon-cyan);
+      text-shadow: 0 0 8px var(--neon-cyan);
     }
 
     /* Hero Section */
     .hero {
       text-align: center;
-      padding: 80px 20px 50px 20px;
-      max-width: 800px;
+      padding: 90px 20px 40px 20px;
+      max-width: 900px;
       margin: 0 auto;
     }
 
+    .logo-badge {
+      display: inline-block;
+      width: 110px;
+      height: 110px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, #00d9ff, #0055ff);
+      padding: 3px;
+      box-shadow: 0 0 30px var(--electric-glow);
+      margin-bottom: 25px;
+    }
+
+    .logo-badge img {
+      width: 100%;
+      height: 100%;
+      border-radius: 19px;
+      object-fit: cover;
+    }
+
     .hero h1 {
-      font-size: 3rem;
-      font-weight: 800;
-      line-height: 1.2;
-      margin-bottom: 20px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      line-height: 1.1;
+      margin-bottom: 15px;
     }
 
     .hero h1 span {
-      background: linear-gradient(135deg, #0088ff 0%, #00f2fe 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: var(--neon-cyan);
+      text-shadow: 0 0 20px rgba(0, 217, 255, 0.6);
     }
 
     .hero p {
-      font-size: 1.15rem;
+      font-size: 1.25rem;
       color: var(--text-muted);
-      line-height: 1.6;
+      max-width: 650px;
+      margin: 0 auto;
+      font-weight: 500;
     }
 
-    /* Section Projets & Communauté */
+    /* Cards Section */
     .container {
-      max-width: 1100px;
-      margin: 0 auto 60px auto;
+      max-width: 1050px;
+      margin: 40px auto 60px auto;
       padding: 0 20px;
       width: 100%;
     }
@@ -130,91 +157,114 @@
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 25px;
+      gap: 30px;
     }
 
     .card {
       background: var(--card-bg);
-      border: 1px solid var(--border-color);
+      border: 1px solid var(--border-glow);
       border-radius: 16px;
-      padding: 30px;
+      padding: 35px 30px;
       position: relative;
       overflow: hidden;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      backdrop-filter: blur(10px);
+      transition: all 0.4s ease;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+      opacity: 0;
+      transition: opacity 0.4s ease;
     }
 
     .card:hover {
-      transform: translateY(-5px);
-      border-color: rgba(0, 136, 255, 0.4);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      transform: translateY(-7px);
+      border-color: var(--neon-cyan);
+      box-shadow: 0 10px 35px rgba(0, 217, 255, 0.25);
+    }
+
+    .card:hover::before {
+      opacity: 1;
     }
 
     .card-tag {
       align-self: flex-start;
-      padding: 4px 12px;
-      border-radius: 20px;
-      font-size: 0.75rem;
+      padding: 4px 14px;
+      border-radius: 6px;
+      font-size: 0.85rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 15px;
+      letter-spacing: 1.5px;
+      margin-bottom: 20px;
     }
 
     .tag-discord {
-      background: rgba(88, 101, 242, 0.15);
+      background: rgba(88, 101, 242, 0.2);
       color: #5865f2;
-      border: 1px solid rgba(88, 101, 242, 0.3);
+      border: 1px solid rgba(88, 101, 242, 0.4);
     }
 
     .tag-dev {
-      background: rgba(245, 158, 11, 0.15);
-      color: #f59e0b;
-      border: 1px solid rgba(245, 158, 11, 0.3);
+      background: rgba(0, 217, 255, 0.15);
+      color: var(--neon-cyan);
+      border: 1px solid var(--border-glow);
     }
 
     .card h2 {
-      font-size: 1.5rem;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.6rem;
       margin-bottom: 12px;
-      color: #fff;
+      letter-spacing: 1px;
     }
 
     .card p {
       color: var(--text-muted);
+      font-size: 1.05rem;
       line-height: 1.5;
-      font-size: 0.95rem;
-      margin-bottom: 25px;
+      margin-bottom: 30px;
     }
 
+    /* Buttons */
     .btn {
       display: inline-block;
       width: 100%;
       text-align: center;
-      padding: 12px 20px;
-      border-radius: 10px;
+      padding: 14px 20px;
+      border-radius: 8px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.95rem;
       font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
       text-decoration: none;
-      transition: all 0.2s ease;
+      transition: all 0.3s ease;
       cursor: pointer;
     }
 
-    .btn-discord {
-      background: var(--discord-color);
-      color: #fff;
-      box-shadow: 0 4px 15px rgba(88, 101, 242, 0.3);
+    .btn-electric {
+      background: linear-gradient(135deg, #00d9ff, #0066ff);
+      color: #000;
+      box-shadow: 0 0 20px rgba(0, 217, 255, 0.4);
     }
 
-    .btn-discord:hover {
-      background: #4752c4;
-      box-shadow: 0 6px 20px rgba(88, 101, 242, 0.5);
+    .btn-electric:hover {
+      box-shadow: 0 0 35px rgba(0, 217, 255, 0.8);
+      transform: scale(1.02);
     }
 
     .btn-disabled {
-      background: rgba(255, 255, 255, 0.05);
-      color: #64748b;
-      border: 1px solid var(--border-color);
+      background: rgba(255, 255, 255, 0.03);
+      color: #4a5d78;
+      border: 1px solid rgba(255, 255, 255, 0.08);
       cursor: not-allowed;
     }
 
@@ -222,10 +272,11 @@
     footer {
       margin-top: auto;
       text-align: center;
-      padding: 30px 20px;
-      border-top: 1px solid var(--border-color);
+      padding: 25px 20px;
+      border-top: 1px solid var(--border-glow);
       color: var(--text-muted);
-      font-size: 0.85rem;
+      font-size: 0.95rem;
+      letter-spacing: 1px;
     }
   </style>
 </head>
@@ -236,14 +287,17 @@
     <a href="#" class="logo">2DKR</a>
     <div class="nav-links">
       <a href="#projets">Projets</a>
-      <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn-discord-nav">Rejoindre Discord</a>
+      <a href="https://discord.gg/mDpZT73FFG" target="_blank" style="color: var(--neon-cyan);">Discord</a>
     </div>
   </nav>
 
   <!-- Hero Section -->
   <section class="hero">
-    <h1>Bienvenue sur l'espace <span>2DKR</span></h1>
-    <p>Retrouve nos projets, nos configurations serveurs et rejoins notre communauté Discord pour ne rien rater des futures nouveautés.</p>
+    <div class="logo-badge">
+      <img src="https://cdn.discordapp.com/icons/123456789/dummy.png" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=2DKR&background=00d9ff&color=000&bold=true&size=128'" alt="2DKR Logo">
+    </div>
+    <h1>ESPACE <span>2DKR</span></h1>
+    <p>Plateforme officielle — Accède à la communauté Discord, aux outils et aux prochains projets.</p>
   </section>
 
   <!-- Cards Section -->
@@ -253,21 +307,21 @@
       <!-- Carte Discord -->
       <div class="card">
         <div>
-          <span class="card-tag tag-discord">Communauté</span>
-          <h2>Serveur Discord</h2>
-          <p>Rejoins le serveur officiel pour échanger avec la communauté, suivre les actus en direct et obtenir du support.</p>
+          <span class="card-tag tag-discord">COMMUNAUTÉ</span>
+          <h2>SERVEUR DISCORD</h2>
+          <p>Rejoins la communauté officielle pour suivre le développement, participer aux discussions et ouvrir un ticket.</p>
         </div>
-        <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-discord">Rejoindre le Discord</a>
+        <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-electric">REJOINDRER LE DISCORD</a>
       </div>
 
-      <!-- Carte Cherax / Projet en dev -->
+      <!-- Carte Cherax -->
       <div class="card">
         <div>
-          <span class="card-tag tag-dev">⚡ Bientôt Disponible</span>
-          <h2>Projet Cherax</h2>
-          <p>Section dédiée en cours de préparation. Les demandes et informations concernant Cherax seront accessibles très prochainement.</p>
+          <span class="card-tag tag-dev">⚡ BIENTÔT DISPONIBLE</span>
+          <h2>CHERAX VIP</h2>
+          <p>Module et services en cours de configuration. L'accès aux demandes sera débloqué très prochainement.</p>
         </div>
-        <button class="btn btn-disabled" disabled>En développement...</button>
+        <button class="btn btn-disabled" disabled>EN DÉVELOPPEMENT...</button>
       </div>
 
     </div>
@@ -275,7 +329,7 @@
 
   <!-- Footer -->
   <footer>
-    © 2026 2DKR — Tous droits réservés.
+    © 2026 2DKR — ALL RIGHTS RESERVED.
   </footer>
 
 </body>
