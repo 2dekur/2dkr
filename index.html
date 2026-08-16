@@ -3,27 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>2DKR — Official Hub</title>
+  <title>2DKR — Site Officiel de Dekur</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800;900&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-dark: #050811;
-      --card-bg: rgba(10, 16, 30, 0.75);
-      --neon-cyan: #00d9ff;
-      --neon-blue: #0077ff;
-      --electric-glow: rgba(0, 217, 255, 0.4);
-      --text-main: #f0f6ff;
-      --text-muted: #7b8ea8;
-      --border-glow: rgba(0, 217, 255, 0.2);
+      --bg-dark: #08080a;
+      --card-bg: rgba(18, 18, 22, 0.85);
+      --gold-primary: #d4af37;
+      --gold-light: #f3e5ab;
+      --gold-glow: rgba(212, 175, 55, 0.35);
+      --discord-color: #5865f2;
+      --text-main: #f8f8fc;
+      --text-muted: #a0a0b0;
+      --border-gold: rgba(212, 175, 55, 0.25);
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Rajdhani', sans-serif;
+      font-family: 'Montserrat', sans-serif;
     }
 
     body {
@@ -36,17 +37,17 @@
       position: relative;
     }
 
-    /* Background FX (Vortex & Electric Glow) */
+    /* Fond Ambiance Dorée */
     body::before {
       content: '';
       position: fixed;
-      top: 50%;
+      top: 30%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(0, 217, 255, 0.15) 0%, rgba(0, 119, 255, 0.08) 40%, transparent 70%);
-      filter: blur(60px);
+      width: 650px;
+      height: 650px;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.12) 0%, rgba(243, 229, 171, 0.03) 45%, transparent 70%);
+      filter: blur(80px);
       z-index: -1;
       pointer-events: none;
     }
@@ -57,23 +58,25 @@
       justify-content: space-between;
       align-items: center;
       padding: 20px 8%;
-      background: rgba(5, 8, 17, 0.85);
+      background: rgba(8, 8, 10, 0.9);
       backdrop-filter: blur(15px);
-      border-bottom: 1px solid var(--border-glow);
+      border-bottom: 1px solid var(--border-gold);
       position: sticky;
       top: 0;
       z-index: 100;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.8);
     }
 
     .logo {
-      font-family: 'Orbitron', sans-serif;
+      font-family: 'Cinzel', serif;
       font-size: 1.8rem;
       font-weight: 900;
       text-decoration: none;
-      color: #fff;
-      letter-spacing: 2px;
-      text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-blue);
+      letter-spacing: 3px;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold-primary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 15px var(--gold-glow);
     }
 
     .nav-links {
@@ -86,15 +89,15 @@
       color: var(--text-muted);
       text-decoration: none;
       font-weight: 600;
-      font-size: 1.1rem;
+      font-size: 0.95rem;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 1.5px;
       transition: all 0.3s ease;
     }
 
     .nav-links a:hover {
-      color: var(--neon-cyan);
-      text-shadow: 0 0 8px var(--neon-cyan);
+      color: var(--gold-light);
+      text-shadow: 0 0 10px var(--gold-glow);
     }
 
     /* Hero Section */
@@ -109,41 +112,43 @@
       display: inline-block;
       width: 110px;
       height: 110px;
-      border-radius: 22px;
-      background: linear-gradient(135deg, #00d9ff, #0055ff);
-      padding: 3px;
-      box-shadow: 0 0 30px var(--electric-glow);
+      border-radius: 24px;
+      background: linear-gradient(135deg, #f3e5ab, #d4af37, #996515);
+      padding: 2px;
+      box-shadow: 0 0 35px var(--gold-glow);
       margin-bottom: 25px;
     }
 
     .logo-badge img {
       width: 100%;
       height: 100%;
-      border-radius: 19px;
+      border-radius: 22px;
       object-fit: cover;
     }
 
     .hero h1 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 3.5rem;
-      font-weight: 900;
+      font-family: 'Cinzel', serif;
+      font-size: 3.2rem;
+      font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: 3px;
+      letter-spacing: 4px;
       line-height: 1.1;
-      margin-bottom: 15px;
+      margin-bottom: 18px;
     }
 
     .hero h1 span {
-      color: var(--neon-cyan);
-      text-shadow: 0 0 20px rgba(0, 217, 255, 0.6);
+      background: linear-gradient(135deg, #ffffff 0%, var(--gold-light) 50%, var(--gold-primary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     .hero p {
-      font-size: 1.25rem;
+      font-size: 1.15rem;
       color: var(--text-muted);
       max-width: 650px;
       margin: 0 auto;
-      font-weight: 500;
+      font-weight: 400;
+      line-height: 1.6;
     }
 
     /* Cards Section */
@@ -162,7 +167,7 @@
 
     .card {
       background: var(--card-bg);
-      border: 1px solid var(--border-glow);
+      border: 1px solid var(--border-gold);
       border-radius: 16px;
       padding: 35px 30px;
       position: relative;
@@ -170,7 +175,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(12px);
       transition: all 0.4s ease;
     }
 
@@ -181,15 +186,15 @@
       left: 0;
       width: 100%;
       height: 2px;
-      background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+      background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
       opacity: 0;
       transition: opacity 0.4s ease;
     }
 
     .card:hover {
       transform: translateY(-7px);
-      border-color: var(--neon-cyan);
-      box-shadow: 0 10px 35px rgba(0, 217, 255, 0.25);
+      border-color: var(--gold-primary);
+      box-shadow: 0 10px 35px rgba(212, 175, 55, 0.2);
     }
 
     .card:hover::before {
@@ -198,9 +203,9 @@
 
     .card-tag {
       align-self: flex-start;
-      padding: 4px 14px;
+      padding: 5px 14px;
       border-radius: 6px;
-      font-size: 0.85rem;
+      font-size: 0.75rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 1.5px;
@@ -208,28 +213,28 @@
     }
 
     .tag-discord {
-      background: rgba(88, 101, 242, 0.2);
+      background: rgba(88, 101, 242, 0.15);
       color: #5865f2;
-      border: 1px solid rgba(88, 101, 242, 0.4);
+      border: 1px solid rgba(88, 101, 242, 0.3);
     }
 
-    .tag-dev {
-      background: rgba(0, 217, 255, 0.15);
-      color: var(--neon-cyan);
-      border: 1px solid var(--border-glow);
+    .tag-gold {
+      background: rgba(212, 175, 55, 0.12);
+      color: var(--gold-light);
+      border: 1px solid var(--border-gold);
     }
 
     .card h2 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1.6rem;
+      font-family: 'Cinzel', serif;
+      font-size: 1.5rem;
       margin-bottom: 12px;
       letter-spacing: 1px;
     }
 
     .card p {
       color: var(--text-muted);
-      font-size: 1.05rem;
-      line-height: 1.5;
+      font-size: 0.95rem;
+      line-height: 1.6;
       margin-bottom: 30px;
     }
 
@@ -240,30 +245,30 @@
       text-align: center;
       padding: 14px 20px;
       border-radius: 8px;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 0.95rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.85rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1.5px;
+      letter-spacing: 2px;
       text-decoration: none;
       transition: all 0.3s ease;
       cursor: pointer;
     }
 
-    .btn-electric {
-      background: linear-gradient(135deg, #00d9ff, #0066ff);
-      color: #000;
-      box-shadow: 0 0 20px rgba(0, 217, 255, 0.4);
+    .btn-gold {
+      background: linear-gradient(135deg, #f3e5ab 0%, #d4af37 100%);
+      color: #08080a;
+      box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
     }
 
-    .btn-electric:hover {
-      box-shadow: 0 0 35px rgba(0, 217, 255, 0.8);
+    .btn-gold:hover {
+      box-shadow: 0 6px 30px rgba(212, 175, 55, 0.6);
       transform: scale(1.02);
     }
 
     .btn-disabled {
       background: rgba(255, 255, 255, 0.03);
-      color: #4a5d78;
+      color: #505060;
       border: 1px solid rgba(255, 255, 255, 0.08);
       cursor: not-allowed;
     }
@@ -273,9 +278,9 @@
       margin-top: auto;
       text-align: center;
       padding: 25px 20px;
-      border-top: 1px solid var(--border-glow);
+      border-top: 1px solid var(--border-gold);
       color: var(--text-muted);
-      font-size: 0.95rem;
+      font-size: 0.85rem;
       letter-spacing: 1px;
     }
   </style>
@@ -287,17 +292,17 @@
     <a href="#" class="logo">2DKR</a>
     <div class="nav-links">
       <a href="#projets">Projets</a>
-      <a href="https://discord.gg/mDpZT73FFG" target="_blank" style="color: var(--neon-cyan);">Discord</a>
+      <a href="https://discord.gg/mDpZT73FFG" target="_blank" style="color: var(--gold-light);">Discord</a>
     </div>
   </nav>
 
   <!-- Hero Section -->
   <section class="hero">
     <div class="logo-badge">
-      <img src="https://cdn.discordapp.com/icons/123456789/dummy.png" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=2DKR&background=00d9ff&color=000&bold=true&size=128'" alt="2DKR Logo">
+      <img src="https://ui-avatars.com/api/?name=2DKR&background=d4af37&color=000&bold=true&size=128" alt="2DKR Logo">
     </div>
-    <h1>ESPACE <span>2DKR</span></h1>
-    <p>Plateforme officielle — Accède à la communauté Discord, aux outils et aux prochains projets.</p>
+    <h1>HUB <span>2DKR</span></h1>
+    <p>Accès exclusif à la communauté, aux serveurs et aux prochaines fonctionnalités en développement.</p>
   </section>
 
   <!-- Cards Section -->
@@ -308,18 +313,18 @@
       <div class="card">
         <div>
           <span class="card-tag tag-discord">COMMUNAUTÉ</span>
-          <h2>SERVEUR DISCORD</h2>
-          <p>Rejoins la communauté officielle pour suivre le développement, participer aux discussions et ouvrir un ticket.</p>
+          <h2>COMMUNAUTÉ DISCORD</h2>
+          <p>Rejoins le serveur officiel pour échanger avec l'équipe, participer aux événements et ouvrir un ticket.</p>
         </div>
-        <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-electric">REJOINDRER LE DISCORD</a>
+        <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-gold">REJOINDRER LE DISCORD</a>
       </div>
 
       <!-- Carte Cherax -->
       <div class="card">
         <div>
-          <span class="card-tag tag-dev">⚡ BIENTÔT DISPONIBLE</span>
-          <h2>CHERAX VIP</h2>
-          <p>Module et services en cours de configuration. L'accès aux demandes sera débloqué très prochainement.</p>
+          <span class="card-tag tag-gold">⚡ BIENTÔT DISPONIBLE</span>
+          <h2>PROJET CHERAX</h2>
+          <p>Module et configurations en cours de finalisation. L'accès aux demandes sera ouvert très prochainement.</p>
         </div>
         <button class="btn btn-disabled" disabled>EN DÉVELOPPEMENT...</button>
       </div>
