@@ -80,6 +80,17 @@
       color: var(--text-main);
     }
 
+    /* Effet de zoom sur les icônes de la navbar en haut à droite */
+    .nav-social-icon {
+      font-size: 1.2rem;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+      display: inline-block;
+    }
+
+    .nav-social-icon:hover {
+      transform: scale(1.2);
+    }
+
     /* Hero Section */
     .hero {
       text-align: center;
@@ -138,7 +149,7 @@
     }
 
     .badge-dev-mode:hover .extra-text {
-      max-width: 150px; /* S'allonge pour laisser passer le texte */
+      max-width: 150px;
       opacity: 1;
     }
 
@@ -308,8 +319,8 @@
     <div class="nav-links">
       <a href="#projets">Services</a>
       <a href="#paiements">Paiements</a>
-      <a href="https://www.youtube.com/@Dekur7" target="_blank" style="color: #ff0000; font-size: 1.2rem; transition: opacity 0.2s;" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
-      <a href="https://discord.gg/mDpZT73FFG" target="_blank" style="color: #5865f2; font-size: 1.2rem; transition: opacity 0.2s;" title="Discord"><i class="fa-brands fa-discord"></i></a>
+      <a href="https://www.youtube.com/@Dekur7" target="_blank" class="nav-social-icon" style="color: #ff0000;" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+      <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="nav-social-icon" style="color: #5865f2;" title="Discord"><i class="fa-brands fa-discord"></i></a>
     </div>
   </nav>
 
