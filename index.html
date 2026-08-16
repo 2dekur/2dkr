@@ -1,198 +1,282 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2dkr - Official</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2DKR — Hub & Projets</title>
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --card-bg: #131a2a;
+      --accent-blue: #0088ff;
+      --accent-purple: #7928ca;
+      --discord-color: #5865f2;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --border-color: rgba(255, 255, 255, 0.08);
+    }
 
-        body {
-            background-color: #0b0f19;
-            color: #f3f4f6;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
 
-        /* Navbar */
-        nav {
-            width: 100%;
-            padding: 20px 10%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid #1e293b;
-            position: fixed;
-            top: 0;
-            z-index: 100;
-        }
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(0, 136, 255, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(121, 40, 202, 0.12) 0%, transparent 40%);
+      background-attachment: fixed;
+    }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #38bdf8;
-            text-decoration: none;
-        }
+    /* Navigation */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 8%;
+      background: rgba(11, 15, 25, 0.8);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
 
-        .nav-links a {
-            color: #94a3b8;
-            text-decoration: none;
-            margin-left: 20px;
-            transition: color 0.3s;
-        }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      text-decoration: none;
+      color: #fff;
+      letter-spacing: 1px;
+      background: linear-gradient(135deg, #0088ff, #7928ca);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
-        .nav-links a:hover {
-            color: #38bdf8;
-        }
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
 
-        /* Hero Section */
-        .hero {
-            margin-top: 140px;
-            text-align: center;
-            max-width: 700px;
-            padding: 0 20px;
-        }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
 
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 15px;
-            background: linear-gradient(90deg, #38bdf8, #818cf8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+    .nav-links a:hover {
+      color: #fff;
+    }
 
-        .hero p {
-            font-size: 1.1rem;
-            color: #94a3b8;
-            margin-bottom: 30px;
-            line-height: 1.6;
-        }
+    .btn-discord-nav {
+      background: var(--discord-color);
+      color: #fff !important;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: 600 !important;
+      box-shadow: 0 4px 14px rgba(88, 101, 242, 0.3);
+      transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+    }
 
-        /* Buttons & Links */
-        .btn-group {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
+    .btn-discord-nav:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(88, 101, 242, 0.5);
+    }
 
-        .btn {
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 80px 20px 50px 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
 
-        .btn-primary {
-            background-color: #38bdf8;
-            color: #0f172a;
-        }
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
 
-        .btn-primary:hover {
-            background-color: #7dd3fc;
-            transform: translateY(-2px);
-        }
+    .hero h1 span {
+      background: linear-gradient(135deg, #0088ff 0%, #00f2fe 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
-        .btn-secondary {
-            background-color: #1e293b;
-            color: #f3f4f6;
-            border: 1px solid #334155;
-        }
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
 
-        .btn-secondary:hover {
-            background-color: #334155;
-            transform: translateY(-2px);
-        }
+    /* Section Projets & Communauté */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto 60px auto;
+      padding: 0 20px;
+      width: 100%;
+    }
 
-        /* Cards Grid */
-        .cards-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            width: 80%;
-            max-width: 900px;
-            margin-top: 60px;
-            margin-bottom: 50px;
-        }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 25px;
+    }
 
-        .card {
-            background: #111827;
-            padding: 25px;
-            border-radius: 12px;
-            border: 1px solid #1f2937;
-            transition: border-color 0.3s;
-        }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 30px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
 
-        .card:hover {
-            border-color: #38bdf8;
-        }
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(0, 136, 255, 0.4);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
 
-        .card h3 {
-            color: #38bdf8;
-            margin-bottom: 10px;
-        }
+    .card-tag {
+      align-self: flex-start;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 15px;
+    }
 
-        .card p {
-            color: #9ca3af;
-            font-size: 0.95rem;
-        }
+    .tag-discord {
+      background: rgba(88, 101, 242, 0.15);
+      color: #5865f2;
+      border: 1px solid rgba(88, 101, 242, 0.3);
+    }
 
-        footer {
-            margin-top: auto;
-            padding: 20px;
-            color: #6b7280;
-            font-size: 0.85rem;
-        }
-    </style>
+    .tag-dev {
+      background: rgba(245, 158, 11, 0.15);
+      color: #f59e0b;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    .card h2 {
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+      color: #fff;
+    }
+
+    .card p {
+      color: var(--text-muted);
+      line-height: 1.5;
+      font-size: 0.95rem;
+      margin-bottom: 25px;
+    }
+
+    .btn {
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .btn-discord {
+      background: var(--discord-color);
+      color: #fff;
+      box-shadow: 0 4px 15px rgba(88, 101, 242, 0.3);
+    }
+
+    .btn-discord:hover {
+      background: #4752c4;
+      box-shadow: 0 6px 20px rgba(88, 101, 242, 0.5);
+    }
+
+    .btn-disabled {
+      background: rgba(255, 255, 255, 0.05);
+      color: #64748b;
+      border: 1px solid var(--border-color);
+      cursor: not-allowed;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: auto;
+      text-align: center;
+      padding: 30px 20px;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+  </style>
 </head>
 <body>
 
-    <nav>
-        <a href="#" class="logo">2dkr</a>
-        <div class="nav-links">
-            <a href="#about">À propos</a>
-            <a href="#projects">Projets</a>
-            <a href="#contact">Contact</a>
-        </div>
-    </nav>
+  <!-- Navigation -->
+  <nav>
+    <a href="#" class="logo">2DKR</a>
+    <div class="nav-links">
+      <a href="#projets">Projets</a>
+      <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn-discord-nav">Rejoindre Discord</a>
+    </div>
+  </nav>
 
-    <section class="hero">
-        <h1>Bienvenue sur mon espace</h1>
-        <p>Tout a savoir sur Dekur ici en un seul endroit.</p>
-        <div class="btn-group">
-            <a href="#" class="btn btn-primary">Rejoindre le Discord</a>
-            <a href="#projects" class="btn btn-secondary">Voir les projets</a>
-        </div>
-    </section>
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Bienvenue sur l'espace <span>2DKR</span></h1>
+    <p>Retrouve nos projets, nos configurations serveurs et rejoins notre communauté Discord pour ne rien rater des futures nouveautés.</p>
+  </section>
 
-    <section class="cards-container" id="projects">
-        <div class="card">
-            <h3>🎮 Gaming & Serveurs</h3>
-            <p>Retrouve mes projets de serveurs et mes configurations de jeu.</p>
+  <!-- Cards Section -->
+  <div class="container" id="projets">
+    <div class="grid">
+      
+      <!-- Carte Discord -->
+      <div class="card">
+        <div>
+          <span class="card-tag tag-discord">Communauté</span>
+          <h2>Serveur Discord</h2>
+          <p>Rejoins le serveur officiel pour échanger avec la communauté, suivre les actus en direct et obtenir du support.</p>
         </div>
-        <div class="card">
-            <h3>💬 Communauté</h3>
-            <p>Rejoins notre communauté Discord pour échanger et participer.</p>
-        </div>
-        <div class="card">
-            <h3>🚀 Projets</h3>
-            <p>Découvre toutes les nouveautés sur lesquelles je travaille.</p>
-        </div>
-    </section>
+        <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-discord">Rejoindre le Discord</a>
+      </div>
 
-    <footer>
-        © 2026 2dkr - Tous droits réservés.
-    </footer>
+      <!-- Carte Cherax / Projet en dev -->
+      <div class="card">
+        <div>
+          <span class="card-tag tag-dev">⚡ Bientôt Disponible</span>
+          <h2>Projet Cherax</h2>
+          <p>Section dédiée en cours de préparation. Les demandes et informations concernant Cherax seront accessibles très prochainement.</p>
+        </div>
+        <button class="btn btn-disabled" disabled>En développement...</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    © 2026 2DKR — Tous droits réservés.
+  </footer>
 
 </body>
 </html>
