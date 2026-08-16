@@ -116,6 +116,18 @@
       font-size: 1.1rem;
       color: var(--text-muted);
       line-height: 1.6;
+      margin-bottom: 15px;
+    }
+
+    .badge-dev-mode {
+      display: inline-block;
+      background: rgba(56, 189, 248, 0.1);
+      color: var(--accent-blue);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
     }
 
     /* Section Cards */
@@ -281,6 +293,9 @@
   <section class="hero">
     <h1>L'Espace <span>2DKR</span></h1>
     <p>Retrouve tous les accès à la communauté, aux services et aux moyens de paiement.</p>
+    <div>
+      <span class="badge-dev-mode"><i class="fa-solid fa-code"></i> Site en cours de développement</span>
+    </div>
   </section>
 
   <!-- Container Principal -->
@@ -316,7 +331,7 @@
     <div class="grid">
       
       <!-- PayPal -->
-      <div class="card" onclick="window.open('https://discord.gg/mDpZT73FFG', '_blank')">
+      <div class="card" onclick="window.open('https://paypal.me/DekurFreekrd', '_blank')">
         <div>
           <span class="card-badge badge-payment">PayPal</span>
           <h2>Paiement PayPal</h2>
@@ -340,7 +355,7 @@
 
   <!-- Footer -->
   <footer>
-    © 2026 2DKR by Dekur. All rights reserved.
+    &copy; 2026 2DKR by Dekur. All rights reserved.
   </footer>
 
   <!-- Toast Notification Copie -->
