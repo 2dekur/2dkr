@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2DKR - Reseller & GTA V Modding Services</title>
+    <title>2DKR STORE - Products & Services</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -75,21 +75,20 @@
         .section-title {
             font-size: 1.1rem;
             font-weight: 700;
-            margin-bottom: 16px;
+            margin: 24px 0 16px 0;
             color: #e5e7eb;
             display: flex;
             align-items: center;
             gap: 8px;
         }
 
-        .payment-grid {
+        .grid {
             display: flex;
             flex-direction: column;
             gap: 14px;
-            margin-bottom: 28px;
         }
 
-        .payment-card {
+        .card {
             display: flex;
             align-items: center;
             gap: 16px;
@@ -103,13 +102,13 @@
             color: inherit;
         }
 
-        .payment-card:hover {
+        .card:hover {
             border-color: var(--accent-purple);
             transform: translateY(-2px);
             background: #222938;
         }
 
-        .payment-icon {
+        .card-icon {
             width: 44px;
             height: 44px;
             background: rgba(255, 255, 255, 0.05);
@@ -122,13 +121,13 @@
             flex-shrink: 0;
         }
 
-        .payment-info h3 {
+        .card-info h3 {
             font-size: 1rem;
             font-weight: 600;
             color: #ffffff;
         }
 
-        .payment-info .subtext {
+        .card-info .subtext {
             font-size: 0.85rem;
             color: var(--text-muted);
             margin-top: 2px;
@@ -141,7 +140,6 @@
             font-size: 0.9rem;
         }
 
-        /* Toast notification pour confirmation de copie */
         .toast {
             visibility: hidden;
             min-width: 280px;
@@ -173,6 +171,7 @@
             font-size: 0.85rem;
             color: var(--text-muted);
             border-top: 1px solid var(--card-border);
+            margin-top: 32px;
             padding-top: 20px;
         }
     </style>
@@ -186,29 +185,40 @@
             <span class="badge-dev"><i class="fa-solid fa-code"></i> Site en cours de développement</span>
         </div>
 
+        <!-- Section Produit Cherax -->
+        <div class="section-title">
+            <i class="fa-solid fa-gamepad"></i> Produit Cherax
+        </div>
+        <div class="grid">
+            <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="card">
+                <div class="card-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                <div class="card-info">
+                    <h3>Cherax VIP / Lifetime</h3>
+                    <span class="subtext">Acheter directement via ticket Discord</span>
+                </div>
+                <i class="fa-solid fa-arrow-right action-arrow"></i>
+            </a>
+        </div>
+
+        <!-- Section Méthodes de Paiement -->
         <div class="section-title">
             <i class="fa-solid fa-credit-card"></i> Méthodes de Paiement
         </div>
-
-        <div class="payment-grid">
-            <!-- Option PayPal (Lien vers Ticket Discord) -->
-            <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="payment-card">
-                <div class="payment-icon">
-                    <i class="fa-brands fa-paypal"></i>
-                </div>
-                <div class="payment-info">
+        <div class="grid">
+            <!-- PayPal -->
+            <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="card">
+                <div class="card-icon"><i class="fa-brands fa-paypal"></i></div>
+                <div class="card-info">
                     <h3>PayPal</h3>
                     <span class="subtext">Ouvrir un ticket Discord pour régler par PayPal</span>
                 </div>
                 <i class="fa-solid fa-arrow-right action-arrow"></i>
             </a>
 
-            <!-- Option Crypto (Copie de l'adresse Wallet) -->
-            <div class="payment-card" onclick="copyCryptoAddress()">
-                <div class="payment-icon">
-                    <i class="fa-solid fa-wallet"></i>
-                </div>
-                <div class="payment-info">
+            <!-- Crypto avec Copie automatique de l'adresse -->
+            <div class="card" onclick="copyCryptoAddress()">
+                <div class="card-icon"><i class="fa-solid fa-wallet"></i></div>
+                <div class="card-info">
                     <h3>Crypto (Phantom / USDC / SOL)</h3>
                     <span class="subtext">Clique pour copier l'adresse du wallet</span>
                 </div>
@@ -216,12 +226,27 @@
             </div>
         </div>
 
+        <!-- Section Communauté & Support -->
+        <div class="section-title">
+            <i class="fa-solid fa-users"></i> Communauté & Support
+        </div>
+        <div class="grid">
+            <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="card">
+                <div class="card-icon"><i class="fa-brands fa-discord"></i></div>
+                <div class="card-info">
+                    <h3>Serveur Discord 2DKR</h3>
+                    <span class="subtext">Rejoindre la communauté et contacter le support</span>
+                </div>
+                <i class="fa-solid fa-arrow-right action-arrow"></i>
+            </a>
+        </div>
+
         <div class="footer">
             &copy; 2026 2DKR Community. Tous droits réservés.
         </div>
     </div>
 
-    <!-- Confirmation Pop-up -->
+    <!-- Notification Toast pour la Copie Crypto -->
     <div id="copy-toast" class="toast">
         <i class="fa-solid fa-check-circle"></i> Adresse wallet copiée dans le presse-papiers !
     </div>
