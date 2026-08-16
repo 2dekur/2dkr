@@ -292,12 +292,18 @@
     <div class="section-heading"><i class="fa-solid fa-layer-group"></i> Communauté & Projets</div>
     <div class="grid">
       
+      <div class="grid">
+      
       <!-- Carte Discord -->
       <div class="card" onclick="window.open('https://discord.gg/mDpZT73FFG', '_blank')">
         <div>
           <span class="card-badge badge-discord">Communauté</span>
-          <h2>Serveur Discord</h2>
-          <p>Rejoins-nous sur Discord pour voir les nouveauté a propos du serveur, parler, suggérer ou meme ouvrir un ticket.</p>
+          <!-- Titre et icône en flex -->
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h2>Serveur Discord</h2>
+            <i class="fa-brands fa-discord" style="font-size: 1.5rem; color: var(--text-muted); opacity: 0.5;"></i>
+          </div>
+          <p>Rejoins-nous sur Discord pour voir les nouveautés a propos du serveur, parler, suggérer ou meme ouvrir un ticket.</p>
         </div>
         <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-blue">Rejoindre le Discord</a>
       </div>
@@ -306,7 +312,11 @@
       <div class="card" onclick="window.open('https://discord.gg/mDpZT73FFG', '_blank')">
         <div>
           <span class="card-badge badge-dev">En attente</span>
-          <h2>Cherax</h2>
+          <!-- Titre et icône en flex -->
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h2>Cherax</h2>
+            <i class="fa-solid fa-code" style="font-size: 1.5rem; color: var(--text-muted); opacity: 0.5;"></i>
+          </div>
           <p>Revendeur en cours de validation. Ouvre un ticket sur le Discord pour plus d'infos.</p>
         </div>
         <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-blue">Ouvrir un ticket</a>
