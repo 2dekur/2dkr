@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services & Tarifs — 2DKR</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root { --bg: #0d1117; --card-bg: #161b22; --border: #30363d; --accent-blue: #38bdf8; --text-main: #f0f6fc; --text-muted: #8b949e; --accent-green: #10b981; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+    body { background-color: var(--bg); color: var(--text-main); min-height: 100vh; padding-bottom: 50px; }
+    
+    nav { padding: 18px 8%; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-size: 1.4rem; font-weight: 800; color: var(--text-main); text-decoration: none; }
+    .logo span { color: var(--accent-blue); }
+    .btn-back { color: var(--accent-blue); text-decoration: none; font-weight: 600; }
+
+    .container { max-width: 900px; margin: 50px auto; padding: 0 20px; }
+    h1 { font-size: 2.2rem; margin-bottom: 10px; }
+    .subtitle { color: var(--text-muted); margin-bottom: 40px; }
+    
+    .section-heading { font-size: 1.3rem; font-weight: 700; margin: 40px 0 20px 0; display: flex; align-items: center; gap: 10px; }
+    
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+    .card { background-color: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 28px; }
+    .card h2 { color: var(--accent-blue); margin-bottom: 15px; font-size: 1.2rem; }
+    .price { font-size: 1.8rem; font-weight: 800; color: var(--text-main); margin-bottom: 15px; }
+    .price span { font-size: 1rem; color: var(--text-muted); }
+    .card p { color: var(--text-muted); line-height: 1.6; margin-bottom: 20px; }
+    
+    .btn { display: block; width: 100%; text-align: center; padding: 12px; border-radius: 8px; font-weight: 600; text-decoration: none; background: var(--accent-blue); color: #0f172a; transition: 0.2s; }
+    .btn:hover { background: #7dd3fc; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="logo">2D<span>KR</span></a>
+    <a href="index.html" class="btn-back"><i class="fa-solid fa-arrow-left"></i> Accueil</a>
+  </nav>
+
+  <div class="container">
+    <h1>Tarifs & Info Lobby</h1>
+    <p class="subtitle">Choisis ton service et consulte les informations de session.</p>
+
+    <!-- Section Tarifs -->
+    <div class="section-heading"><i class="fa-solid fa-tag"></i> Tarifs des Services</div>
+    <div class="grid">
+      <div class="card">
+        <h2>Service Standard</h2>
+        <div class="price">5€ <span>/ session</span></div>
+        <p>Accès au lobby privé, assistance basique et support Discord.</p>
+        <a href="https://discord.gg/mDpZT73FFG" class="btn">Commander</a>
+      </div>
+      <div class="card">
+        <h2>Service Premium</h2>
+        <div class="price">15€ <span>/ mois</span></div>
+        <p>Priorité sur les tickets, accès illimité au lobby, setup inclus.</p>
+        <a href="https://discord.gg/mDpZT73FFG" class="btn">Commander</a>
+      </div>
+    </div>
+
+    <!-- Section Info Lobby -->
+    <div class="section-heading" style="margin-top: 60px;"><i class="fa-solid fa-server"></i> Info Lobby</div>
+    <div class="grid">
+      <div class="card">
+        <h2>État du Lobby</h2>
+        <p><strong>Statut :</strong> <span style="color: var(--accent-green);">En ligne</span><br>
+        <strong>Région :</strong> Europe (FR)<br>
+        <strong>Version :</strong> Stable v2.4</p>
+      </div>
+      <div class="card">
+        <h2>Règles de Sécurité</h2>
+        <p>Ne jamais partager ses accès. En cas de problème technique, ouvre un ticket immédiatement sur Discord pour éviter tout ban.</p>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
