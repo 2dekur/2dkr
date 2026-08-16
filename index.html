@@ -1,154 +1,278 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2DKR STORE</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --bg-color: #0b0e14;
-            --card-bg: #151922;
-            --card-border: #232936;
-            --accent-purple: #7289da;
-            --text-main: #f3f4f6;
-            --text-muted: #9ca3af;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2DKR — Officiel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d1117;
+      --card-bg: #161b22;
+      --border: #30363d;
+      --accent-blue: #38bdf8;
+      --accent-blue-hover: #0284c7;
+      --discord: #5865f2;
+      --text-main: #f0f6fc;
+      --text-muted: #8b949e;
+    }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
 
-        .container {
-            width: 100%;
-            max-width: 500px;
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        }
+    /* Navigation */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 8%;
+      background-color: rgba(22, 27, 34, 0.8);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
 
-        .header {
-            text-align: center;
-            margin-bottom: 24px;
-        }
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--text-main);
+      text-decoration: none;
+      letter-spacing: 1px;
+    }
 
-        .header h1 {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: #ffffff;
-            margin-bottom: 6px;
-        }
+    .logo span {
+      color: var(--accent-blue);
+    }
 
-        .header p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
 
-        .grid {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
 
-        .card {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            background: #1c222e;
-            border: 1px solid var(--card-border);
-            padding: 14px 18px;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-decoration: none;
-            color: inherit;
-        }
+    .nav-links a:hover {
+      color: var(--text-main);
+    }
 
-        .card:hover {
-            border-color: var(--accent-purple);
-            transform: translateY(-2px);
-            background: #222938;
-        }
+    .btn-nav-discord {
+      background-color: var(--discord);
+      color: #ffffff !important;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 600 !important;
+      transition: opacity 0.2s ease !important;
+    }
 
-        .card-icon {
-            font-size: 1.2rem;
-            color: var(--accent-purple);
-            width: 24px;
-            text-align: center;
-        }
+    .btn-nav-discord:hover {
+      opacity: 0.9;
+    }
 
-        .card-info h3 {
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: #ffffff;
-        }
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 80px 20px 40px 20px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
 
-        .card-info span {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 15px;
+    }
 
-        .action-arrow {
-            margin-left: auto;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-        }
+    .hero h1 span {
+      color: var(--accent-blue);
+    }
 
-        .footer {
-            text-align: center;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-top: 24px;
-        }
-    </style>
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Section Cards */
+    .container {
+      max-width: 900px;
+      margin: 30px auto 60px auto;
+      padding: 0 20px;
+      width: 100%;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .card:hover {
+      border-color: var(--accent-blue);
+      transform: translateY(-2px);
+    }
+
+    .card-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+      align-self: flex-start;
+    }
+
+    .badge-discord {
+      background-color: rgba(88, 101, 242, 0.15);
+      color: #5865f2;
+      border: 1px solid rgba(88, 101, 242, 0.3);
+    }
+
+    .badge-dev {
+      background-color: rgba(56, 189, 248, 0.15);
+      color: var(--accent-blue);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    .card h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--text-main);
+    }
+
+    .card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+
+    /* Buttons */
+    .btn {
+      display: block;
+      width: 100%;
+      text-align: center;
+      padding: 12px 18px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background-color 0.2s ease;
+      cursor: pointer;
+    }
+
+    .btn-blue {
+      background-color: var(--accent-blue);
+      color: #0f172a;
+    }
+
+    .btn-blue:hover {
+      background-color: #7dd3fc;
+    }
+
+    .btn-disabled {
+      background-color: #21262d;
+      color: #484f58;
+      border: 1px solid var(--border);
+      cursor: not-allowed;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: auto;
+      text-align: center;
+      padding: 25px 20px;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+  </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="header">
-            <h1>2DKR STORE</h1>
-            <p>Services & Liens</p>
-        </div>
-
-        <div class="grid">
-            <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="card">
-                <div class="card-icon"><i class="fa-brands fa-discord"></i></div>
-                <div class="card-info">
-                    <h3>Discord</h3>
-                    <span>Rejoindre le serveur</span>
-                </div>
-                <i class="fa-solid fa-arrow-right action-arrow"></i>
-            </a>
-
-            <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="card">
-                <div class="card-icon"><i class="fa-solid fa-cart-shopping"></i></div>
-                <div class="card-info">
-                    <h3>Boutique / Commandes</h3>
-                    <span>Ouvrir un ticket</span>
-                </div>
-                <i class="fa-solid fa-arrow-right action-arrow"></i>
-            </a>
-        </div>
-
-        <div class="footer">
-            &copy; 2026 2DKR
-        </div>
+  <!-- Navigation -->
+  <nav>
+    <a href="#" class="logo">2D<span>KR</span></a>
+    <div class="nav-links">
+      <a href="#projets">Projets</a>
+      <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn-nav-discord">Discord</a>
     </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Espace <span>2DKR</span></h1>
+    <p>Retrouve tous les accès à la communauté et aux projets en cours.</p>
+  </section>
+
+  <!-- Cards Section -->
+  <div class="container" id="projets">
+    <div class="grid">
+      
+      <!-- Carte Discord -->
+      <div class="card">
+        <div>
+          <span class="card-badge badge-discord">Communauté</span>
+          <h2>Serveur Discord</h2>
+          <p>Rejoins-nous sur Discord pour suivre les actualités, échanger et ouvrir un ticket.</p>
+        </div>
+        <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-blue">Rejoindre le Discord</a>
+      </div>
+
+      <!-- Carte Cherax -->
+      <div class="card">
+        <div>
+          <span class="card-badge badge-dev">En cours</span>
+          <h2>Cherax</h2>
+          <p>Section en cours de préparation. Les accès et demandes seront ajoutés prochainement.</p>
+        </div>
+        <button class="btn btn-disabled" disabled>Bientôt disponible</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    © 2026 2DKR
+  </footer>
 
 </body>
 </html>
