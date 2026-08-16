@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
       --bg: #0d1117;
@@ -15,6 +16,7 @@
       --accent-blue: #38bdf8;
       --accent-blue-hover: #0284c7;
       --discord: #5865f2;
+      --accent-green: #10b981;
       --text-main: #f0f6fc;
       --text-muted: #8b949e;
     }
@@ -124,6 +126,16 @@
       width: 100%;
     }
 
+    .section-heading {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin: 30px 0 15px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -139,6 +151,7 @@
       flex-direction: column;
       justify-content: space-between;
       transition: border-color 0.2s ease, transform 0.2s ease;
+      cursor: pointer;
     }
 
     .card:hover {
@@ -170,6 +183,12 @@
       border: 1px solid rgba(56, 189, 248, 0.3);
     }
 
+    .badge-payment {
+      background-color: rgba(16, 185, 129, 0.15);
+      color: var(--accent-green);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
     .card h2 {
       font-size: 1.3rem;
       font-weight: 700;
@@ -196,6 +215,7 @@
       text-decoration: none;
       transition: background-color 0.2s ease;
       cursor: pointer;
+      border: none;
     }
 
     .btn-blue {
@@ -207,11 +227,31 @@
       background-color: #7dd3fc;
     }
 
-    .btn-disabled {
-      background-color: #21262d;
-      color: #484f58;
-      border: 1px solid var(--border);
-      cursor: not-allowed;
+    /* Toast Notification */
+    .toast {
+      visibility: hidden;
+      min-width: 280px;
+      background-color: var(--accent-green);
+      color: #0f172a;
+      text-align: center;
+      border-radius: 8px;
+      padding: 12px 20px;
+      position: fixed;
+      z-index: 1000;
+      bottom: 30px;
+      right: 30px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    .toast.show {
+      visibility: visible;
+      opacity: 1;
+      transform: translateY(0);
     }
 
     /* Footer */
@@ -231,7 +271,8 @@
   <nav>
     <a href="#" class="logo">2D<span>KR</span></a>
     <div class="nav-links">
-      <a href="#projets">Projets</a>
+      <a href="#projets">Services</a>
+      <a href="#paiements">Paiements</a>
       <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn-nav-discord">Discord</a>
     </div>
   </nav>
@@ -239,15 +280,17 @@
   <!-- Hero Section -->
   <section class="hero">
     <h1>Espace <span>2DKR</span></h1>
-    <p>Retrouve tous les accès à la communauté et aux projets en cours.</p>
+    <p>Retrouve tous les accès à la communauté, aux services et aux moyens de paiement.</p>
   </section>
 
-  <!-- Cards Section -->
+  <!-- Container Principal -->
   <div class="container" id="projets">
+    
+    <div class="section-heading"><i class="fa-solid fa-layer-group"></i> Communauté & Projets</div>
     <div class="grid">
       
       <!-- Carte Discord -->
-      <div class="card">
+      <div class="card" onclick="window.open('https://discord.gg/mDpZT73FFG', '_blank')">
         <div>
           <span class="card-badge badge-discord">Communauté</span>
           <h2>Serveur Discord</h2>
@@ -257,13 +300,39 @@
       </div>
 
       <!-- Carte Cherax -->
-      <div class="card">
+      <div class="card" onclick="window.open('https://discord.gg/mDpZT73FFG', '_blank')">
         <div>
-          <span class="card-badge badge-dev">En cours</span>
+          <span class="card-badge badge-dev">En attente</span>
           <h2>Cherax</h2>
-          <p>Section en cours de préparation. Les accès et demandes seront ajoutés prochainement.</p>
+          <p>Revendeur en cours de validation. Ouvre un ticket sur le Discord pour plus d'infos.</p>
         </div>
-        <button class="btn btn-disabled" disabled>Bientôt disponible</button>
+        <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-blue">Ouvrir un ticket</a>
+      </div>
+
+    </div>
+
+    <!-- Section Paiements -->
+    <div class="section-heading" id="paiements" style="margin-top: 50px;"><i class="fa-solid fa-wallet"></i> Moyens de Paiement</div>
+    <div class="grid">
+      
+      <!-- PayPal -->
+      <div class="card" onclick="window.open('https://discord.gg/mDpZT73FFG', '_blank')">
+        <div>
+          <span class="card-badge badge-payment">PayPal</span>
+          <h2>Paiement PayPal</h2>
+          <p>Disponible via l'ouverture d'un ticket sur notre serveur Discord officiel.</p>
+        </div>
+        <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-blue">Payer par PayPal</a>
+      </div>
+
+      <!-- Crypto -->
+      <div class="card" onclick="copyCryptoAddress()">
+        <div>
+          <span class="card-badge badge-payment">Crypto</span>
+          <h2>Crypto (SOL / USDC)</h2>
+          <p>Clique sur cette carte pour copier rapidement l'adresse du wallet dans ton presse-papiers.</p>
+        </div>
+        <button class="btn btn-blue"><i class="fa-solid fa-copy"></i> Copier l'adresse crypto</button>
       </div>
 
     </div>
@@ -273,6 +342,28 @@
   <footer>
     © 2026 2DKR
   </footer>
+
+  <!-- Toast Notification Copie -->
+  <div id="copy-toast" class="toast">
+    <i class="fa-solid fa-check-circle"></i> Adresse du wallet copiée !
+  </div>
+
+  <script>
+    // Remplace par ton adresse exacte de wallet Phantom/Solana
+    const WALLET_ADDRESS = "TON_ADRESSE_SOLANA_OU_USDC_ICI";
+
+    function copyCryptoAddress() {
+      navigator.clipboard.writeText(WALLET_ADDRESS).then(() => {
+        const toast = document.getElementById("copy-toast");
+        toast.classList.add("show");
+        setTimeout(() => {
+          toast.classList.remove("show");
+        }, 3000);
+      }).catch(err => {
+        console.error("Erreur lors de la copie : ", err);
+      });
+    }
+  </script>
 
 </body>
 </html>
