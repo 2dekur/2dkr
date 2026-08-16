@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>2DKR — Site officielle de dekur</title>
+  <title>2DKR — Site officiel de dekur</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -188,10 +189,16 @@
       border: 1px solid rgba(16, 185, 129, 0.3);
     }
 
+    .card-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
     .card h2 {
       font-size: 1.3rem;
       font-weight: 700;
-      margin-bottom: 10px;
       color: var(--text-main);
     }
 
@@ -292,16 +299,13 @@
     <div class="section-heading"><i class="fa-solid fa-layer-group"></i> Communauté & Projets</div>
     <div class="grid">
       
-      <div class="grid">
-      
       <!-- Carte Discord -->
       <div class="card" onclick="window.open('https://discord.gg/mDpZT73FFG', '_blank')">
         <div>
           <span class="card-badge badge-discord">Communauté</span>
-          <!-- Titre et icône en flex -->
-          <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div class="card-title-row">
             <h2>Serveur Discord</h2>
-            <i class="fa-brands fa-discord" style="font-size: 1.5rem; color: var(--text-muted); opacity: 0.5;"></i>
+            <i class="fa-brands fa-discord" style="font-size: 1.5rem; color: #5865f2;"></i>
           </div>
           <p>Rejoins-nous sur Discord pour voir les nouveautés a propos du serveur, parler, suggérer ou meme ouvrir un ticket.</p>
         </div>
@@ -312,10 +316,9 @@
       <div class="card" onclick="window.open('https://discord.gg/mDpZT73FFG', '_blank')">
         <div>
           <span class="card-badge badge-dev">En attente</span>
-          <!-- Titre et icône en flex -->
-          <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div class="card-title-row">
             <h2>Cherax</h2>
-            <i class="fa-solid fa-code" style="font-size: 1.5rem; color: var(--text-muted); opacity: 0.5;"></i>
+            <i class="fa-solid fa-shield-halved" style="font-size: 1.4rem; color: var(--accent-blue);"></i>
           </div>
           <p>Revendeur en cours de validation. Ouvre un ticket sur le Discord pour plus d'infos.</p>
         </div>
@@ -332,8 +335,11 @@
       <div class="card" onclick="window.open('https://paypal.me/DekurFreekrd', '_blank')">
         <div>
           <span class="card-badge badge-payment">PayPal</span>
-          <h2>Paiement PayPal</h2>
-          <p>Clique sur le bouton pour envoyer de l'agent via paypal.</p>
+          <div class="card-title-row">
+            <h2>Paiement PayPal</h2>
+            <i class="fa-brands fa-paypal" style="font-size: 1.4rem; color: var(--accent-green);"></i>
+          </div>
+          <p>Clique sur le bouton pour envoyer de l'argent via paypal.</p>
         </div>
         <a href="https://paypal.me/DekurFreekrd" target="_blank" class="btn btn-blue">Payer par PayPal</a>
       </div>
@@ -342,7 +348,10 @@
       <div class="card" onclick="copyCryptoAddress()">
         <div>
           <span class="card-badge badge-payment">Crypto</span>
-          <h2>Crypto (SOL / USDC)</h2>
+          <div class="card-title-row">
+            <h2>Crypto (SOL / USDC)</h2>
+            <i class="fa-solid fa-coins" style="font-size: 1.4rem; color: var(--accent-green);"></i>
+          </div>
           <p>Clique sur le bouton pour copier rapidement l'adresse du wallet.</p>
         </div>
         <button class="btn btn-blue"><i class="fa-solid fa-copy"></i> Copier l'adresse crypto</button>
