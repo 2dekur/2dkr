@@ -265,7 +265,30 @@
         </div>
         <button class="btn btn-disabled" disabled>Bientôt disponible</button>
       </div>
+<!-- Carte Paiement -->
+        <div class="card">
+            <div>
+                <span class="card-badge badge-dev" style="background-color: #22c55e; color: #000;">Paiement</span>
+                <h2>Paiement Sécurisé</h2>
+                <p>Choisis ton moyen de paiement préféré :</p>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 10px; width: 100%; margin-top: 15px;">
+                <a href="https://paypal.me/DekurFreekrd" target="_blank" class="btn" style="background-color: #0070BA; color: #ffffff; text-decoration: none; text-align: center;">Payer par PayPal</a>
+                <button onclick="copyCryptoAddress()" class="btn" style="background-color: #AB9FF2; color: #000000; cursor: pointer;">🔮 Payer en Crypto (USDC)</button>
+            </div>
+            <p id="payment-status" style="font-size: 0.8rem; color: #4ade80; margin-top: 10px; min-height: 1.2em; text-align: center;"></p>
+        </div>
 
+        <script>
+        function copyCryptoAddress() {
+            const address = "9Uh2wj9E6DARdeX9Bnh9KAgeTtcVaHZEE3qKkDJLx2BU";
+            navigator.clipboard.writeText(address).then(() => {
+                const status = document.getElementById("payment-status");
+                status.innerText = "Adresse Phantom copiée ! Envoyez vos USDC (Solana).";
+                setTimeout(() => { status.innerText = ""; }, 4000);
+            });
+        }
+        </script>
     </div>
   </div>
 
