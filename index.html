@@ -153,9 +153,21 @@
       cursor: pointer;
     }
 
+    /* Effet hover : changement de couleur de la bordure et du titre */
     .card:hover {
       border-color: var(--accent-blue);
       transform: translateY(-2px);
+    }
+
+    .card:hover h2 {
+      color: var(--accent-blue);
+    }
+
+    .card h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text-main);
+      transition: color 0.2s ease;
     }
 
     .card-badge {
@@ -193,12 +205,6 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 10px;
-    }
-
-    .card h2 {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--text-main);
     }
 
     .card p {
