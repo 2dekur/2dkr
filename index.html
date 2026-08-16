@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2DKR STORE - Links & Services</title>
+    <title>2DKR STORE</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -11,7 +11,6 @@
             --card-bg: #151922;
             --card-border: #232936;
             --accent-purple: #7289da;
-            --accent-green: #10b981;
             --text-main: #f3f4f6;
             --text-muted: #9ca3af;
         }
@@ -35,21 +34,21 @@
 
         .container {
             width: 100%;
-            max-width: 600px;
+            max-width: 500px;
             background: var(--card-bg);
             border: 1px solid var(--card-border);
             border-radius: 16px;
-            padding: 32px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
         .header {
             text-align: center;
-            margin-bottom: 28px;
+            margin-bottom: 24px;
         }
 
         .header h1 {
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 800;
             color: #ffffff;
             margin-bottom: 6px;
@@ -57,29 +56,7 @@
 
         .header p {
             color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        .badge-dev {
-            display: inline-block;
-            background: rgba(114, 137, 218, 0.15);
-            color: var(--accent-purple);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-top: 10px;
-            border: 1px solid rgba(114, 137, 218, 0.3);
-        }
-
-        .section-title {
-            font-size: 1rem;
-            font-weight: 700;
-            margin: 22px 0 12px 0;
-            color: #e5e7eb;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            font-size: 0.9rem;
         }
 
         .grid {
@@ -91,10 +68,10 @@
         .card {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 14px;
             background: #1c222e;
             border: 1px solid var(--card-border);
-            padding: 16px 20px;
+            padding: 14px 18px;
             border-radius: 12px;
             cursor: pointer;
             transition: all 0.2s ease;
@@ -109,70 +86,34 @@
         }
 
         .card-icon {
-            width: 42px;
-            height: 42px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             font-size: 1.2rem;
             color: var(--accent-purple);
-            flex-shrink: 0;
+            width: 24px;
+            text-align: center;
         }
 
         .card-info h3 {
-            font-size: 0.98rem;
+            font-size: 0.95rem;
             font-weight: 600;
             color: #ffffff;
         }
 
-        .card-info .subtext {
-            font-size: 0.83rem;
+        .card-info span {
+            font-size: 0.8rem;
             color: var(--text-muted);
-            margin-top: 2px;
-            display: block;
         }
 
         .action-arrow {
             margin-left: auto;
             color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        .toast {
-            visibility: hidden;
-            min-width: 280px;
-            background-color: var(--accent-green);
-            color: #ffffff;
-            text-align: center;
-            border-radius: 10px;
-            padding: 14px 20px;
-            position: fixed;
-            z-index: 1000;
-            bottom: 30px;
-            right: 30px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
-
-        .toast.show {
-            visibility: visible;
-            opacity: 1;
-            transform: translateY(0);
+            font-size: 0.85rem;
         }
 
         .footer {
             text-align: center;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--text-muted);
-            border-top: 1px solid var(--card-border);
-            margin-top: 28px;
-            padding-top: 18px;
+            margin-top: 24px;
         }
     </style>
 </head>
@@ -181,92 +122,33 @@
     <div class="container">
         <div class="header">
             <h1>2DKR STORE</h1>
-            <p>Services & Liens Officiels</p>
-            <span class="badge-dev"><i class="fa-solid fa-code"></i> Site en cours de développement</span>
+            <p>Services & Liens</p>
         </div>
 
-        <!-- Section Produits & Menus -->
-        <div class="section-title">
-            <i class="fa-solid fa-gamepad"></i> Produits & Menus
-        </div>
-        <div class="grid">
-            <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="card">
-                <div class="card-icon"><i class="fa-solid fa-shield-halved"></i></div>
-                <div class="card-info">
-                    <h3>Cherax VIP / Lifetime</h3>
-                    <span class="subtext">Revendeur en cours de validation (Infos sur ticket)</span>
-                </div>
-                <i class="fa-solid fa-arrow-right action-arrow"></i>
-            </a>
-        </div>
-
-        <!-- Section Méthodes de Paiement -->
-        <div class="section-title">
-            <i class="fa-solid fa-credit-card"></i> Méthodes de Paiement
-        </div>
-        <div class="grid">
-            <!-- PayPal -->
-            <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="card">
-                <div class="card-icon"><i class="fa-brands fa-paypal"></i></div>
-                <div class="card-info">
-                    <h3>PayPal</h3>
-                    <span class="subtext">Ouvrir un ticket Discord pour régler par PayPal</span>
-                </div>
-                <i class="fa-solid fa-arrow-right action-arrow"></i>
-            </a>
-
-            <!-- Crypto (Copie d'adresse au clic) -->
-            <div class="card" onclick="copyCryptoAddress()">
-                <div class="card-icon"><i class="fa-solid fa-wallet"></i></div>
-                <div class="card-info">
-                    <h3>Crypto (Phantom / USDC / SOL)</h3>
-                    <span class="subtext">Clique pour copier l'adresse du wallet</span>
-                </div>
-                <i class="fa-solid fa-copy action-arrow"></i>
-            </div>
-        </div>
-
-        <!-- Section Communauté & Support -->
-        <div class="section-title">
-            <i class="fa-solid fa-users"></i> Communauté & Support
-        </div>
         <div class="grid">
             <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="card">
                 <div class="card-icon"><i class="fa-brands fa-discord"></i></div>
                 <div class="card-info">
-                    <h3>Serveur Discord 2DKR</h3>
-                    <span class="subtext">Rejoindre la communauté et contacter le support</span>
+                    <h3>Discord</h3>
+                    <span>Rejoindre le serveur</span>
+                </div>
+                <i class="fa-solid fa-arrow-right action-arrow"></i>
+            </a>
+
+            <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="card">
+                <div class="card-icon"><i class="fa-solid fa-cart-shopping"></i></div>
+                <div class="card-info">
+                    <h3>Boutique / Commandes</h3>
+                    <span>Ouvrir un ticket</span>
                 </div>
                 <i class="fa-solid fa-arrow-right action-arrow"></i>
             </a>
         </div>
 
         <div class="footer">
-            &copy; 2026 2DKR Community. Tous droits réservés.
+            &copy; 2026 2DKR
         </div>
     </div>
 
-    <!-- Notification Pop-up pour Copie Crypto -->
-    <div id="copy-toast" class="toast">
-        <i class="fa-solid fa-check-circle"></i> Adresse wallet copiée dans le presse-papiers !
-    </div>
-
-    <script>
-        // Remplace par ton adresse exacte de wallet Phantom (Solana / USDC)
-        const WALLET_ADDRESS = "TON_ADRESSE_SOLANA_OU_USDC_ICI";
-
-        function copyCryptoAddress() {
-            navigator.clipboard.writeText(WALLET_ADDRESS).then(() => {
-                const toast = document.getElementById("copy-toast");
-                toast.classList.add("show");
-                
-                setTimeout(() => {
-                    toast.classList.remove("show");
-                }, 3000);
-            }).catch(err => {
-                console.error("Erreur lors de la copie : ", err);
-            });
-        }
-    </script>
 </body>
 </html>
