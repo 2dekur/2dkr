@@ -3,435 +3,427 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>2DKR — Site officiel de dekur</title>
+  <title>2DKR - Services & Reseller Community</title>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  
   <style>
     :root {
-      --bg: #0d1117;
-      --card-bg: #161b22;
-      --border: #30363d;
-      --accent-blue: #38bdf8;
-      --accent-blue-hover: #0284c7;
-      --discord: #5865f2;
-      --accent-green: #10b981;
-      --text-main: #f0f6fc;
-      --text-muted: #8b949e;
+      --bg-dark: #0a0c10;
+      --card-bg: #12161f;
+      --border: #1e2638;
+      --accent-blue: #00d2ff;
+      --accent-purple: #7000ff;
+      --text-main: #f0f4f8;
+      --text-muted: #8a99ad;
+      --badge-bg: rgba(0, 210, 255, 0.1);
     }
 
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
     }
 
     body {
-      background-color: var(--bg);
+      background-color: var(--bg-dark);
       color: var(--text-main);
+      line-height: 1.6;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
     }
 
-    /* Navigation */
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 18px 8%;
-      background-color: rgba(22, 27, 34, 0.8);
-      backdrop-filter: blur(10px);
+    /* Header / Navbar */
+    header {
+      background: rgba(10, 12, 16, 0.85);
+      backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
       position: sticky;
       top: 0;
       z-index: 100;
-    }
-
-    .logo {
-      font-size: 1.4rem;
-      font-weight: 800;
-      color: var(--text-main);
-      text-decoration: none;
-      letter-spacing: 1px;
-    }
-
-    .logo span {
-      color: var(--accent-blue);
-    }
-
-    .nav-links {
+      padding: 15px 8%;
       display: flex;
-      gap: 20px;
+      justify-content: space-between;
       align-items: center;
     }
 
-    /* MODIFICATION ICI : Applique la couleur bleue aux liens de navigation */
-    .nav-links a {
-      color: var(--accent-blue);
+    .logo {
+      font-size: 1.6rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    nav {
+      display: flex;
+      gap: 25px;
+      align-items: center;
+    }
+
+    nav a {
+      color: var(--text-muted);
       text-decoration: none;
+      font-weight: 600;
       font-size: 0.95rem;
-      font-weight: 500;
-      transition: color 0.2s ease;
+      transition: color 0.3s;
     }
 
-    .nav-links a:hover {
-      color: var(--accent-blue-hover);
+    nav a:hover, nav a.active {
+      color: var(--accent-blue);
     }
 
-    /* Effet de zoom sur les icônes de la navbar en haut à droite */
-    .nav-social-icon {
-      font-size: 1.2rem;
-      transition: transform 0.2s ease, opacity 0.2s ease;
-      display: inline-block;
+    .btn-discord-nav {
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+      color: #fff;
+      padding: 8px 18px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
 
-    .nav-social-icon:hover {
-      transform: scale(1.2);
+    .btn-discord-nav:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(0, 210, 255, 0.3);
     }
 
     /* Hero Section */
     .hero {
       text-align: center;
-      padding: 80px 20px 40px 20px;
-      max-width: 700px;
+      padding: 80px 8% 50px 8%;
+      max-width: 900px;
       margin: 0 auto;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--badge-bg);
+      border: 1px solid rgba(0, 210, 255, 0.2);
+      color: var(--accent-blue);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 20px;
     }
 
     .hero h1 {
       font-size: 2.8rem;
       font-weight: 800;
-      letter-spacing: -0.5px;
-      margin-bottom: 15px;
-    }
-
-    .hero h1 span {
-      color: var(--accent-blue);
+      line-height: 1.2;
+      margin-bottom: 20px;
     }
 
     .hero p {
-      font-size: 1.1rem;
       color: var(--text-muted);
-      line-height: 1.6;
-      margin-bottom: 15px;
+      font-size: 1.1rem;
+      margin-bottom: 30px;
     }
 
-    /* Badge interactif qui s'allonge au survol */
-    .badge-dev-mode {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(56, 189, 248, 0.1);
-      color: var(--accent-blue);
-      border: 1px solid rgba(56, 189, 248, 0.25);
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      cursor: pointer;
-      overflow: hidden;
-      white-space: nowrap;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .badge-dev-mode .extra-text {
-      max-width: 0;
-      opacity: 0;
-      overflow: hidden;
-      transition: max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
-    }
-
-    .badge-dev-mode:hover {
-      background: rgba(56, 189, 248, 0.15);
-      border-color: var(--accent-blue);
-      box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
-    }
-
-    .badge-dev-mode:hover .extra-text {
-      max-width: 150px;
-      opacity: 1;
-    }
-
-    /* Section Cards */
-    .container {
-      max-width: 900px;
-      margin: 30px auto 60px auto;
-      padding: 0 20px;
-      width: 100%;
-    }
-
-    .section-heading {
-      font-size: 1.2rem;
+    /* Section Title */
+    .section-title {
+      font-size: 1.8rem;
       font-weight: 700;
-      color: var(--text-main);
-      margin: 30px 0 15px 0;
+      margin: 40px 8% 25px 8%;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 12px;
     }
 
-    .grid {
+    .section-title i {
+      color: var(--accent-blue);
+    }
+
+    /* Products Grid */
+    .products-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 25px;
+      padding: 0 8%;
+      margin-bottom: 60px;
     }
 
     .card {
-      background-color: var(--card-bg);
+      background: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 28px;
+      border-radius: 14px;
+      padding: 25px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      transition: border-color 0.2s ease, transform 0.2s ease;
-      cursor: pointer;
+      transition: border-color 0.3s, transform 0.3s;
     }
 
     .card:hover {
       border-color: var(--accent-blue);
-      transform: translateY(-2px);
+      transform: translateY(-4px);
     }
 
-    .card:hover h2 {
-      color: var(--accent-blue);
-    }
-
-    .card h2 {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--text-main);
-      transition: color 0.2s ease;
-    }
-
-    .card-badge {
-      display: inline-block;
-      padding: 4px 10px;
-      border-radius: 20px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 16px;
-      align-self: flex-start;
-    }
-
-    .badge-discord {
-      background-color: rgba(88, 101, 242, 0.15);
-      color: #5865f2;
-      border: 1px solid rgba(88, 101, 242, 0.3);
-    }
-
-    .badge-dev {
-      background-color: rgba(56, 189, 248, 0.15);
-      color: var(--accent-blue);
-      border: 1px solid rgba(56, 189, 248, 0.3);
-    }
-
-    .badge-payment {
-      background-color: rgba(16, 185, 129, 0.15);
-      color: var(--accent-green);
-      border: 1px solid rgba(16, 185, 129, 0.3);
-    }
-
-    .card-title-row {
+    .card-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
 
-    .card p {
+    .card-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card-title i {
+      color: var(--accent-blue);
+    }
+
+    .badge {
+      background: var(--badge-bg);
+      color: var(--accent-blue);
+      border: 1px solid rgba(0, 210, 255, 0.3);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 12px;
+    }
+
+    .card-desc {
       color: var(--text-muted);
-      font-size: 0.95rem;
-      line-height: 1.5;
-      margin-bottom: 24px;
+      font-size: 0.9rem;
+      margin-bottom: 20px;
     }
 
-    /* Buttons */
-    .btn {
+    /* Price List Styling for Lexis */
+    .price-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 25px;
+    }
+
+    .price-group {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px;
+    }
+
+    .game-tag {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--accent-blue);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .price-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      padding: 3px 0;
+    }
+
+    .price-item .price {
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .btn-buy {
       display: block;
       width: 100%;
       text-align: center;
-      padding: 12px 18px;
+      background: rgba(0, 210, 255, 0.08);
+      color: var(--accent-blue);
+      border: 1px solid rgba(0, 210, 255, 0.3);
+      padding: 12px;
       border-radius: 8px;
-      font-size: 0.95rem;
-      font-weight: 600;
+      font-weight: 700;
       text-decoration: none;
-      transition: background-color 0.2s ease;
-      cursor: pointer;
-      border: none;
+      transition: all 0.3s;
     }
 
-    .btn-blue {
-      background-color: var(--accent-blue);
-      color: #0f172a;
-    }
-
-    .btn-blue:hover {
-      background-color: #7dd3fc;
-    }
-
-    /* Toast Notification */
-    .toast {
-      visibility: hidden;
-      min-width: 280px;
-      background-color: var(--accent-green);
-      color: #0f172a;
-      text-align: center;
-      border-radius: 8px;
-      padding: 12px 20px;
-      position: fixed;
-      z-index: 1000;
-      bottom: 30px;
-      right: 30px;
-      font-weight: 600;
-      font-size: 0.9rem;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    }
-
-    .toast.show {
-      visibility: visible;
-      opacity: 1;
-      transform: translateY(0);
+    .btn-buy:hover {
+      background: var(--accent-blue);
+      color: #000;
     }
 
     /* Footer */
     footer {
       margin-top: auto;
-      text-align: center;
-      padding: 25px 20px;
+      background: var(--card-bg);
       border-top: 1px solid var(--border);
+      padding: 25px 8%;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .footer-content p {
       color: var(--text-muted);
       font-size: 0.85rem;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2rem; }
+      header { padding: 15px 5%; }
+      .products-grid { padding: 0 5%; }
+      .footer-content { flex-direction: column; text-align: center; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Navigation -->
-  <nav>
-    <a href="#" class="logo">2D<span>KR</span></a>
-    <div class="nav-links">
-      <a href="services.html">Services & Tarifs</a>
-      <a href="#projets">Services</a>
-      <a href="#paiements">Paiements</a>
-      <a href="https://www.youtube.com/@Dekur7" target="_blank" class="nav-social-icon" style="color: #ff0000;" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
-      <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="nav-social-icon" style="color: #5865f2;" title="Discord"><i class="fa-brands fa-discord"></i></a>
+  <!-- Navbar -->
+  <header>
+    <div class="logo">
+      <i class="fa-solid fa-shield-halved"></i> 2DKR
     </div>
-  </nav>
+    <nav>
+      <a href="index.html" class="active">Accueil</a>
+      <a href="services.html">Services</a>
+      <a href="https://discord.gg/TON_LIEN_DISCORD" target="_blank" class="btn-discord-nav">
+        <i class="fa-brands fa-discord"></i> Discord
+      </a>
+    </nav>
+  </header>
 
   <!-- Hero Section -->
   <section class="hero">
-    <h1>L'Espace <span>2DKR</span></h1>
-    <p>Retrouve tous les accès à la communauté, aux services et aux moyens de paiement.</p>
-    <div>
-      <div class="badge-dev-mode">
-        <i class="fa-solid fa-code"></i>
-        <span>v0.1 — En cours de développement</span>
-        <span class="extra-text">&nbsp;• by Dekur</span>
-      </div>
-    </div>
+    <div class="hero-badge"><i class="fa-solid fa-bolt"></i> Official 2DKR Store</div>
+    <h1>Solutions & Abonnements Premium</h1>
+    <p>Retrouvez l'ensemble de nos services, menus et abonnements de confiance pour GTA Online, Overwatch 2, The Division 2 et plus encore.</p>
   </section>
 
-  <!-- Container Principal -->
-  <div class="container" id="projets">
+  <!-- Section Produits -->
+  <div class="section-title">
+    <i class="fa-solid fa-layer-group"></i> Offres Disponibles
+  </div>
+
+  <div class="products-grid">
     
-    <div class="section-heading"><i class="fa-solid fa-layer-group"></i> Communauté & Projets</div>
-    <div class="grid">
-      
-      <!-- Carte Discord -->
-      <div class="card" onclick="window.open('https://discord.gg/mDpZT73FFG', '_blank')">
-        <div>
-          <span class="card-badge badge-discord">Communauté</span>
-          <div class="card-title-row">
-            <h2>Serveur Discord</h2>
-            <i class="fa-brands fa-discord" style="font-size: 1.5rem; color: #5865f2;"></i>
+    <!-- Carte Lexis Menu -->
+    <div class="card">
+      <div>
+        <div class="card-header">
+          <div class="card-title">
+            <i class="fa-solid fa-microchip"></i> Lexis Menu
           </div>
-          <p>Rejoins-nous sur Discord pour voir les nouveautés a propos du serveur, parler, suggérer ou meme ouvrir un ticket.</p>
+          <span class="badge">Nouveau</span>
         </div>
-        <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-blue">Rejoindre le Discord</a>
+        <p class="card-desc">Accès premium pour GTA Online, Overwatch 2 & The Division 2.</p>
+        
+        <div class="price-list">
+          <!-- GTA -->
+          <div class="price-group">
+            <div class="game-tag"><i class="fa-solid fa-car"></i> GTA Online</div>
+            <div class="price-item">
+              <span>1 Mois</span>
+              <span class="price">30,00 $</span>
+            </div>
+            <div class="price-item">
+              <span>3 Mois</span>
+              <span class="price">70,00 $</span>
+            </div>
+          </div>
+
+          <!-- Overwatch 2 -->
+          <div class="price-group">
+            <div class="game-tag"><i class="fa-solid fa-crosshair"></i> Overwatch 2</div>
+            <div class="price-item">
+              <span>1 Semaine</span>
+              <span class="price">20,00 $</span>
+            </div>
+            <div class="price-item">
+              <span>1 Mois</span>
+              <span class="price">35,00 $</span>
+            </div>
+          </div>
+
+          <!-- The Division 2 -->
+          <div class="price-group">
+            <div class="game-tag"><i class="fa-solid fa-shield-cat"></i> The Division 2</div>
+            <div class="price-item">
+              <span>1 Semaine</span>
+              <span class="price">25,00 $</span>
+            </div>
+            <div class="price-item">
+              <span>1 Mois</span>
+              <span class="price">50,00 $</span>
+            </div>
+            <div class="price-item">
+              <span>3 Mois</span>
+              <span class="price">100,00 $</span>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <!-- Carte Cherax -->
-      <div class="card" onclick="window.open('https://discord.gg/mDpZT73FFG', '_blank')">
-        <div>
-          <span class="card-badge badge-dev">En attente</span>
-          <div class="card-title-row">
-            <h2>Cherax</h2>
-            <img src="https://cherax.menu/logo.png" alt="Cherax Logo" style="height: 28px; width: auto; object-fit: contain;">
-          </div>
-          <p>Revendeur en cours de validation. Ouvre un ticket sur le Discord pour plus d'infos.</p>
-        </div>
-        <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-blue">Ouvrir un ticket</a>
-      </div>
-
+      <a href="https://discord.gg/TON_LIEN_DISCORD" target="_blank" class="btn-buy">
+        Commander via Discord
+      </a>
     </div>
 
-    <!-- Section Paiements -->
-    <div class="section-heading" id="paiements" style="margin-top: 50px;"><i class="fa-solid fa-wallet"></i> Moyens de Paiement</div>
-    <div class="grid">
-      
-      <!-- PayPal -->
-      <div class="card" onclick="window.open('https://paypal.me/DekurFreekrd', '_blank')">
-        <div>
-          <span class="card-badge badge-payment">PayPal</span>
-          <div class="card-title-row">
-            <h2>Paiement PayPal</h2>
-            <i class="fa-brands fa-paypal" style="font-size: 1.4rem; color: var(--accent-green);"></i>
+    <!-- Carte Community / Support -->
+    <div class="card">
+      <div>
+        <div class="card-header">
+          <div class="card-title">
+            <i class="fa-brands fa-discord"></i> Support & Commande
           </div>
-          <p>Clique sur le bouton pour envoyer de l'argent via paypal.</p>
+          <span class="badge">24/7</span>
         </div>
-        <a href="https://paypal.me/DekurFreekrd" target="_blank" class="btn btn-blue">Payer par PayPal</a>
+        <p class="card-desc">Rejoins le serveur Discord 2DKR pour ouvrir un ticket, effectuer un paiement crypto ou contacter le staff.</p>
+        
+        <div class="price-group" style="margin-top: 15px;">
+          <div class="game-tag"><i class="fa-solid fa-wallet"></i> Moyen de paiement</div>
+          <div class="price-item">
+            <span>Crypto / BTC / LTC / USDT</span>
+            <span class="price">Accepté</span>
+          </div>
+          <div class="price-item">
+            <span>Livraison des clés</span>
+            <span class="price">Instantanée</span>
+          </div>
+        </div>
       </div>
 
-      <!-- Crypto -->
-      <div class="card" onclick="copyCryptoAddress()">
-        <div>
-          <span class="card-badge badge-payment">Crypto</span>
-          <div class="card-title-row">
-            <h2>Crypto (SOL / USDC)</h2>
-            <i class="fa-solid fa-coins" style="font-size: 1.4rem; color: var(--accent-green);"></i>
-          </div>
-          <p>Clique sur le bouton pour copier rapidement l'adresse du wallet.</p>
-        </div>
-        <button class="btn btn-blue"><i class="fa-solid fa-copy"></i> Copier l'adresse crypto</button>
-      </div>
-
+      <a href="https://discord.gg/TON_LIEN_DISCORD" target="_blank" class="btn-buy" style="margin-top: 25px;">
+        Rejoindre le Discord
+      </a>
     </div>
+
   </div>
 
   <!-- Footer -->
   <footer>
-    &copy; 2026 2DKR by Dekur. All rights reserved.
+    <div class="footer-content">
+      <p>&copy; 2026 2DKR by Dekur. Tous droits réservés.</p>
+      <p style="color: var(--text-muted); font-size: 0.8rem;">Site officiel 2DKR Community</p>
+    </div>
   </footer>
-
-  <!-- Toast Notification Copie -->
-  <div id="copy-toast" class="toast">
-    <i class="fa-solid fa-check-circle"></i> Adresse du wallet copiée !
-  </div>
-
-  <script>
-    // Remplace par ton adresse exacte de wallet Phantom/Solana
-    const WALLET_ADDRESS = "TON_ADRESSE_SOLANA_OU_USDC_ICI";
-
-    function copyCryptoAddress() {
-      navigator.clipboard.writeText(WALLET_ADDRESS).then(() => {
-        const toast = document.getElementById("copy-toast");
-        toast.classList.add("show");
-        setTimeout(() => {
-          toast.classList.remove("show");
-        }, 3000);
-      }).catch(err => {
-        console.error("Erreur lors de la copie : ", err);
-      });
-    }
-  </script>
 
 </body>
 </html>
