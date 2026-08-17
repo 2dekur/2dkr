@@ -153,8 +153,14 @@
     }
 
     .card:hover {
-      border-color: var(--accent-blue);
       transform: translateY(-2px);
+    }
+
+    .card h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text-main);
+      transition: color 0.2s ease;
     }
 
     .card-header {
@@ -162,12 +168,6 @@
       justify-content: space-between;
       align-items: flex-start;
       margin-bottom: 15px;
-    }
-
-    .card h2 {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--text-main);
     }
 
     .price-tag {
@@ -197,6 +197,22 @@
     .badge-gold { background-color: rgba(255, 215, 0, 0.15); color: #ffd700; border: 1px solid rgba(255, 215, 0, 0.3); }
     .badge-plat { background-color: rgba(56, 189, 248, 0.15); color: var(--accent-blue); border: 1px solid rgba(56, 189, 248, 0.3); }
     .badge-ultimate { background-color: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3); }
+
+    /* Survol personnalisé par couleur de pack */
+    .card-bronze:hover { border-color: #cd7f32; }
+    .card-bronze:hover h2 { color: #cd7f32; }
+
+    .card-silver:hover { border-color: #c0c0c0; }
+    .card-silver:hover h2 { color: #c0c0c0; }
+
+    .card-gold:hover { border-color: #ffd700; }
+    .card-gold:hover h2 { color: #ffd700; }
+
+    .card-plat:hover { border-color: var(--accent-blue); }
+    .card-plat:hover h2 { color: var(--accent-blue); }
+
+    .card-ultimate:hover { border-color: #c084fc; }
+    .card-ultimate:hover h2 { color: #c084fc; }
 
     .feature-list {
       list-style: none;
@@ -331,7 +347,7 @@
   <!-- Hero -->
   <section class="hero">
     <h1>Catalogue des <span>Lobbies</span></h1>
-    <p>Découvre tous nos packs GTA Online, options à la carte et comptes prêts à jouer.</p>
+    <p>Découvre tous nos packs GTA Online, options à la carte et comptes prêts à jouer. bruh...</p>
   </section>
 
   <!-- Container -->
@@ -342,7 +358,7 @@
     <div class="grid">
 
       <!-- Pack Bronze -->
-      <div class="card">
+      <div class="card card-bronze">
         <div>
           <span class="card-badge badge-bronze">Bronze</span>
           <div class="card-header">
@@ -365,7 +381,7 @@
       </div>
 
       <!-- Pack Argent -->
-      <div class="card">
+      <div class="card card-silver">
         <div>
           <span class="card-badge badge-silver">Argent</span>
           <div class="card-header">
@@ -388,7 +404,7 @@
       </div>
 
       <!-- Pack Or -->
-      <div class="card">
+      <div class="card card-gold">
         <div>
           <span class="card-badge badge-gold">Or</span>
           <div class="card-header">
@@ -411,7 +427,7 @@
       </div>
 
       <!-- Pack Platine -->
-      <div class="card">
+      <div class="card card-plat">
         <div>
           <span class="card-badge badge-plat">Platine</span>
           <div class="card-header">
@@ -434,7 +450,7 @@
       </div>
 
       <!-- Pack Ultime -->
-      <div class="card" style="border-color: rgba(168, 85, 247, 0.4);">
+      <div class="card card-ultimate">
         <div>
           <span class="card-badge badge-ultimate">Ultime 👑</span>
           <div class="card-header">
@@ -513,7 +529,7 @@
       </div>
     </div>
 
-<!-- Comment commander -->
+    <!-- Comment commander -->
     <div class="section-heading" style="margin-top: 50px;"><i class="fa-solid fa-circle-question"></i> Comment commander ?</div>
     <div class="steps-grid">
       <div class="step-card">
