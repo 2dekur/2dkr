@@ -90,6 +90,34 @@
       transform: scale(1.2);
     }
 
+    /* Language Switcher */
+    .lang-switch {
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2px;
+      margin-left: 10px;
+    }
+
+    .lang-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 16px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .lang-btn.active {
+      background-color: var(--accent-blue);
+      color: #0f172a;
+    }
+
     /* Hero Section */
     .hero {
       text-align: center;
@@ -200,7 +228,6 @@
     .badge-plat { background-color: rgba(56, 189, 248, 0.15); color: var(--accent-blue); border: 1px solid rgba(56, 189, 248, 0.3); }
     .badge-ultimate { background-color: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3); }
 
-    /* Animations au survol par pack (Border & Glow) */
     .card-bronze:hover { border-color: #cd7f32; box-shadow: 0 4px 20px rgba(205, 127, 50, 0.15); }
     .card-bronze:hover h2 { color: #cd7f32; }
 
@@ -348,220 +375,225 @@
   <nav>
     <a href="index.html" class="logo">2D<span>KR</span></a>
     <div class="nav-links">
-      <a href="index.html" class="active">Accueil</a>
-      <a href="index.html#paiements">Paiements</a>
+      <a href="index.html" class="active" data-fr="Accueil" data-en="Home">Accueil</a>
+      <a href="index.html#paiements" data-fr="Paiements" data-en="Payments">Paiements</a>
       <a href="https://www.youtube.com/@Dekur7" target="_blank" class="nav-social-icon" style="color: #ff0000;" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
       <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="nav-social-icon" style="color: #5865f2;" title="Discord"><i class="fa-brands fa-discord"></i></a>
+      
+      <div class="lang-switch">
+        <button class="lang-btn active" id="btn-fr" onclick="setLanguage('fr')">FR</button>
+        <button class="lang-btn" id="btn-en" onclick="setLanguage('en')">EN</button>
+      </div>
     </div>
   </nav>
 
   <!-- Hero -->
   <section class="hero">
-    <h1>Catalogue des <span>Lobbies</span></h1>
-    <p>Découvre tous nos packs GTA Online, nos options à la carte et nos comptes prêts à jouer.</p>
+    <h1><span data-fr="Catalogue des" data-en="Catalog of">Catalogue des</span> <span>Lobbies</span></h1>
+    <p data-fr="Découvre tous nos packs GTA Online, nos options à la carte et nos comptes prêts à jouer." data-en="Discover all our GTA Online packs, custom options, and ready-to-play accounts.">Découvre tous nos packs GTA Online, nos options à la carte et nos comptes prêts à jouer.</p>
   </section>
 
   <!-- Container -->
   <div class="container">
 
     <!-- Section Packs -->
-    <div class="section-heading"><i class="fa-solid fa-box-open"></i> Nos Packs Disponibles</div>
+    <div class="section-heading"><i class="fa-solid fa-box-open"></i> <span data-fr="Nos Packs Disponibles" data-en="Our Available Packs">Nos Packs Disponibles</span></div>
     <div class="grid">
 
       <!-- Pack Bronze -->
       <div class="card card-bronze">
         <div>
-          <span class="card-badge badge-bronze">Bronze</span>
+          <span class="card-badge badge-bronze" data-fr="Bronze" data-en="Bronze">Bronze</span>
           <div class="card-header">
-            <h2>Pack Bronze</h2>
+            <h2 data-fr="Pack Bronze" data-en="Bronze Pack">Pack Bronze</h2>
             <div class="price-tag">5€</div>
           </div>
           <ul class="feature-list">
-            <li>💰 <strong>Argent :</strong> 50 000 000$</li>
-            <li>⏳ <strong>Estimation :</strong> 2 jours</li>
-            <li>🏎️ 5 Véhicules moddés</li>
-            <li>👕 5 Tenues moddées</li>
+            <li>💰 <strong><span data-fr="Argent :" data-en="Money:">Argent :</span></strong> 50 000 000$</li>
+            <li>⏳ <strong><span data-fr="Estimation :" data-en="Estimated time:">Estimation :</span></strong> <span data-fr="2 jours" data-en="2 days">2 jours</span></li>
+            <li>🏎️ <span data-fr="5 Véhicules moddés" data-en="5 Modded vehicles">5 Véhicules moddés</span></li>
+            <li>👕 <span data-fr="5 Tenues moddées" data-en="5 Modded outfits">5 Tenues moddées</span></li>
             <li>📈 RP 120</li>
-            <li>📊 Stats max</li>
+            <li>📊 <span data-fr="Stats max" data-en="Max stats">Stats max</span></li>
           </ul>
         </div>
         <div>
-          <div class="info-box">📦 Réalisé sur votre compte</div>
-          <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-blue">Commander via Discord</a>
+          <div class="info-box" data-fr="📦 Réalisé sur votre compte" data-en="📦 Done on your account">📦 Réalisé sur votre compte</div>
+          <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-blue" data-fr="Commander via Discord" data-en="Order via Discord">Commander via Discord</a>
         </div>
       </div>
 
       <!-- Pack Argent -->
       <div class="card card-silver">
         <div>
-          <span class="card-badge badge-silver">Argent</span>
+          <span class="card-badge badge-silver" data-fr="Argent" data-en="Silver">Argent</span>
           <div class="card-header">
-            <h2>Pack Argent</h2>
+            <h2 data-fr="Pack Argent" data-en="Silver Pack">Pack Argent</h2>
             <div class="price-tag">10€</div>
           </div>
           <ul class="feature-list">
-            <li>💰 <strong>Argent :</strong> 100 000 000$</li>
-            <li>⏳ <strong>Estimation :</strong> 4 jours</li>
-            <li>🏎️ 10 Véhicules moddés</li>
-            <li>👕 10 Tenues moddées</li>
-            <li>📈 RP 200 | 📊 Stats max</li>
-            <li>🔓 Déblocages RP inclus</li>
+            <li>💰 <strong><span data-fr="Argent :" data-en="Money:">Argent :</span></strong> 100 000 000$</li>
+            <li>⏳ <strong><span data-fr="Estimation :" data-en="Estimated time:">Estimation :</span></strong> <span data-fr="4 jours" data-en="4 days">4 jours</span></li>
+            <li>🏎️ <span data-fr="10 Véhicules moddés" data-en="10 Modded vehicles">10 Véhicules moddés</span></li>
+            <li>👕 <span data-fr="10 Tenues moddées" data-en="10 Modded outfits">10 Tenues moddées</span></li>
+            <li>📈 RP 200 | 📊 <span data-fr="Stats max" data-en="Max stats">Stats max</span></li>
+            <li>🔓 <span data-fr="Déblocages RP inclus" data-en="RP Unlocks included">Déblocages RP inclus</span></li>
           </ul>
         </div>
         <div>
-          <div class="info-box">📦 Réalisé sur votre compte</div>
-          <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-blue">Commander via Discord</a>
+          <div class="info-box" data-fr="📦 Réalisé sur votre compte" data-en="📦 Done on your account">📦 Réalisé sur votre compte</div>
+          <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-blue" data-fr="Commander via Discord" data-en="Order via Discord">Commander via Discord</a>
         </div>
       </div>
 
       <!-- Pack Or -->
       <div class="card card-gold">
         <div>
-          <span class="card-badge badge-gold">Or ⭐ Popular</span>
+          <span class="card-badge badge-gold" data-fr="Or ⭐ Populaire" data-en="Gold ⭐ Popular">Or ⭐ Populaire</span>
           <div class="card-header">
-            <h2>Pack Or</h2>
+            <h2 data-fr="Pack Or" data-en="Gold Pack">Pack Or</h2>
             <div class="price-tag">15€</div>
           </div>
           <ul class="feature-list">
-            <li>💰 <strong>Argent :</strong> 150 000 000$</li>
-            <li>⏳ <strong>Estimation :</strong> 5 jours</li>
-            <li>🏎️ 15 Véhicules moddés</li>
-            <li>👕 15 Tenues moddées</li>
-            <li>📈 RP au choix | 📊 Stats max</li>
-            <li>🔓 Déblocages + 🔫 Toutes les armes</li>
+            <li>💰 <strong><span data-fr="Argent :" data-en="Money:">Argent :</span></strong> 150 000 000$</li>
+            <li>⏳ <strong><span data-fr="Estimation :" data-en="Estimated time:">Estimation :</span></strong> <span data-fr="5 jours" data-en="5 days">5 jours</span></li>
+            <li>🏎️ <span data-fr="15 Véhicules moddés" data-en="15 Modded vehicles">15 Véhicules moddés</span></li>
+            <li>👕 <span data-fr="15 Tenues moddées" data-en="15 Modded outfits">15 Tenues moddées</span></li>
+            <li>📈 <span data-fr="RP au choix" data-en="Custom RP rank">RP au choix</span> | 📊 <span data-fr="Stats max" data-en="Max stats">Stats max</span></li>
+            <li>🔓 <span data-fr="Déblocages + 🔫 Toutes les armes" data-en="Unlocks + 🔫 All weapons">Déblocages + 🔫 Toutes les armes</span></li>
           </ul>
         </div>
         <div>
-          <div class="info-box">📦 Réalisé sur votre compte</div>
-          <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-blue">Commander via Discord</a>
+          <div class="info-box" data-fr="📦 Réalisé sur votre compte" data-en="📦 Done on your account">📦 Réalisé sur votre compte</div>
+          <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-blue" data-fr="Commander via Discord" data-en="Order via Discord">Commander via Discord</a>
         </div>
       </div>
 
       <!-- Pack Platine -->
       <div class="card card-plat">
         <div>
-          <span class="card-badge badge-plat">Platine</span>
+          <span class="card-badge badge-plat" data-fr="Platine" data-en="Platinum">Platine</span>
           <div class="card-header">
-            <h2>Pack Platine</h2>
+            <h2 data-fr="Pack Platine" data-en="Platinum Pack">Pack Platine</h2>
             <div class="price-tag">20€</div>
           </div>
           <ul class="feature-list">
-            <li>💰 <strong>Argent :</strong> 200 000 000$</li>
-            <li>⏳ <strong>Estimation :</strong> 7 jours</li>
-            <li>🏎️ 20 Véhicules moddés</li>
-            <li>👕 20 Tenues (Maximum)</li>
-            <li>📈 RP au choix | 📊 Stats max</li>
-            <li>🔓 Tous déblocages + Manoirs + Armes + Business</li>
+            <li>💰 <strong><span data-fr="Argent :" data-en="Money:">Argent :</span></strong> 200 000 000$</li>
+            <li>⏳ <strong><span data-fr="Estimation :" data-en="Estimated time:">Estimation :</span></strong> <span data-fr="7 jours" data-en="7 days">7 jours</span></li>
+            <li>🏎️ <span data-fr="20 Véhicules moddés" data-en="20 Modded vehicles">20 Véhicules moddés</span></li>
+            <li>👕 <span data-fr="20 Tenues (Maximum)" data-en="20 Outfits (Max)">20 Tenues (Maximum)</span></li>
+            <li>📈 <span data-fr="RP au choix" data-en="Custom RP rank">RP au choix</span> | 📊 <span data-fr="Stats max" data-en="Max stats">Stats max</span></li>
+            <li>🔓 <span data-fr="Tous déblocages + Manoirs + Armes + Business" data-en="All unlocks + Mansions + Weapons + Businesses">Tous déblocages + Manoirs + Armes + Business</span></li>
           </ul>
         </div>
         <div>
-          <div class="info-box">📦 Réalisé sur votre compte</div>
-          <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-blue">Commander via Discord</a>
+          <div class="info-box" data-fr="📦 Réalisé sur votre compte" data-en="📦 Done on your account">📦 Réalisé sur votre compte</div>
+          <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-blue" data-fr="Commander via Discord" data-en="Order via Discord">Commander via Discord</a>
         </div>
       </div>
 
       <!-- Pack Ultime -->
       <div class="card card-ultimate">
         <div>
-          <span class="card-badge badge-ultimate">Ultime 👑</span>
+          <span class="card-badge badge-ultimate" data-fr="Ultime 👑" data-en="Ultimate 👑">Ultime 👑</span>
           <div class="card-header">
-            <h2>Pack Ultime</h2>
+            <h2 data-fr="Pack Ultime" data-en="Ultimate Pack">Pack Ultime</h2>
             <div class="price-tag">60€</div>
           </div>
           <ul class="feature-list">
-            <li>📦 <strong>Compte neuf fourni</strong> (Jeu inclus)</li>
-            <li>💰 <strong>Argent :</strong> 300 000 000$</li>
-            <li>⏳ <strong>Estimation :</strong> 10 jours</li>
-            <li>🏎️ 30 Véhicules moddés | 👕 20 Tenues</li>
-            <li>📈 RP au choix | 📊 Stats max</li>
-            <li>🏢 Business, Manoirs & Armes inclus</li>
+            <li>📦 <strong><span data-fr="Compte neuf fourni" data-en="New account provided">Compte neuf fourni</span></strong> <span data-fr="(Jeu inclus)" data-en="(Game included)">(Jeu inclus)</span></li>
+            <li>💰 <strong><span data-fr="Argent :" data-en="Money:">Argent :</span></strong> 300 000 000$</li>
+            <li>⏳ <strong><span data-fr="Estimation :" data-en="Estimated time:">Estimation :</span></strong> <span data-fr="10 jours" data-en="10 days">10 jours</span></li>
+            <li>🏎️ <span data-fr="30 Véhicules moddés | 👕 20 Tenues" data-en="30 Modded vehicles | 👕 20 Outfits">30 Véhicules moddés | 👕 20 Tenues</span></li>
+            <li>📈 <span data-fr="RP au choix" data-en="Custom RP rank">RP au choix</span> | 📊 <span data-fr="Stats max" data-en="Max stats">Stats max</span></li>
+            <li>🏢 <span data-fr="Business, Manoirs & Armes inclus" data-en="Businesses, Mansions & Weapons included">Business, Manoirs & Armes inclus</span></li>
           </ul>
         </div>
         <div>
-          <div class="info-box">🎮 Prêt à jouer</div>
-          <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-blue">Commander via Discord</a>
+          <div class="info-box" data-fr="🎮 Prêt à jouer" data-en="🎮 Ready to play">🎮 Prêt à jouer</div>
+          <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-blue" data-fr="Commander via Discord" data-en="Order via Discord">Commander via Discord</a>
         </div>
       </div>
 
     </div>
 
     <!-- Section Options à la carte -->
-    <div class="section-heading" style="margin-top: 50px;"><i class="fa-solid fa-sliders"></i> Options à la carte</div>
+    <div class="section-heading" style="margin-top: 50px;"><i class="fa-solid fa-sliders"></i> <span data-fr="Options à la carte" data-en="Custom Options">Options à la carte</span></div>
     
     <div class="grid">
       <!-- Argent supplémentaire -->
       <div class="card">
-        <h2><i class="fa-solid fa-coins" style="color: var(--accent-blue);"></i> Argent supplémentaire</h2>
+        <h2><i class="fa-solid fa-coins" style="color: var(--accent-blue);"></i> <span data-fr="Argent supplémentaire" data-en="Extra Cash">Argent supplémentaire</span></h2>
         <div class="options-list" style="margin-top: 15px;">
-          <div class="option-row"><span>+10 000 000$ (1j)</span> <span class="option-price">3€</span></div>
-          <div class="option-row"><span>+20 000 000$ (1j)</span> <span class="option-price">4€</span></div>
-          <div class="option-row"><span>+30 000 000$ (1j)</span> <span class="option-price">5€</span></div>
-          <div class="option-row"><span>+50 000 000$ (2j)</span> <span class="option-price">7€</span></div>
-          <div class="option-row"><span>+100 000 000$ (4j)</span> <span class="option-price">20€</span></div>
-          <div class="option-row"><span>+200 000 000$ (7j)</span> <span class="option-price">40€</span></div>
+          <div class="option-row"><span>+10 000 000$ (1<span data-fr="j" data-en="d">j</span>)</span> <span class="option-price">3€</span></div>
+          <div class="option-row"><span>+20 000 000$ (1<span data-fr="j" data-en="d">j</span>)</span> <span class="option-price">4€</span></div>
+          <div class="option-row"><span>+30 000 000$ (1<span data-fr="j" data-en="d">j</span>)</span> <span class="option-price">5€</span></div>
+          <div class="option-row"><span>+50 000 000$ (2<span data-fr="j" data-en="d">j</span>)</span> <span class="option-price">7€</span></div>
+          <div class="option-row"><span>+100 000 000$ (4<span data-fr="j" data-en="d">j</span>)</span> <span class="option-price">20€</span></div>
+          <div class="option-row"><span>+200 000 000$ (7<span data-fr="j" data-en="d">j</span>)</span> <span class="option-price">40€</span></div>
         </div>
       </div>
 
       <!-- Autres options -->
       <div style="display: flex; flex-direction: column; gap: 20px;">
         <div class="card" style="flex: 1;">
-          <h2><i class="fa-solid fa-chart-line" style="color: var(--accent-blue);"></i> Niveau & Stats</h2>
+          <h2><i class="fa-solid fa-chart-line" style="color: var(--accent-blue);"></i> <span data-fr="Niveau & Stats" data-en="Rank & Stats">Niveau & Stats</span></h2>
           <div class="options-list" style="margin-top: 15px;">
-            <div class="option-row"><span>Niveau au choix</span> <span class="option-price">5€</span></div>
-            <div class="option-row"><span>Stats max</span> <span class="option-price">2€</span></div>
+            <div class="option-row"><span data-fr="Niveau au choix" data-en="Custom Rank">Niveau au choix</span> <span class="option-price">5€</span></div>
+            <div class="option-row"><span data-fr="Stats max" data-en="Max stats">Stats max</span> <span class="option-price">2€</span></div>
           </div>
         </div>
 
         <div class="card" style="flex: 1;">
-          <h2><i class="fa-solid fa-car" style="color: var(--accent-blue);"></i> Véhicules & Tenues</h2>
+          <h2><i class="fa-solid fa-car" style="color: var(--accent-blue);"></i> <span data-fr="Véhicules & Tenues" data-en="Vehicles & Outfits">Véhicules & Tenues</span></h2>
           <div class="options-list" style="margin-top: 15px;">
-            <div class="option-row"><span>Pack 10 Véhicules moddés</span> <span class="option-price">10€</span></div>
-            <div class="option-row"><span>Pack 5 Tenues moddées</span> <span class="option-price">5€</span></div>
-            <div class="option-row"><span>Pack 20 Tenues (Max)</span> <span class="option-price">20€</span></div>
+            <div class="option-row"><span data-fr="Pack 10 Véhicules moddés" data-en="10 Modded Vehicles Pack">Pack 10 Véhicules moddés</span> <span class="option-price">10€</span></div>
+            <div class="option-row"><span data-fr="Pack 5 Tenues moddées" data-en="5 Modded Outfits Pack">Pack 5 Tenues moddées</span> <span class="option-price">5€</span></div>
+            <div class="option-row"><span data-fr="Pack 20 Tenues (Max)" data-en="20 Outfits Pack (Max)">Pack 20 Tenues (Max)</span> <span class="option-price">20€</span></div>
           </div>
         </div>
       </div>
     </div>
 
     <!-- Section Nouveau Compte -->
-    <div class="section-heading" style="margin-top: 50px;"><i class="fa-solid fa-user-plus"></i> Nouveaux Comptes</div>
+    <div class="section-heading" style="margin-top: 50px;"><i class="fa-solid fa-user-plus"></i> <span data-fr="Nouveaux Comptes" data-en="New Accounts">Nouveaux Comptes</span></div>
     <div class="grid">
       <div class="card">
-        <h2>Compte Complet</h2>
-        <p style="color: var(--text-muted); font-size: 0.9rem; margin: 10px 0;">Compte fourni avec jeu inclus + 30M offerts + RP 120.</p>
+        <h2 data-fr="Compte Complet" data-en="Full Account">Compte Complet</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin: 10px 0;" data-fr="Compte fourni avec jeu inclus + 30M offerts + RP 120." data-en="Account provided with game included + free 30M + RP 120.">Compte fourni avec jeu inclus + 30M offerts + RP 120.</p>
         <div class="price-tag" style="align-self: flex-start; margin-top: 10px;">30€</div>
-        <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-blue" style="margin-top: 20px;">Commander</a>
+        <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-blue" style="margin-top: 20px;" data-fr="Commander" data-en="Order">Commander</a>
       </div>
       <div class="card">
-        <h2>Option Compte Simple</h2>
-        <p style="color: var(--text-muted); font-size: 0.9rem; margin: 10px 0;">Compte fourni avec le jeu inclus.</p>
+        <h2 data-fr="Option Compte Simple" data-en="Basic Account Option">Option Compte Simple</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin: 10px 0;" data-fr="Compte fourni avec le jeu inclus." data-en="Account provided with game included.">Compte fourni avec le jeu inclus.</p>
         <div class="price-tag" style="align-self: flex-start; margin-top: 10px;">20€</div>
-        <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-blue" style="margin-top: 20px;">Commander</a>
+        <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-blue" style="margin-top: 20px;" data-fr="Commander" data-en="Order">Commander</a>
       </div>
     </div>
 
     <!-- Comment commander -->
-    <div class="section-heading" style="margin-top: 50px;"><i class="fa-solid fa-circle-question"></i> Comment commander ?</div>
+    <div class="section-heading" style="margin-top: 50px;"><i class="fa-solid fa-circle-question"></i> <span data-fr="Comment commander ?" data-en="How to order?">Comment commander ?</span></div>
     <div class="steps-grid">
       <div class="step-card">
         <div class="step-number">1️⃣</div>
-        <p>Rejoins le serveur Discord officiel.</p>
+        <p data-fr="Rejoins le serveur Discord officiel." data-en="Join the official Discord server.">Rejoins le serveur Discord officiel.</p>
       </div>
       <div class="step-card">
         <div class="step-number">2️⃣</div>
-        <p>Crée un ticket dans le salon dédié.</p>
+        <p data-fr="Crée un ticket dans le salon dédié." data-en="Create a ticket in the dedicated channel.">Crée un ticket dans le salon dédié.</p>
       </div>
       <div class="step-card">
         <div class="step-number">3️⃣</div>
-        <p>Indique le pack ou les options souhaitées.</p>
+        <p data-fr="Indique le pack ou les options souhaitées." data-en="Specify the requested pack or options.">Indique le pack ou les options souhaitées.</p>
       </div>
       <div class="step-card">
         <div class="step-number">4️⃣</div>
-        <p>Effectue le paiement via PayPal (en ami/proche).</p>
+        <p data-fr="Effectue le paiement via PayPal (en ami/proche)." data-en="Make payment via PayPal (Friends & Family).">Effectue le paiement via PayPal (en ami/proche).</p>
       </div>
       <div class="step-card">
         <div class="step-number">5️⃣</div>
-        <p>Suivi de commande direct dans ton ticket.</p>
+        <p data-fr="Suivi de commande direct dans ton ticket." data-en="Direct order tracking in your ticket.">Suivi de commande direct dans ton ticket.</p>
       </div>
     </div>
 
@@ -570,6 +602,25 @@
   <footer>
     &copy; 2026 2DKR by Dekur. All rights reserved.
   </footer>
+
+  <script>
+    function setLanguage(lang) {
+      document.querySelectorAll('[data-fr][data-en]').forEach(elem => {
+        elem.textContent = elem.getAttribute(`data-${lang}`);
+      });
+
+      document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+      document.documentElement.lang = lang;
+
+      localStorage.setItem('preferred_lang', lang);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedLang = localStorage.getItem('preferred_lang') || 'fr';
+      setLanguage(savedLang);
+    });
+  </script>
 
 </body>
 </html>
