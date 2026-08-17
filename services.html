@@ -69,7 +69,7 @@
     }
 
     .nav-links a {
-      color: var(--accent-blue);
+      color: var(--text-muted);
       text-decoration: none;
       font-size: 0.95rem;
       font-weight: 500;
@@ -77,7 +77,11 @@
     }
 
     .nav-links a:hover {
-      color: var(--accent-blue-hover);
+      color: var(--accent-blue);
+    }
+
+    .nav-links a.active {
+      color: var(--accent-blue);
     }
 
     .nav-social-icon {
@@ -198,7 +202,7 @@
     .badge-plat { background-color: rgba(56, 189, 248, 0.15); color: var(--accent-blue); border: 1px solid rgba(56, 189, 248, 0.3); }
     .badge-ultimate { background-color: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3); }
 
-    /* Survol personnalisé par couleur de pack */
+    /* Animation au survol par couleur de pack */
     .card-bronze:hover { border-color: #cd7f32; }
     .card-bronze:hover h2 { color: #cd7f32; }
 
@@ -240,7 +244,6 @@
       color: var(--text-muted);
     }
 
-    /* List items inside options */
     .options-list {
       display: flex;
       flex-direction: column;
@@ -295,7 +298,7 @@
     /* Steps container */
     .steps-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 15px;
     }
 
@@ -336,8 +339,7 @@
   <nav>
     <a href="index.html" class="logo">2D<span>KR</span></a>
     <div class="nav-links">
-      <a href="index.html">Accueil</a>
-      <a href="services.html" style="color: var(--text-main);">Catalogue</a>
+      <a href="index.html" class="active">Accueil</a>
       <a href="index.html#paiements">Paiements</a>
       <a href="https://www.youtube.com/@Dekur7" target="_blank" class="nav-social-icon" style="color: #ff0000;" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
       <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="nav-social-icon" style="color: #5865f2;" title="Discord"><i class="fa-brands fa-discord"></i></a>
@@ -347,7 +349,7 @@
   <!-- Hero -->
   <section class="hero">
     <h1>Catalogue des <span>Lobbies</span></h1>
-    <p>Découvre tous nos packs GTA Online, options à la carte et comptes prêts à jouer. bruh...</p>
+    <p>Découvre tous nos packs GTA Online, options à la carte et comptes prêts à jouer.</p>
   </section>
 
   <!-- Container -->
