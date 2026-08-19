@@ -3,11 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>2DKR — Site officiel de dekur</title>
+  <title>2DKR — Site officiel de Dekur</title>
+  
+  <!-- Preconnect & Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
   <style>
     :root {
       --bg: #0d1117;
@@ -90,6 +95,9 @@
       transform: scale(1.2);
     }
 
+    .icon-youtube { color: #ff0000; }
+    .icon-discord { color: var(--discord); }
+
     /* Sélecteur de Langue */
     .lang-selector {
       position: relative;
@@ -140,11 +148,15 @@
     }
 
     .lang-option {
+      width: 100%;
+      text-align: left;
+      background: none;
+      border: none;
       padding: 8px 12px;
       color: var(--text-main);
       font-size: 0.85rem;
       cursor: pointer;
-      transition: background-color 0.2s;
+      transition: background-color 0.2s, color 0.2s;
     }
 
     .lang-option:hover {
@@ -189,7 +201,7 @@
       border-radius: 20px;
       font-size: 0.85rem;
       font-weight: 600;
-      cursor: pointer;
+      cursor: default;
       overflow: hidden;
       white-space: nowrap;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -238,6 +250,7 @@
     }
 
     .card {
+      position: relative;
       background-color: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: 12px;
@@ -246,7 +259,6 @@
       flex-direction: column;
       justify-content: space-between;
       transition: border-color 0.2s ease, transform 0.2s ease;
-      cursor: pointer;
     }
 
     .card:hover {
@@ -279,7 +291,7 @@
 
     .badge-discord {
       background-color: rgba(88, 101, 242, 0.15);
-      color: #5865f2;
+      color: var(--discord);
       border: 1px solid rgba(88, 101, 242, 0.3);
     }
 
@@ -333,6 +345,17 @@
       background-color: #7dd3fc;
     }
 
+    /* Étendre la zone cliquable du bouton à toute la carte */
+    .stretched-link::after {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 1;
+      content: "";
+    }
+
     /* Toast Notification */
     .toast {
       visibility: hidden;
@@ -380,158 +403,181 @@
       <a href="services.html" data-i18n="nav-services">Services & Tarifs</a>
       <a href="#projets" data-i18n="nav-projects">Services</a>
       <a href="#paiements" data-i18n="nav-payments">Paiements</a>
-      <a href="https://www.youtube.com/@Dekur7" target="_blank" class="nav-social-icon" style="color: #ff0000;" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
-      <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="nav-social-icon" style="color: #5865f2;" title="Discord"><i class="fa-brands fa-discord"></i></a>
+      <a href="https://www.youtube.com/@Dekur7" target="_blank" rel="noopener" class="nav-social-icon icon-youtube" title="YouTube" aria-label="Chaîne YouTube de Dekur">
+        <i class="fa-brands fa-youtube" aria-hidden="true"></i>
+      </a>
+      <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener" class="nav-social-icon icon-discord" title="Discord" aria-label="Serveur Discord 2DKR">
+        <i class="fa-brands fa-discord" aria-hidden="true"></i>
+      </a>
       
       <!-- Sélecteur de langue -->
       <div class="lang-selector">
-        <button class="lang-btn" onclick="toggleLangDropdown()">
+        <button class="lang-btn" id="lang-btn" aria-haspopup="true" aria-expanded="false">
           <span id="current-lang">Français</span>
-          <span class="arrow">▼</span>
+          <span class="arrow" aria-hidden="true">▼</span>
         </button>
-        <div class="lang-dropdown" id="lang-dropdown">
-          <div class="lang-option" onclick="changeLanguage('en')">English</div>
-          <div class="lang-option" onclick="changeLanguage('fr')">Français</div>
+        <div class="lang-dropdown" id="lang-dropdown" role="menu">
+          <button class="lang-option" role="menuitem" onclick="changeLanguage('en')">English</button>
+          <button class="lang-option" role="menuitem" onclick="changeLanguage('fr')">Français</button>
         </div>
       </div>
     </div>
   </nav>
 
   <!-- Hero Section -->
-  <section class="hero">
+  <header class="hero">
     <h1 data-i18n="hero-title">L'Espace <span>2DKR</span></h1>
     <p data-i18n="hero-desc">Retrouve tous les accès à la communauté, aux services et aux moyens de paiement.</p>
     <div>
       <div class="badge-dev-mode">
-        <i class="fa-solid fa-code"></i>
+        <i class="fa-solid fa-code" aria-hidden="true"></i>
         <span data-i18n="badge-dev-status">v0.1 — En cours de développement</span>
         <span class="extra-text">&nbsp;• by Dekur</span>
       </div>
     </div>
-  </section>
+  </header>
 
   <!-- Container Principal -->
-  <div class="container" id="projets">
+  <main class="container" id="projets">
     
-    <div class="section-heading"><i class="fa-solid fa-layer-group"></i> <span data-i18n="heading-projects">Communauté & Projets</span></div>
-    <div class="grid">
+    <section>
+      <div class="section-heading">
+        <i class="fa-solid fa-layer-group" aria-hidden="true"></i>
+        <span data-i18n="heading-projects">Communauté & Projets</span>
+      </div>
       
-      <!-- Carte Discord -->
-      <div class="card" onclick="window.open('https://discord.gg/mDpZT73FFG', '_blank')">
-        <div>
-          <span class="card-badge badge-discord" data-i18n="badge-community">Communauté</span>
-          <div class="card-title-row">
-            <h2 data-i18n="discord-title">Serveur Discord</h2>
-            <i class="fa-brands fa-discord" style="font-size: 1.5rem; color: #5865f2;"></i>
+      <div class="grid">
+        
+        <!-- Carte Discord -->
+        <article class="card">
+          <div>
+            <span class="card-badge badge-discord" data-i18n="badge-community">Communauté</span>
+            <div class="card-title-row">
+              <h2 data-i18n="discord-title">Serveur Discord</h2>
+              <i class="fa-brands fa-discord" style="font-size: 1.5rem; color: var(--discord);" aria-hidden="true"></i>
+            </div>
+            <p data-i18n="discord-desc">Rejoins-nous sur Discord pour voir les nouveautés à propos du serveur, parler, suggérer ou même ouvrir un ticket.</p>
           </div>
-          <p data-i18n="discord-desc">Rejoins-nous sur Discord pour voir les nouveautés a propos du serveur, parler, suggérer ou meme ouvrir un ticket.</p>
-        </div>
-        <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-blue" data-i18n="btn-join-discord">Rejoindre le Discord</a>
-      </div>
+          <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener" class="btn btn-blue stretched-link" data-i18n="btn-join-discord">Rejoindre le Discord</a>
+        </article>
 
-      <!-- Carte Cherax -->
-      <div class="card" onclick="window.open('https://discord.gg/mDpZT73FFG', '_blank')">
-        <div>
-          <span class="card-badge badge-dev" data-i18n="badge-pending">En attente</span>
-          <div class="card-title-row">
-            <h2>Cherax</h2>
-            <img src="https://cherax.menu/logo.png" alt="Cherax Logo" style="height: 28px; width: auto; object-fit: contain;">
+        <!-- Carte Cherax -->
+        <article class="card">
+          <div>
+            <span class="card-badge badge-dev" data-i18n="badge-pending">En attente</span>
+            <div class="card-title-row">
+              <h2>Cherax</h2>
+              <img src="https://cherax.menu/logo.png" alt="Cherax Logo" style="height: 28px; width: auto; object-fit: contain;">
+            </div>
+            <p data-i18n="reseller-desc">Revendeur en cours de validation. Ouvre un ticket sur le Discord pour plus d'infos.</p>
           </div>
-          <p data-i18n="reseller-desc">Revendeur en cours de validation. Ouvre un ticket sur le Discord pour plus d'infos.</p>
-        </div>
-        <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-blue" data-i18n="btn-open-ticket">Ouvrir un ticket</a>
-      </div>
+          <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener" class="btn btn-blue stretched-link" data-i18n="btn-open-ticket">Ouvrir un ticket</a>
+        </article>
 
-      <!-- Carte Lexis -->
-      <div class="card" onclick="window.open('https://discord.gg/mDpZT73FFG', '_blank')">
-        <div>
-          <span class="card-badge badge-dev" data-i18n="badge-pending">En attente</span>
-          <div class="card-title-row">
-            <h2>Lexis</h2>
-            <svg viewBox="0 0 111 128.1" xmlns="http://www.w3.org/2000/svg" style="height: 28px; width: auto; object-fit: contain;">
-              <defs>
-                <linearGradient id="lexis-a" gradientUnits="userSpaceOnUse" x1="55.5" x2="111" y1="96" y2="96">
-                  <stop offset="0" stop-color="#4d4d4d"/>
-                  <stop offset="1" stop-color="#ccc"/>
-                </linearGradient>
-                <linearGradient id="lexis-b" gradientUnits="userSpaceOnUse" x1="6" x2="50.6" y1="26" y2="70.6">
-                  <stop offset="0" stop-color="#c2c2c2"/>
-                  <stop offset="1" stop-color="#9e9e9e"/>
-                </linearGradient>
-                <linearGradient id="lexis-c" gradientUnits="userSpaceOnUse" x1="21.9" x2="65.7" y1="117.9" y2="74.2">
-                  <stop offset="0" stop-color="#404040"/>
-                  <stop offset="1" stop-color="#919191"/>
-                </linearGradient>
-              </defs>
-              <path d="m111 96-55.5-32v64z" fill="url(#lexis-a)"/>
-              <path d="m0 96v-64l55.5-32v64z" fill="url(#lexis-b)"/>
-              <path d="m0 96 55.5 32v-64z" fill="url(#lexis-c)"/>
-            </svg>
+        <!-- Carte Lexis -->
+        <article class="card">
+          <div>
+            <span class="card-badge badge-dev" data-i18n="badge-pending">En attente</span>
+            <div class="card-title-row">
+              <h2>Lexis</h2>
+              <svg viewBox="0 0 111 128.1" xmlns="http://www.w3.org/2000/svg" style="height: 28px; width: auto; object-fit: contain;" aria-hidden="true">
+                <defs>
+                  <linearGradient id="lexis-a" gradientUnits="userSpaceOnUse" x1="55.5" x2="111" y1="96" y2="96">
+                    <stop offset="0" stop-color="#4d4d4d"/>
+                    <stop offset="1" stop-color="#ccc"/>
+                  </linearGradient>
+                  <linearGradient id="lexis-b" gradientUnits="userSpaceOnUse" x1="6" x2="50.6" y1="26" y2="70.6">
+                    <stop offset="0" stop-color="#c2c2c2"/>
+                    <stop offset="1" stop-color="#9e9e9e"/>
+                  </linearGradient>
+                  <linearGradient id="lexis-c" gradientUnits="userSpaceOnUse" x1="21.9" x2="65.7" y1="117.9" y2="74.2">
+                    <stop offset="0" stop-color="#404040"/>
+                    <stop offset="1" stop-color="#919191"/>
+                  </linearGradient>
+                </defs>
+                <path d="m111 96-55.5-32v64z" fill="url(#lexis-a)"/>
+                <path d="m0 96v-64l55.5-32v64z" fill="url(#lexis-b)"/>
+                <path d="m0 96 55.5 32v-64z" fill="url(#lexis-c)"/>
+              </svg>
+            </div>
+            <p data-i18n="reseller-desc">Revendeur en cours de validation. Ouvre un ticket sur le Discord pour plus d'infos.</p>
           </div>
-          <p data-i18n="reseller-desc">Revendeur en cours de validation. Ouvre un ticket sur le Discord pour plus d'infos.</p>
-        </div>
-        <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-blue" data-i18n="btn-open-ticket">Ouvrir un ticket</a>
-      </div>
+          <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener" class="btn btn-blue stretched-link" data-i18n="btn-open-ticket">Ouvrir un ticket</a>
+        </article>
 
-    </div>
+      </div>
+    </section>
 
     <!-- Section Paiements -->
-    <div class="section-heading" id="paiements" style="margin-top: 50px;"><i class="fa-solid fa-wallet"></i> <span data-i18n="heading-payments">Moyens de Paiement</span></div>
-    <div class="grid">
+    <section>
+      <div class="section-heading" id="paiements" style="margin-top: 50px;">
+        <i class="fa-solid fa-wallet" aria-hidden="true"></i>
+        <span data-i18n="heading-payments">Moyens de Paiement</span>
+      </div>
       
-      <!-- PayPal -->
-      <div class="card" onclick="window.open('https://paypal.me/DekurFreekrd', '_blank')">
-        <div>
-          <span class="card-badge badge-payment">PayPal</span>
-          <div class="card-title-row">
-            <h2 data-i18n="paypal-title">Paiement PayPal</h2>
-            <i class="fa-brands fa-paypal" style="font-size: 1.4rem; color: var(--accent-green);"></i>
+      <div class="grid">
+        
+        <!-- PayPal -->
+        <article class="card">
+          <div>
+            <span class="card-badge badge-payment">PayPal</span>
+            <div class="card-title-row">
+              <h2 data-i18n="paypal-title">Paiement PayPal</h2>
+              <i class="fa-brands fa-paypal" style="font-size: 1.4rem; color: var(--accent-green);" aria-hidden="true"></i>
+            </div>
+            <p data-i18n="paypal-desc">Clique sur le bouton pour envoyer de l'argent via PayPal.</p>
           </div>
-          <p data-i18n="paypal-desc">Clique sur le bouton pour envoyer de l'argent via paypal.</p>
-        </div>
-        <a href="https://paypal.me/DekurFreekrd" target="_blank" class="btn btn-blue" data-i18n="btn-paypal">Payer par PayPal</a>
-      </div>
+          <a href="https://paypal.me/DekurFreekrd" target="_blank" rel="noopener" class="btn btn-blue stretched-link" data-i18n="btn-paypal">Payer par PayPal</a>
+        </article>
 
-      <!-- Crypto -->
-      <div class="card" onclick="copyCryptoAddress()">
-        <div>
-          <span class="card-badge badge-payment">Crypto</span>
-          <div class="card-title-row">
-            <h2>Crypto (SOL / USDC)</h2>
-            <i class="fa-solid fa-coins" style="font-size: 1.4rem; color: var(--accent-green);"></i>
+        <!-- Crypto -->
+        <article class="card">
+          <div>
+            <span class="card-badge badge-payment">Crypto</span>
+            <div class="card-title-row">
+              <h2>Crypto (SOL / USDC)</h2>
+              <i class="fa-solid fa-coins" style="font-size: 1.4rem; color: var(--accent-green);" aria-hidden="true"></i>
+            </div>
+            <p data-i18n="crypto-desc">Clique sur le bouton pour copier rapidement l'adresse du wallet.</p>
           </div>
-          <p data-i18n="crypto-desc">Clique sur le bouton pour copier rapidement l'adresse du wallet.</p>
-        </div>
-        <button class="btn btn-blue" id="btn-crypto"><i class="fa-solid fa-copy"></i> <span data-i18n="btn-crypto-text">Copier l'adresse crypto</span></button>
-      </div>
+          <button class="btn btn-blue stretched-link" id="btn-crypto" onclick="copyCryptoAddress()">
+            <i class="fa-solid fa-copy" aria-hidden="true"></i>
+            <span data-i18n="btn-crypto-text">Copier l'adresse crypto</span>
+          </button>
+        </article>
 
-    </div>
-  </div>
+      </div>
+    </section>
+
+  </main>
 
   <!-- Footer -->
   <footer>
-    &copy; 2026 2DKR by Dekur. All rights reserved.
+    &copy; 2026 2DKR by Dekur. Tous droits réservés.
   </footer>
 
-  <!-- Toast Notification Copie -->
-  <div id="copy-toast" class="toast">
-    <i class="fa-solid fa-check-circle"></i> <span data-i18n="toast-copied">Adresse du wallet copiée !</span>
+  <!-- Toast Notification -->
+  <div id="copy-toast" class="toast" role="status" aria-live="polite">
+    <i class="fa-solid fa-check-circle" aria-hidden="true"></i>
+    <span data-i18n="toast-copied">Adresse du wallet copiée !</span>
   </div>
 
   <script>
-    // Remplace par ton adresse exacte de wallet Phantom/Solana
+    // Config Wallet Solana/USDC
     const WALLET_ADDRESS = "TON_ADRESSE_SOLANA_OU_USDC_ICI";
 
     function copyCryptoAddress() {
-      navigator.clipboard.writeText(WALLET_ADDRESS).then(() => {
-        const toast = document.getElementById("copy-toast");
-        toast.classList.add("show");
-        setTimeout(() => {
-          toast.classList.remove("show");
-        }, 3000);
-      }).catch(err => {
-        console.error("Erreur lors de la copie : ", err);
-      });
+      navigator.clipboard.writeText(WALLET_ADDRESS)
+        .then(() => {
+          const toast = document.getElementById("copy-toast");
+          toast.classList.add("show");
+          setTimeout(() => {
+            toast.classList.remove("show");
+          }, 3000);
+        })
+        .catch(err => {
+          console.error("Erreur de copie : ", err);
+        });
     }
 
     // --- Système de Traduction FR / EN ---
@@ -546,14 +592,14 @@
         "heading-projects": "Communauté & Projets",
         "badge-community": "Communauté",
         "discord-title": "Serveur Discord",
-        "discord-desc": "Rejoins-nous sur Discord pour voir les nouveautés a propos du serveur, parler, suggérer ou meme ouvrir un ticket.",
+        "discord-desc": "Rejoins-nous sur Discord pour voir les nouveautés à propos du serveur, parler, suggérer ou même ouvrir un ticket.",
         "btn-join-discord": "Rejoindre le Discord",
         "badge-pending": "En attente",
         "reseller-desc": "Revendeur en cours de validation. Ouvre un ticket sur le Discord pour plus d'infos.",
         "btn-open-ticket": "Ouvrir un ticket",
         "heading-payments": "Moyens de Paiement",
         "paypal-title": "Paiement PayPal",
-        "paypal-desc": "Clique sur le bouton pour envoyer de l'argent via paypal.",
+        "paypal-desc": "Clique sur le bouton pour envoyer de l'argent via PayPal.",
         "btn-paypal": "Payer par PayPal",
         "crypto-desc": "Clique sur le bouton pour copier rapidement l'adresse du wallet.",
         "btn-crypto-text": "Copier l'adresse crypto",
@@ -584,11 +630,17 @@
       }
     };
 
-    function toggleLangDropdown() {
-      document.getElementById("lang-dropdown").classList.toggle("show");
-    }
+    const langBtn = document.getElementById("lang-btn");
+    const langDropdown = document.getElementById("lang-dropdown");
+
+    langBtn.addEventListener("click", () => {
+      const isExpanded = langBtn.getAttribute("aria-expanded") === "true";
+      langBtn.setAttribute("aria-expanded", !isExpanded);
+      langDropdown.classList.toggle("show");
+    });
 
     function changeLanguage(lang) {
+      document.documentElement.lang = lang;
       document.getElementById("current-lang").textContent = lang === 'fr' ? 'Français' : 'English';
       
       document.querySelectorAll("[data-i18n]").forEach(el => {
@@ -598,17 +650,19 @@
         }
       });
 
-      document.getElementById("lang-dropdown").classList.remove("show");
+      langDropdown.classList.remove("show");
+      langBtn.setAttribute("aria-expanded", "false");
     }
 
-    window.onclick = function(e) {
+    // Fermer le menu déroulant si clic en dehors
+    window.addEventListener("click", (e) => {
       if (!e.target.closest('.lang-selector')) {
-        const dropdown = document.getElementById("lang-dropdown");
-        if (dropdown && dropdown.classList.contains('show')) {
-          dropdown.classList.remove('show');
+        if (langDropdown.classList.contains('show')) {
+          langDropdown.classList.remove('show');
+          langBtn.setAttribute("aria-expanded", "false");
         }
       }
-    }
+    });
   </script>
 
 </body>
