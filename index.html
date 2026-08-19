@@ -95,9 +95,6 @@
       transform: scale(1.2);
     }
 
-    .icon-youtube { color: #ff0000; }
-    .icon-discord { color: var(--discord); }
-
     /* Hero Section */
     .hero {
       text-align: center;
@@ -135,7 +132,7 @@
       border-radius: 20px;
       font-size: 0.85rem;
       font-weight: 600;
-      cursor: default;
+      cursor: pointer;
       overflow: hidden;
       white-space: nowrap;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -184,7 +181,6 @@
     }
 
     .card {
-      position: relative;
       background-color: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: 12px;
@@ -193,6 +189,7 @@
       flex-direction: column;
       justify-content: space-between;
       transition: border-color 0.2s ease, transform 0.2s ease;
+      cursor: pointer;
     }
 
     .card:hover {
@@ -225,7 +222,7 @@
 
     .badge-discord {
       background-color: rgba(88, 101, 242, 0.15);
-      color: var(--discord);
+      color: #5865f2;
       border: 1px solid rgba(88, 101, 242, 0.3);
     }
 
@@ -279,16 +276,6 @@
       background-color: #7dd3fc;
     }
 
-    .stretched-link::after {
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      z-index: 1;
-      content: "";
-    }
-
     /* Toast Notification */
     .toast {
       visibility: hidden;
@@ -336,138 +323,114 @@
       <a href="services.html">Services & Tarifs</a>
       <a href="#projets">Services</a>
       <a href="#paiements">Paiements</a>
-      <a href="https://www.youtube.com/@Dekur7" target="_blank" rel="noopener" class="nav-social-icon icon-youtube" title="YouTube" aria-label="Chaîne YouTube de Dekur">
-        <i class="fa-brands fa-youtube" aria-hidden="true"></i>
-      </a>
-      <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener" class="nav-social-icon icon-discord" title="Discord" aria-label="Serveur Discord 2DKR">
-        <i class="fa-brands fa-discord" aria-hidden="true"></i>
-      </a>
+      <a href="https://www.youtube.com/@Dekur7" target="_blank" class="nav-social-icon" style="color: #ff0000;" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+      <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="nav-social-icon" style="color: #5865f2;" title="Discord"><i class="fa-brands fa-discord"></i></a>
     </div>
   </nav>
 
   <!-- Hero Section -->
-  <header class="hero">
+  <section class="hero">
     <h1>L'Espace <span>2DKR</span></h1>
     <p>Retrouve tous les accès à la communauté, aux services et aux moyens de paiement.</p>
     <div>
       <div class="badge-dev-mode">
-        <i class="fa-solid fa-code" aria-hidden="true"></i>
+        <i class="fa-solid fa-code"></i>
         <span>v0.1 — En cours de développement</span>
         <span class="extra-text">&nbsp;• by Dekur</span>
       </div>
     </div>
-  </header>
+  </section>
 
   <!-- Container Principal -->
-  <main class="container" id="projets">
+  <div class="container" id="projets">
     
-    <section>
-      <div class="section-heading">
-        <i class="fa-solid fa-layer-group" aria-hidden="true"></i>
-        <span>Communauté & Projets</span>
-      </div>
+    <div class="section-heading"><i class="fa-solid fa-layer-group"></i> <span>Communauté & Projets</span></div>
+    <div class="grid">
       
-      <div class="grid">
-        
-        <!-- Carte Discord -->
-        <article class="card">
-          <div>
-            <span class="card-badge badge-discord">Communauté</span>
-            <div class="card-title-row">
-              <h2>Serveur Discord</h2>
-              <i class="fa-brands fa-discord" style="font-size: 1.5rem; color: var(--discord);" aria-hidden="true"></i>
-            </div>
-            <p>Rejoins-nous sur Discord pour voir les nouveautés à propos du serveur, parler, suggérer ou même ouvrir un ticket.</p>
+      <!-- Carte Discord -->
+      <div class="card" onclick="window.open('https://discord.gg/mDpZT73FFG', '_blank')">
+        <div>
+          <span class="card-badge badge-discord">Communauté</span>
+          <div class="card-title-row">
+            <h2>Serveur Discord</h2>
+            <i class="fa-brands fa-discord" style="font-size: 1.5rem; color: #5865f2;"></i>
           </div>
-          <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener" class="btn btn-blue stretched-link">Rejoindre le Discord</a>
-        </article>
-
-        <!-- Carte Cherax -->
-        <article class="card">
-          <div>
-            <span class="card-badge badge-dev">En attente</span>
-            <div class="card-title-row">
-              <h2>Cherax</h2>
-              <img src="https://cherax.menu/logo.png" alt="Cherax Logo" style="height: 28px; width: auto; object-fit: contain;">
-            </div>
-            <p>Revendeur en cours de validation. Ouvre un ticket sur le Discord pour plus d'infos.</p>
-          </div>
-          <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener" class="btn btn-blue stretched-link">Ouvrir un ticket</a>
-        </article>
-
+          <p>Rejoins-nous sur Discord pour voir les nouveautés a propos du serveur, parler, suggérer ou meme ouvrir un ticket.</p>
+        </div>
+        <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-blue">Rejoindre le Discord</a>
       </div>
-    </section>
+
+      <!-- Carte Cherax -->
+      <div class="card" onclick="window.open('https://discord.gg/mDpZT73FFG', '_blank')">
+        <div>
+          <span class="card-badge badge-dev">En attente</span>
+          <div class="card-title-row">
+            <h2>Cherax</h2>
+            <img src="https://cherax.menu/logo.png" alt="Cherax Logo" style="height: 28px; width: auto; object-fit: contain;">
+          </div>
+          <p>Revendeur en cours de validation. Ouvre un ticket sur le Discord pour plus d'infos.</p>
+        </div>
+        <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-blue">Ouvrir un ticket</a>
+      </div>
+
+    </div>
 
     <!-- Section Paiements -->
-    <section>
-      <div class="section-heading" id="paiements" style="margin-top: 50px;">
-        <i class="fa-solid fa-wallet" aria-hidden="true"></i>
-        <span>Moyens de Paiement</span>
-      </div>
+    <div class="section-heading" id="paiements" style="margin-top: 50px;"><i class="fa-solid fa-wallet"></i> <span>Moyens de Paiement</span></div>
+    <div class="grid">
       
-      <div class="grid">
-        
-        <!-- PayPal -->
-        <article class="card">
-          <div>
-            <span class="card-badge badge-payment">PayPal</span>
-            <div class="card-title-row">
-              <h2>Paiement PayPal</h2>
-              <i class="fa-brands fa-paypal" style="font-size: 1.4rem; color: var(--accent-green);" aria-hidden="true"></i>
-            </div>
-            <p>Clique sur le bouton pour envoyer de l'argent via PayPal.</p>
+      <!-- PayPal -->
+      <div class="card" onclick="window.open('https://paypal.me/DekurFreekrd', '_blank')">
+        <div>
+          <span class="card-badge badge-payment">PayPal</span>
+          <div class="card-title-row">
+            <h2>Paiement PayPal</h2>
+            <i class="fa-brands fa-paypal" style="font-size: 1.4rem; color: var(--accent-green);"></i>
           </div>
-          <a href="https://paypal.me/DekurFreekrd" target="_blank" rel="noopener" class="btn btn-blue stretched-link">Payer par PayPal</a>
-        </article>
-
-        <!-- Crypto -->
-        <article class="card">
-          <div>
-            <span class="card-badge badge-payment">Crypto</span>
-            <div class="card-title-row">
-              <h2>Crypto (SOL / USDC)</h2>
-              <i class="fa-solid fa-coins" style="font-size: 1.4rem; color: var(--accent-green);" aria-hidden="true"></i>
-            </div>
-            <p>Clique sur le bouton pour copier rapidement l'adresse du wallet.</p>
-          </div>
-          <button class="btn btn-blue stretched-link" id="btn-crypto" onclick="copyCryptoAddress()">
-            <i class="fa-solid fa-copy" aria-hidden="true"></i>
-            <span>Copier l'adresse crypto</span>
-          </button>
-        </article>
-
+          <p>Clique sur le bouton pour envoyer de l'argent via paypal.</p>
+        </div>
+        <a href="https://paypal.me/DekurFreekrd" target="_blank" class="btn btn-blue">Payer par PayPal</a>
       </div>
-    </section>
 
-  </main>
+      <!-- Crypto -->
+      <div class="card" onclick="copyCryptoAddress()">
+        <div>
+          <span class="card-badge badge-payment">Crypto</span>
+          <div class="card-title-row">
+            <h2>Crypto (SOL / USDC)</h2>
+            <i class="fa-solid fa-coins" style="font-size: 1.4rem; color: var(--accent-green);"></i>
+          </div>
+          <p>Clique sur le bouton pour copier rapidement l'adresse du wallet.</p>
+        </div>
+        <button class="btn btn-blue" id="btn-crypto"><i class="fa-solid fa-copy"></i> <span>Copier l'adresse crypto</span></button>
+      </div>
+
+    </div>
+  </div>
 
   <!-- Footer -->
   <footer>
-    &copy; 2026 2DKR by Dekur. Tous droits réservés.
+    &copy; 2026 2DKR by Dekur. All rights reserved.
   </footer>
 
-  <!-- Toast Notification -->
-  <div id="copy-toast" class="toast" role="status" aria-live="polite">
-    <i class="fa-solid fa-check-circle" aria-hidden="true"></i>
-    <span>Adresse du wallet copiée !</span>
+  <!-- Toast Notification Copie -->
+  <div id="copy-toast" class="toast">
+    <i class="fa-solid fa-check-circle"></i> <span>Adresse du wallet copiée !</span>
   </div>
 
   <script>
-    // Config Wallet Solana/USDC
     const WALLET_ADDRESS = "TON_ADRESSE_SOLANA_OU_USDC_ICI";
 
     function copyCryptoAddress() {
-      navigator.clipboard.writeText(WALLET_ADDRESS)
-        .then(() => {
-          const toast = document.getElementById("copy-toast");
-          toast.classList.add("show");
-          setTimeout(() => {
-            toast.classList.remove("show");
-          }, 3000);
-        })
-        .catch(err => {
-          console.error("Erreur de copie : ", err);
-        });
+      navigator.clipboard.writeText(WALLET_ADDRESS).then(() => {
+        const toast = document.getElementById("copy-toast");
+        toast.classList.add("show");
+        setTimeout(() => {
+          toast.classList.remove("show");
+        }, 3000);
+      }).catch(err => {
+        console.error("Erreur lors de la copie : ", err);
+      });
     }
   </script>
 
