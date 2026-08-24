@@ -177,7 +177,7 @@
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 20px;
     }
 
@@ -251,6 +251,52 @@
       font-size: 0.95rem;
       line-height: 1.5;
       margin-bottom: 24px;
+    }
+
+    /* FAQ Details/Summary (Nouveau V0.2) */
+    .faq-item {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      transition: border-color 0.2s ease;
+    }
+
+    .faq-item:hover {
+      border-color: var(--accent-blue);
+    }
+
+    .faq-item summary {
+      font-weight: 600;
+      color: var(--text-main);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      list-style: none;
+    }
+
+    .faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-item summary i {
+      color: var(--accent-blue);
+      transition: transform 0.2s ease;
+    }
+
+    .faq-item[open] summary i {
+      transform: rotate(180deg);
+    }
+
+    .faq-item p {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      line-height: 1.6;
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
     }
 
     /* Buttons */
@@ -336,7 +382,7 @@
     <div>
       <div class="badge-dev-mode">
         <i class="fa-solid fa-code"></i>
-        <span>v0.1 — En cours de développement</span>
+        <span>v0.2 — Version mise à jour</span>
         <span class="extra-text">&nbsp;• by Dekur</span>
       </div>
     </div>
@@ -345,6 +391,7 @@
   <!-- Container Principal -->
   <div class="container" id="projets">
     
+    <!-- Section Communauté -->
     <div class="section-heading"><i class="fa-solid fa-layer-group"></i> <span>Communauté & Projets</span></div>
     <div class="grid">
       
@@ -356,9 +403,37 @@
             <h2>Serveur Discord</h2>
             <i class="fa-brands fa-discord" style="font-size: 1.5rem; color: #5865f2;"></i>
           </div>
-          <p>Rejoins-nous sur Discord pour voir les nouveautés a propos du serveur, parler, suggérer ou meme ouvrir un ticket.</p>
+          <p>Rejoins-nous sur Discord pour voir les nouveautés à propos du serveur, parler, suggérer ou ouvrir un ticket.</p>
         </div>
         <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-blue">Rejoindre le Discord</a>
+      </div>
+
+    </div>
+
+    <!-- Section Pourquoi nous choisir ? (Nouveau V0.2) -->
+    <div class="section-heading" style="margin-top: 50px;"><i class="fa-solid fa-shield-halved"></i> <span>Pourquoi choisir 2DKR ?</span></div>
+    <div class="grid">
+      
+      <div class="card" style="cursor: default;">
+        <div>
+          <span class="card-badge badge-dev">Avantage</span>
+          <div class="card-title-row">
+            <h2>Livraison Rapide</h2>
+            <i class="fa-solid fa-bolt" style="font-size: 1.4rem; color: var(--accent-blue);"></i>
+          </div>
+          <p>Prise en charge directe de tes demandes et tickets sur notre Discord dédié.</p>
+        </div>
+      </div>
+
+      <div class="card" style="cursor: default;">
+        <div>
+          <span class="card-badge badge-dev">Sécurité</span>
+          <div class="card-title-row">
+            <h2>Fiabilité & Support</h2>
+            <i class="fa-solid fa-headset" style="font-size: 1.4rem; color: var(--accent-blue);"></i>
+          </div>
+          <p>Un support réactif en français pour t'aider dans la configuration et l'utilisation.</p>
+        </div>
       </div>
 
     </div>
@@ -375,7 +450,7 @@
             <h2>Paiement PayPal</h2>
             <i class="fa-brands fa-paypal" style="font-size: 1.4rem; color: var(--accent-green);"></i>
           </div>
-          <p>Clique sur le bouton pour envoyer de l'argent via paypal.</p>
+          <p>Clique sur le bouton pour envoyer de l'argent via PayPal.</p>
         </div>
         <a href="https://paypal.me/DekurFreekrd" target="_blank" class="btn btn-blue">Payer par PayPal</a>
       </div>
@@ -394,6 +469,20 @@
       </div>
 
     </div>
+
+    <!-- Section FAQ (Nouveau V0.2) -->
+    <div class="section-heading" style="margin-top: 50px;"><i class="fa-circle-question fa-solid"></i> <span>Foire Aux Questions</span></div>
+    
+    <details class="faq-item">
+      <summary><span>Comment passer commande ?</span> <i class="fa-solid fa-chevron-down"></i></summary>
+      <p>Va dans la rubrique Services, choisis ce dont tu as besoin, puis clique pour ouvrir un ticket sur le serveur Discord.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span>Quels sont les délais de réponse ?</span> <i class="fa-solid fa-chevron-down"></i></summary>
+      <p>L'équipe répond généralement très rapidement dès qu'un ticket est ouvert sur Discord.</p>
+    </details>
+
   </div>
 
   <!-- Footer -->
