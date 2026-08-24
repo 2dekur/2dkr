@@ -8,18 +8,20 @@
   <!-- Preconnect & Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   
   <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
     :root {
-      --bg: #0d1117;
-      --card-bg: #161b22;
-      --border: #30363d;
+      --bg: #090d16;
+      --card-bg: rgba(22, 27, 34, 0.75);
+      --border: rgba(48, 54, 61, 0.6);
+      --border-glow: rgba(56, 189, 248, 0.4);
       --accent-blue: #38bdf8;
       --accent-blue-hover: #0284c7;
+      --accent-blue-glow: rgba(56, 189, 248, 0.25);
       --discord: #5865f2;
       --accent-green: #10b981;
       --text-main: #f0f6fc;
@@ -35,20 +37,26 @@
 
     body {
       background-color: var(--bg);
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(56, 189, 248, 0.08) 0%, transparent 45%),
+        radial-gradient(circle at 85% 85%, rgba(88, 101, 242, 0.08) 0%, transparent 45%);
+      background-attachment: fixed;
       color: var(--text-main);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      overflow-x: hidden;
     }
 
-    /* Navigation */
+    /* Navigation Glassmorphism */
     nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 18px 8%;
-      background-color: rgba(22, 27, 34, 0.8);
-      backdrop-filter: blur(10px);
+      padding: 16px 8%;
+      background: rgba(13, 17, 23, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
       position: sticky;
       top: 0;
@@ -56,11 +64,16 @@
     }
 
     .logo {
-      font-size: 1.4rem;
-      font-weight: 800;
+      font-size: 1.5rem;
+      font-weight: 900;
       color: var(--text-main);
       text-decoration: none;
-      letter-spacing: 1px;
+      letter-spacing: 1.5px;
+      transition: transform 0.2s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.03);
     }
 
     .logo span {
@@ -69,7 +82,7 @@
 
     .nav-links {
       display: flex;
-      gap: 20px;
+      gap: 22px;
       align-items: center;
     }
 
@@ -78,90 +91,114 @@
       text-decoration: none;
       font-size: 0.95rem;
       font-weight: 500;
-      transition: color 0.2s ease;
+      transition: all 0.2s ease;
     }
 
     .nav-links a:hover,
     .nav-links a.active {
       color: var(--accent-blue);
+      text-shadow: 0 0 10px var(--accent-blue-glow);
     }
 
     .nav-social-icon {
-      font-size: 1.2rem;
-      transition: transform 0.2s ease;
+      font-size: 1.25rem;
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s ease;
       display: inline-block;
     }
 
     .nav-social-icon:hover {
-      transform: scale(1.2);
+      transform: scale(1.25) rotate(5deg);
     }
 
     /* Hero Section */
     .hero {
       text-align: center;
-      padding: 50px 20px 20px 20px;
+      padding: 60px 20px 30px 20px;
       max-width: 800px;
       margin: 0 auto;
+      animation: fadeInDown 0.8s ease-out;
     }
 
     .hero h1 {
-      font-size: 2.4rem;
-      font-weight: 800;
+      font-size: 2.8rem;
+      font-weight: 900;
       letter-spacing: -0.5px;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
+      line-height: 1.15;
     }
 
     .hero h1 span {
-      color: var(--accent-blue);
+      background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     .hero p {
-      font-size: 1.05rem;
+      font-size: 1.1rem;
       color: var(--text-muted);
       line-height: 1.6;
     }
 
-    /* Container & Grids */
+    /* Container Principal */
     .container {
-      max-width: 1000px;
+      max-width: 1050px;
       margin: 20px auto 60px auto;
       padding: 0 20px;
       width: 100%;
+      animation: fadeInUp 0.8s ease-out 0.2s backwards;
     }
 
     .section-heading {
-      font-size: 1.3rem;
+      font-size: 1.35rem;
       font-weight: 700;
       color: var(--text-main);
-      margin: 40px 0 20px 0;
+      margin: 45px 0 22px 0;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       border-bottom: 1px solid var(--border);
-      padding-bottom: 10px;
+      padding-bottom: 12px;
     }
 
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-      gap: 20px;
+      gap: 22px;
     }
 
-    /* Cards */
+    /* Cards Glassmorphism */
     .card {
-      background-color: var(--card-bg);
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 24px;
+      border-radius: 14px;
+      padding: 26px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
 
     .card:hover {
-      transform: translateY(-4px);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .card:hover::before {
+      opacity: 1;
     }
 
     .card h2 {
@@ -179,58 +216,64 @@
     }
 
     .price-tag {
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       font-weight: 800;
       color: var(--accent-green);
-      background: rgba(16, 185, 129, 0.1);
-      padding: 4px 10px;
+      background: rgba(16, 185, 129, 0.12);
+      padding: 4px 12px;
       border-radius: 8px;
-      border: 1px solid rgba(16, 185, 129, 0.2);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.1);
     }
 
     .card-badge {
       display: inline-block;
-      padding: 4px 10px;
+      padding: 4px 12px;
       border-radius: 20px;
       font-size: 0.75rem;
-      font-weight: 600;
+      font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.5px;
       margin-bottom: 14px;
       align-self: flex-start;
     }
 
-    .badge-bronze { background-color: rgba(205, 127, 50, 0.15); color: #cd7f32; border: 1px solid rgba(205, 127, 50, 0.3); }
-    .badge-silver { background-color: rgba(192, 192, 192, 0.15); color: #c0c0c0; border: 1px solid rgba(192, 192, 192, 0.3); }
-    .badge-gold { background-color: rgba(255, 215, 0, 0.15); color: #ffd700; border: 1px solid rgba(255, 215, 0, 0.3); }
-    .badge-plat { background-color: rgba(56, 189, 248, 0.15); color: var(--accent-blue); border: 1px solid rgba(56, 189, 248, 0.3); }
-    .badge-ultimate { background-color: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3); }
+    /* Color Badges & Card Hover Customizations */
+    .badge-bronze { background-color: rgba(205, 127, 50, 0.15); color: #cd7f32; border: 1px solid rgba(205, 127, 50, 0.35); }
+    .badge-silver { background-color: rgba(192, 192, 192, 0.15); color: #c0c0c0; border: 1px solid rgba(192, 192, 192, 0.35); }
+    .badge-gold { background-color: rgba(255, 215, 0, 0.15); color: #ffd700; border: 1px solid rgba(255, 215, 0, 0.35); }
+    .badge-plat { background-color: rgba(56, 189, 248, 0.15); color: var(--accent-blue); border: 1px solid rgba(56, 189, 248, 0.35); }
+    .badge-ultimate { background-color: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.35); }
 
-    .card-bronze:hover { border-color: #cd7f32; box-shadow: 0 4px 20px rgba(205, 127, 50, 0.15); }
+    .card-bronze:hover { border-color: #cd7f32; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(205, 127, 50, 0.25); }
     .card-bronze:hover h2 { color: #cd7f32; }
+    .card-bronze::before { background: linear-gradient(90deg, transparent, #cd7f32, transparent); }
 
-    .card-silver:hover { border-color: #c0c0c0; box-shadow: 0 4px 20px rgba(192, 192, 192, 0.15); }
+    .card-silver:hover { border-color: #c0c0c0; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(192, 192, 192, 0.25); }
     .card-silver:hover h2 { color: #c0c0c0; }
+    .card-silver::before { background: linear-gradient(90deg, transparent, #c0c0c0, transparent); }
 
-    .card-gold:hover { border-color: #ffd700; box-shadow: 0 4px 20px rgba(255, 215, 0, 0.2); }
+    .card-gold:hover { border-color: #ffd700; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 215, 0, 0.3); }
     .card-gold:hover h2 { color: #ffd700; }
+    .card-gold::before { background: linear-gradient(90deg, transparent, #ffd700, transparent); }
 
-    .card-plat:hover { border-color: var(--accent-blue); box-shadow: 0 4px 20px rgba(56, 189, 248, 0.2); }
+    .card-plat:hover { border-color: var(--accent-blue); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(56, 189, 248, 0.3); }
     .card-plat:hover h2 { color: var(--accent-blue); }
 
-    .card-ultimate:hover { border-color: #c084fc; box-shadow: 0 4px 20px rgba(168, 85, 247, 0.2); }
+    .card-ultimate:hover { border-color: #c084fc; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(168, 85, 247, 0.3); }
     .card-ultimate:hover h2 { color: #c084fc; }
+    .card-ultimate::before { background: linear-gradient(90deg, transparent, #c084fc, transparent); }
 
     .feature-list {
       list-style: none;
-      margin: 15px 0;
+      margin: 16px 0;
       font-size: 0.95rem;
       color: var(--text-muted);
-      line-height: 1.6;
+      line-height: 1.65;
     }
 
     .feature-list li {
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
 
     .feature-list strong {
@@ -238,14 +281,15 @@
     }
 
     .info-box {
-      background: rgba(22, 27, 34, 0.6);
+      background: rgba(13, 17, 23, 0.6);
       border: 1px solid var(--border);
       border-radius: 8px;
-      padding: 12px;
+      padding: 10px;
       margin-top: 15px;
       font-size: 0.88rem;
       color: var(--text-muted);
       text-align: center;
+      font-weight: 500;
     }
 
     .options-list {
@@ -258,15 +302,21 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(22, 27, 34, 0.5);
-      padding: 10px 14px;
+      background: rgba(13, 17, 23, 0.5);
+      padding: 12px 16px;
       border-radius: 8px;
       border: 1px solid var(--border);
+      transition: border-color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .option-row:hover {
+      border-color: var(--border-glow);
+      background: rgba(56, 189, 248, 0.05);
     }
 
     .option-row span {
       font-weight: 500;
-      font-size: 0.9rem;
+      font-size: 0.92rem;
     }
 
     .option-price {
@@ -276,74 +326,99 @@
 
     /* Buttons */
     .btn {
-      display: block;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
       width: 100%;
       text-align: center;
       padding: 12px 18px;
-      border-radius: 8px;
+      border-radius: 10px;
       font-size: 0.95rem;
       font-weight: 600;
       text-decoration: none;
-      transition: background-color 0.2s ease, transform 0.1s ease;
+      transition: all 0.25s ease;
       cursor: pointer;
       border: none;
       margin-top: 18px;
     }
 
     .btn-blue {
-      background-color: var(--accent-blue);
-      color: #0f172a;
+      background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+      color: #090d16;
+      box-shadow: 0 4px 15px rgba(56, 189, 248, 0.25);
     }
 
     .btn-blue:hover {
-      background-color: #7dd3fc;
+      box-shadow: 0 6px 20px rgba(56, 189, 248, 0.45);
+      transform: translateY(-2px);
     }
 
     .btn:active {
-      transform: scale(0.98);
+      transform: translateY(0);
     }
 
-    /* Steps container */
+    /* Steps grid */
     .steps-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 15px;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 16px;
     }
 
     .step-card {
-      background-color: var(--card-bg);
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 18px;
+      border-radius: 12px;
+      padding: 20px 16px;
       text-align: center;
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .step-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent-blue);
     }
 
     .step-number {
-      font-size: 1.4rem;
+      font-size: 1.5rem;
       font-weight: 800;
       color: var(--accent-blue);
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .step-card p {
       font-size: 0.88rem;
       color: var(--text-muted);
-      line-height: 1.4;
+      line-height: 1.45;
+    }
+
+    /* Animations Keyframe */
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     footer {
       margin-top: auto;
       text-align: center;
-      padding: 25px 20px;
+      padding: 28px 20px;
       border-top: 1px solid var(--border);
       color: var(--text-muted);
       font-size: 0.85rem;
+      background: rgba(9, 13, 22, 0.8);
     }
 
     /* Responsive */
     @media (max-width: 600px) {
       nav { padding: 15px 5%; }
-      .hero h1 { font-size: 2rem; }
+      .hero h1 { font-size: 2.2rem; }
     }
   </style>
 </head>
@@ -371,7 +446,7 @@
   <div class="container">
 
     <!-- Section Packs -->
-    <div class="section-heading"><i class="fa-solid fa-box-open"></i> Nos Packs Disponibles</div>
+    <div class="section-heading"><i class="fa-solid fa-box-open" style="color: var(--accent-blue);"></i> Nos Packs Disponibles</div>
     <div class="grid">
 
       <!-- Pack Bronze -->
@@ -393,7 +468,7 @@
         </div>
         <div>
           <div class="info-box">📦 Réalisé sur votre compte</div>
-          <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-blue">Commander via Discord</a>
+          <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-blue"><i class="fa-brands fa-discord"></i> Commander via Discord</a>
         </div>
       </div>
 
@@ -416,7 +491,7 @@
         </div>
         <div>
           <div class="info-box">📦 Réalisé sur votre compte</div>
-          <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-blue">Commander via Discord</a>
+          <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-blue"><i class="fa-brands fa-discord"></i> Commander via Discord</a>
         </div>
       </div>
 
@@ -439,7 +514,7 @@
         </div>
         <div>
           <div class="info-box">📦 Réalisé sur votre compte</div>
-          <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-blue">Commander via Discord</a>
+          <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-blue"><i class="fa-brands fa-discord"></i> Commander via Discord</a>
         </div>
       </div>
 
@@ -462,7 +537,7 @@
         </div>
         <div>
           <div class="info-box">📦 Réalisé sur votre compte</div>
-          <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-blue">Commander via Discord</a>
+          <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-blue"><i class="fa-brands fa-discord"></i> Commander via Discord</a>
         </div>
       </div>
 
@@ -485,14 +560,14 @@
         </div>
         <div>
           <div class="info-box">🎮 Prêt à jouer</div>
-          <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-blue">Commander via Discord</a>
+          <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-blue"><i class="fa-brands fa-discord"></i> Commander via Discord</a>
         </div>
       </div>
 
     </div>
 
     <!-- Section Options à la carte -->
-    <div class="section-heading" style="margin-top: 50px;"><i class="fa-solid fa-sliders"></i> Options à la carte</div>
+    <div class="section-heading" style="margin-top: 50px;"><i class="fa-solid fa-sliders" style="color: var(--accent-blue);"></i> Options à la carte</div>
     
     <div class="grid">
       <!-- Argent supplémentaire -->
@@ -530,24 +605,24 @@
     </div>
 
     <!-- Section Nouveau Compte -->
-    <div class="section-heading" style="margin-top: 50px;"><i class="fa-solid fa-user-plus"></i> Nouveaux Comptes</div>
+    <div class="section-heading" style="margin-top: 50px;"><i class="fa-solid fa-user-plus" style="color: var(--accent-blue);"></i> Nouveaux Comptes</div>
     <div class="grid">
       <div class="card">
         <h2>Compte Complet</h2>
         <p style="color: var(--text-muted); font-size: 0.9rem; margin: 10px 0;">Compte fourni avec jeu inclus + 30M offerts + RP 120.</p>
         <div class="price-tag" style="align-self: flex-start; margin-top: 10px;">30€</div>
-        <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-blue" style="margin-top: 20px;">Commander</a>
+        <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-blue" style="margin-top: 20px;"><i class="fa-brands fa-discord"></i> Commander</a>
       </div>
       <div class="card">
         <h2>Option Compte Simple</h2>
         <p style="color: var(--text-muted); font-size: 0.9rem; margin: 10px 0;">Compte fourni avec le jeu inclus.</p>
         <div class="price-tag" style="align-self: flex-start; margin-top: 10px;">20€</div>
-        <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-blue" style="margin-top: 20px;">Commander</a>
+        <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-blue" style="margin-top: 20px;"><i class="fa-brands fa-discord"></i> Commander</a>
       </div>
     </div>
 
     <!-- Comment commander -->
-    <div class="section-heading" style="margin-top: 50px;"><i class="fa-solid fa-circle-question"></i> Comment commander ?</div>
+    <div class="section-heading" style="margin-top: 50px;"><i class="fa-solid fa-circle-question" style="color: var(--accent-blue);"></i> Comment commander ?</div>
     <div class="steps-grid">
       <div class="step-card">
         <div class="step-number">1️⃣</div>
