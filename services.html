@@ -238,7 +238,7 @@
       align-self: flex-start;
     }
 
-    /* Color Badges & Card Hover Customizations */
+    /* Badges Personnalisés */
     .badge-bronze { background-color: rgba(205, 127, 50, 0.15); color: #cd7f32; border: 1px solid rgba(205, 127, 50, 0.35); }
     .badge-silver { background-color: rgba(192, 192, 192, 0.15); color: #c0c0c0; border: 1px solid rgba(192, 192, 192, 0.35); }
     .badge-gold { background-color: rgba(255, 215, 0, 0.15); color: #ffd700; border: 1px solid rgba(255, 215, 0, 0.35); }
@@ -394,7 +394,7 @@
       line-height: 1.45;
     }
 
-    /* Animations Keyframe */
+    /* Keyframe Animations */
     @keyframes fadeInDown {
       from { opacity: 0; transform: translateY(-20px); }
       to { opacity: 1; transform: translateY(0); }
@@ -418,6 +418,7 @@
     /* Responsive */
     @media (max-width: 600px) {
       nav { padding: 15px 5%; }
+      .nav-links { gap: 14px; }
       .hero h1 { font-size: 2.2rem; }
     }
   </style>
@@ -431,8 +432,8 @@
       <a href="index.html">Accueil</a>
       <a href="services.html" class="active">Services & Tarifs</a>
       <a href="index.html#paiements">Paiements</a>
-      <a href="https://www.youtube.com/@Dekur7" target="_blank" class="nav-social-icon" style="color: #ff0000;" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
-      <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="nav-social-icon" style="color: #5865f2;" title="Discord"><i class="fa-brands fa-discord"></i></a>
+      <a href="https://www.youtube.com/@Dekur7" target="_blank" rel="noopener noreferrer" class="nav-social-icon" style="color: #ff0000;" title="YouTube" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+      <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="nav-social-icon" style="color: #5865f2;" title="Discord" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
     </div>
   </nav>
 
@@ -468,7 +469,7 @@
         </div>
         <div>
           <div class="info-box">📦 Réalisé sur votre compte</div>
-          <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-blue"><i class="fa-brands fa-discord"></i> Commander via Discord</a>
+          <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="btn btn-blue"><i class="fa-brands fa-discord"></i> Commander via Discord</a>
         </div>
       </div>
 
@@ -491,7 +492,7 @@
         </div>
         <div>
           <div class="info-box">📦 Réalisé sur votre compte</div>
-          <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-blue"><i class="fa-brands fa-discord"></i> Commander via Discord</a>
+          <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="btn btn-blue"><i class="fa-brands fa-discord"></i> Commander via Discord</a>
         </div>
       </div>
 
@@ -514,7 +515,7 @@
         </div>
         <div>
           <div class="info-box">📦 Réalisé sur votre compte</div>
-          <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-blue"><i class="fa-brands fa-discord"></i> Commander via Discord</a>
+          <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="btn btn-blue"><i class="fa-brands fa-discord"></i> Commander via Discord</a>
         </div>
       </div>
 
@@ -537,7 +538,7 @@
         </div>
         <div>
           <div class="info-box">📦 Réalisé sur votre compte</div>
-          <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-blue"><i class="fa-brands fa-discord"></i> Commander via Discord</a>
+          <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="btn btn-blue"><i class="fa-brands fa-discord"></i> Commander via Discord</a>
         </div>
       </div>
 
@@ -560,7 +561,7 @@
         </div>
         <div>
           <div class="info-box">🎮 Prêt à jouer</div>
-          <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-blue"><i class="fa-brands fa-discord"></i> Commander via Discord</a>
+          <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="btn btn-blue"><i class="fa-brands fa-discord"></i> Commander via Discord</a>
         </div>
       </div>
 
@@ -611,13 +612,13 @@
         <h2>Compte Complet</h2>
         <p style="color: var(--text-muted); font-size: 0.9rem; margin: 10px 0;">Compte fourni avec jeu inclus + 30M offerts + RP 120.</p>
         <div class="price-tag" style="align-self: flex-start; margin-top: 10px;">30€</div>
-        <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-blue" style="margin-top: 20px;"><i class="fa-brands fa-discord"></i> Commander</a>
+        <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="btn btn-blue" style="margin-top: 20px;"><i class="fa-brands fa-discord"></i> Commander</a>
       </div>
       <div class="card">
         <h2>Option Compte Simple</h2>
         <p style="color: var(--text-muted); font-size: 0.9rem; margin: 10px 0;">Compte fourni avec le jeu inclus.</p>
         <div class="price-tag" style="align-self: flex-start; margin-top: 10px;">20€</div>
-        <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-blue" style="margin-top: 20px;"><i class="fa-brands fa-discord"></i> Commander</a>
+        <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="btn btn-blue" style="margin-top: 20px;"><i class="fa-brands fa-discord"></i> Commander</a>
       </div>
     </div>
 
