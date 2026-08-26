@@ -567,7 +567,7 @@
       </div>
 
       <!-- Crypto -->
-      <div class="card interactive" onclick="copyCryptoAddress(event)">
+      <div class="card interactive">
         <div>
           <span class="card-badge badge-payment">Crypto</span>
           <div class="card-title-row">
@@ -576,7 +576,7 @@
           </div>
           <p>Clique sur le bouton pour copier rapidement l'adresse du wallet.</p>
         </div>
-        <button class="btn btn-blue" id="btn-crypto" type="button">
+        <button class="btn btn-blue" id="btn-crypto" type="button" onclick="copyCryptoAddress(event)">
           <i class="fa-solid fa-copy"></i> <span>Copier l'adresse crypto</span>
         </button>
       </div>
@@ -611,7 +611,7 @@
   <script>
     const WALLET_ADDRESS = "HzBYYLgE5aJ9cKG9FmxUv3tZfiMSayd6YdADkVYzQA29";
 
-    // Menu Mobile Toggle
+    // Menu Mobile Toggle & Fermeture au clic sur un lien
     const menuToggle = document.getElementById('menu-toggle');
     const navLinks = document.getElementById('nav-links');
 
@@ -619,20 +619,23 @@
       menuToggle.addEventListener('click', () => {
         navLinks.classList.toggle('active');
       });
+
+      document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+          navLinks.classList.remove('active');
+        });
+      });
     }
 
-    // Copie de l'adresse crypto
+    // Copie de l'adresse crypto dans le presse-papier avec fallback
     function copyCryptoAddress(event) {
       if (event) event.stopPropagation();
 
-      navigator.clipboard.writeText(WALLET_ADDRESS).then(() => {
+      const handleSuccess = () => {
         const btnCrypto = document.getElementById("btn-crypto");
         const originalContent = btnCrypto.innerHTML;
 
-        // Feedback sur le bouton
         btnCrypto.innerHTML = '<i class="fa-solid fa-check"></i> <span>Copié !</span>';
-        
-        // Affichage Toast
         const toast = document.getElementById("copy-toast");
         toast.classList.add("show");
 
@@ -640,9 +643,28 @@
           toast.classList.remove("show");
           btnCrypto.innerHTML = originalContent;
         }, 3000);
-      }).catch(err => {
-        console.error("Erreur lors de la copie : ", err);
-      });
+      };
+
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(WALLET_ADDRESS).then(handleSuccess).catch(err => {
+          console.error("Erreur lors de la copie : ", err);
+        });
+      } else {
+        const textarea = document.createElement("textarea");
+        textarea.value = WALLET_ADDRESS;
+        textarea.style.position = "fixed";
+        textarea.style.opacity = "0";
+        document.body.appendChild(textarea);
+        textarea.focus();
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          handleSuccess();
+        } catch (err) {
+          console.error('Erreur fallback copie : ', err);
+        }
+        document.body.removeChild(textarea);
+      }
     }
   </script>
 
