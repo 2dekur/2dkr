@@ -110,6 +110,16 @@
       transform: scale(1.25) rotate(5deg);
     }
 
+    /* Menu mobile burger */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text-main);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
     /* Hero Section avec Animations */
     .hero {
       text-align: center;
@@ -151,7 +161,7 @@
       border-radius: 20px;
       font-size: 0.85rem;
       font-weight: 600;
-      cursor: pointer;
+      cursor: default;
       overflow: hidden;
       white-space: nowrap;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -213,12 +223,14 @@
       flex-direction: column;
       justify-content: space-between;
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      cursor: pointer;
       position: relative;
       overflow: hidden;
     }
 
-    /* Ligne brillante supérieure sur survol */
+    .card.interactive {
+      cursor: pointer;
+    }
+
     .card::before {
       content: '';
       position: absolute;
@@ -403,6 +415,35 @@
       transform: translateY(0);
     }
 
+    /* Responsive Design Mobile */
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(13, 17, 23, 0.95);
+        backdrop-filter: blur(16px);
+        padding: 20px;
+        border-bottom: 1px solid var(--border);
+        gap: 16px;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+    }
+
     /* Keyframes Animations */
     @keyframes fadeInDown {
       from { opacity: 0; transform: translateY(-20px); }
@@ -431,12 +472,17 @@
   <!-- Navigation -->
   <nav>
     <a href="index.html" class="logo">2D<span>KR</span></a>
-    <div class="nav-links">
+    
+    <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <div class="nav-links" id="nav-links">
       <a href="index.html" class="active">Accueil</a>
       <a href="services.html">Services & Tarifs</a>
       <a href="#paiements">Paiements</a>
-      <a href="https://www.youtube.com/@Dekur7" target="_blank" class="nav-social-icon" style="color: #ff0000;" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
-      <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="nav-social-icon" style="color: #5865f2;" title="Discord"><i class="fa-brands fa-discord"></i></a>
+      <a href="https://www.youtube.com/@Dekur7" target="_blank" rel="noopener noreferrer" class="nav-social-icon" style="color: #ff0000;" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+      <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="nav-social-icon" style="color: #5865f2;" title="Discord"><i class="fa-brands fa-discord"></i></a>
     </div>
   </nav>
 
@@ -447,7 +493,7 @@
     <div>
       <div class="badge-dev-mode">
         <i class="fa-solid fa-code"></i>
-        <span>v0.2 — Version mise à jour</span>
+        <span>v0.2.1 — Version mise à jour</span>
         <span class="extra-text">&nbsp;• by Dekur</span>
       </div>
     </div>
@@ -461,7 +507,7 @@
     <div class="grid">
       
       <!-- Carte Discord -->
-      <div class="card" onclick="window.open('https://discord.gg/mDpZT73FFG', '_blank')">
+      <div class="card interactive">
         <div>
           <span class="card-badge badge-discord">Communauté</span>
           <div class="card-title-row">
@@ -470,16 +516,16 @@
           </div>
           <p>Rejoins-nous sur Discord pour voir les nouveautés à propos du serveur, parler, suggérer ou ouvrir un ticket.</p>
         </div>
-        <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn btn-blue">Rejoindre le Discord</a>
+        <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="btn btn-blue">Rejoindre le Discord</a>
       </div>
 
     </div>
 
-    <!-- Section Pourquoi nous choisir ? (Nouveau V0.2) -->
+    <!-- Section Pourquoi nous choisir ? -->
     <div class="section-heading" style="margin-top: 50px;"><i class="fa-solid fa-shield-halved"></i> <span>Pourquoi choisir 2DKR ?</span></div>
     <div class="grid">
       
-      <div class="card" style="cursor: default;">
+      <div class="card">
         <div>
           <span class="card-badge badge-dev">Avantage</span>
           <div class="card-title-row">
@@ -490,7 +536,7 @@
         </div>
       </div>
 
-      <div class="card" style="cursor: default;">
+      <div class="card">
         <div>
           <span class="card-badge badge-dev">Sécurité</span>
           <div class="card-title-row">
@@ -508,7 +554,7 @@
     <div class="grid">
       
       <!-- PayPal -->
-      <div class="card" onclick="window.open('https://paypal.me/DekurFreekrd', '_blank')">
+      <div class="card interactive">
         <div>
           <span class="card-badge badge-payment">PayPal</span>
           <div class="card-title-row">
@@ -517,11 +563,11 @@
           </div>
           <p>Clique sur le bouton pour envoyer de l'argent via PayPal.</p>
         </div>
-        <a href="https://paypal.me/DekurFreekrd" target="_blank" class="btn btn-blue">Payer par PayPal</a>
+        <a href="https://paypal.me/DekurFreekrd" target="_blank" rel="noopener noreferrer" class="btn btn-blue">Payer par PayPal</a>
       </div>
 
       <!-- Crypto -->
-      <div class="card" onclick="copyCryptoAddress()">
+      <div class="card interactive" onclick="copyCryptoAddress(event)">
         <div>
           <span class="card-badge badge-payment">Crypto</span>
           <div class="card-title-row">
@@ -530,12 +576,14 @@
           </div>
           <p>Clique sur le bouton pour copier rapidement l'adresse du wallet.</p>
         </div>
-        <button class="btn btn-blue" id="btn-crypto"><i class="fa-solid fa-copy"></i> <span>Copier l'adresse crypto</span></button>
+        <button class="btn btn-blue" id="btn-crypto" type="button">
+          <i class="fa-solid fa-copy"></i> <span>Copier l'adresse crypto</span>
+        </button>
       </div>
 
     </div>
 
-    <!-- Section FAQ (Nouveau V0.2) -->
+    <!-- Section FAQ -->
     <div class="section-heading" style="margin-top: 50px;"><i class="fa-circle-question fa-solid"></i> <span>Foire Aux Questions</span></div>
     
     <details class="faq-item">
@@ -563,12 +611,34 @@
   <script>
     const WALLET_ADDRESS = "HzBYYLgE5aJ9cKG9FmxUv3tZfiMSayd6YdADkVYzQA29";
 
-    function copyCryptoAddress() {
+    // Menu Mobile Toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+
+    if (menuToggle) {
+      menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+      });
+    }
+
+    // Copie de l'adresse crypto
+    function copyCryptoAddress(event) {
+      if (event) event.stopPropagation();
+
       navigator.clipboard.writeText(WALLET_ADDRESS).then(() => {
+        const btnCrypto = document.getElementById("btn-crypto");
+        const originalContent = btnCrypto.innerHTML;
+
+        // Feedback sur le bouton
+        btnCrypto.innerHTML = '<i class="fa-solid fa-check"></i> <span>Copié !</span>';
+        
+        // Affichage Toast
         const toast = document.getElementById("copy-toast");
         toast.classList.add("show");
+
         setTimeout(() => {
           toast.classList.remove("show");
+          btnCrypto.innerHTML = originalContent;
         }, 3000);
       }).catch(err => {
         console.error("Erreur lors de la copie : ", err);
