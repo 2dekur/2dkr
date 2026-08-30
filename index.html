@@ -5,10 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>2DKR — Site officiel de Dekur</title>
   
+  <!-- Preconnect & Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   
+  <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
@@ -226,26 +228,6 @@
       overflow: hidden;
     }
 
-    .card.has-banner {
-      padding: 0;
-    }
-
-    .card-banner-img {
-      width: 100%;
-      height: 150px;
-      object-fit: cover;
-      display: block;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .card-body {
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      height: 100%;
-    }
-
     .card.interactive {
       cursor: pointer;
     }
@@ -258,7 +240,6 @@
       background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
       opacity: 0;
       transition: opacity 0.3s ease;
-      z-index: 2;
     }
 
     .card:hover {
@@ -495,6 +476,7 @@
 </head>
 <body>
 
+  <!-- Navigation -->
   <nav>
     <a href="index.html" class="logo">2D<span>KR</span></a>
     
@@ -511,6 +493,7 @@
     </div>
   </nav>
 
+  <!-- Hero Section -->
   <section class="hero">
     <h1>L'Espace <span>2DKR</span></h1>
     <p>Retrouve tous les accès à la communauté, aux services et aux moyens de paiement.</p>
@@ -523,11 +506,14 @@
     </div>
   </section>
 
+  <!-- Container Principal -->
   <div class="container" id="projets">
     
+    <!-- Section Communauté -->
     <div class="section-heading"><i class="fa-solid fa-layer-group"></i> <span>Communauté & Offres</span></div>
     <div class="grid">
       
+      <!-- Carte Discord -->
       <div class="card interactive">
         <div>
           <span class="card-badge badge-discord">Communauté</span>
@@ -540,23 +526,22 @@
         <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="btn btn-blue">Rejoindre le Discord</a>
       </div>
 
-      <div class="card interactive has-banner">
-        <img src="image_6baf89.jpg" alt="BeamNG.drive Banner" class="card-banner-img">
-        <div class="card-body">
-          <div>
-            <span class="card-badge badge-offer">Offre Spéciale</span>
-            <div class="card-title-row">
-              <h2>BeamNG.drive</h2>
-              <i class="fa-solid fa-car-burst" style="font-size: 1.4rem; color: var(--accent-orange);"></i>
-            </div>
-            <p>Accès & clés PC en stock bien moins chers que sur Steam. Livraison rapide et garantie.</p>
+      <!-- Carte BeamNG.drive -->
+      <div class="card interactive">
+        <div>
+          <span class="card-badge badge-offer">Offre Spéciale</span>
+          <div class="card-title-row">
+            <h2>BeamNG.drive</h2>
+            <i class="fa-solid fa-car-burst" style="font-size: 1.4rem; color: var(--accent-orange);"></i>
           </div>
-          <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="btn btn-blue">Ouvrir un ticket Discord</a>
+          <p>Accès & clés PC en stock bien moins chers que sur Steam. Livraison rapide et garantie.</p>
         </div>
+        <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="btn btn-blue">Ouvrir un ticket Discord</a>
       </div>
 
     </div>
 
+    <!-- Section Pourquoi nous choisir ? -->
     <div class="section-heading" style="margin-top: 50px;"><i class="fa-solid fa-shield-halved"></i> <span>Pourquoi choisir 2DKR ?</span></div>
     <div class="grid">
       
@@ -584,9 +569,11 @@
 
     </div>
 
+    <!-- Section Paiements -->
     <div class="section-heading" id="paiements" style="margin-top: 50px;"><i class="fa-solid fa-wallet"></i> <span>Moyens de Paiement</span></div>
     <div class="grid">
       
+      <!-- PayPal -->
       <div class="card interactive">
         <div>
           <span class="card-badge badge-payment">PayPal</span>
@@ -599,6 +586,7 @@
         <a href="https://paypal.me/DekurFreekrd" target="_blank" rel="noopener noreferrer" class="btn btn-blue">Payer par PayPal</a>
       </div>
 
+      <!-- Crypto -->
       <div class="card interactive">
         <div>
           <span class="card-badge badge-payment">Crypto</span>
@@ -615,6 +603,7 @@
 
     </div>
 
+    <!-- Section FAQ -->
     <div class="section-heading" style="margin-top: 50px;"><i class="fa-circle-question fa-solid"></i> <span>Foire Aux Questions</span></div>
     
     <details class="faq-item">
@@ -629,10 +618,12 @@
 
   </div>
 
+  <!-- Footer -->
   <footer>
     &copy; 2026 2DKR by Dekur. All rights reserved.
   </footer>
 
+  <!-- Toast Notification Copie -->
   <div id="copy-toast" class="toast">
     <i class="fa-solid fa-check-circle"></i> <span>Adresse du wallet copiée !</span>
   </div>
