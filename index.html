@@ -24,6 +24,7 @@
       --accent-blue-glow: rgba(56, 189, 248, 0.25);
       --discord: #5865f2;
       --accent-green: #10b981;
+      --accent-orange: #f97316;
       --text-main: #f0f6fc;
       --text-muted: #8b949e;
     }
@@ -292,6 +293,12 @@
       border: 1px solid rgba(16, 185, 129, 0.35);
     }
 
+    .badge-offer {
+      background-color: rgba(249, 115, 22, 0.15);
+      color: var(--accent-orange);
+      border: 1px solid rgba(249, 115, 22, 0.35);
+    }
+
     .card-title-row {
       display: flex;
       justify-content: space-between;
@@ -503,7 +510,7 @@
   <div class="container" id="projets">
     
     <!-- Section Communauté -->
-    <div class="section-heading"><i class="fa-solid fa-layer-group"></i> <span>Communauté & Projets</span></div>
+    <div class="section-heading"><i class="fa-solid fa-layer-group"></i> <span>Communauté & Offres</span></div>
     <div class="grid">
       
       <!-- Carte Discord -->
@@ -517,6 +524,19 @@
           <p>Rejoins-nous sur Discord pour voir les nouveautés à propos du serveur, parler, suggérer ou ouvrir un ticket.</p>
         </div>
         <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="btn btn-blue">Rejoindre le Discord</a>
+      </div>
+
+      <!-- Carte BeamNG.drive -->
+      <div class="card interactive">
+        <div>
+          <span class="card-badge badge-offer">Offre Spéciale</span>
+          <div class="card-title-row">
+            <h2>BeamNG.drive</h2>
+            <i class="fa-solid fa-car-burst" style="font-size: 1.4rem; color: var(--accent-orange);"></i>
+          </div>
+          <p>Accès & clés PC en stock bien moins chers que sur Steam. Livraison rapide et garantie.</p>
+        </div>
+        <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="btn btn-blue">Ouvrir un ticket Discord</a>
       </div>
 
     </div>
