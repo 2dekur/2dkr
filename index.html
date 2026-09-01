@@ -5,10 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>2DKR — Site officiel de Dekur</title>
   
+  <!-- Preconnect & Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   
+  <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
@@ -149,10 +151,11 @@
       margin-bottom: 20px;
     }
 
-    /* Badges Hero v0.3.0 */
+    /* Badges Hero v0.3.0 avec effet expandable */
     .hero-badges {
       display: flex;
       justify-content: center;
+      align-items: center;
       gap: 12px;
       flex-wrap: wrap;
     }
@@ -168,7 +171,29 @@
       border-radius: 20px;
       font-size: 0.85rem;
       font-weight: 600;
+      cursor: default;
+      overflow: hidden;
+      white-space: nowrap;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       backdrop-filter: blur(8px);
+    }
+
+    .badge-dev-mode .extra-text {
+      max-width: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+    }
+
+    .badge-dev-mode:hover {
+      background: rgba(56, 189, 248, 0.2);
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+    }
+
+    .badge-dev-mode:hover .extra-text {
+      max-width: 150px;
+      opacity: 1;
     }
 
     .badge-status {
@@ -192,7 +217,7 @@
       box-shadow: 0 0 8px var(--accent-green);
     }
 
-    /* Barre de recherche v0.3.0 */
+    /* Barre de recherche */
     .search-container {
       max-width: 500px;
       margin: 25px auto 0 auto;
@@ -249,7 +274,7 @@
       gap: 22px;
     }
 
-    /* Cards Glassmorphism v0.3.0 */
+    /* Cards Glassmorphism */
     .card {
       background: var(--card-bg);
       backdrop-filter: blur(12px);
@@ -503,6 +528,7 @@
 </head>
 <body>
 
+  <!-- Navigation -->
   <nav>
     <a href="index.html" class="logo">2D<span>KR</span></a>
     
@@ -513,12 +539,14 @@
     <div class="nav-links" id="nav-links">
       <a href="index.html" class="active">Accueil</a>
       <a href="services.html">Services & Tarifs</a>
+      <a href="calculateur.html">Calculateur</a>
       <a href="#paiements">Paiements</a>
       <a href="https://www.youtube.com/@Dekur7" target="_blank" rel="noopener noreferrer" class="nav-social-icon" style="color: #ff0000;" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
       <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="nav-social-icon" style="color: #5865f2;" title="Discord"><i class="fa-brands fa-discord"></i></a>
     </div>
   </nav>
 
+  <!-- Hero Section -->
   <section class="hero">
     <h1>L'Espace <span>2DKR</span></h1>
     <p>Retrouve tous les accès à la communauté, aux services et aux moyens de paiement.</p>
@@ -527,6 +555,7 @@
       <div class="badge-dev-mode">
         <i class="fa-solid fa-code"></i>
         <span>v0.3.0 — Nouvelle Interface</span>
+        <span class="extra-text">&nbsp;• by Dekur</span>
       </div>
       <div class="badge-status">
         <span class="status-dot"></span>
@@ -534,14 +563,17 @@
       </div>
     </div>
 
+    <!-- Barre de recherche -->
     <div class="search-container">
       <i class="fa-solid fa-magnifying-glass search-icon"></i>
       <input type="text" id="search-input" class="search-input" placeholder="Rechercher un service, une offre, un moyen de paiement...">
     </div>
   </section>
 
+  <!-- Container Principal -->
   <div class="container" id="projets">
     
+    <!-- Section Communauté -->
     <div class="section-heading"><i class="fa-solid fa-layer-group"></i> <span>Communauté & Offres</span></div>
     <div class="grid">
       
@@ -571,6 +603,7 @@
 
     </div>
 
+    <!-- Section Pourquoi nous choisir ? -->
     <div class="section-heading" style="margin-top: 50px;"><i class="fa-solid fa-shield-halved"></i> <span>Pourquoi choisir 2DKR ?</span></div>
     <div class="grid">
       
@@ -598,6 +631,7 @@
 
     </div>
 
+    <!-- Section Paiements -->
     <div class="section-heading" id="paiements" style="margin-top: 50px;"><i class="fa-solid fa-wallet"></i> <span>Moyens de Paiement</span></div>
     <div class="grid">
       
@@ -629,6 +663,7 @@
 
     </div>
 
+    <!-- Section FAQ -->
     <div class="section-heading" style="margin-top: 50px;"><i class="fa-circle-question fa-solid"></i> <span>Foire Aux Questions</span></div>
     
     <details class="faq-item">
@@ -643,10 +678,12 @@
 
   </div>
 
+  <!-- Footer -->
   <footer>
     &copy; 2026 2DKR by Dekur. All rights reserved.
   </footer>
 
+  <!-- Toast Notification Copie -->
   <div id="copy-toast" class="toast">
     <i class="fa-solid fa-check-circle"></i> <span>Adresse du wallet copiée !</span>
   </div>
@@ -670,7 +707,7 @@
       });
     }
 
-    // Filtre de recherche dynamique (v0.3.0)
+    // Filtre de recherche dynamique
     const searchInput = document.getElementById('search-input');
     if (searchInput) {
       searchInput.addEventListener('input', (e) => {
