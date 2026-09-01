@@ -217,16 +217,19 @@
       box-shadow: 0 0 8px var(--accent-green);
     }
 
-    /* Barre de recherche */
+    /* Barre de recherche & Badge Beta */
     .search-container {
       max-width: 500px;
       margin: 25px auto 0 auto;
       position: relative;
+      display: flex;
+      align-items: center;
     }
 
     .search-input {
       width: 100%;
-      padding: 12px 20px 12px 45px;
+      /* Padding-right augmenté pour laisser de la place au badge Bêta */
+      padding: 12px 65px 12px 45px;
       background: rgba(13, 17, 23, 0.8);
       border: 1px solid var(--border);
       border-radius: 12px;
@@ -244,9 +247,22 @@
     .search-icon {
       position: absolute;
       left: 15px;
-      top: 50%;
-      transform: translateY(-50%);
       color: var(--text-muted);
+    }
+
+    .beta-badge {
+      position: absolute;
+      right: 12px;
+      background: rgba(249, 115, 22, 0.15);
+      color: var(--accent-orange);
+      border: 1px solid rgba(249, 115, 22, 0.35);
+      padding: 3px 8px;
+      border-radius: 8px;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      pointer-events: none; /* Empêche de bloquer le clic sur l'input en dessous */
+      user-select: none;
     }
 
     /* Container Principal */
@@ -528,7 +544,7 @@
 </head>
 <body>
 
-  <!-- Navigation -->
+  <!-- Navigation (À copier telle quelle sur services.html) -->
   <nav>
     <a href="index.html" class="logo">2D<span>KR</span></a>
     
@@ -539,6 +555,7 @@
     <div class="nav-links" id="nav-links">
       <a href="index.html" class="active">Accueil</a>
       <a href="services.html">Services & Tarifs</a>
+      <!-- Le lien vers le calculateur est bien présent et accessible de partout -->
       <a href="calculateur.html">Calculateur</a>
       <a href="#paiements">Paiements</a>
       <a href="https://www.youtube.com/@Dekur7" target="_blank" rel="noopener noreferrer" class="nav-social-icon" style="color: #ff0000;" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
@@ -563,10 +580,11 @@
       </div>
     </div>
 
-    <!-- Barre de recherche -->
+    <!-- Barre de recherche avec le badge BETA -->
     <div class="search-container">
       <i class="fa-solid fa-magnifying-glass search-icon"></i>
       <input type="text" id="search-input" class="search-input" placeholder="Rechercher un service, une offre, un moyen de paiement...">
+      <span class="beta-badge">BÊTA</span>
     </div>
   </section>
 
