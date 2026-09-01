@@ -490,7 +490,6 @@
   <div class="container">
     <div class="calc-layout">
       
-      <!-- Colonne des options -->
       <div class="calc-options">
         
         <div class="calc-card">
@@ -590,7 +589,6 @@
 
       </div>
 
-      <!-- Colonne Résumé -->
       <div class="summary-sidebar">
         <div class="summary-card">
           <h2>Résumé du Pack</h2>
@@ -707,7 +705,7 @@
           });
           discordBtn.classList.remove('disabled');
           
-          // Construction du message de commande Discord pré-rempli
+          // Construction du message de commande Discord pré-rempli et encodé pour l'URL webhook/pré-remplissage ou le format de message
           const descList = activeSelections.map(s => `• ${s.name} (${s.price}€)`).join('\n');
           const discordMsg = encodeURIComponent(`Salut ! Je souhaite commander un pack sur mesure :\n\n${descList}\n\nTotal : ${calculatedTotal}€`);
           discordBtn.setAttribute('href', `https://discord.gg/mDpZT73FFG`);
