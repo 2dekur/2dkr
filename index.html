@@ -3,28 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>2DKR — Site officiel de Dekur</title>
+  <title>2DKR — Hub Officiel & Services</title>
   
-  <!-- Preconnect & Fonts -->
+  <meta name="description" content="Plateforme officielle 2DKR par Dekur. Offres BeamNG.drive, services PC, communauté Discord et support réactif.">
+  <meta property="og:title" content="2DKR — Hub Officiel & Services">
+  <meta property="og:description" content="Accède aux offres exclusives, au simulateur de commande et au support Discord 2DKR.">
+  <meta property="og:url" content="https://2dkr.pages.dev/">
+  <meta name="twitter:card" content="summary_large_image">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   
-  <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
     :root {
       --bg: #090d16;
+      --bg-surface: #0f172a;
       --card-bg: rgba(22, 27, 34, 0.75);
       --border: rgba(48, 54, 61, 0.6);
-      --border-glow: rgba(56, 189, 248, 0.4);
+      --border-glow: rgba(56, 189, 248, 0.5);
       --accent-blue: #38bdf8;
       --accent-blue-hover: #0284c7;
       --accent-blue-glow: rgba(56, 189, 248, 0.25);
       --discord: #5865f2;
       --accent-green: #10b981;
       --accent-orange: #f97316;
+      --accent-purple: #818cf8;
       --text-main: #f0f6fc;
       --text-muted: #8b949e;
     }
@@ -39,8 +45,8 @@
     body {
       background-color: var(--bg);
       background-image: 
-        radial-gradient(circle at 15% 15%, rgba(56, 189, 248, 0.08) 0%, transparent 45%),
-        radial-gradient(circle at 85% 85%, rgba(88, 101, 242, 0.08) 0%, transparent 45%);
+        radial-gradient(circle at 15% 15%, rgba(56, 189, 248, 0.1) 0%, transparent 45%),
+        radial-gradient(circle at 85% 85%, rgba(88, 101, 242, 0.1) 0%, transparent 45%);
       background-attachment: fixed;
       color: var(--text-main);
       min-height: 100vh;
@@ -55,7 +61,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 16px 8%;
-      background: rgba(13, 17, 23, 0.75);
+      background: rgba(13, 17, 23, 0.85);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
@@ -73,12 +79,29 @@
       transition: transform 0.2s ease;
     }
 
-    .logo:hover {
-      transform: scale(1.03);
+    .logo:hover { transform: scale(1.03); }
+    .logo span { color: var(--accent-blue); }
+
+    .live-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent-green);
     }
 
-    .logo span {
-      color: var(--accent-blue);
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--accent-green);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--accent-green);
+      animation: pulse 2s infinite;
     }
 
     .nav-links {
@@ -95,23 +118,11 @@
       transition: all 0.2s ease;
     }
 
-    .nav-links a:hover,
-    .nav-links a.active {
+    .nav-links a:hover, .nav-links a.active {
       color: var(--accent-blue);
       text-shadow: 0 0 10px var(--accent-blue-glow);
     }
 
-    .nav-social-icon {
-      font-size: 1.25rem;
-      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s ease;
-      display: inline-block;
-    }
-
-    .nav-social-icon:hover {
-      transform: scale(1.25) rotate(5deg);
-    }
-
-    /* Menu mobile burger */
     .menu-toggle {
       display: none;
       background: none;
@@ -121,17 +132,17 @@
       cursor: pointer;
     }
 
-    /* Hero Section avec Animations */
+    /* Hero Section */
     .hero {
       text-align: center;
-      padding: 80px 20px 40px 20px;
-      max-width: 750px;
+      padding: 70px 20px 30px;
+      max-width: 800px;
       margin: 0 auto;
       animation: fadeInDown 0.8s ease-out;
     }
 
     .hero h1 {
-      font-size: 3rem;
+      font-size: 3.2rem;
       font-weight: 900;
       letter-spacing: -0.5px;
       margin-bottom: 15px;
@@ -148,10 +159,10 @@
       font-size: 1.15rem;
       color: var(--text-muted);
       line-height: 1.6;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
     }
 
-    .badge-dev-mode {
+    .badge-v03 {
       display: inline-flex;
       align-items: center;
       gap: 8px;
@@ -161,49 +172,76 @@
       padding: 6px 16px;
       border-radius: 20px;
       font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    /* Quick Stats Bar */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      max-width: 900px;
+      margin: 0 auto 30px;
+      padding: 0 20px;
+    }
+
+    .stat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 18px;
+      border-radius: 12px;
+      text-align: center;
+      backdrop-filter: blur(12px);
+    }
+
+    .stat-card h3 {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--accent-blue);
+    }
+
+    .stat-card p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
       font-weight: 600;
-      cursor: default;
-      overflow: hidden;
-      white-space: nowrap;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      backdrop-filter: blur(8px);
-    }
-
-    .badge-dev-mode .extra-text {
-      max-width: 0;
-      opacity: 0;
-      overflow: hidden;
-      transition: max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
-    }
-
-    .badge-dev-mode:hover {
-      background: rgba(56, 189, 248, 0.2);
-      border-color: var(--accent-blue);
-      box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
-    }
-
-    .badge-dev-mode:hover .extra-text {
-      max-width: 150px;
-      opacity: 1;
     }
 
     /* Container Principal */
     .container {
       max-width: 900px;
-      margin: 30px auto 60px auto;
+      margin: 20px auto 60px;
       padding: 0 20px;
       width: 100%;
       animation: fadeInUp 0.8s ease-out 0.2s backwards;
     }
 
-    .section-heading {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--text-main);
-      margin: 30px 0 15px 0;
+    /* Filters Bar */
+    .filter-bar {
       display: flex;
-      align-items: center;
+      justify-content: center;
       gap: 10px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background: rgba(22, 27, 34, 0.8);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--accent-blue);
+      color: #090d16;
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
     }
 
     .grid {
@@ -212,24 +250,20 @@
       gap: 22px;
     }
 
-    /* Cards Modernes Glassmorphism */
+    /* Cards Glassmorphism */
     .card {
       background: var(--card-bg);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border: 1px solid var(--border);
       border-radius: 14px;
-      padding: 28px;
+      padding: 26px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       position: relative;
       overflow: hidden;
-    }
-
-    .card.interactive {
-      cursor: pointer;
     }
 
     .card::before {
@@ -248,20 +282,7 @@
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px var(--accent-blue-glow);
     }
 
-    .card:hover::before {
-      opacity: 1;
-    }
-
-    .card:hover h2 {
-      color: var(--accent-blue);
-    }
-
-    .card h2 {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--text-main);
-      transition: color 0.2s ease;
-    }
+    .card:hover::before { opacity: 1; }
 
     .card-badge {
       display: inline-block;
@@ -275,29 +296,10 @@
       align-self: flex-start;
     }
 
-    .badge-discord {
-      background-color: rgba(88, 101, 242, 0.15);
-      color: #5865f2;
-      border: 1px solid rgba(88, 101, 242, 0.35);
-    }
-
-    .badge-dev {
-      background-color: rgba(56, 189, 248, 0.15);
-      color: var(--accent-blue);
-      border: 1px solid rgba(56, 189, 248, 0.35);
-    }
-
-    .badge-payment {
-      background-color: rgba(16, 185, 129, 0.15);
-      color: var(--accent-green);
-      border: 1px solid rgba(16, 185, 129, 0.35);
-    }
-
-    .badge-offer {
-      background-color: rgba(249, 115, 22, 0.15);
-      color: var(--accent-orange);
-      border: 1px solid rgba(249, 115, 22, 0.35);
-    }
+    .badge-discord { background: rgba(88, 101, 242, 0.15); color: #5865f2; border: 1px solid rgba(88, 101, 242, 0.35); }
+    .badge-offer { background: rgba(249, 115, 22, 0.15); color: var(--accent-orange); border: 1px solid rgba(249, 115, 22, 0.35); }
+    .badge-dev { background: rgba(56, 189, 248, 0.15); color: var(--accent-blue); border: 1px solid rgba(56, 189, 248, 0.35); }
+    .badge-payment { background: rgba(16, 185, 129, 0.15); color: var(--accent-green); border: 1px solid rgba(16, 185, 129, 0.35); }
 
     .card-title-row {
       display: flex;
@@ -306,6 +308,8 @@
       margin-bottom: 10px;
     }
 
+    .card h2 { font-size: 1.3rem; font-weight: 700; color: var(--text-main); }
+
     .card p {
       color: var(--text-muted);
       font-size: 0.95rem;
@@ -313,63 +317,13 @@
       margin-bottom: 24px;
     }
 
-    /* FAQ Details/Summary */
-    .faq-item {
-      background-color: var(--card-bg);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 18px 22px;
-      margin-bottom: 14px;
-      cursor: pointer;
-      transition: all 0.25s ease;
-    }
-
-    .faq-item:hover {
-      border-color: var(--accent-blue);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    }
-
-    .faq-item summary {
-      font-weight: 600;
-      color: var(--text-main);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      list-style: none;
-    }
-
-    .faq-item summary::-webkit-details-marker {
-      display: none;
-    }
-
-    .faq-item summary i {
-      color: var(--accent-blue);
-      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .faq-item[open] summary i {
-      transform: rotate(180deg);
-    }
-
-    .faq-item p {
-      color: var(--text-muted);
-      font-size: 0.92rem;
-      line-height: 1.6;
-      margin-top: 12px;
-      padding-top: 12px;
-      border-top: 1px solid var(--border);
-    }
-
-    /* Buttons Modernes */
+    /* Buttons */
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
       width: 100%;
-      text-align: center;
       padding: 13px 20px;
       border-radius: 10px;
       font-size: 0.95rem;
@@ -391,8 +345,92 @@
       transform: translateY(-2px);
     }
 
-    .btn-blue:active {
-      transform: translateY(0);
+    /* Simulateur de Commande */
+    .simulator {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 26px;
+      margin: 40px 0;
+      backdrop-filter: blur(12px);
+    }
+
+    .sim-option {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sim-option label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .sim-total {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+      padding-top: 15px;
+      border-top: 1px solid var(--border);
+      font-size: 1.2rem;
+      font-weight: 800;
+    }
+
+    /* FAQ Details */
+    .faq-item {
+      background-color: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 22px;
+      margin-bottom: 14px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .faq-item:hover { border-color: var(--accent-blue); }
+
+    .faq-item summary {
+      font-weight: 600;
+      color: var(--text-main);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      list-style: none;
+    }
+
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary i { color: var(--accent-blue); transition: transform 0.3s ease; }
+    .faq-item[open] summary i { transform: rotate(180deg); }
+
+    .faq-item p {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      line-height: 1.6;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* Avis Clients */
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+      margin-top: 15px;
+    }
+
+    .review-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      padding: 18px;
+      border-radius: 12px;
     }
 
     /* Toast Notification */
@@ -410,7 +448,7 @@
       right: 30px;
       font-weight: 700;
       font-size: 0.9rem;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 15px rgba(16, 185, 129, 0.4);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
       opacity: 0;
       transform: translateY(20px);
       transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
@@ -422,47 +460,28 @@
       transform: translateY(0);
     }
 
-    /* Responsive Design Mobile */
-    @media (max-width: 768px) {
-      .menu-toggle {
-        display: block;
-      }
+    /* Keyframes */
+    @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+    @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
+    @media (max-width: 768px) {
+      .menu-toggle { display: block; }
       .nav-links {
         display: none;
         flex-direction: column;
         position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
+        top: 100%; left: 0; right: 0;
         background: rgba(13, 17, 23, 0.95);
         backdrop-filter: blur(16px);
         padding: 20px;
         border-bottom: 1px solid var(--border);
         gap: 16px;
       }
-
-      .nav-links.active {
-        display: flex;
-      }
-
-      .hero h1 {
-        font-size: 2.2rem;
-      }
+      .nav-links.active { display: flex; }
+      .hero h1 { font-size: 2.2rem; }
     }
 
-    /* Keyframes Animations */
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Footer */
     footer {
       margin-top: auto;
       text-align: center;
@@ -476,45 +495,65 @@
 </head>
 <body>
 
-  <!-- Navigation -->
   <nav>
     <a href="index.html" class="logo">2D<span>KR</span></a>
     
+    <div class="live-status">
+      <div class="status-dot"></div>
+      <span>Support Ouvert</span>
+    </div>
+
     <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation">
       <i class="fa-solid fa-bars"></i>
     </button>
 
     <div class="nav-links" id="nav-links">
       <a href="index.html" class="active">Accueil</a>
-      <a href="services.html">Services & Tarifs</a>
+      <a href="#offres">Offres</a>
+      <a href="#simulateur">Simulateur</a>
       <a href="#paiements">Paiements</a>
-      <a href="https://www.youtube.com/@Dekur7" target="_blank" rel="noopener noreferrer" class="nav-social-icon" style="color: #ff0000;" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
-      <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="nav-social-icon" style="color: #5865f2;" title="Discord"><i class="fa-brands fa-discord"></i></a>
+      <a href="https://www.youtube.com/@Dekur7" target="_blank" rel="noopener noreferrer" style="color: #ff0000;"><i class="fa-brands fa-youtube"></i></a>
+      <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" style="color: #5865f2;"><i class="fa-brands fa-discord"></i></a>
     </div>
   </nav>
 
-  <!-- Hero Section -->
   <section class="hero">
+    <div class="badge-v03"><i class="fa-solid fa-bolt"></i> v0.3.0 — Platform Update</div>
     <h1>L'Espace <span>2DKR</span></h1>
     <p>Retrouve tous les accès à la communauté, aux services et aux moyens de paiement.</p>
-    <div>
-      <div class="badge-dev-mode">
-        <i class="fa-solid fa-code"></i>
-        <span>v0.2.1 — Version mise à jour</span>
-        <span class="extra-text">&nbsp;• by Dekur</span>
-      </div>
+    <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+      <a href="#simulateur" class="btn btn-blue" style="width: auto; padding: 12px 24px;"><i class="fa-solid fa-calculator"></i> Simulateur de commande</a>
+      <a href="https://discord.gg/mDpZT73FFG" target="_blank" class="btn" style="width: auto; padding: 12px 24px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--text-main);"><i class="fa-brands fa-discord"></i> Discord</a>
     </div>
   </section>
 
-  <!-- Container Principal -->
-  <div class="container" id="projets">
+  <div class="stats-bar">
+    <div class="stat-card">
+      <h3>+150</h3>
+      <p>Commandes Honorées</p>
+    </div>
+    <div class="stat-card">
+      <h3>&lt; 15 min</h3>
+      <p>Temps de Réponse</p>
+    </div>
+    <div class="stat-card">
+      <h3>100%</h3>
+      <p>Support Réactif</p>
+    </div>
+  </div>
+
+  <div class="container" id="offres">
     
-    <!-- Section Communauté -->
-    <div class="section-heading"><i class="fa-solid fa-layer-group"></i> <span>Communauté & Offres</span></div>
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="filterCards('all')">Tous</button>
+      <button class="filter-btn" onclick="filterCards('offres')">Offres & Jeux</button>
+      <button class="filter-btn" onclick="filterCards('commu')">Communauté</button>
+      <button class="filter-btn" onclick="filterCards('paiement')">Paiements</button>
+    </div>
+
     <div class="grid">
       
-      <!-- Carte Discord -->
-      <div class="card interactive">
+      <div class="card" data-cat="commu">
         <div>
           <span class="card-badge badge-discord">Communauté</span>
           <div class="card-title-row">
@@ -526,8 +565,7 @@
         <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="btn btn-blue">Rejoindre le Discord</a>
       </div>
 
-      <!-- Carte BeamNG.drive -->
-      <div class="card interactive">
+      <div class="card" data-cat="offres">
         <div>
           <span class="card-badge badge-offer">Offre Spéciale</span>
           <div class="card-title-row">
@@ -539,42 +577,7 @@
         <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="btn btn-blue">Ouvrir un ticket Discord</a>
       </div>
 
-    </div>
-
-    <!-- Section Pourquoi nous choisir ? -->
-    <div class="section-heading" style="margin-top: 50px;"><i class="fa-solid fa-shield-halved"></i> <span>Pourquoi choisir 2DKR ?</span></div>
-    <div class="grid">
-      
-      <div class="card">
-        <div>
-          <span class="card-badge badge-dev">Avantage</span>
-          <div class="card-title-row">
-            <h2>Livraison Rapide</h2>
-            <i class="fa-solid fa-bolt" style="font-size: 1.4rem; color: var(--accent-blue);"></i>
-          </div>
-          <p>Prise en charge directe de tes demandes et tickets sur notre Discord dédié.</p>
-        </div>
-      </div>
-
-      <div class="card">
-        <div>
-          <span class="card-badge badge-dev">Sécurité</span>
-          <div class="card-title-row">
-            <h2>Fiabilité & Support</h2>
-            <i class="fa-solid fa-headset" style="font-size: 1.4rem; color: var(--accent-blue);"></i>
-          </div>
-          <p>Un support réactif en français pour t'aider dans la configuration et l'utilisation.</p>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Section Paiements -->
-    <div class="section-heading" id="paiements" style="margin-top: 50px;"><i class="fa-solid fa-wallet"></i> <span>Moyens de Paiement</span></div>
-    <div class="grid">
-      
-      <!-- PayPal -->
-      <div class="card interactive">
+      <div class="card" data-cat="paiement" id="paiements">
         <div>
           <span class="card-badge badge-payment">PayPal</span>
           <div class="card-title-row">
@@ -586,8 +589,7 @@
         <a href="https://paypal.me/DekurFreekrd" target="_blank" rel="noopener noreferrer" class="btn btn-blue">Payer par PayPal</a>
       </div>
 
-      <!-- Crypto -->
-      <div class="card interactive">
+      <div class="card" data-cat="paiement">
         <div>
           <span class="card-badge badge-payment">Crypto</span>
           <div class="card-title-row">
@@ -603,51 +605,150 @@
 
     </div>
 
-    <!-- Section FAQ -->
-    <div class="section-heading" style="margin-top: 50px;"><i class="fa-circle-question fa-solid"></i> <span>Foire Aux Questions</span></div>
-    
-    <details class="faq-item">
-      <summary><span>Comment passer commande ?</span> <i class="fa-solid fa-chevron-down"></i></summary>
-      <p>Va dans la rubrique Services, choisis ce dont tu as besoin, puis clique pour ouvrir un ticket sur le serveur Discord.</p>
-    </details>
+    <div class="simulator" id="simulateur">
+      <h2 style="font-size: 1.3rem; margin-bottom: 8px;"><i class="fa-solid fa-calculator" style="color: var(--accent-blue);"></i> Simulateur de Ticket / Commande</h2>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">Sélectionne tes besoins pour calculer le total et copier le message de commande pour Discord.</p>
+      
+      <div class="sim-option">
+        <label><input type="checkbox" value="15" onchange="calculateTotal()" class="item-check" data-name="BeamNG.drive (Clé PC)"> BeamNG.drive (Clé PC)</label>
+        <span>15.00 €</span>
+      </div>
 
-    <details class="faq-item">
-      <summary><span>Quels sont les délais de réponse ?</span> <i class="fa-solid fa-chevron-down"></i></summary>
-      <p>L'équipe répond généralement très rapidement dès qu'un ticket est ouvert sur Discord.</p>
-    </details>
+      <div class="sim-option">
+        <label><input type="checkbox" value="5" onchange="calculateTotal()" class="item-check" data-name="Support VIP / Config"> Support Prioritaire VIP</label>
+        <span>5.00 €</span>
+      </div>
+
+      <div class="sim-total">
+        <span>Total Estimé :</span>
+        <span id="total-price" style="color: var(--accent-blue);">0.00 €</span>
+      </div>
+
+      <button class="btn btn-blue" style="margin-top: 20px;" onclick="copyOrderSummary()"><i class="fa-solid fa-copy"></i> Copier le Récapitulatif pour Discord</button>
+    </div>
+
+    <div style="margin-top: 50px;">
+      <h2 style="font-size: 1.25rem; margin-bottom: 15px;"><i class="fa-solid fa-shield-halved"></i> Pourquoi choisir 2DKR ?</h2>
+      <div class="grid">
+        <div class="card">
+          <div>
+            <span class="card-badge badge-dev">Avantage</span>
+            <div class="card-title-row">
+              <h2>Livraison Rapide</h2>
+              <i class="fa-solid fa-bolt" style="font-size: 1.4rem; color: var(--accent-blue);"></i>
+            </div>
+            <p>Prise en charge directe de tes demandes et tickets sur notre Discord dédié.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div>
+            <span class="card-badge badge-dev">Sécurité</span>
+            <div class="card-title-row">
+              <h2>Fiabilité & Support</h2>
+              <i class="fa-solid fa-headset" style="font-size: 1.4rem; color: var(--accent-blue);"></i>
+            </div>
+            <p>Un support réactif en français pour t'aider dans la configuration et l'utilisation.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 50px;">
+      <h2 style="font-size: 1.25rem; margin-bottom: 15px;"><i class="fa-solid fa-star" style="color: #f59e0b;"></i> Avis Communauté</h2>
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div style="color: #f59e0b; margin-bottom: 8px; font-size: 0.8rem;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+          <p style="font-size: 0.88rem; color: var(--text-muted);">"Livraison rapide et clé valide direct. Merci Dekur !"</p>
+          <div style="font-size: 0.85rem; font-weight: 700; color: var(--accent-blue); margin-top: 10px;">— Kévin_93</div>
+        </div>
+        <div class="review-card">
+          <div style="color: #f59e0b; margin-bottom: 8px; font-size: 0.8rem;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+          <p style="font-size: 0.88rem; color: var(--text-muted);">"Support au top sur le Discord, réponses ultra claires."</p>
+          <div style="font-size: 0.85rem; font-weight: 700; color: var(--accent-blue); margin-top: 10px;">— Thomas.R</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 50px;">
+      <h2 style="font-size: 1.25rem; margin-bottom: 15px;"><i class="fa-circle-question fa-solid"></i> Foire Aux Questions</h2>
+      <details class="faq-item">
+        <summary><span>Comment passer commande ?</span> <i class="fa-solid fa-chevron-down"></i></summary>
+        <p>Va dans la rubrique Services, choisis ce dont tu as besoin, puis clique pour ouvrir un ticket sur le serveur Discord.</p>
+      </details>
+      <details class="faq-item">
+        <summary><span>Quels sont les délais de réponse ?</span> <i class="fa-solid fa-chevron-down"></i></summary>
+        <p>L'équipe répond généralement très rapidement dès qu'un ticket est ouvert sur Discord.</p>
+      </details>
+    </div>
 
   </div>
 
-  <!-- Footer -->
   <footer>
     &copy; 2026 2DKR by Dekur. All rights reserved.
   </footer>
 
-  <!-- Toast Notification Copie -->
   <div id="copy-toast" class="toast">
-    <i class="fa-solid fa-check-circle"></i> <span>Adresse du wallet copiée !</span>
+    <i class="fa-solid fa-check-circle"></i> <span id="toast-text">Adresse du wallet copiée !</span>
   </div>
 
   <script>
     const WALLET_ADDRESS = "HzBYYLgE5aJ9cKG9FmxUv3tZfiMSayd6YdADkVYzQA29";
 
-    // Menu Mobile Toggle & Fermeture au clic sur un lien
+    // Menu Mobile
     const menuToggle = document.getElementById('menu-toggle');
     const navLinks = document.getElementById('nav-links');
 
     if (menuToggle) {
-      menuToggle.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-      });
-
+      menuToggle.addEventListener('click', () => navLinks.classList.toggle('active'));
       document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', () => {
-          navLinks.classList.remove('active');
-        });
+        link.addEventListener('click', () => navLinks.classList.remove('active'));
       });
     }
 
-    // Copie de l'adresse crypto dans le presse-papier avec fallback
+    // Filtrage dynamique des cartes
+    function filterCards(category) {
+      document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+
+      document.querySelectorAll('.grid .card').forEach(card => {
+        if (category === 'all' || card.getAttribute('data-cat') === category) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // Calculateur
+    function calculateTotal() {
+      let total = 0;
+      document.querySelectorAll('.item-check:checked').forEach(item => {
+        total += parseFloat(item.value);
+      });
+      document.getElementById('total-price').innerText = total.toFixed(2) + ' €';
+    }
+
+    // Copier le récapitulatif pour Discord
+    function copyOrderSummary() {
+      let selectedItems = [];
+      document.querySelectorAll('.item-check:checked').forEach(item => {
+        selectedItems.push(item.getAttribute('data-name'));
+      });
+
+      if (selectedItems.length === 0) {
+        showToast('Sélectionne au moins un article !');
+        return;
+      }
+
+      const total = document.getElementById('total-price').innerText;
+      const text = `Salut Dekur ! Je voudrais commander :\n- ${selectedItems.join('\n- ')}\nTotal estimé : ${total}`;
+
+      navigator.clipboard.writeText(text).then(() => {
+        showToast('Récapitulatif copié ! Colle-le sur Discord.');
+      });
+    }
+
+    // Copie Adresse Crypto
     function copyCryptoAddress(event) {
       if (event) event.stopPropagation();
 
@@ -656,19 +757,15 @@
         const originalContent = btnCrypto.innerHTML;
 
         btnCrypto.innerHTML = '<i class="fa-solid fa-check"></i> <span>Copié !</span>';
-        const toast = document.getElementById("copy-toast");
-        toast.classList.add("show");
+        showToast("Adresse du wallet copiée !");
 
         setTimeout(() => {
-          toast.classList.remove("show");
           btnCrypto.innerHTML = originalContent;
         }, 3000);
       };
 
       if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(WALLET_ADDRESS).then(handleSuccess).catch(err => {
-          console.error("Erreur lors de la copie : ", err);
-        });
+        navigator.clipboard.writeText(WALLET_ADDRESS).then(handleSuccess);
       } else {
         const textarea = document.createElement("textarea");
         textarea.value = WALLET_ADDRESS;
@@ -680,11 +777,17 @@
         try {
           document.execCommand('copy');
           handleSuccess();
-        } catch (err) {
-          console.error('Erreur fallback copie : ', err);
-        }
+        } catch (err) {}
         document.body.removeChild(textarea);
       }
+    }
+
+    // Dynamic Toast Show
+    function showToast(msg) {
+      const toast = document.getElementById("copy-toast");
+      document.getElementById("toast-text").innerText = msg;
+      toast.classList.add("show");
+      setTimeout(() => { toast.classList.remove("show"); }, 3000);
     }
   </script>
 
