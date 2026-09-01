@@ -4,12 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>2DKR — Calculateur de Prix</title>
-  <span class="beta-badge">BÊTA</span>
-  
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
@@ -63,6 +62,13 @@
       animation: fadeInDown 0.8s ease-out;
     }
 
+    .logo-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      position: relative;
+    }
+
     .logo {
       font-size: 1.5rem;
       font-weight: 900;
@@ -78,6 +84,55 @@
 
     .logo span {
       color: var(--accent-blue);
+    }
+
+    /* Badge BÊTA */
+    .beta-badge {
+      position: relative;
+      background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+      color: #fff;
+      font-size: 0.68rem;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 6px;
+      letter-spacing: 0.5px;
+      cursor: help;
+      box-shadow: 0 2px 8px rgba(249, 115, 22, 0.4);
+      transition: transform 0.2s ease;
+      user-select: none;
+    }
+
+    .beta-badge:hover {
+      transform: scale(1.08);
+    }
+
+    .beta-tooltip {
+      position: absolute;
+      top: 140%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-6px);
+      background: rgba(13, 17, 23, 0.95);
+      border: 1px solid var(--border-glow);
+      color: var(--text-main);
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 10px 14px;
+      border-radius: 10px;
+      width: 220px;
+      text-align: center;
+      line-height: 1.4;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+      z-index: 200;
+    }
+
+    .beta-badge:hover .beta-tooltip {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
     }
 
     .nav-links {
@@ -472,7 +527,13 @@
 <body>
 
   <nav>
-    <a href="index.html" class="logo">2D<span>KR</span></a>
+    <div class="logo-wrapper">
+      <a href="index.html" class="logo">2D<span>KR</span></a>
+      <div class="beta-badge">
+        BÊTA
+        <div class="beta-tooltip">🚧 Version bêta — mises à jour, ajouts et changelogs à venir régulièrement !</div>
+      </div>
+    </div>
     <div class="nav-links">
       <a href="index.html">Accueil</a>
       <a href="services.html">Services & Tarifs</a>
