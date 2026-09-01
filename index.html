@@ -151,7 +151,7 @@
       margin-bottom: 20px;
     }
 
-    /* Badges Hero v0.3.0 avec effet expandable */
+    /* Badges Hero */
     .hero-badges {
       display: flex;
       justify-content: center;
@@ -228,7 +228,6 @@
 
     .search-input {
       width: 100%;
-      /* Padding-right augmenté pour laisser de la place au badge Bêta */
       padding: 12px 65px 12px 45px;
       background: rgba(13, 17, 23, 0.8);
       border: 1px solid var(--border);
@@ -261,7 +260,7 @@
       font-size: 0.65rem;
       font-weight: 800;
       letter-spacing: 0.5px;
-      pointer-events: none; /* Empêche de bloquer le clic sur l'input en dessous */
+      pointer-events: none;
       user-select: none;
     }
 
@@ -387,7 +386,7 @@
       margin-bottom: 24px;
     }
 
-    /* FAQ Details/Summary */
+    /* FAQ Details/Summary avec animation fluide */
     .faq-item {
       background-color: var(--card-bg);
       backdrop-filter: blur(12px);
@@ -398,6 +397,9 @@
       margin-bottom: 14px;
       cursor: pointer;
       transition: all 0.25s ease;
+      overflow: hidden;
+      /* Animation fluide moderne pour l'ouverture des balises details */
+      transition: border-color 0.25s ease, box-shadow 0.25s ease, height 0.3s ease;
     }
 
     .faq-item:hover {
@@ -412,6 +414,7 @@
       justify-content: space-between;
       align-items: center;
       list-style: none;
+      user-select: none;
     }
 
     .faq-item summary::-webkit-details-marker {
@@ -434,6 +437,12 @@
       margin-top: 12px;
       padding-top: 12px;
       border-top: 1px solid var(--border);
+      animation: fadeInText 0.3s ease-in-out;
+    }
+
+    @keyframes fadeInText {
+      from { opacity: 0; transform: translateY(-6px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     /* Buttons Modernes */
@@ -544,7 +553,7 @@
 </head>
 <body>
 
-  <!-- Navigation (À copier telle quelle sur services.html) -->
+  <!-- Navigation -->
   <nav>
     <a href="index.html" class="logo">2D<span>KR</span></a>
     
@@ -555,7 +564,6 @@
     <div class="nav-links" id="nav-links">
       <a href="index.html" class="active">Accueil</a>
       <a href="services.html">Services & Tarifs</a>
-      <!-- Le lien vers le calculateur est bien présent et accessible de partout -->
       <a href="calculateur.html">Calculateur</a>
       <a href="#paiements">Paiements</a>
       <a href="https://www.youtube.com/@Dekur7" target="_blank" rel="noopener noreferrer" class="nav-social-icon" style="color: #ff0000;" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
@@ -580,7 +588,7 @@
       </div>
     </div>
 
-    <!-- Barre de recherche avec le badge BETA -->
+    <!-- Barre de recherche -->
     <div class="search-container">
       <i class="fa-solid fa-magnifying-glass search-icon"></i>
       <input type="text" id="search-input" class="search-input" placeholder="Rechercher un service, une offre, un moyen de paiement...">
@@ -681,7 +689,7 @@
 
     </div>
 
-    <!-- Section FAQ -->
+    <!-- Section FAQ avec animation -->
     <div class="section-heading" style="margin-top: 50px;"><i class="fa-circle-question fa-solid"></i> <span>Foire Aux Questions</span></div>
     
     <details class="faq-item">
