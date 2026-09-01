@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2DKR — Calculateur de Lobby GTA</title>
+  
+  <!-- Preconnect & Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: rgba(22, 27, 34, 0.75);
+      --border: rgba(48, 54, 61, 0.6);
+      --border-glow: rgba(56, 189, 248, 0.4);
+      --accent-blue: #38bdf8;
+      --accent-blue-hover: #0284c7;
+      --accent-blue-glow: rgba(56, 189, 248, 0.25);
+      --discord: #5865f2;
+      --accent-green: #10b981;
+      --text-main: #f0f6fc;
+      --text-muted: #8b949e;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(56, 189, 248, 0.08) 0%, transparent 45%),
+        radial-gradient(circle at 85% 85%, rgba(88, 101, 242, 0.08) 0%, transparent 45%);
+      background-attachment: fixed;
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 8%;
+      background: rgba(13, 17, 23, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--text-main);
+      text-decoration: none;
+      letter-spacing: 1.5px;
+    }
+
+    .logo span { color: var(--accent-blue); }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--accent-blue);
+      text-shadow: 0 0 10px var(--accent-blue-glow);
+    }
+
+    .hero {
+      text-align: center;
+      padding: 60px 20px 30px 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 20px auto 60px auto;
+      padding: 0 20px;
+      width: 100%;
+    }
+
+    .calc-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--text-main);
+      font-size: 1rem;
+    }
+
+    select, input[type="checkbox"] {
+      cursor: pointer;
+    }
+
+    select {
+      width: 100%;
+      padding: 12px 16px;
+      background: rgba(13, 17, 23, 0.8);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-main);
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    select:focus {
+      border-color: var(--accent-blue);
+    }
+
+    .checkbox-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(13, 17, 23, 0.5);
+      padding: 12px 16px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .summary-box {
+      margin-top: 35px;
+      background: rgba(13, 17, 23, 0.9);
+      border: 1px solid var(--border-glow);
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .summary-title {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .total-price {
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: var(--accent-green);
+      margin-bottom: 6px;
+    }
+
+    .estimated-time {
+      font-size: 0.95rem;
+      color: var(--accent-blue);
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 14px 20px;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 700;
+      text-decoration: none;
+      color: white;
+      background: var(--discord);
+      box-shadow: 0 4px 15px rgba(88, 101, 242, 0.3);
+      transition: all 0.25s ease;
+      border: none;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(88, 101, 242, 0.5);
+    }
+
+    footer {
+      margin-top: auto;
+      text-align: center;
+      padding: 28px 20px;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      background: rgba(9, 13, 22, 0.8);
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="logo">2D<span>KR</span></a>
+    <div class="nav-links">
+      <a href="index.html">Accueil</a>
+      <a href="services.html">Services & Tarifs</a>
+      <a href="calculateur.html" class="active">Calculateur</a>
+      <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" style="color: #5865f2;"><i class="fa-brands fa-discord"></i></a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <h1>Calculateur <span>Lobby Sur-Mesure</span></h1>
+    <p>Compose ton offre personnalisée et obtiens une estimation instantanée de ton tarif et du délai.</p>
+  </section>
+
+  <div class="container">
+    <div class="calc-card">
+      
+      <!-- Argent -->
+      <div class="form-group">
+        <label><i class="fa-solid fa-coins" style="color: var(--accent-blue);"></i> Montant d'argent souhaité</label>
+        <select id="moneySelect" onchange="calculateTotal()">
+          <option value="0" data-days="0">Aucun rajout d'argent (0€)</option>
+          <option value="3" data-days="1">+10 000 000$ (3€ - 1 jour)</option>
+          <option value="4" data-days="1">+20 000 000$ (4€ - 1 jour)</option>
+          <option value="5" data-days="1">+30 000 000$ (5€ - 1 jour)</option>
+          <option value="7" data-days="2">+50 000 000$ (7€ - 2 jours)</option>
+          <option value="20" data-days="4">+100 000 000$ (20€ - 4 jours)</option>
+          <option value="40" data-days="7">+200 000 000$ (40€ - 7 jours)</option>
+        </select>
+      </div>
+
+      <!-- Niveau & RP -->
+      <div class="form-group">
+        <label><i class="fa-solid fa-chart-line" style="color: var(--accent-blue);"></i> Niveau / RP</label>
+        <select id="levelSelect" onchange="calculateTotal()">
+          <option value="0">Conserver mon niveau actuel (0€)</option>
+          <option value="5">Niveau / RP au choix (5€)</option>
+        </select>
+      </div>
+
+      <!-- Pack Véhicules -->
+      <div class="form-group">
+        <label><i class="fa-solid fa-car" style="color: var(--accent-blue);"></i> Véhicules Moddés</label>
+        <select id="vehiclesSelect" onchange="calculateTotal()">
+          <option value="0">Aucun véhicule (0€)</option>
+          <option value="10">Pack 10 Véhicules moddés (10€)</option>
+        </select>
+      </div>
+
+      <!-- Pack Tenues -->
+      <div class="form-group">
+        <label><i class="fa-solid fa-shirt" style="color: var(--accent-blue);"></i> Tenues Moddées</label>
+        <select id="outfitsSelect" onchange="calculateTotal()">
+          <option value="0">Aucune tenue (0€)</option>
+          <option value="5">Pack 5 Tenues moddées (5€)</option>
+          <option value="20">Pack 20 Tenues Max (20€)</option>
+        </select>
+      </div>
+
+      <!-- Options Supplémentaires -->
+      <div class="form-group">
+        <label><i class="fa-solid fa-plus-circle" style="color: var(--accent-blue);"></i> Options complémentaires</label>
+        <div class="checkbox-group">
+          <label class="checkbox-item">
+            <input type="checkbox" id="statsOpt" value="2" onchange="calculateTotal()">
+            <span>Stats au maximum (+2€)</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" id="accountOpt" value="20" onchange="calculateTotal()">
+            <span>Fournir un compte neuf avec le jeu inclus (+20€)</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Résultat -->
+      <div class="summary-box">
+        <div class="summary-title">Total Estimé</div>
+        <div class="total-price" id="totalDisplay">0€</div>
+        <div class="estimated-time" id="timeDisplay"><i class="fa-regular fa-clock"></i> Estimation délai : Immédiat</div>
+        <a id="orderBtn" href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="btn">
+          <i class="fa-brands fa-discord"></i> Commander ma configuration
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2026 2DKR by Dekur. All rights reserved.
+  </footer>
+
+  <script>
+    function calculateTotal() {
+      const moneySelect = document.getElementById('moneySelect');
+      const moneyPrice = parseFloat(moneySelect.value);
+      const moneyDays = parseInt(moneySelect.options[moneySelect.selectedIndex].getAttribute('data-days') || 0);
+
+      const levelPrice = parseFloat(document.getElementById('levelSelect').value);
+      const vehiclesPrice = parseFloat(document.getElementById('vehiclesSelect').value);
+      const outfitsPrice = parseFloat(document.getElementById('outfitsSelect').value);
+
+      const statsPrice = document.getElementById('statsOpt').checked ? parseFloat(document.getElementById('statsOpt').value) : 0;
+      const accountPrice = document.getElementById('accountOpt').checked ? parseFloat(document.getElementById('accountOpt').value) : 0;
+
+      const total = moneyPrice + levelPrice + vehiclesPrice + outfitsPrice + statsPrice + accountPrice;
+
+      document.getElementById('totalDisplay').innerText = total + '€';
+
+      let timeText = 'Estimation délai : ';
+      if (moneyDays === 0) {
+        timeText += total > 0 ? 'Quelques heures' : 'Immédiat';
+      } else {
+        timeText += moneyDays + (moneyDays > 1 ? ' jours' : ' jour');
+      }
+      document.getElementById('timeDisplay').innerHTML = `<i class="fa-regular fa-clock"></i> ${timeText}`;
+    }
+  </script>
+</body>
+</html>
