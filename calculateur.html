@@ -3,14 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>2DKR — Calculateur de Lobby GTA</title>
+  <title>2DKR — Calculateur de Prix</title>
   
-  <!-- Preconnect & Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   
-  <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
@@ -48,6 +46,7 @@
       overflow-x: hidden;
     }
 
+    /* Navigation Glassmorphism */
     nav {
       display: flex;
       justify-content: space-between;
@@ -60,6 +59,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
+      animation: fadeInDown 0.8s ease-out;
     }
 
     .logo {
@@ -68,9 +68,16 @@
       color: var(--text-main);
       text-decoration: none;
       letter-spacing: 1.5px;
+      transition: transform 0.2s ease;
     }
 
-    .logo span { color: var(--accent-blue); }
+    .logo:hover {
+      transform: scale(1.03);
+    }
+
+    .logo span {
+      color: var(--accent-blue);
+    }
 
     .nav-links {
       display: flex;
@@ -86,22 +93,37 @@
       transition: all 0.2s ease;
     }
 
-    .nav-links a:hover, .nav-links a.active {
+    .nav-links a:hover,
+    .nav-links a.active {
       color: var(--accent-blue);
       text-shadow: 0 0 10px var(--accent-blue-glow);
     }
 
+    .nav-social-icon {
+      font-size: 1.25rem;
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s ease;
+      display: inline-block;
+    }
+
+    .nav-social-icon:hover {
+      transform: scale(1.25) rotate(5deg);
+    }
+
+    /* Hero Section */
     .hero {
       text-align: center;
-      padding: 60px 20px 30px 20px;
+      padding: 50px 20px 25px 20px;
       max-width: 800px;
       margin: 0 auto;
+      animation: fadeInDown 0.8s ease-out 0.1s backwards;
     }
 
     .hero h1 {
       font-size: 2.8rem;
       font-weight: 900;
+      letter-spacing: -0.5px;
       margin-bottom: 12px;
+      line-height: 1.15;
     }
 
     .hero h1 span {
@@ -111,124 +133,319 @@
     }
 
     .hero p {
-      color: var(--text-muted);
       font-size: 1.1rem;
+      color: var(--text-muted);
+      line-height: 1.6;
     }
 
+    /* Container Principal */
     .container {
       max-width: 900px;
       margin: 20px auto 60px auto;
       padding: 0 20px;
       width: 100%;
+      animation: fadeInUp 0.8s ease-out 0.2s backwards;
     }
 
+    .calc-layout {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    /* Sections / Cards */
     .calc-card {
       background: var(--card-bg);
       backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 30px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      border-radius: 14px;
+      padding: 24px;
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .form-group {
-      margin-bottom: 24px;
+    .calc-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
 
-    .form-group label {
-      display: block;
+    .calc-card:hover {
+      border-color: var(--border-glow);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .calc-card:hover::before {
+      opacity: 1;
+    }
+
+    .calc-card:hover h2 {
+      color: var(--accent-blue);
+    }
+
+    .calc-card h2 {
+      font-size: 1.2rem;
       font-weight: 700;
-      margin-bottom: 10px;
       color: var(--text-main);
-      font-size: 1rem;
-    }
-
-    select, input[type="checkbox"] {
-      cursor: pointer;
-    }
-
-    select {
-      width: 100%;
-      padding: 12px 16px;
-      background: rgba(13, 17, 23, 0.8);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: var(--text-main);
-      font-size: 1rem;
-      outline: none;
-      transition: border-color 0.2s ease;
-    }
-
-    select:focus {
-      border-color: var(--accent-blue);
-    }
-
-    .checkbox-group {
+      margin-bottom: 16px;
       display: flex;
-      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      transition: color 0.2s ease;
+    }
+
+    /* Options Grid inside Calculator */
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr;
       gap: 12px;
     }
 
-    .checkbox-item {
+    .option-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(13, 17, 23, 0.5);
+      border: 1px solid var(--border);
+      padding: 14px 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+
+    .option-item:hover {
+      border-color: var(--accent-blue);
+      background: rgba(56, 189, 248, 0.05);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(56, 189, 248, 0.15);
+    }
+
+    .option-item:hover span {
+      color: var(--accent-blue);
+    }
+
+    .option-item:active {
+      transform: scale(0.98);
+    }
+
+    .option-item.selected {
+      border-color: var(--accent-blue);
+      background: rgba(56, 189, 248, 0.1);
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+    }
+
+    .option-item.selected span {
+      color: var(--accent-blue);
+      font-weight: 600;
+    }
+
+    .option-info {
       display: flex;
       align-items: center;
       gap: 12px;
-      background: rgba(13, 17, 23, 0.5);
-      padding: 12px 16px;
-      border-radius: 8px;
+    }
+
+    .option-checkbox {
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--border);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      background: rgba(13, 17, 23, 0.8);
+    }
+
+    .option-item.selected .option-checkbox {
+      background: var(--accent-blue);
+      border-color: var(--accent-blue);
+      color: #090d16;
+    }
+
+    .option-checkbox i {
+      font-size: 0.75rem;
+      opacity: 0;
+      transform: scale(0);
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .option-item.selected .option-checkbox i {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .option-label {
+      font-size: 0.95rem;
+      color: var(--text-main);
+      transition: color 0.2s ease;
+    }
+
+    .option-price-tag {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--accent-green);
+      background: rgba(16, 185, 129, 0.12);
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    /* Summary Sidebar */
+    .summary-sidebar {
+      position: sticky;
+      top: 90px;
+    }
+
+    .summary-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border: 1px solid var(--border);
-    }
-
-    .summary-box {
-      margin-top: 35px;
-      background: rgba(13, 17, 23, 0.9);
-      border: 1px solid var(--border-glow);
-      border-radius: 12px;
+      border-radius: 14px;
       padding: 24px;
-      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     }
 
-    .summary-title {
-      font-size: 1.1rem;
+    .summary-card h2 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 12px;
+    }
+
+    .summary-items {
+      min-height: 90px;
+      max-height: 200px;
+      overflow-y: auto;
+      margin-bottom: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .summary-item-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.88rem;
       color: var(--text-muted);
-      margin-bottom: 8px;
+      animation: fadeInDown 0.3s ease-out;
     }
 
-    .total-price {
-      font-size: 2.8rem;
+    .summary-item-row span:last-child {
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    .summary-empty {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      font-style: italic;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .total-box {
+      background: rgba(13, 17, 23, 0.7);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .total-label {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .total-amount {
+      font-size: 1.5rem;
       font-weight: 900;
       color: var(--accent-green);
-      margin-bottom: 6px;
+      text-shadow: 0 0 15px rgba(16, 185, 129, 0.25);
+      transition: transform 0.2s ease;
     }
 
-    .estimated-time {
-      font-size: 0.95rem;
-      color: var(--accent-blue);
-      font-weight: 600;
-      margin-bottom: 20px;
+    .total-amount.pulse {
+      transform: scale(1.1);
     }
 
+    /* Buttons */
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
+      gap: 8px;
       width: 100%;
-      padding: 14px 20px;
+      text-align: center;
+      padding: 12px 18px;
       border-radius: 10px;
-      font-size: 1rem;
-      font-weight: 700;
+      font-size: 0.95rem;
+      font-weight: 600;
       text-decoration: none;
-      color: white;
-      background: var(--discord);
-      box-shadow: 0 4px 15px rgba(88, 101, 242, 0.3);
       transition: all 0.25s ease;
+      cursor: pointer;
       border: none;
     }
 
-    .btn:hover {
-      transform: translateY(-2px);
+    .btn-discord {
+      background: linear-gradient(135deg, #5865f2 0%, #4752c4 100%);
+      color: #ffffff;
+      box-shadow: 0 4px 15px rgba(88, 101, 242, 0.3);
+    }
+
+    .btn-discord:hover:not(.disabled) {
       box-shadow: 0 6px 20px rgba(88, 101, 242, 0.5);
+      transform: translateY(-2px);
+    }
+
+    .btn-discord.disabled {
+      background: rgba(48, 54, 61, 0.5);
+      color: var(--text-muted);
+      cursor: not-allowed;
+      box-shadow: none;
+      opacity: 0.6;
+    }
+
+    .btn-reset {
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      margin-top: 10px;
+      font-size: 0.85rem;
+      padding: 8px;
+    }
+
+    .btn-reset:hover {
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text-main);
+      border-color: var(--text-muted);
+    }
+
+    /* Keyframe Animations */
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     footer {
@@ -239,6 +456,15 @@
       color: var(--text-muted);
       font-size: 0.85rem;
       background: rgba(9, 13, 22, 0.8);
+      animation: fadeInDown 0.8s ease-out 0.3s backwards;
+    }
+
+    @media (max-width: 850px) {
+      .calc-layout { grid-template-columns: 1fr; }
+      .summary-sidebar { position: static; }
+      nav { padding: 15px 5%; }
+      .nav-links { gap: 14px; }
+      .hero h1 { font-size: 2.2rem; }
     }
   </style>
 </head>
@@ -250,83 +476,142 @@
       <a href="index.html">Accueil</a>
       <a href="services.html">Services & Tarifs</a>
       <a href="calculateur.html" class="active">Calculateur</a>
-      <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" style="color: #5865f2;"><i class="fa-brands fa-discord"></i></a>
+      <a href="index.html#paiements">Paiements</a>
+      <a href="https://www.youtube.com/@Dekur7" target="_blank" rel="noopener noreferrer" class="nav-social-icon" style="color: #ff0000;" title="YouTube" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+      <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="nav-social-icon" style="color: #5865f2;" title="Discord" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
     </div>
   </nav>
 
   <section class="hero">
-    <h1>Calculateur <span>Lobby Sur-Mesure</span></h1>
-    <p>Compose ton offre personnalisée et obtiens une estimation instantanée de ton tarif et du délai.</p>
+    <h1>Calculateur de <span>Tarifs Sur Mesure</span></h1>
+    <p>Sélectionne les options de ton choix pour composer ton pack GTA Online personnalisé.</p>
   </section>
 
   <div class="container">
-    <div class="calc-card">
+    <div class="calc-layout">
       
-      <!-- Argent -->
-      <div class="form-group">
-        <label><i class="fa-solid fa-coins" style="color: var(--accent-blue);"></i> Montant d'argent souhaité</label>
-        <select id="moneySelect" onchange="calculateTotal()">
-          <option value="0" data-days="0">Aucun rajout d'argent (0€)</option>
-          <option value="3" data-days="1">+10 000 000$ (3€ - 1 jour)</option>
-          <option value="4" data-days="1">+20 000 000$ (4€ - 1 jour)</option>
-          <option value="5" data-days="1">+30 000 000$ (5€ - 1 jour)</option>
-          <option value="7" data-days="2">+50 000 000$ (7€ - 2 jours)</option>
-          <option value="20" data-days="4">+100 000 000$ (20€ - 4 jours)</option>
-          <option value="40" data-days="7">+200 000 000$ (40€ - 7 jours)</option>
-        </select>
-      </div>
-
-      <!-- Niveau & RP -->
-      <div class="form-group">
-        <label><i class="fa-solid fa-chart-line" style="color: var(--accent-blue);"></i> Niveau / RP</label>
-        <select id="levelSelect" onchange="calculateTotal()">
-          <option value="0">Conserver mon niveau actuel (0€)</option>
-          <option value="5">Niveau / RP au choix (5€)</option>
-        </select>
-      </div>
-
-      <!-- Pack Véhicules -->
-      <div class="form-group">
-        <label><i class="fa-solid fa-car" style="color: var(--accent-blue);"></i> Véhicules Moddés</label>
-        <select id="vehiclesSelect" onchange="calculateTotal()">
-          <option value="0">Aucun véhicule (0€)</option>
-          <option value="10">Pack 10 Véhicules moddés (10€)</option>
-        </select>
-      </div>
-
-      <!-- Pack Tenues -->
-      <div class="form-group">
-        <label><i class="fa-solid fa-shirt" style="color: var(--accent-blue);"></i> Tenues Moddées</label>
-        <select id="outfitsSelect" onchange="calculateTotal()">
-          <option value="0">Aucune tenue (0€)</option>
-          <option value="5">Pack 5 Tenues moddées (5€)</option>
-          <option value="20">Pack 20 Tenues Max (20€)</option>
-        </select>
-      </div>
-
-      <!-- Options Supplémentaires -->
-      <div class="form-group">
-        <label><i class="fa-solid fa-plus-circle" style="color: var(--accent-blue);"></i> Options complémentaires</label>
-        <div class="checkbox-group">
-          <label class="checkbox-item">
-            <input type="checkbox" id="statsOpt" value="2" onchange="calculateTotal()">
-            <span>Stats au maximum (+2€)</span>
-          </label>
-          <label class="checkbox-item">
-            <input type="checkbox" id="accountOpt" value="20" onchange="calculateTotal()">
-            <span>Fournir un compte neuf avec le jeu inclus (+20€)</span>
-          </label>
+      <!-- Colonne des options -->
+      <div class="calc-options">
+        
+        <div class="calc-card">
+          <h2><i class="fa-solid fa-coins"></i> Argent GTA Online</h2>
+          <div class="options-grid" id="money-options">
+            <div class="option-item" data-name="+10M$ GTA Online" data-price="3" data-category="money">
+              <div class="option-info">
+                <div class="option-checkbox"><i class="fa-solid fa-check"></i></div>
+                <span class="option-label">+10 000 000$ (1j)</span>
+              </div>
+              <span class="option-price-tag">3€</span>
+            </div>
+            <div class="option-item" data-name="+20M$ GTA Online" data-price="4" data-category="money">
+              <div class="option-info">
+                <div class="option-checkbox"><i class="fa-solid fa-check"></i></div>
+                <span class="option-label">+20 000 000$ (1j)</span>
+              </div>
+              <span class="option-price-tag">4€</span>
+            </div>
+            <div class="option-item" data-name="+30M$ GTA Online" data-price="5" data-category="money">
+              <div class="option-info">
+                <div class="option-checkbox"><i class="fa-solid fa-check"></i></div>
+                <span class="option-label">+30 000 000$ (1j)</span>
+              </div>
+              <span class="option-price-tag">5€</span>
+            </div>
+            <div class="option-item" data-name="+50M$ GTA Online" data-price="7" data-category="money">
+              <div class="option-info">
+                <div class="option-checkbox"><i class="fa-solid fa-check"></i></div>
+                <span class="option-label">+50 000 000$ (2j)</span>
+              </div>
+              <span class="option-price-tag">7€</span>
+            </div>
+            <div class="option-item" data-name="+100M$ GTA Online" data-price="20" data-category="money">
+              <div class="option-info">
+                <div class="option-checkbox"><i class="fa-solid fa-check"></i></div>
+                <span class="option-label">+100 000 000$ (4j)</span>
+              </div>
+              <span class="option-price-tag">20€</span>
+            </div>
+            <div class="option-item" data-name="+200M$ GTA Online" data-price="40" data-category="money">
+              <div class="option-info">
+                <div class="option-checkbox"><i class="fa-solid fa-check"></i></div>
+                <span class="option-label">+200 000 000$ (7j)</span>
+              </div>
+              <span class="option-price-tag">40€</span>
+            </div>
+          </div>
         </div>
+
+        <div class="calc-card">
+          <h2><i class="fa-solid fa-chart-line"></i> Niveau & Statistiques</h2>
+          <div class="options-grid">
+            <div class="option-item" data-name="Niveau RP au choix" data-price="5" data-category="level">
+              <div class="option-info">
+                <div class="option-checkbox"><i class="fa-solid fa-check"></i></div>
+                <span class="option-label">Niveau au choix</span>
+              </div>
+              <span class="option-price-tag">5€</span>
+            </div>
+            <div class="option-item" data-name="Statistiques Maximum" data-price="2" data-category="stats">
+              <div class="option-info">
+                <div class="option-checkbox"><i class="fa-solid fa-check"></i></div>
+                <span class="option-label">Stats max (Course, Tir, Apnée...)</span>
+              </div>
+              <span class="option-price-tag">2€</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="calc-card">
+          <h2><i class="fa-solid fa-car"></i> Véhicules & Tenues</h2>
+          <div class="options-grid">
+            <div class="option-item" data-name="Pack 10 Véhicules moddés" data-price="10" data-category="vehicles">
+              <div class="option-info">
+                <div class="option-checkbox"><i class="fa-solid fa-check"></i></div>
+                <span class="option-label">Pack 10 Véhicules moddés</span>
+              </div>
+              <span class="option-price-tag">10€</span>
+            </div>
+            <div class="option-item" data-name="Pack 5 Tenues moddées" data-price="5" data-category="outfits">
+              <div class="option-info">
+                <div class="option-checkbox"><i class="fa-solid fa-check"></i></div>
+                <span class="option-label">Pack 5 Tenues moddées</span>
+              </div>
+              <span class="option-price-tag">5€</span>
+            </div>
+            <div class="option-item" data-name="Pack 20 Tenues (Max)" data-price="20" data-category="outfits">
+              <div class="option-info">
+                <div class="option-checkbox"><i class="fa-solid fa-check"></i></div>
+                <span class="option-label">Pack 20 Tenues (Max)</span>
+              </div>
+              <span class="option-price-tag">20€</span>
+            </div>
+          </div>
+        </div>
+
       </div>
 
-      <!-- Résultat -->
-      <div class="summary-box">
-        <div class="summary-title">Total Estimé</div>
-        <div class="total-price" id="totalDisplay">0€</div>
-        <div class="estimated-time" id="timeDisplay"><i class="fa-regular fa-clock"></i> Estimation délai : Immédiat</div>
-        <a id="orderBtn" href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="btn">
-          <i class="fa-brands fa-discord"></i> Commander ma configuration
-        </a>
+      <!-- Colonne Résumé -->
+      <div class="summary-sidebar">
+        <div class="summary-card">
+          <h2>Résumé du Pack</h2>
+          
+          <div class="summary-items" id="summary-items">
+            <div class="summary-empty">Aucune option sélectionnée</div>
+          </div>
+
+          <div class="total-box">
+            <span class="total-label">Total :</span>
+            <span class="total-amount" id="total-price">0€</span>
+          </div>
+
+          <a href="#" id="discord-btn" class="btn btn-discord disabled" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-discord"></i> Commander via Discord
+          </a>
+
+          <button class="btn btn-reset" id="reset-btn">
+            Réinitialiser
+          </button>
+        </div>
       </div>
 
     </div>
@@ -337,30 +622,120 @@
   </footer>
 
   <script>
-    function calculateTotal() {
-      const moneySelect = document.getElementById('moneySelect');
-      const moneyPrice = parseFloat(moneySelect.value);
-      const moneyDays = parseInt(moneySelect.options[moneySelect.selectedIndex].getAttribute('data-days') || 0);
+    document.addEventListener('DOMContentLoaded', () => {
+      const optionItems = document.querySelectorAll('.option-item');
+      const summaryContainer = document.getElementById('summary-items');
+      const totalPriceEl = document.getElementById('total-price');
+      const discordBtn = document.getElementById('discord-btn');
+      const resetBtn = document.getElementById('reset-btn');
 
-      const levelPrice = parseFloat(document.getElementById('levelSelect').value);
-      const vehiclesPrice = parseFloat(document.getElementById('vehiclesSelect').value);
-      const outfitsPrice = parseFloat(document.getElementById('outfitsSelect').value);
+      // État des sélections par catégorie pour gérer l'exclusivité (ex: un seul choix d'argent à la fois)
+      let selections = {
+        money: null,
+        level: null,
+        stats: null,
+        vehicles: null,
+        outfits: null
+      };
 
-      const statsPrice = document.getElementById('statsOpt').checked ? parseFloat(document.getElementById('statsOpt').value) : 0;
-      const accountPrice = document.getElementById('accountOpt').checked ? parseFloat(document.getElementById('accountOpt').value) : 0;
+      let currentDisplayPrice = 0;
 
-      const total = moneyPrice + levelPrice + vehiclesPrice + outfitsPrice + statsPrice + accountPrice;
+      optionItems.forEach(item => {
+        item.addEventListener('click', () => {
+          const category = item.getAttribute('data-category');
+          const name = item.getAttribute('data-name');
+          const price = parseInt(item.getAttribute('data-price'));
 
-      document.getElementById('totalDisplay').innerText = total + '€';
+          // Si c'est dans la catégorie argent, un seul choix possible à la fois
+          if (category === 'money') {
+            optionItems.forEach(opt => {
+              if (opt.getAttribute('data-category') === 'money' && opt !== item) {
+                opt.classList.remove('selected');
+              }
+            });
 
-      let timeText = 'Estimation délai : ';
-      if (moneyDays === 0) {
-        timeText += total > 0 ? 'Quelques heures' : 'Immédiat';
-      } else {
-        timeText += moneyDays + (moneyDays > 1 ? ' jours' : ' jour');
+            if (item.classList.contains('selected')) {
+              item.classList.remove('selected');
+              selections.money = null;
+            } else {
+              item.classList.add('selected');
+              selections.money = { name, price };
+            }
+          } else {
+            // Pour les autres catégories, bascule simple
+            if (item.classList.contains('selected')) {
+              item.classList.remove('selected');
+              selections[category] = null;
+            } else {
+              item.classList.add('selected');
+              selections[category] = { name, price };
+            }
+          }
+
+          updateSummary();
+        });
+      });
+
+      resetBtn.addEventListener('click', () => {
+        optionItems.forEach(opt => opt.classList.remove('selected'));
+        selections = { money: null, level: null, stats: null, vehicles: null, outfits: null };
+        updateSummary();
+      });
+
+      function updateSummary() {
+        summaryContainer.innerHTML = '';
+        let activeSelections = [];
+        let calculatedTotal = 0;
+
+        Object.keys(selections).forEach(cat => {
+          if (selections[cat]) {
+            activeSelections.push(selections[cat]);
+            calculatedTotal += selections[cat].price;
+          }
+        });
+
+        if (activeSelections.length === 0) {
+          summaryContainer.innerHTML = '<div class="summary-empty">Aucune option sélectionnée</div>';
+          discordBtn.classList.add('disabled');
+          discordBtn.setAttribute('href', '#');
+        } else {
+          activeSelections.forEach(sel => {
+            const row = document.createElement('div');
+            row.className = 'summary-item-row';
+            row.innerHTML = `<span>${sel.name}</span><span>${sel.price}€</span>`;
+            summaryContainer.appendChild(row);
+          });
+          discordBtn.classList.remove('disabled');
+          
+          // Construction du message de commande Discord pré-rempli
+          const descList = activeSelections.map(s => `• ${s.name} (${s.price}€)`).join('\n');
+          const discordMsg = encodeURIComponent(`Salut ! Je souhaite commander un pack sur mesure :\n\n${descList}\n\nTotal : ${calculatedTotal}€`);
+          discordBtn.setAttribute('href', `https://discord.gg/mDpZT73FFG`);
+        }
+
+        // Animation fluide de transition du montant total
+        animateValue(totalPriceEl, currentDisplayPrice, calculatedTotal, 400);
+        currentDisplayPrice = calculatedTotal;
+
+        // Effet de pulsation sur le montant
+        totalPriceEl.classList.add('pulse');
+        setTimeout(() => totalPriceEl.classList.remove('pulse'), 200);
       }
-      document.getElementById('timeDisplay').innerHTML = `<i class="fa-regular fa-clock"></i> ${timeText}`;
-    }
+
+      function animateValue(obj, start, end, duration) {
+        let startTimestamp = null;
+        const step = (timestamp) => {
+          if (!startTimestamp) startTimestamp = timestamp;
+          const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+          const currentVal = Math.floor(progress * (end - start) + start);
+          obj.innerHTML = currentVal + '€';
+          if (progress < 1) {
+            window.requestAnimationFrame(step);
+          }
+        };
+        window.requestAnimationFrame(step);
+      }
+    });
   </script>
 </body>
 </html>
