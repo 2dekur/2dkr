@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>2DKR — Site officiel de Dekur</title>
   
+  <!-- Open Graph / Meta Discord -->
+  <meta property="og:title" content="2DKR — Espace Officiel Dekur">
+  <meta property="og:description" content="Découvre nos services de boost GTA Online, véhicules moddés, tenues et offres exclusives.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#38bdf8">
+
   <!-- Preconnect & Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -386,7 +392,7 @@
       margin-bottom: 24px;
     }
 
-    /* FAQ Details/Summary avec animation fluide */
+    /* FAQ Details/Summary */
     .faq-item {
       background-color: var(--card-bg);
       backdrop-filter: blur(12px);
@@ -396,10 +402,8 @@
       padding: 18px 22px;
       margin-bottom: 14px;
       cursor: pointer;
-      transition: all 0.25s ease;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
       overflow: hidden;
-      /* Animation fluide moderne pour l'ouverture des balises details */
-      transition: border-color 0.25s ease, box-shadow 0.25s ease, height 0.3s ease;
     }
 
     .faq-item:hover {
@@ -566,8 +570,8 @@
       <a href="services.html">Services & Tarifs</a>
       <a href="calculateur.html">Calculateur</a>
       <a href="#paiements">Paiements</a>
-      <a href="https://www.youtube.com/@Dekur7" target="_blank" rel="noopener noreferrer" class="nav-social-icon" style="color: #ff0000;" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
-      <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="nav-social-icon" style="color: #5865f2;" title="Discord"><i class="fa-brands fa-discord"></i></a>
+      <a href="https://www.youtube.com/@Dekur7" target="_blank" rel="noopener noreferrer" class="nav-social-icon" style="color: #ff0000;" title="YouTube" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+      <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="nav-social-icon" style="color: #5865f2;" title="Discord" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
     </div>
   </nav>
 
@@ -600,7 +604,7 @@
   <div class="container" id="projets">
     
     <!-- Section Communauté -->
-    <div class="section-heading"><i class="fa-solid fa-layer-group"></i> <span>Communauté & Offres</span></div>
+    <div class="section-heading"><i class="fa-solid fa-layer-group" style="color: var(--accent-blue);" aria-hidden="true"></i> <span>Communauté & Offres</span></div>
     <div class="grid">
       
       <div class="card searchable">
@@ -612,7 +616,7 @@
           </div>
           <p>Rejoins-nous sur Discord pour voir les nouveautés à propos du serveur, parler, suggérer ou ouvrir un ticket.</p>
         </div>
-        <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="btn btn-blue">Rejoindre le Discord</a>
+        <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="btn btn-blue"><i class="fa-brands fa-discord"></i> Rejoindre le Discord</a>
       </div>
 
       <div class="card searchable">
@@ -624,13 +628,13 @@
           </div>
           <p>Accès & clés PC en stock bien moins chers que sur Steam. Livraison rapide et garantie.</p>
         </div>
-        <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="btn btn-blue">Ouvrir un ticket Discord</a>
+        <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="btn btn-blue"><i class="fa-solid fa-ticket"></i> Ouvrir un ticket Discord</a>
       </div>
 
     </div>
 
     <!-- Section Pourquoi nous choisir ? -->
-    <div class="section-heading" style="margin-top: 50px;"><i class="fa-solid fa-shield-halved"></i> <span>Pourquoi choisir 2DKR ?</span></div>
+    <div class="section-heading" style="margin-top: 50px;"><i class="fa-solid fa-shield-halved" style="color: var(--accent-blue);" aria-hidden="true"></i> <span>Pourquoi choisir 2DKR ?</span></div>
     <div class="grid">
       
       <div class="card searchable">
@@ -658,7 +662,7 @@
     </div>
 
     <!-- Section Paiements -->
-    <div class="section-heading" id="paiements" style="margin-top: 50px;"><i class="fa-solid fa-wallet"></i> <span>Moyens de Paiement</span></div>
+    <div class="section-heading" id="paiements" style="margin-top: 50px;"><i class="fa-solid fa-wallet" style="color: var(--accent-blue);" aria-hidden="true"></i> <span>Moyens de Paiement</span></div>
     <div class="grid">
       
       <div class="card searchable">
@@ -670,7 +674,7 @@
           </div>
           <p>Clique sur le bouton pour envoyer de l'argent via PayPal.</p>
         </div>
-        <a href="https://paypal.me/DekurFreekrd" target="_blank" rel="noopener noreferrer" class="btn btn-blue">Payer par PayPal</a>
+        <a href="https://paypal.me/DekurFreekrd" target="_blank" rel="noopener noreferrer" class="btn btn-blue"><i class="fa-brands fa-paypal"></i> Payer par PayPal</a>
       </div>
 
       <div class="card searchable">
@@ -689,8 +693,8 @@
 
     </div>
 
-    <!-- Section FAQ avec animation -->
-    <div class="section-heading" style="margin-top: 50px;"><i class="fa-circle-question fa-solid"></i> <span>Foire Aux Questions</span></div>
+    <!-- Section FAQ -->
+    <div class="section-heading" style="margin-top: 50px;"><i class="fa-circle-question fa-solid" style="color: var(--accent-blue);" aria-hidden="true"></i> <span>Foire Aux Questions</span></div>
     
     <details class="faq-item">
       <summary><span>Comment passer commande ?</span> <i class="fa-solid fa-chevron-down"></i></summary>
@@ -717,7 +721,7 @@
   <script>
     const WALLET_ADDRESS = "HzBYYLgE5aJ9cKG9FmxUv3tZfiMSayd6YdADkVYzQA29";
 
-    // Menu Mobile
+    // Menu Mobile Burger
     const menuToggle = document.getElementById('menu-toggle');
     const navLinks = document.getElementById('nav-links');
 
@@ -747,7 +751,7 @@
       });
     }
 
-    // Copie Adresse Crypto avec fallback
+    // Copie Adresse Crypto
     function copyCryptoAddress(event) {
       if (event) event.stopPropagation();
 
