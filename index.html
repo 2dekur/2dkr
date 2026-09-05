@@ -5,18 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>2DKR — Site officiel de Dekur</title>
   
-  <!-- Open Graph / Meta Discord -->
   <meta property="og:title" content="2DKR — Espace Officiel De Dekur">
   <meta property="og:description" content="Retrouve tous nos boosts GTA Online, véhicules moddés, tenues et packs sur mesure.">
   <meta property="og:type" content="website">
   <meta name="theme-color" content="#38bdf8">
 
-  <!-- Preconnect & Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   
-  <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
@@ -392,7 +389,7 @@
       margin-bottom: 24px;
     }
 
-    /* FAQ Details/Summary */
+    /* FAQ Details/Summary (Anti double-clic & fluide) */
     .faq-item {
       background-color: var(--card-bg);
       backdrop-filter: blur(12px);
@@ -401,7 +398,6 @@
       border-radius: 12px;
       padding: 18px 22px;
       margin-bottom: 14px;
-      cursor: pointer;
       transition: border-color 0.25s ease, box-shadow 0.25s ease;
       overflow: hidden;
     }
@@ -418,7 +414,9 @@
       justify-content: space-between;
       align-items: center;
       list-style: none;
-      user-select: none;
+      cursor: pointer;
+      user-select: none; /* Règle le bug de sélection de texte au double-clic */
+      -webkit-user-select: none;
     }
 
     .faq-item summary::-webkit-details-marker {
@@ -427,11 +425,15 @@
 
     .faq-item summary i {
       color: var(--accent-blue);
-      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    .faq-item[open] summary i {
+    .faq-item.is-open summary i {
       transform: rotate(180deg);
+    }
+
+    .faq-content-wrapper {
+      overflow: hidden;
     }
 
     .faq-item p {
@@ -441,12 +443,6 @@
       margin-top: 12px;
       padding-top: 12px;
       border-top: 1px solid var(--border);
-      animation: fadeInText 0.3s ease-in-out;
-    }
-
-    @keyframes fadeInText {
-      from { opacity: 0; transform: translateY(-6px); }
-      to { opacity: 1; transform: translateY(0); }
     }
 
     /* Buttons Modernes */
@@ -557,7 +553,6 @@
 </head>
 <body>
 
-  <!-- Navigation -->
   <nav>
     <a href="index.html" class="logo">2D<span>KR</span></a>
     
@@ -575,7 +570,6 @@
     </div>
   </nav>
 
-  <!-- Hero Section -->
   <section class="hero">
     <h1>L'Espace <span>2DKR</span></h1>
     <p>Retrouve tous les accès à la communauté, aux services et aux moyens de paiement.</p>
@@ -592,7 +586,6 @@
       </div>
     </div>
 
-    <!-- Barre de recherche -->
     <div class="search-container">
       <i class="fa-solid fa-magnifying-glass search-icon"></i>
       <input type="text" id="search-input" class="search-input" placeholder="Rechercher un service, une offre, un moyen de paiement...">
@@ -600,10 +593,8 @@
     </div>
   </section>
 
-  <!-- Container Principal -->
   <div class="container" id="projets">
     
-    <!-- Section Communauté -->
     <div class="section-heading"><i class="fa-solid fa-layer-group" style="color: var(--accent-blue);" aria-hidden="true"></i> <span>Communauté & Offres</span></div>
     <div class="grid">
       
@@ -633,7 +624,6 @@
 
     </div>
 
-    <!-- Section Pourquoi nous choisir ? -->
     <div class="section-heading" style="margin-top: 50px;"><i class="fa-solid fa-shield-halved" style="color: var(--accent-blue);" aria-hidden="true"></i> <span>Pourquoi choisir 2DKR ?</span></div>
     <div class="grid">
       
@@ -661,7 +651,6 @@
 
     </div>
 
-    <!-- Section Paiements -->
     <div class="section-heading" id="paiements" style="margin-top: 50px;"><i class="fa-solid fa-wallet" style="color: var(--accent-blue);" aria-hidden="true"></i> <span>Moyens de Paiement</span></div>
     <div class="grid">
       
@@ -693,27 +682,28 @@
 
     </div>
 
-    <!-- Section FAQ -->
     <div class="section-heading" style="margin-top: 50px;"><i class="fa-circle-question fa-solid" style="color: var(--accent-blue);" aria-hidden="true"></i> <span>Foire Aux Questions</span></div>
     
     <details class="faq-item">
       <summary><span>Comment passer commande ?</span> <i class="fa-solid fa-chevron-down"></i></summary>
-      <p>Va dans la rubrique Services, choisis ce dont tu as besoin, puis clique pour ouvrir un ticket sur le serveur Discord.</p>
+      <div class="faq-content-wrapper">
+        <p>Va dans la rubrique Services, choisis ce dont tu as besoin, puis clique pour ouvrir un ticket sur le serveur Discord.</p>
+      </div>
     </details>
 
     <details class="faq-item">
       <summary><span>Quels sont les délais de réponse ?</span> <i class="fa-solid fa-chevron-down"></i></summary>
-      <p>L'équipe répond généralement très rapidement dès qu'un ticket est ouvert sur Discord.</p>
+      <div class="faq-content-wrapper">
+        <p>L'équipe répond généralement très rapidement dès qu'un ticket est ouvert sur Discord.</p>
+      </div>
     </details>
 
   </div>
 
-  <!-- Footer -->
   <footer>
     &copy; 2026 2DKR by Dekur. All rights reserved.
   </footer>
 
-  <!-- Toast Notification Copie -->
   <div id="copy-toast" class="toast">
     <i class="fa-solid fa-check-circle"></i> <span>Adresse du wallet copiée !</span>
   </div>
@@ -736,6 +726,58 @@
         });
       });
     }
+
+    // Animation Fluide FAQ (Accordéon Pro)
+    document.querySelectorAll('.faq-item').forEach((el) => {
+      const summary = el.querySelector('summary');
+      const content = el.querySelector('.faq-content-wrapper');
+
+      summary.addEventListener('click', (e) => {
+        e.preventDefault(); // Empêche le comportement natif instantané
+
+        if (el.open) {
+          // Fermeture fluide
+          const startHeight = el.offsetHeight;
+          const endHeight = summary.offsetHeight;
+
+          el.classList.remove('is-open');
+
+          const animation = el.animate([
+            { height: `${startHeight}px` },
+            { height: `${endHeight}px` }
+          ], {
+            duration: 300,
+            easing: 'cubic-bezier(0.4, 0, 0.2, 1)'
+          });
+
+          animation.onfinish = () => {
+            el.open = false;
+            el.style.height = '';
+          };
+        } else {
+          // Ouverture fluide
+          el.open = true;
+          el.classList.add('is-open');
+
+          const startHeight = el.offsetHeight - content.offsetHeight;
+          const endHeight = el.offsetHeight;
+
+          el.style.height = `${startHeight}px`;
+
+          const animation = el.animate([
+            { height: `${startHeight}px` },
+            { height: `${endHeight}px` }
+          ], {
+            duration: 300,
+            easing: 'cubic-bezier(0.4, 0, 0.2, 1)'
+          });
+
+          animation.onfinish = () => {
+            el.style.height = '';
+          };
+        }
+      });
+    });
 
     // Filtre de recherche dynamique
     const searchInput = document.getElementById('search-input');
