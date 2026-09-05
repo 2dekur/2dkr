@@ -172,7 +172,6 @@
       transform: scale(1.25) rotate(5deg);
     }
 
-    /* Menu mobile burger */
     .menu-toggle {
       display: none;
       background: none;
@@ -182,7 +181,6 @@
       cursor: pointer;
     }
 
-    /* Hero Section */
     .hero {
       text-align: center;
       padding: 50px 20px 25px 20px;
@@ -211,7 +209,6 @@
       line-height: 1.6;
     }
 
-    /* Container Principal */
     .container {
       max-width: 900px;
       margin: 20px auto 60px auto;
@@ -227,7 +224,6 @@
       align-items: start;
     }
 
-    /* Sections / Cards */
     .calc-card {
       background: var(--card-bg);
       backdrop-filter: blur(12px);
@@ -275,7 +271,6 @@
       transition: color 0.2s ease;
     }
 
-    /* Options Grid inside Calculator */
     .options-grid {
       display: grid;
       grid-template-columns: 1fr;
@@ -374,7 +369,6 @@
       border: 1px solid rgba(16, 185, 129, 0.3);
     }
 
-    /* Summary Sidebar */
     .summary-sidebar {
       position: sticky;
       top: 90px;
@@ -458,7 +452,6 @@
       transform: scale(1.1);
     }
 
-    /* Buttons */
     .btn {
       display: inline-flex;
       align-items: center;
@@ -510,7 +503,6 @@
       border-color: var(--text-muted);
     }
 
-    /* Keyframe Animations */
     @keyframes fadeInDown {
       from { opacity: 0; transform: translateY(-20px); }
       to { opacity: 1; transform: translateY(0); }
@@ -533,28 +525,20 @@
     }
 
     @media (max-width: 850px) {
-      .menu-toggle {
-        display: block;
-      }
-
+      .menu-toggle { display: block; }
       .nav-links {
         display: none;
         flex-direction: column;
         position: absolute;
         top: 100%;
-        left: 0;
-        right: 0;
+        left: 0; right: 0;
         background: rgba(13, 17, 23, 0.95);
         backdrop-filter: blur(16px);
         padding: 20px;
         border-bottom: 1px solid var(--border);
         gap: 16px;
       }
-
-      .nav-links.active {
-        display: flex;
-      }
-
+      .nav-links.active { display: flex; }
       .calc-layout { grid-template-columns: 1fr; }
       .summary-sidebar { position: static; }
       nav { padding: 15px 5%; }
@@ -600,51 +584,51 @@
       
       <div class="calc-options">
         
-        <!-- Argent -->
+        <!-- Argent GTA Online -->
         <div class="calc-card">
           <h2><i class="fa-solid fa-coins" style="color: var(--accent-blue);"></i> Argent GTA Online</h2>
           <div class="options-grid" id="money-options">
             <div class="option-item" data-name="+10M$ GTA Online" data-price="3" data-category="money">
               <div class="option-info">
                 <div class="option-checkbox"><i class="fa-solid fa-check"></i></div>
-                <span class="option-label">+10 000 000$ (1j)</span>
+                <span class="option-label">+10 000 000$ (24h)</span>
               </div>
               <span class="option-price-tag">3€</span>
             </div>
-            <div class="option-item" data-name="+20M$ GTA Online" data-price="4" data-category="money">
+            <div class="option-item" data-name="+20M$ GTA Online" data-price="5" data-category="money">
               <div class="option-info">
                 <div class="option-checkbox"><i class="fa-solid fa-check"></i></div>
-                <span class="option-label">+20 000 000$ (1j)</span>
-              </div>
-              <span class="option-price-tag">4€</span>
-            </div>
-            <div class="option-item" data-name="+30M$ GTA Online" data-price="5" data-category="money">
-              <div class="option-info">
-                <div class="option-checkbox"><i class="fa-solid fa-check"></i></div>
-                <span class="option-label">+30 000 000$ (1j)</span>
+                <span class="option-label">+20 000 000$ (24h)</span>
               </div>
               <span class="option-price-tag">5€</span>
             </div>
-            <div class="option-item" data-name="+50M$ GTA Online" data-price="7" data-category="money">
+            <div class="option-item" data-name="+30M$ GTA Online" data-price="7" data-category="money">
               <div class="option-info">
                 <div class="option-checkbox"><i class="fa-solid fa-check"></i></div>
-                <span class="option-label">+50 000 000$ (2j)</span>
+                <span class="option-label">+30 000 000$ (24h)</span>
               </div>
               <span class="option-price-tag">7€</span>
             </div>
-            <div class="option-item" data-name="+100M$ GTA Online" data-price="20" data-category="money">
+            <div class="option-item" data-name="+50M$ GTA Online" data-price="10" data-category="money">
               <div class="option-info">
                 <div class="option-checkbox"><i class="fa-solid fa-check"></i></div>
-                <span class="option-label">+100 000 000$ (4j)</span>
+                <span class="option-label">+50 000 000$ (24h - 48h)</span>
               </div>
-              <span class="option-price-tag">20€</span>
+              <span class="option-price-tag">10€</span>
             </div>
-            <div class="option-item" data-name="+200M$ GTA Online" data-price="40" data-category="money">
+            <div class="option-item" data-name="+100M$ GTA Online" data-price="18" data-category="money">
               <div class="option-info">
                 <div class="option-checkbox"><i class="fa-solid fa-check"></i></div>
-                <span class="option-label">+200 000 000$ (7j)</span>
+                <span class="option-label">+100 000 000$ (48h)</span>
               </div>
-              <span class="option-price-tag">40€</span>
+              <span class="option-price-tag">18€</span>
+            </div>
+            <div class="option-item" data-name="+200M$ GTA Online" data-price="30" data-category="money">
+              <div class="option-info">
+                <div class="option-checkbox"><i class="fa-solid fa-check"></i></div>
+                <span class="option-label">+200 000 000$ (3 à 5 jours)</span>
+              </div>
+              <span class="option-price-tag">30€</span>
             </div>
           </div>
         </div>
@@ -674,12 +658,12 @@
         <div class="calc-card">
           <h2><i class="fa-solid fa-car" style="color: var(--accent-blue);"></i> Véhicules & Tenues</h2>
           <div class="options-grid">
-            <div class="option-item" data-name="Pack 10 Véhicules moddés" data-price="10" data-category="vehicles">
+            <div class="option-item" data-name="Pack 10 Véhicules moddés" data-price="8" data-category="vehicles">
               <div class="option-info">
                 <div class="option-checkbox"><i class="fa-solid fa-check"></i></div>
                 <span class="option-label">Pack 10 Véhicules moddés</span>
               </div>
-              <span class="option-price-tag">10€</span>
+              <span class="option-price-tag">8€</span>
             </div>
             <div class="option-item" data-name="Pack 5 Tenues moddées" data-price="5" data-category="outfits">
               <div class="option-info">
@@ -688,12 +672,12 @@
               </div>
               <span class="option-price-tag">5€</span>
             </div>
-            <div class="option-item" data-name="Pack 20 Tenues (Max)" data-price="20" data-category="outfits">
+            <div class="option-item" data-name="Pack 20 Tenues (Max)" data-price="12" data-category="outfits">
               <div class="option-info">
                 <div class="option-checkbox"><i class="fa-solid fa-check"></i></div>
                 <span class="option-label">Pack 20 Tenues (Max)</span>
               </div>
-              <span class="option-price-tag">20€</span>
+              <span class="option-price-tag">12€</span>
             </div>
           </div>
         </div>
@@ -734,7 +718,6 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // Menu Mobile Burger
       const menuToggle = document.getElementById('menu-toggle');
       const navLinks = document.getElementById('nav-links');
 
@@ -750,7 +733,6 @@
         });
       }
 
-      // Logique Calculateur
       const optionItems = document.querySelectorAll('.option-item');
       const summaryContainer = document.getElementById('summary-items');
       const totalPriceEl = document.getElementById('total-price');
@@ -773,7 +755,6 @@
           const name = item.getAttribute('data-name');
           const price = parseInt(item.getAttribute('data-price'), 10);
 
-          // Gestion des exclusivités par catégorie (ex: argent et tenues)
           if (category === 'money' || category === 'outfits') {
             optionItems.forEach(opt => {
               if (opt.getAttribute('data-category') === category && opt !== item) {
