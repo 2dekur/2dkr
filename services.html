@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>2DKR — Catalogue des Lobby & Services</title>
+  <title>2DKR — Promo Rentrée -30% | Catalogue Lobby & Services</title>
 
   <!-- Open Graph / Meta Discord -->
-  <meta property="og:title" content="2DKR — Catalogue des Lobby & Services">
-  <meta property="og:description" content="Découvre tous nos packs GTA Online, nos options à la carte et nos comptes prêts à jouer.">
+  <meta property="og:title" content="2DKR — Promo Rentrée jusqu'à -30% !">
+  <meta property="og:description" content="Jusqu'à -30% sur tous les packs GTA Online tout le mois de septembre. Découvre nos packs, options à la carte et comptes prêts à jouer.">
   <meta property="og:type" content="website">
   <meta name="theme-color" content="#38bdf8">
 
@@ -141,6 +141,31 @@
       font-size: 1.1rem;
       color: var(--text-muted);
       line-height: 1.6;
+    }
+
+    /* Promo Banner */
+    .promo-banner {
+      max-width: 1050px;
+      margin: 0 auto 10px auto;
+      padding: 0 20px;
+      width: 100%;
+      animation: fadeInDown 0.8s ease-out;
+    }
+
+    .promo-banner-content {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(13, 17, 23, 0.85) 100%);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      border-radius: 12px;
+      padding: 14px 24px;
+      text-align: center;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-main);
+      box-shadow: 0 4px 20px rgba(16, 185, 129, 0.15);
+    }
+
+    .promo-banner-content span {
+      color: var(--accent-green);
     }
 
     /* Calculator Banner Bar */
@@ -301,6 +326,30 @@
     }
 
     .price-tag {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--accent-green);
+      background: rgba(16, 185, 129, 0.12);
+      padding: 4px 12px;
+      border-radius: 8px;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.1);
+    }
+
+    /* Promo price block */
+    .price-promo {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      align-self: flex-start;
+    }
+    .price-old {
+      text-decoration: line-through;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+    .price-new {
       font-size: 1.25rem;
       font-weight: 800;
       color: var(--accent-green);
@@ -530,6 +579,13 @@
     <p>Découvre tous nos packs GTA Online, nos options à la carte et nos comptes prêts à jouer.</p>
   </section>
 
+  <!-- Promo Banner -->
+  <div class="promo-banner">
+    <div class="promo-banner-content">
+      🔥 Promo Rentrée — <span>jusqu'à -30%</span> sur tous les packs, tout le mois de septembre !
+    </div>
+  </div>
+
   <!-- Banner Calculator -->
   <div class="calc-banner">
     <div class="calc-banner-content">
@@ -553,13 +609,13 @@
     <h2 class="section-heading"><i class="fa-solid fa-box-open" style="color: var(--accent-blue);" aria-hidden="true"></i> Nos Packs Disponibles</h2>
     <div class="grid">
 
-      <!-- Pack Bronze 5€ -->
+      <!-- Pack Bronze 5€ -> 3€ -->
       <div class="card card-bronze">
         <div>
           <span class="card-badge badge-bronze">Bronze</span>
           <div class="card-header">
             <h2>Pack Bronze</h2>
-            <div class="price-tag">5€</div>
+            <div class="price-promo"><span class="price-old">5€</span><span class="price-new">3€</span></div>
           </div>
           <ul class="feature-list">
             <li>💰 <strong>Argent :</strong> 50 000 000$</li>
@@ -572,17 +628,17 @@
         </div>
         <div>
           <div class="info-box">📦 Réalisé sur votre compte</div>
-          <a href="https://nowpayments.io/payment/?iid=6300581629" target="_blank" rel="noopener noreferrer" class="btn btn-blue"><i class="fa-solid fa-credit-card"></i> Payer 5€ (Crypto / Cards)</a>
+          <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="btn btn-blue"><i class="fa-solid fa-credit-card"></i> Payer 3€ Crypto/Carte ou via PayPal (en ami/proche) sur Discord</a>
         </div>
       </div>
 
-      <!-- Pack Argent 10€ -->
+      <!-- Pack Argent 10€ -> 7€ -->
       <div class="card card-silver">
         <div>
           <span class="card-badge badge-silver">Argent</span>
           <div class="card-header">
             <h2>Pack Argent</h2>
-            <div class="price-tag">10€</div>
+            <div class="price-promo"><span class="price-old">10€</span><span class="price-new">7€</span></div>
           </div>
           <ul class="feature-list">
             <li>💰 <strong>Argent :</strong> 100 000 000$</li>
@@ -595,17 +651,17 @@
         </div>
         <div>
           <div class="info-box">📦 Réalisé sur votre compte</div>
-          <a href="https://nowpayments.io/payment/?iid=4872029963" target="_blank" rel="noopener noreferrer" class="btn btn-blue"><i class="fa-solid fa-credit-card"></i> Payer 10€ (Crypto / Cards)</a>
+          <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="btn btn-blue"><i class="fa-solid fa-credit-card"></i> Payer 7€ Crypto/Carte ou via PayPal (en ami/proche) sur Discord</a>
         </div>
       </div>
 
-      <!-- Pack Or 15€ -->
+      <!-- Pack Or 15€ -> 11€ -->
       <div class="card card-gold">
         <div>
           <span class="card-badge badge-gold">Or ⭐ Populaire</span>
           <div class="card-header">
             <h2>Pack Or</h2>
-            <div class="price-tag">15€</div>
+            <div class="price-promo"><span class="price-old">15€</span><span class="price-new">11€</span></div>
           </div>
           <ul class="feature-list">
             <li>💰 <strong>Argent :</strong> 150 000 000$</li>
@@ -618,17 +674,17 @@
         </div>
         <div>
           <div class="info-box">📦 Réalisé sur votre compte</div>
-          <a href="https://nowpayments.io/payment/?iid=4462752316" target="_blank" rel="noopener noreferrer" class="btn btn-blue"><i class="fa-solid fa-credit-card"></i> Payer 15€ (Crypto / Cards)</a>
+          <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="btn btn-blue"><i class="fa-solid fa-credit-card"></i> Payer 11€ Crypto/Carte ou via PayPal (en ami/proche) sur Discord</a>
         </div>
       </div>
 
-      <!-- Pack Platine 20€ -->
+      <!-- Pack Platine 20€ -> 14€ -->
       <div class="card card-plat">
         <div>
           <span class="card-badge badge-plat">Platine</span>
           <div class="card-header">
             <h2>Pack Platine</h2>
-            <div class="price-tag">20€</div>
+            <div class="price-promo"><span class="price-old">20€</span><span class="price-new">14€</span></div>
           </div>
           <ul class="feature-list">
             <li>💰 <strong>Argent :</strong> 200 000 000$</li>
@@ -641,17 +697,17 @@
         </div>
         <div>
           <div class="info-box">📦 Réalisé sur votre compte</div>
-          <a href="https://nowpayments.io/payment/?iid=5473662248" target="_blank" rel="noopener noreferrer" class="btn btn-blue"><i class="fa-solid fa-credit-card"></i> Payer 20€ (Crypto / Cards)</a>
+          <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="btn btn-blue"><i class="fa-solid fa-credit-card"></i> Payer 14€ Crypto/Carte ou via PayPal (en ami/proche) sur Discord</a>
         </div>
       </div>
 
-      <!-- Pack Ultime 60€ -->
+      <!-- Pack Ultime 60€ -> 44€ -->
       <div class="card card-ultimate">
         <div>
           <span class="card-badge badge-ultimate">Ultime 👑</span>
           <div class="card-header">
             <h2>Pack Ultime</h2>
-            <div class="price-tag">60€</div>
+            <div class="price-promo"><span class="price-old">60€</span><span class="price-new">44€</span></div>
           </div>
           <ul class="feature-list">
             <li>📦 <strong>Compte neuf fourni</strong> (Jeu inclus)</li>
@@ -664,7 +720,7 @@
         </div>
         <div>
           <div class="info-box">🎮 Prêt à jouer</div>
-          <a href="https://nowpayments.io/payment/?iid=4861075527" target="_blank" rel="noopener noreferrer" class="btn btn-blue"><i class="fa-solid fa-credit-card"></i> Payer 60€ (Crypto / Cards)</a>
+          <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="btn btn-blue"><i class="fa-solid fa-credit-card"></i> Payer 44€ Crypto/Carte ou via PayPal (en ami/proche) sur Discord</a>
         </div>
       </div>
 
@@ -711,14 +767,14 @@
       <div class="card">
         <h2>Compte Complet</h2>
         <p style="color: var(--text-muted); font-size: 0.9rem; margin: 10px 0;">Compte fourni avec jeu inclus + 30M offerts + RP 120.</p>
-        <div class="price-tag" style="align-self: flex-start; margin-top: 10px;">30€</div>
-        <a href="https://nowpayments.io/payment/?iid=6287724852" target="_blank" rel="noopener noreferrer" class="btn btn-blue" style="margin-top: 20px;"><i class="fa-solid fa-credit-card"></i> Payer 30€ (Crypto / Cards)</a>
+        <div class="price-promo" style="margin-top: 10px;"><span class="price-old">30€</span><span class="price-new">22€</span></div>
+        <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="btn btn-blue" style="margin-top: 20px;"><i class="fa-solid fa-credit-card"></i> Payer 22€ Crypto/Carte ou via PayPal (en ami/proche) sur Discord</a>
       </div>
       <div class="card">
         <h2>Option Compte Simple</h2>
         <p style="color: var(--text-muted); font-size: 0.9rem; margin: 10px 0;">Compte fourni avec le jeu inclus.</p>
-        <div class="price-tag" style="align-self: flex-start; margin-top: 10px;">20€</div>
-        <a href="https://nowpayments.io/payment/?iid=4341851886" target="_blank" rel="noopener noreferrer" class="btn btn-blue" style="margin-top: 20px;"><i class="fa-solid fa-credit-card"></i> Payer 20€ (Crypto / Cards)</a>
+        <div class="price-promo" style="margin-top: 10px;"><span class="price-old">20€</span><span class="price-new">14€</span></div>
+        <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="btn btn-blue" style="margin-top: 20px;"><i class="fa-solid fa-credit-card"></i> Payer 14€ Crypto/Carte ou via PayPal (en ami/proche) sur Discord</a>
       </div>
     </div>
 
