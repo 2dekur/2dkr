@@ -389,7 +389,7 @@
       margin-bottom: 24px;
     }
 
-    /* FAQ Details/Summary (Anti double-clic & fluide) */
+    /* FAQ Details/Summary */
     .faq-item {
       background-color: var(--card-bg);
       backdrop-filter: blur(12px);
@@ -415,7 +415,7 @@
       align-items: center;
       list-style: none;
       cursor: pointer;
-      user-select: none; /* Règle le bug de sélection de texte au double-clic */
+      user-select: none;
       -webkit-user-select: none;
     }
 
@@ -564,6 +564,7 @@
       <a href="index.html" class="active">Accueil</a>
       <a href="services.html">Services & Tarifs</a>
       <a href="calculateur.html">Calculateur</a>
+      <a href="avis.html">Avis & Preuves</a>
       <a href="#paiements">Paiements</a>
       <a href="https://www.youtube.com/@Dekur7" target="_blank" rel="noopener noreferrer" class="nav-social-icon" style="color: #ff0000;" title="YouTube" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
       <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="nav-social-icon" style="color: #5865f2;" title="Discord" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
@@ -733,10 +734,9 @@
       const content = el.querySelector('.faq-content-wrapper');
 
       summary.addEventListener('click', (e) => {
-        e.preventDefault(); // Empêche le comportement natif instantané
+        e.preventDefault();
 
         if (el.open) {
-          // Fermeture fluide
           const startHeight = el.offsetHeight;
           const endHeight = summary.offsetHeight;
 
@@ -755,7 +755,6 @@
             el.style.height = '';
           };
         } else {
-          // Ouverture fluide
           el.open = true;
           el.classList.add('is-open');
 
