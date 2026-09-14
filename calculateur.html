@@ -699,7 +699,7 @@
           </div>
 
           <a href="#" id="discord-btn" class="btn btn-discord disabled" target="_blank" rel="noopener noreferrer">
-            <i class="fa-brands fa-discord"></i> Commander via Discord
+            <i class="fa-brands fa-discord"></i> <span id="discord-btn-text">Commander via Discord</span>
           </a>
 
           <button class="btn btn-reset" id="reset-btn" type="button">
@@ -737,6 +737,7 @@
       const summaryContainer = document.getElementById('summary-items');
       const totalPriceEl = document.getElementById('total-price');
       const discordBtn = document.getElementById('discord-btn');
+      const discordBtnText = document.getElementById('discord-btn-text');
       const resetBtn = document.getElementById('reset-btn');
 
       let selections = {
@@ -805,6 +806,7 @@
           summaryContainer.innerHTML = '<div class="summary-empty">Aucune option sélectionnée</div>';
           discordBtn.classList.add('disabled');
           discordBtn.setAttribute('href', '#');
+          discordBtnText.textContent = 'Commander via Discord';
         } else {
           activeSelections.forEach(sel => {
             const row = document.createElement('div');
@@ -814,6 +816,7 @@
           });
           discordBtn.classList.remove('disabled');
           discordBtn.setAttribute('href', 'https://discord.gg/mDpZT73FFG');
+          discordBtnText.textContent = `Commander via Discord (${calculatedTotal}€)`;
         }
 
         animateValue(totalPriceEl, currentDisplayPrice, calculatedTotal, 300);
