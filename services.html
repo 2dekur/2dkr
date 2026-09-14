@@ -50,6 +50,7 @@
       display: flex;
       flex-direction: column;
       overflow-x: hidden;
+      padding-bottom: 80px; /* Espace pour le panier fixe */
     }
 
     /* Navigation Glassmorphism */
@@ -325,17 +326,6 @@
       margin-bottom: 15px;
     }
 
-    .price-tag {
-      font-size: 1.25rem;
-      font-weight: 800;
-      color: var(--accent-green);
-      background: rgba(16, 185, 129, 0.12);
-      padding: 4px 12px;
-      border-radius: 8px;
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      box-shadow: 0 0 10px rgba(16, 185, 129, 0.1);
-    }
-
     /* Promo price block */
     .price-promo {
       display: flex;
@@ -488,8 +478,27 @@
       transform: translateY(-2px);
     }
 
+    .btn-outline {
+      background: rgba(56, 189, 248, 0.1);
+      color: var(--accent-blue);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+    }
+
+    .btn-outline:hover {
+      background: rgba(56, 189, 248, 0.2);
+      border-color: var(--accent-blue);
+      transform: translateY(-2px);
+    }
+
     .btn:active {
       transform: translateY(0);
+    }
+
+    .btn-sm {
+      padding: 6px 12px;
+      font-size: 0.82rem;
+      margin-top: 0;
+      width: auto;
     }
 
     /* Steps grid */
@@ -528,6 +537,158 @@
       line-height: 1.45;
     }
 
+    /* Floating Cart Bar */
+    .cart-bar {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      width: calc(100% - 40px);
+      max-width: 800px;
+      background: rgba(13, 17, 23, 0.9);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--accent-blue);
+      border-radius: 16px;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 1000;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px var(--accent-blue-glow);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .cart-bar.active {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .cart-info {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .cart-count {
+      background: var(--accent-blue);
+      color: #090d16;
+      font-weight: 800;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+    }
+
+    .cart-total {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--accent-green);
+    }
+
+    /* Modal Order Summary */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(9, 13, 22, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      width: 100%;
+      max-width: 550px;
+      padding: 28px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+      transform: scale(0.95);
+      transition: transform 0.3s ease;
+    }
+
+    .modal-overlay.active .modal {
+      transform: scale(1);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 14px;
+      margin-bottom: 20px;
+    }
+
+    .modal-header h3 {
+      font-size: 1.3rem;
+      color: var(--text-main);
+    }
+
+    .modal-close {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.3rem;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .modal-close:hover {
+      color: var(--text-main);
+    }
+
+    .cart-items-list {
+      list-style: none;
+      max-height: 250px;
+      overflow-y: auto;
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(13, 17, 23, 0.6);
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .cart-item-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .cart-item-price {
+      color: var(--accent-green);
+      font-weight: 700;
+    }
+
+    .cart-item-remove {
+      color: #ef4444;
+      cursor: pointer;
+      margin-left: 10px;
+      font-size: 0.9rem;
+    }
+
     /* Keyframe Animations */
     @keyframes fadeInDown {
       from { opacity: 0; transform: translateY(-20px); }
@@ -557,6 +718,7 @@
       .calc-banner-content { flex-direction: column; text-align: center; align-items: stretch; }
       .calc-banner-left { flex-direction: column; text-align: center; }
       .calc-banner-btn { justify-content: center; }
+      .cart-bar { width: calc(100% - 24px); padding: 12px 16px; }
     }
   </style>
 </head>
@@ -628,7 +790,7 @@
         </div>
         <div>
           <div class="info-box">📦 Réalisé sur votre compte</div>
-          <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="btn btn-blue"><i class="fa-solid fa-credit-card"></i> Payer 3€ Crypto/Carte ou via PayPal (en ami/proche) sur Discord</a>
+          <button onclick="addToCart('Pack Bronze', 3)" class="btn btn-blue"><i class="fa-solid fa-cart-plus"></i> Ajouter au panier (3€)</button>
         </div>
       </div>
 
@@ -651,7 +813,7 @@
         </div>
         <div>
           <div class="info-box">📦 Réalisé sur votre compte</div>
-          <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="btn btn-blue"><i class="fa-solid fa-credit-card"></i> Payer 7€ Crypto/Carte ou via PayPal (en ami/proche) sur Discord</a>
+          <button onclick="addToCart('Pack Argent', 7)" class="btn btn-blue"><i class="fa-solid fa-cart-plus"></i> Ajouter au panier (7€)</button>
         </div>
       </div>
 
@@ -674,7 +836,7 @@
         </div>
         <div>
           <div class="info-box">📦 Réalisé sur votre compte</div>
-          <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="btn btn-blue"><i class="fa-solid fa-credit-card"></i> Payer 11€ Crypto/Carte ou via PayPal (en ami/proche) sur Discord</a>
+          <button onclick="addToCart('Pack Or', 11)" class="btn btn-blue"><i class="fa-solid fa-cart-plus"></i> Ajouter au panier (11€)</button>
         </div>
       </div>
 
@@ -697,7 +859,7 @@
         </div>
         <div>
           <div class="info-box">📦 Réalisé sur votre compte</div>
-          <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="btn btn-blue"><i class="fa-solid fa-credit-card"></i> Payer 14€ Crypto/Carte ou via PayPal (en ami/proche) sur Discord</a>
+          <button onclick="addToCart('Pack Platine', 14)" class="btn btn-blue"><i class="fa-solid fa-cart-plus"></i> Ajouter au panier (14€)</button>
         </div>
       </div>
 
@@ -720,24 +882,25 @@
         </div>
         <div>
           <div class="info-box">🎮 Prêt à jouer</div>
-          <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="btn btn-blue"><i class="fa-solid fa-credit-card"></i> Payer 44€ Crypto/Carte ou via PayPal (en ami/proche) sur Discord</a>
+          <button onclick="addToCart('Pack Ultime', 44)" class="btn btn-blue"><i class="fa-solid fa-cart-plus"></i> Ajouter au panier (44€)</button>
         </div>
       </div>
 
     </div>
 
+    <!-- Options à la carte -->
     <h2 class="section-heading" style="margin-top: 50px;"><i class="fa-solid fa-sliders" style="color: var(--accent-blue);" aria-hidden="true"></i> Options à la carte</h2>
     
     <div class="grid">
       <div class="card">
         <h2><i class="fa-solid fa-coins" style="color: var(--accent-blue);" aria-hidden="true"></i> Argent supplémentaire</h2>
         <div class="options-list" style="margin-top: 15px;">
-          <div class="option-row"><span>+10 000 000$ (1j)</span> <span class="option-price">3€</span></div>
-          <div class="option-row"><span>+20 000 000$ (1j)</span> <span class="option-price">4€</span></div>
-          <div class="option-row"><span>+30 000 000$ (1j)</span> <span class="option-price">5€</span></div>
-          <div class="option-row"><span>+50 000 000$ (2j)</span> <span class="option-price">7€</span></div>
-          <div class="option-row"><span>+100 000 000$ (4j)</span> <span class="option-price">18€</span></div>
-          <div class="option-row"><span>+200 000 000$ (7j)</span> <span class="option-price">30€</span></div>
+          <div class="option-row"><span>+10M GTA$ (1j)</span><div><span class="option-price">3€ </span><button onclick="addToCart('+10M GTA$', 3)" class="btn btn-outline btn-sm"><i class="fa-solid fa-plus"></i></button></div></div>
+          <div class="option-row"><span>+20M GTA$ (1j)</span><div><span class="option-price">4€ </span><button onclick="addToCart('+20M GTA$', 4)" class="btn btn-outline btn-sm"><i class="fa-solid fa-plus"></i></button></div></div>
+          <div class="option-row"><span>+30M GTA$ (1j)</span><div><span class="option-price">5€ </span><button onclick="addToCart('+30M GTA$', 5)" class="btn btn-outline btn-sm"><i class="fa-solid fa-plus"></i></button></div></div>
+          <div class="option-row"><span>+50M GTA$ (2j)</span><div><span class="option-price">7€ </span><button onclick="addToCart('+50M GTA$', 7)" class="btn btn-outline btn-sm"><i class="fa-solid fa-plus"></i></button></div></div>
+          <div class="option-row"><span>+100M GTA$ (4j)</span><div><span class="option-price">18€ </span><button onclick="addToCart('+100M GTA$', 18)" class="btn btn-outline btn-sm"><i class="fa-solid fa-plus"></i></button></div></div>
+          <div class="option-row"><span>+200M GTA$ (7j)</span><div><span class="option-price">30€ </span><button onclick="addToCart('+200M GTA$', 30)" class="btn btn-outline btn-sm"><i class="fa-solid fa-plus"></i></button></div></div>
         </div>
       </div>
 
@@ -745,17 +908,17 @@
         <div class="card" style="flex: 1;">
           <h2><i class="fa-solid fa-chart-line" style="color: var(--accent-blue);" aria-hidden="true"></i> Niveau & Stats</h2>
           <div class="options-list" style="margin-top: 15px;">
-            <div class="option-row"><span>Niveau au choix</span> <span class="option-price">5€</span></div>
-            <div class="option-row"><span>Stats max</span> <span class="option-price">2€</span></div>
+            <div class="option-row"><span>Niveau au choix</span><div><span class="option-price">5€ </span><button onclick="addToCart('Niveau au choix', 5)" class="btn btn-outline btn-sm"><i class="fa-solid fa-plus"></i></button></div></div>
+            <div class="option-row"><span>Stats max</span><div><span class="option-price">2€ </span><button onclick="addToCart('Stats max', 2)" class="btn btn-outline btn-sm"><i class="fa-solid fa-plus"></i></button></div></div>
           </div>
         </div>
 
         <div class="card" style="flex: 1;">
           <h2><i class="fa-solid fa-car" style="color: var(--accent-blue);" aria-hidden="true"></i> Véhicules & Tenues</h2>
           <div class="options-list" style="margin-top: 15px;">
-            <div class="option-row"><span>Pack 10 Véhicules moddés</span> <span class="option-price">10€</span></div>
-            <div class="option-row"><span>Pack 5 Tenues moddées</span> <span class="option-price">5€</span></div>
-            <div class="option-row"><span>Pack 20 Tenues (Max)</span> <span class="option-price">20€</span></div>
+            <div class="option-row"><span>10 Véhicules moddés</span><div><span class="option-price">10€ </span><button onclick="addToCart('10 Véhicules moddés', 10)" class="btn btn-outline btn-sm"><i class="fa-solid fa-plus"></i></button></div></div>
+            <div class="option-row"><span>5 Tenues moddées</span><div><span class="option-price">5€ </span><button onclick="addToCart('5 Tenues moddées', 5)" class="btn btn-outline btn-sm"><i class="fa-solid fa-plus"></i></button></div></div>
+            <div class="option-row"><span>20 Tenues (Max)</span><div><span class="option-price">20€ </span><button onclick="addToCart('20 Tenues (Max)', 20)" class="btn btn-outline btn-sm"><i class="fa-solid fa-plus"></i></button></div></div>
           </div>
         </div>
       </div>
@@ -768,13 +931,13 @@
         <h2>Compte Complet</h2>
         <p style="color: var(--text-muted); font-size: 0.9rem; margin: 10px 0;">Compte fourni avec jeu inclus + 30M offerts + RP 120.</p>
         <div class="price-promo" style="margin-top: 10px;"><span class="price-old">30€</span><span class="price-new">22€</span></div>
-        <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="btn btn-blue" style="margin-top: 20px;"><i class="fa-solid fa-credit-card"></i> Payer 22€ Crypto/Carte ou via PayPal (en ami/proche) sur Discord</a>
+        <button onclick="addToCart('Compte Complet', 22)" class="btn btn-blue" style="margin-top: 20px;"><i class="fa-solid fa-cart-plus"></i> Ajouter au panier (22€)</button>
       </div>
       <div class="card">
         <h2>Option Compte Simple</h2>
         <p style="color: var(--text-muted); font-size: 0.9rem; margin: 10px 0;">Compte fourni avec le jeu inclus.</p>
         <div class="price-promo" style="margin-top: 10px;"><span class="price-old">20€</span><span class="price-new">14€</span></div>
-        <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="btn btn-blue" style="margin-top: 20px;"><i class="fa-solid fa-credit-card"></i> Payer 14€ Crypto/Carte ou via PayPal (en ami/proche) sur Discord</a>
+        <button onclick="addToCart('Option Compte Simple', 14)" class="btn btn-blue" style="margin-top: 20px;"><i class="fa-solid fa-cart-plus"></i> Ajouter au panier (14€)</button>
       </div>
     </div>
 
@@ -782,31 +945,124 @@
     <div class="steps-grid">
       <div class="step-card">
         <div class="step-number">1️⃣</div>
-        <p>Rejoins le serveur Discord officiel.</p>
+        <p>Ajoute tes packs ou options au panier.</p>
       </div>
       <div class="step-card">
         <div class="step-number">2️⃣</div>
-        <p>Crée un ticket dans le salon dédié.</p>
+        <p>Valide ta commande pour copier ton récapitulatif.</p>
       </div>
       <div class="step-card">
         <div class="step-number">3️⃣</div>
-        <p>Indique le pack ou les options souhaitées.</p>
+        <p>Rejoins le serveur Discord officiel.</p>
       </div>
       <div class="step-card">
         <div class="step-number">4️⃣</div>
-        <p>Effectue le paiement en Crypto/Carte ou via PayPal (en ami/proche) sur Discord.</p>
+        <p>Ouvre un ticket et colle ton récapitulatif.</p>
       </div>
       <div class="step-card">
         <div class="step-number">5️⃣</div>
-        <p>Suivi de commande direct dans ton ticket.</p>
+        <p>Paye par Crypto, Carte ou PayPal (Ami/Proche).</p>
       </div>
     </div>
 
   </main>
 
+  <!-- Bannière flottante du panier -->
+  <div id="cartBar" class="cart-bar">
+    <div class="cart-info">
+      <div id="cartCount" class="cart-count">0</div>
+      <div>
+        <div style="font-size: 0.85rem; color: var(--text-muted);">Total de la sélection :</div>
+        <div id="cartTotal" class="cart-total">0€</div>
+      </div>
+    </div>
+    <button onclick="openModal()" class="btn btn-blue" style="margin: 0; width: auto; padding: 10px 20px;">
+      <i class="fa-solid fa-receipt"></i> Voir la commande
+    </button>
+  </div>
+
+  <!-- Modal Récapitulatif -->
+  <div id="orderModal" class="modal-overlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-shopping-cart" style="color: var(--accent-blue);"></i> Récapitulatif de la commande</h3>
+        <button onclick="closeModal()" class="modal-close"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <ul id="cartItemsList" class="cart-items-list">
+        <!-- Rempli en JS -->
+      </ul>
+      <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 15px; margin-bottom: 20px;">
+        <span style="font-weight: 700;">Total Final :</span>
+        <span id="modalTotal" style="font-size: 1.3rem; font-weight: 900; color: var(--accent-green);">0€</span>
+      </div>
+      <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="btn btn-blue">
+        <i class="fa-brands fa-discord"></i> Finaliser la commande sur Discord
+      </a>
+    </div>
+  </div>
+
   <footer>
     &copy; 2026 2DKR by Dekur. All rights reserved.
   </footer>
+
+  <script>
+    let cart = [];
+
+    function addToCart(name, price) {
+      cart.push({ name, price });
+      updateCartUI();
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      const cartBar = document.getElementById('cartBar');
+      const cartCount = document.getElementById('cartCount');
+      const cartTotal = document.getElementById('cartTotal');
+      const cartItemsList = document.getElementById('cartItemsList');
+      const modalTotal = document.getElementById('modalTotal');
+
+      const total = cart.reduce((sum, item) => sum + item.price, 0);
+
+      cartCount.textContent = cart.length;
+      cartTotal.textContent = total + '€';
+      modalTotal.textContent = total + '€';
+
+      if (cart.length > 0) {
+        cartBar.classList.add('active');
+      } else {
+        cartBar.classList.remove('active');
+        closeModal();
+      }
+
+      cartItemsList.innerHTML = '';
+      cart.forEach((item, index) => {
+        const li = document.createElement('li');
+        li.className = 'cart-item';
+        li.innerHTML = `
+          <span class="cart-item-title">${item.name}</span>
+          <div>
+            <span class="cart-item-price">${item.price}€</span>
+            <i class="fa-solid fa-trash cart-item-remove" onclick="removeFromCart(${index})"></i>
+          </div>
+        `;
+        cartItemsList.appendChild(li);
+      });
+    }
+
+    function openModal() {
+      if (cart.length > 0) {
+        document.getElementById('orderModal').classList.add('active');
+      }
+    }
+
+    function closeModal() {
+      document.getElementById('orderModal').classList.remove('active');
+    }
+  </script>
 
 </body>
 </html>
