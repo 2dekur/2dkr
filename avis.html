@@ -337,6 +337,7 @@
       line-height: 1.6;
       margin-bottom: 18px;
       font-style: italic;
+      white-space: pre-line;
     }
 
     .review-tag {
@@ -348,6 +349,36 @@
       padding: 4px 10px;
       border-radius: 6px;
       width: fit-content;
+    }
+
+    /* Style spécifique aux cartes en attente d'avis */
+    .review-card.placeholder {
+      border: 1px dashed var(--border);
+      background: rgba(22, 27, 34, 0.35);
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      min-height: 220px;
+    }
+
+    .placeholder-icon {
+      font-size: 2rem;
+      color: var(--accent-blue);
+      margin-bottom: 12px;
+      opacity: 0.6;
+    }
+
+    .placeholder-title {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    .placeholder-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.4;
     }
 
     /* CTA Section */
@@ -494,37 +525,37 @@
     <!-- CARTES D'AVIS -->
     <div class="reviews-grid">
       
+      <!-- AVIS RÉEL DIAS -->
       <div class="review-card">
         <div>
           <div class="review-header">
-            <span class="user-info"><i class="fa-brands fa-discord"></i> Client Discord</span>
+            <span class="user-info"><i class="fa-brands fa-discord"></i> Dias ☘️</span>
             <span class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
           </div>
-          <p class="review-text">"Pack Or livré très rapidement. Vendeur ultra sérieux et réactif sur Discord. Je recommande à 100% !"</p>
-        </div>
-        <span class="review-tag">Pack Or</span>
-      </div>
-
-      <div class="review-card">
-        <div>
-          <div class="review-header">
-            <span class="user-info"><i class="fa-brands fa-discord"></i> Client Discord</span>
-            <span class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
-          </div>
-          <p class="review-text">"J'hésitais au début mais tout s'est super bien passé. Les 150M$ et le level 120 sont bien arrivés sur mon compte."</p>
+          <p class="review-text">"Rapide - Efficace
+Sympatique et professionnel
+La technique marche vraiment. Pas de risque de ban. Il a fait tous ce que je lui ai demander en partage d'écran de :
+• 30 million
+• Level 120
+• Véhicule Opressor MK2
+• Plusieurs achat de business
+• Tenu Modder"</p>
         </div>
         <span class="review-tag">Pack Sur-Mesure</span>
       </div>
 
-      <div class="review-card">
-        <div>
-          <div class="review-header">
-            <span class="user-info"><i class="fa-brands fa-discord"></i> Client Discord</span>
-            <span class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
-          </div>
-          <p class="review-text">"Service propre, tout est débloqué (bunker, compétences, tenues). Rien à dire, travail de pro."</p>
-        </div>
-        <span class="review-tag">Pack Or</span>
+      <!-- CARTE EN ATTENTE D'AVIS DISCORD 1 -->
+      <div class="review-card placeholder">
+        <i class="fa-solid fa-comments placeholder-icon"></i>
+        <div class="placeholder-title">Mise à jour en cours...</div>
+        <p class="placeholder-desc">Les prochains avis laissés par les clients sur le serveur Discord seront ajoutés ici !</p>
+      </div>
+
+      <!-- CARTE EN ATTENTE D'AVIS DISCORD 2 -->
+      <div class="review-card placeholder">
+        <i class="fa-solid fa-clock-rotate-left placeholder-icon"></i>
+        <div class="placeholder-title">Prochain avis bientôt</div>
+        <p class="placeholder-desc">Consulte le salon <b>#avis</b> sur Discord pour voir les retours en temps réel.</p>
       </div>
 
     </div>
