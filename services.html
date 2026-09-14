@@ -85,6 +85,15 @@
       color: var(--accent-blue);
     }
 
+    .menu-toggle {
+      display: none;
+      background: transparent;
+      border: none;
+      color: var(--text-main);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
     .nav-links {
       display: flex;
       gap: 22px;
@@ -711,9 +720,23 @@
     }
 
     /* Responsive */
-    @media (max-width: 700px) {
+    @media (max-width: 768px) {
       nav { padding: 15px 5%; }
-      .nav-links { gap: 14px; }
+      .menu-toggle { display: block; }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(13, 17, 23, 0.95);
+        backdrop-filter: blur(16px);
+        padding: 20px;
+        border-bottom: 1px solid var(--border);
+        gap: 16px;
+      }
+      .nav-links.active { display: flex; }
       .hero h1 { font-size: 2.2rem; }
       .calc-banner-content { flex-direction: column; text-align: center; align-items: stretch; }
       .calc-banner-left { flex-direction: column; text-align: center; }
@@ -724,12 +747,19 @@
 </head>
 <body>
 
+  <!-- Navigation -->
   <nav>
     <a href="index.html" class="logo">2D<span>KR</span></a>
-    <div class="nav-links">
+    
+    <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <div class="nav-links" id="nav-links">
       <a href="index.html">Accueil</a>
       <a href="services.html" class="active">Services & Tarifs</a>
       <a href="calculateur.html">Calculateur</a>
+      <a href="index.html#avis">Avis & Preuves</a>
       <a href="index.html#paiements">Paiements</a>
       <a href="https://www.youtube.com/@Dekur7" target="_blank" rel="noopener noreferrer" class="nav-social-icon" style="color: #ff0000;" title="YouTube" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
       <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="nav-social-icon" style="color: #5865f2;" title="Discord" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
@@ -995,7 +1025,7 @@
         <span style="font-weight: 700;">Total Final :</span>
         <span id="modalTotal" style="font-size: 1.3rem; font-weight: 900; color: var(--accent-green);">0€</span>
       </div>
-      <a href="https://discord.gg/QaW2tdSdt" target="_blank" rel="noopener noreferrer" class="btn btn-blue">
+      <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="btn btn-blue">
         <i class="fa-brands fa-discord"></i> Finaliser la commande sur Discord
       </a>
     </div>
@@ -1006,6 +1036,17 @@
   </footer>
 
   <script>
+    // Menu mobile toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+
+    if (menuToggle && navLinks) {
+      menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+      });
+    }
+
+    // Gestion du panier
     let cart = [];
 
     function addToCart(name, price) {
