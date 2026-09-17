@@ -542,6 +542,137 @@
       nav { padding: 15px 5%; }
       .hero h1 { font-size: 2.2rem; }
     }
+    /* ===== v0.3.4 — Thèmes, chips, palette de commandes ===== */
+    :root {
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --accent: var(--accent-blue);
+      --accent-hover: var(--accent-blue-hover);
+      --accent-glow: var(--accent-blue-glow);
+    }
+    html[data-theme="gold"] {
+      --bg: #0b0906;
+      --card-bg: rgba(30, 24, 14, 0.75);
+      --border: rgba(83, 66, 32, 0.6);
+      --border-glow: rgba(240, 185, 76, 0.45);
+      --accent-blue: #f0b94c;
+      --accent-blue-hover: #c98f1f;
+      --accent-blue-glow: rgba(240, 185, 76, 0.25);
+      --text-main: #fdf6e6;
+      --text-muted: #a2937a;
+    }
+    html { transition: none; }
+    body, nav, .card, .btn, .search-input {
+      transition: background-color .35s var(--ease), color .35s var(--ease), border-color .35s var(--ease);
+    }
+
+    /* Bouton thème */
+    .theme-toggle {
+      background: rgba(255,255,255,.04);
+      border: 1px solid var(--border);
+      color: var(--accent-blue);
+      width: 36px; height: 36px; border-radius: 10px;
+      cursor: pointer; font-size: 1rem; line-height: 1;
+      display: inline-flex; align-items: center; justify-content: center;
+      transition: transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease);
+    }
+    .theme-toggle:hover {
+      transform: translateY(-2px) rotate(-12deg);
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 14px var(--accent-blue-glow);
+    }
+
+    /* Chips de filtre */
+    .chips {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 10px; margin: 18px auto 0; max-width: 760px; padding: 0 20px;
+    }
+    .chip {
+      background: rgba(255,255,255,.03);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 7px 16px; border-radius: 999px;
+      font-size: .85rem; font-weight: 600; font-family: inherit;
+      cursor: pointer; white-space: nowrap;
+      transition: transform .2s var(--ease), color .2s var(--ease), border-color .2s var(--ease), box-shadow .2s var(--ease), background-color .2s var(--ease);
+    }
+    .chip i { margin-right: 6px; font-size: .8rem; }
+    .chip:hover { transform: translateY(-2px); color: var(--text-main); border-color: var(--border-glow); }
+    .chip.active {
+      color: var(--bg); border-color: var(--accent-blue);
+      background: var(--accent-blue);
+      box-shadow: 0 0 18px var(--accent-blue-glow);
+    }
+    .card.searchable { transition: opacity .25s var(--ease), transform .25s var(--ease), border-color .3s var(--ease), box-shadow .3s var(--ease); }
+    .card.is-hidden { display: none !important; }
+    .card.is-enter { opacity: 0; transform: translateY(10px); }
+
+    .kbd-hint {
+      display: inline-flex; align-items: center; gap: 6px;
+      margin-top: 14px; font-size: .78rem; color: var(--text-muted);
+    }
+    .kbd {
+      border: 1px solid var(--border); border-radius: 6px;
+      padding: 2px 7px; font-size: .72rem; font-family: ui-monospace, monospace;
+      background: rgba(255,255,255,.04); color: var(--text-main);
+    }
+
+    /* Palette de commandes */
+    .cmdk-overlay {
+      position: fixed; inset: 0; z-index: 500;
+      background: rgba(3, 6, 12, .72);
+      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+      display: flex; justify-content: center; align-items: flex-start;
+      padding: 12vh 20px 20px;
+      opacity: 0; pointer-events: none;
+      transition: opacity .22s var(--ease);
+    }
+    .cmdk-overlay.open { opacity: 1; pointer-events: auto; }
+    .cmdk {
+      width: 100%; max-width: 620px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-glow);
+      border-radius: 16px; overflow: hidden;
+      backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+      box-shadow: 0 24px 60px rgba(0,0,0,.6), 0 0 30px var(--accent-blue-glow);
+      transform: translateY(-14px) scale(.98);
+      transition: transform .26s var(--ease);
+    }
+    .cmdk-overlay.open .cmdk { transform: translateY(0) scale(1); }
+    .cmdk-head { display: flex; align-items: center; gap: 12px; padding: 16px 18px; border-bottom: 1px solid var(--border); }
+    .cmdk-head i { color: var(--accent-blue); }
+    .cmdk-head input {
+      flex: 1; background: none; border: none; outline: none;
+      color: var(--text-main); font-size: 1rem; font-family: inherit;
+    }
+    .cmdk-list { max-height: 52vh; overflow-y: auto; padding: 8px; }
+    .cmdk-group { padding: 10px 12px 4px; font-size: .7rem; letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted); font-weight: 700; }
+    .cmdk-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 11px 12px; border-radius: 10px; cursor: pointer;
+      color: var(--text-muted); text-decoration: none;
+      transition: background-color .15s var(--ease), color .15s var(--ease), transform .15s var(--ease);
+    }
+    .cmdk-item i { width: 18px; text-align: center; color: var(--accent-blue); }
+    .cmdk-item .cmdk-title { color: var(--text-main); font-weight: 600; font-size: .92rem; }
+    .cmdk-item .cmdk-sub { font-size: .78rem; }
+    .cmdk-item.sel, .cmdk-item:hover { background: rgba(255,255,255,.06); transform: translateX(3px); }
+    .cmdk-empty { padding: 26px; text-align: center; color: var(--text-muted); font-size: .9rem; }
+    .cmdk-tag { margin-left: auto; font-size: .68rem; border: 1px solid var(--border); padding: 2px 8px; border-radius: 999px; }
+
+    @media (max-width: 768px) { .chips { gap: 8px; } .kbd-hint { display: none; } }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important; animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important; scroll-behavior: auto !important;
+      }
+    }
+
+    .beta-badge {
+      position: static !important;
+      display: inline-flex; align-items: center; justify-content: center;
+      margin: 12px auto 0; right: auto;
+    }
+    .search-input { padding-right: 44px !important; }
   </style>
 </head>
 <body>
@@ -564,8 +695,9 @@
   <a href="index.html">Accueil</a>
   <a href="services.html">Services & Tarifs</a>
   <a href="calculateur.html" class="active">Calculateur</a>
-  <a href="avis.html#avis">Avis & Preuves</a>
+  <a href="avis.html">Avis & Preuves</a>
   <a href="index.html#paiements">Paiements</a>
+  <button class="theme-toggle" id="theme-toggle" title="Changer de thème" aria-label="Changer de thème"><i class="fa-solid fa-moon"></i></button>
   <a href="https://www.youtube.com/@Dekur7" target="_blank" rel="noopener noreferrer" class="nav-social-icon" style="color: #ff0000;" title="YouTube" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
   <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="nav-social-icon" style="color: #5865f2;" title="Discord" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
 </div>
@@ -845,6 +977,192 @@
         window.requestAnimationFrame(step);
       }
     });
+    /* ===== v0.3.4 ===== */
+
+    // --- Thème (bleu / dark or)
+    (function () {
+      const root = document.documentElement;
+      const saved = localStorage.getItem('2dkr-theme') || 'blue';
+      const meta = document.querySelector('meta[name="theme-color"]');
+      const btn = document.getElementById('theme-toggle');
+
+      function apply(t, animate) {
+        root.setAttribute('data-theme', t);
+        if (meta) meta.setAttribute('content', t === 'gold' ? '#f0b94c' : '#38bdf8');
+        if (btn) btn.innerHTML = t === 'gold'
+          ? '<i class="fa-solid fa-crown"></i>'
+          : '<i class="fa-solid fa-moon"></i>';
+        if (animate && btn) {
+          btn.animate([{ transform: 'rotate(0) scale(1)' }, { transform: 'rotate(360deg) scale(1.15)' }, { transform: 'rotate(360deg) scale(1)' }], { duration: 480, easing: 'cubic-bezier(0.22,1,0.36,1)' });
+        }
+      }
+      apply(saved, false);
+      if (btn) btn.addEventListener('click', () => {
+        const next = root.getAttribute('data-theme') === 'gold' ? 'blue' : 'gold';
+        localStorage.setItem('2dkr-theme', next);
+        apply(next, true);
+      });
+    })();
+
+    // --- Index global du site (toutes les pages)
+    const SITE_INDEX = [
+      { t: 'Serveur Discord', s: 'Rejoindre la communauté 2DKR', u: 'https://discord.gg/mDpZT73FFG', p: 'Accueil', k: 'discord communaute ticket support chat' },
+      { t: 'Moyens de paiement', s: 'PayPal, crypto, cartes', u: 'index.html#paiements', p: 'Accueil', k: 'paiement paypal crypto solana carte argent' },
+      { t: 'BeamNG.drive', s: 'Clés PC en stock, moins cher que Steam', u: 'https://discord.gg/mDpZT73FFG', p: 'Accueil', k: 'beamng jeu jeux cle key steam pc' },
+      { t: 'Pack Bronze', s: 'Pack d\'entrée lobby moddé', u: 'services.html', p: 'Services', k: 'pack bronze tarif prix lobby gta' },
+      { t: 'Pack Argent', s: 'Pack intermédiaire', u: 'services.html', p: 'Services', k: 'pack argent silver tarif prix lobby' },
+      { t: 'Pack Or', s: 'Pack avancé', u: 'services.html', p: 'Services', k: 'pack or gold tarif prix lobby' },
+      { t: 'Pack Platine', s: 'Pack haut de gamme', u: 'services.html', p: 'Services', k: 'pack platine platinum tarif prix lobby' },
+      { t: 'Pack Ultime', s: 'Le pack le plus complet', u: 'services.html', p: 'Services', k: 'pack ultime ultimate max tarif prix' },
+      { t: 'Compte Complet', s: 'Compte GTA Online prêt à jouer', u: 'services.html', p: 'Services', k: 'compte complet account gta rank argent' },
+      { t: 'Option Compte Simple', s: 'Formule compte allégée', u: 'services.html', p: 'Services', k: 'compte simple option account' },
+      { t: 'Promo Septembre -30%', s: 'Réduction en cours sur le catalogue', u: 'services.html', p: 'Services', k: 'promo reduction remise septembre 30 soldes' },
+      { t: 'Calculateur de prix', s: 'Estime ton pack sur mesure', u: 'calculateur.html', p: 'Calculateur', k: 'calculateur devis estimation prix sur mesure argent rang' },
+      { t: 'Avis & Preuves clients', s: 'Retours et preuves en direct', u: 'avis.html', p: 'Avis', k: 'avis preuve review client temoignage confiance vouch' }
+    ];
+
+    const QUICK = [
+      { t: 'Aller à l\'accueil', u: 'index.html', i: 'fa-house', k: 'accueil home index' },
+      { t: 'Voir les services & tarifs', u: 'services.html', i: 'fa-tags', k: 'service tarif prix pack catalogue' },
+      { t: 'Ouvrir le calculateur', u: 'calculateur.html', i: 'fa-calculator', k: 'calculateur devis estimation' },
+      { t: 'Voir les avis & preuves', u: 'avis.html', i: 'fa-star', k: 'avis preuve review' },
+      { t: 'Rejoindre le Discord', u: 'https://discord.gg/mDpZT73FFG', i: 'fa-brands fa-discord', k: 'discord ticket support' },
+      { t: 'Chaîne YouTube', u: 'https://www.youtube.com/@Dekur7', i: 'fa-brands fa-youtube', k: 'youtube video chaine' },
+      { t: 'Moyens de paiement', u: 'index.html#paiements', i: 'fa-wallet', k: 'paiement paypal crypto' },
+      { t: 'Changer de thème (bleu / dark or)', u: '#theme', i: 'fa-palette', k: 'theme couleur dark or bleu mode' }
+    ];
+
+    const norm = (s) => (s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
+    // --- Palette de commandes (Ctrl+K)
+    (function () {
+      const overlay = document.getElementById('cmdk-overlay');
+      const input = document.getElementById('cmdk-input');
+      const list = document.getElementById('cmdk-list');
+      if (!overlay) return;
+      let items = [], sel = 0;
+
+      function render(q) {
+        const nq = norm(q);
+        const quick = QUICK.filter(o => !nq || norm(o.t + ' ' + o.k).includes(nq));
+        const pages = SITE_INDEX.filter(o => !nq || norm(o.t + ' ' + o.s + ' ' + o.k + ' ' + o.p).includes(nq));
+        items = [];
+        let html = '';
+        if (quick.length) {
+          html += '<div class="cmdk-group">Commandes rapides</div>';
+          quick.forEach(o => {
+            items.push(o.u);
+            html += '<div class="cmdk-item" data-u="' + o.u + '"><i class="fa-solid ' + o.i + '"></i><span class="cmdk-title">' + o.t + '</span></div>';
+          });
+        }
+        if (pages.length) {
+          html += '<div class="cmdk-group">Dans le site</div>';
+          pages.forEach(o => {
+            items.push(o.u);
+            html += '<div class="cmdk-item" data-u="' + o.u + '"><i class="fa-solid fa-arrow-right-long"></i><span><span class="cmdk-title">' + o.t + '</span><br><span class="cmdk-sub">' + o.s + '</span></span><span class="cmdk-tag">' + o.p + '</span></div>';
+          });
+        }
+        list.innerHTML = html || '<div class="cmdk-empty">Aucun résultat pour « ' + q +' »</div>';
+        sel = 0; mark();
+        list.querySelectorAll('.cmdk-item').forEach((el, idx) => {
+          el.addEventListener('mouseenter', () => { sel = idx; mark(); });
+          el.addEventListener('click', () => go(el.dataset.u));
+        });
+      }
+      function mark() {
+        list.querySelectorAll('.cmdk-item').forEach((el, idx) => el.classList.toggle('sel', idx === sel));
+        const cur = list.querySelector('.cmdk-item.sel');
+        if (cur) cur.scrollIntoView({ block: 'nearest' });
+      }
+      function go(u) {
+        if (u === '#theme') { close(); document.getElementById('theme-toggle').click(); return; }
+        if (u.startsWith('http')) window.open(u, '_blank', 'noopener');
+        else window.location.href = u;
+      }
+      function open() { overlay.classList.add('open'); input.value = ''; render(''); setTimeout(() => input.focus(), 40); }
+      function close() { overlay.classList.remove('open'); }
+
+      input.addEventListener('input', () => render(input.value));
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowDown') { e.preventDefault(); sel = Math.min(sel + 1, items.length - 1); mark(); }
+        else if (e.key === 'ArrowUp') { e.preventDefault(); sel = Math.max(sel - 1, 0); mark(); }
+        else if (e.key === 'Enter') { e.preventDefault(); if (items[sel]) go(items[sel]); }
+      });
+      overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
+      document.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); overlay.classList.contains('open') ? close() : open(); }
+        else if (e.key === 'Escape') close();
+      });
+      window.openCmdk = open;
+    })();
+
+    // --- Chips de filtre + recherche globale
+    (function () {
+      const chips = document.querySelectorAll('.chip');
+      const cards = Array.from(document.querySelectorAll('.card.searchable'));
+      const input = document.getElementById('search-input');
+      let cat = 'all';
+
+      function refresh() {
+        const q = norm(input ? input.value : '');
+        let shown = 0;
+        cards.forEach(card => {
+          const okCat = cat === 'all' || (card.dataset.cat || '').split(' ').includes(cat);
+          const okQ = !q || norm(card.textContent).includes(q);
+          const show = okCat && okQ;
+          if (show && card.classList.contains('is-hidden')) {
+            card.classList.remove('is-hidden');
+            card.classList.add('is-enter');
+            requestAnimationFrame(() => requestAnimationFrame(() => card.classList.remove('is-enter')));
+          } else if (!show) {
+            card.classList.add('is-hidden');
+          }
+          if (show) shown++;
+        });
+        suggest(q, shown);
+      }
+
+      // Si rien sur cette page, propose les résultats des autres pages
+      function suggest(q, shown) {
+        let box = document.getElementById('cross-results');
+        if (!q || q.length < 2 || shown > 0) { if (box) box.remove(); return; }
+        const hits = SITE_INDEX.filter(o => norm(o.t + ' ' + o.s + ' ' + o.k + ' ' + o.p).includes(q)).slice(0, 5);
+        if (!box) {
+          box = document.createElement('div');
+          box.id = 'cross-results';
+          box.className = 'cmdk';
+          box.style.cssText = 'max-width:620px;margin:22px auto 0;box-shadow:none;';
+          document.querySelector('.chips').after(box);
+        }
+        box.innerHTML = hits.length
+          ? '<div class="cmdk-group">Trouvé ailleurs sur le site</div>' + hits.map(o =>
+              '<a class="cmdk-item" href="' + o.u + '"><i class="fa-solid fa-arrow-right-long"></i><span><span class="cmdk-title">' + o.t + '</span><br><span class="cmdk-sub">' + o.s + '</span></span><span class="cmdk-tag">' + o.p + '</span></a>').join('')
+          : '<div class="cmdk-empty">Aucun résultat sur le site. <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener" style="color:var(--accent-blue)">Demande sur le Discord</a></div>';
+      }
+
+      chips.forEach(chip => chip.addEventListener('click', () => {
+        chips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        cat = chip.dataset.cat;
+        refresh();
+      }));
+
+      if (input) {
+        input.addEventListener('input', refresh);
+        input.addEventListener('keydown', (e) => { if (e.key === 'Enter' && window.openCmdk) { window.openCmdk(); } });
+      }
+    })();
   </script>
+
+  <div class="cmdk-overlay" id="cmdk-overlay" role="dialog" aria-modal="true" aria-label="Commandes rapides">
+    <div class="cmdk">
+      <div class="cmdk-head">
+        <i class="fa-solid fa-terminal"></i>
+        <input type="text" id="cmdk-input" placeholder="Tape une commande, une page, un service..." autocomplete="off">
+        <span class="kbd">ESC</span>
+      </div>
+      <div class="cmdk-list" id="cmdk-list"></div>
+    </div>
+  </div>
 </body>
 </html>
