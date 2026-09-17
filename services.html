@@ -869,9 +869,16 @@
       }
     }
 
+    .beta-badge {
+      position: static !important;
+      display: inline-flex; align-items: center; justify-content: center;
+      margin: 12px auto 0; right: auto;
+    }
+    .search-input { padding-right: 44px !important; }
+
     .search-container { position: relative; max-width: 520px; margin: 26px auto 0; padding: 0 20px; }
     .search-input {
-      width: 100%; padding: 13px 88px 13px 44px; border-radius: 12px;
+      width: 100%; padding: 13px 20px 13px 44px; border-radius: 12px;
       background: rgba(255,255,255,.03); border: 1px solid var(--border);
       color: var(--text-main); font-size: .95rem; font-family: inherit; outline: none;
       transition: border-color .25s var(--ease), box-shadow .25s var(--ease);
@@ -879,8 +886,8 @@
     .search-input:focus { border-color: var(--accent-blue); box-shadow: 0 0 15px var(--accent-blue-glow); }
     .search-icon { position: absolute; left: 36px; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
     .beta-badge {
-      position: absolute; right: 32px; top: 50%; transform: translateY(-50%);
-      font-size: .62rem; font-weight: 800; letter-spacing: 1px;
+      display: inline-flex; align-items: center; justify-content: center;
+      margin: 0 auto; font-size: .62rem; font-weight: 800; letter-spacing: 1px;
       color: var(--accent-orange, #f97316); border: 1px solid currentColor;
       padding: 2px 7px; border-radius: 999px;
     }
@@ -915,7 +922,6 @@
     <div class="search-container">
       <i class="fa-solid fa-magnifying-glass search-icon"></i>
       <input type="text" id="search-input" class="search-input" placeholder="Rechercher un pack, une option, un prix...">
-      <span class="beta-badge">BÊTA</span>
     </div>
 
     <div class="chips" id="chips">
@@ -924,10 +930,10 @@
       <button class="chip" data-cat="options"><i class="fa-solid fa-sliders"></i>À la carte</button>
       <button class="chip" data-cat="comptes"><i class="fa-solid fa-user-plus"></i>Comptes</button>
       <button class="chip" data-cat="promo"><i class="fa-solid fa-fire"></i>Promo -30%</button>
-      <span class="beta-badge">BÊTA</span>
     </div>
 
     <div class="kbd-hint"><span class="kbd">Ctrl</span> + <span class="kbd">K</span> pour les commandes rapides</div>
+    <span class="beta-badge">BÊTA</span>
   </section>
 
   <!-- Promo Banner -->
