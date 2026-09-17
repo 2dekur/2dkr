@@ -674,6 +674,13 @@
         transition-duration: .01ms !important; scroll-behavior: auto !important;
       }
     }
+
+    .beta-badge {
+      position: static !important;
+      display: inline-flex; align-items: center; justify-content: center;
+      margin: 12px auto 0; right: auto;
+    }
+    .search-input { padding-right: 44px !important; }
   </style>
 </head>
 <body>
@@ -716,7 +723,6 @@
     <div class="search-container">
       <i class="fa-solid fa-magnifying-glass search-icon"></i>
       <input type="text" id="search-input" class="search-input" placeholder="Rechercher un service, une offre, un moyen de paiement...">
-      <span class="beta-badge">BÊTA</span>
     </div>
 
     <div class="chips" id="chips">
@@ -726,10 +732,10 @@
       <button class="chip" data-cat="services"><i class="fa-solid fa-bolt"></i>Services</button>
       <button class="chip" data-cat="paiements"><i class="fa-solid fa-wallet"></i>Paiements</button>
       <button class="chip" data-cat="communaute"><i class="fa-brands fa-discord"></i>Communauté</button>
-      <span class="beta-badge">BÊTA</span>
     </div>
 
     <div class="kbd-hint"><span class="kbd">Ctrl</span> + <span class="kbd">K</span> pour les commandes rapides</div>
+    <span class="beta-badge">BÊTA</span>
   </section>
 
   <div class="container" id="projets">
