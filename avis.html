@@ -583,6 +583,21 @@
     .cmdk-tag { margin-left: auto; font-size: .68rem; border: 1px solid var(--border); padding: 2px 8px; border-radius: 999px; }
 
     @media (max-width: 768px) { .chips { gap: 8px; } .kbd-hint { display: none; } }
+
+    /* Bouton flottant mobile pour ouvrir la palette de commandes */
+    .cmdk-fab { display: none; }
+    @media (max-width: 768px) {
+      .cmdk-fab {
+        display: flex; align-items: center; justify-content: center;
+        position: fixed; right: 18px; bottom: 18px; z-index: 400;
+        width: 52px; height: 52px; border-radius: 50%;
+        background: var(--accent-blue); color: var(--bg);
+        border: none; font-size: 1.1rem; cursor: pointer;
+        box-shadow: 0 8px 24px rgba(0,0,0,.5), 0 0 20px var(--accent-blue-glow);
+        transition: transform .18s var(--ease);
+      }
+      .cmdk-fab:active { transform: scale(.9); }
+    }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: .01ms !important; animation-iteration-count: 1 !important;
@@ -676,11 +691,18 @@ La technique marche vraiment. Pas de risque de ban. Il a fait tous ce que je lui
         <span class="review-tag">Pack Sur-Mesure</span>
       </div>
 
-      <!-- CARTE EN ATTENTE D'AVIS DISCORD 1 -->
-      <div class="review-card placeholder">
-        <i class="fa-solid fa-comments placeholder-icon"></i>
-        <div class="placeholder-title">Mise à jour en cours...</div>
-        <p class="placeholder-desc">Les prochains avis laissés par les clients sur le serveur Discord seront ajoutés ici !</p>
+      <!-- AVIS RÉEL SHEIDHEDA -->
+      <div class="review-card">
+        <div>
+          <div class="review-header">
+            <span class="user-info"><i class="fa-brands fa-discord"></i> SheidHeda</span>
+            <span class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+          </div>
+          <p class="review-text">"Super réactivité, commandé dans l'aprèm et livré le soir même.
+50M$ commandé sur légacy et au top et rapide.
+10/10"</p>
+        </div>
+        <span class="review-tag">50M$ Legacy</span>
       </div>
 
       <!-- CARTE EN ATTENTE D'AVIS DISCORD 2 -->
@@ -842,6 +864,8 @@ La technique marche vraiment. Pas de risque de ban. Il a fait tous ce que je lui
         else if (e.key === 'Escape') close();
       });
       window.openCmdk = open;
+      const fab = document.getElementById('cmdk-fab');
+      if (fab) fab.addEventListener('click', open);
     })();
 
     // --- Chips de filtre + recherche globale
@@ -912,5 +936,6 @@ La technique marche vraiment. Pas de risque de ban. Il a fait tous ce que je lui
       <div class="cmdk-list" id="cmdk-list"></div>
     </div>
   </div>
+  <button class="cmdk-fab" id="cmdk-fab" title="Commandes rapides" aria-label="Commandes rapides"><i class="fa-solid fa-terminal"></i></button>
 </body>
 </html>
