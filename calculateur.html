@@ -22,10 +22,12 @@
       --bg: #090d16;
       --card-bg: rgba(22, 27, 34, 0.75);
       --border: rgba(48, 54, 61, 0.6);
-      --border-glow: rgba(56, 189, 248, 0.4);
+      --border-glow: rgba(var(--accent-blue-rgb), 0.4);
       --accent-blue: #38bdf8;
       --accent-blue-hover: #0284c7;
-      --accent-blue-glow: rgba(56, 189, 248, 0.25);
+      --accent-blue-glow: rgba(var(--accent-blue-rgb), 0.25);
+      --accent-blue-rgb: 56, 189, 248;
+      --accent-2: #818cf8;
       --discord: #5865f2;
       --accent-green: #10b981;
       --accent-orange: #f97316;
@@ -43,7 +45,7 @@
     body {
       background-color: var(--bg);
       background-image: 
-        radial-gradient(circle at 15% 15%, rgba(56, 189, 248, 0.08) 0%, transparent 45%),
+        radial-gradient(circle at 15% 15%, rgba(var(--accent-blue-rgb), 0.08) 0%, transparent 45%),
         radial-gradient(circle at 85% 85%, rgba(88, 101, 242, 0.08) 0%, transparent 45%);
       background-attachment: fixed;
       color: var(--text-main);
@@ -196,7 +198,7 @@
     }
 
     .hero h1 span {
-      background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+      background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-2) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -291,9 +293,9 @@
 
     .option-item:hover {
       border-color: var(--accent-blue);
-      background: rgba(56, 189, 248, 0.05);
+      background: rgba(var(--accent-blue-rgb), 0.05);
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(56, 189, 248, 0.15);
+      box-shadow: 0 6px 20px rgba(var(--accent-blue-rgb), 0.15);
     }
 
     .option-item:hover .option-label {
@@ -306,8 +308,8 @@
 
     .option-item.selected {
       border-color: var(--accent-blue);
-      background: rgba(56, 189, 248, 0.1);
-      box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+      background: rgba(var(--accent-blue-rgb), 0.1);
+      box-shadow: 0 0 15px rgba(var(--accent-blue-rgb), 0.2);
     }
 
     .option-item.selected .option-label {
@@ -557,6 +559,10 @@
       --accent-blue: #f0b94c;
       --accent-blue-hover: #c98f1f;
       --accent-blue-glow: rgba(240, 185, 76, 0.25);
+      --accent-blue-rgb: 240, 185, 76;
+      --accent-2: #fcd34d;
+      --accent-blue-rgb: 240, 185, 76;
+      --accent-2: #fcd34d;
       --text-main: #fdf6e6;
       --text-muted: #a2937a;
     }
