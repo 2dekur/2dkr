@@ -22,6 +22,7 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
+  <script src="assets/catalogue.js"></script>
 
   <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,6 +31,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
+    /* v0.4.0 — transition fluide entre les pages (navigateurs récents) */
+    @view-transition { navigation: auto; }
     :root {
       --bg: #090d16;
       --card-bg: rgba(22, 27, 34, 0.75);
@@ -647,10 +650,6 @@
   <nav>
     <div class="logo-wrapper">
       <a href="index.html" class="logo">2D<span>KR</span></a>
-      <div class="beta-badge">
-        BÊTA
-        <div class="beta-tooltip">🚧 Version bêta de la plateforme — des mises à jour, ajouts et changelogs à venir !</div>
-      </div>
     </div>
 
     <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation">
@@ -833,7 +832,7 @@ Pour menu ou lobby 10/10 parfait"</p>
       { t: 'Pack Ultime', s: 'Le pack le plus complet', u: 'services.html', p: 'Services', k: 'pack ultime ultimate max tarif prix' },
       { t: 'Compte Complet', s: 'Compte GTA Online prêt à jouer', u: 'services.html', p: 'Services', k: 'compte complet account gta rank argent' },
       { t: 'Option Compte Simple', s: 'Formule compte allégée', u: 'services.html', p: 'Services', k: 'compte simple option account' },
-      { t: 'Promo Septembre -30%', s: 'Réduction en cours sur le catalogue', u: 'services.html', p: 'Services', k: 'promo reduction remise septembre 30 soldes' },
+      ...(window.DKR && DKR.promoActive() ? [{ t: DKR.catalogue.promo.titre, s: 'Réduction en cours sur le catalogue', u: 'services.html', p: 'Services', k: 'promo reduction remise soldes' }] : []),
       { t: 'Calculateur de prix', s: 'Estime ton pack sur mesure', u: 'calculateur.html', p: 'Calculateur', k: 'calculateur devis estimation prix sur mesure argent rang' },
       { t: 'Avis & Preuves clients', s: 'Retours et preuves en direct', u: 'avis.html', p: 'Avis', k: 'avis preuve review client temoignage confiance vouch' }
     ];

@@ -22,6 +22,7 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
+  <script src="assets/catalogue.js"></script>
 
   <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,6 +31,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
+    /* v0.4.0 — transition fluide entre les pages (navigateurs récents) */
+    @view-transition { navigation: auto; }
     :root {
       --bg: #090d16;
       --card-bg: rgba(22, 27, 34, 0.75);
@@ -515,6 +518,21 @@
       border-color: var(--text-muted);
     }
 
+    /* v0.4.0 */
+    [hidden] { display: none !important; }
+
+    .btn-reset:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .calc-hint {
+      color: var(--accent-green);
+      font-size: 0.85rem;
+      text-align: center;
+      margin-top: 10px;
+    }
+
     @keyframes fadeInDown {
       from { opacity: 0; transform: translateY(-20px); }
       to { opacity: 1; transform: translateY(0); }
@@ -714,10 +732,6 @@
   <nav>
     <div class="logo-wrapper">
       <a href="index.html" class="logo">2D<span>KR</span></a>
-      <div class="beta-badge">
-        BÊTA
-        <div class="beta-tooltip">🚧 Version bêta du calculateur — des mises à jour, ajouts et changelogs à venir !</div>
-      </div>
     </div>
 
     <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation">
@@ -746,107 +760,7 @@
   <div class="container">
     <div class="calc-layout">
       
-      <div class="calc-options">
-        
-        <!-- Argent GTA Online -->
-        <div class="calc-card">
-          <h2><i class="fa-solid fa-coins" style="color: var(--accent-blue);"></i> Argent GTA Online</h2>
-          <div class="options-grid" id="money-options">
-            <div class="option-item" data-name="+10M$ GTA Online" data-price="3" data-category="money">
-              <div class="option-info">
-                <div class="option-checkbox"><i class="fa-solid fa-check"></i></div>
-                <span class="option-label">+10 000 000$ (24h)</span>
-              </div>
-              <span class="option-price-tag">3€</span>
-            </div>
-            <div class="option-item" data-name="+20M$ GTA Online" data-price="4" data-category="money">
-              <div class="option-info">
-                <div class="option-checkbox"><i class="fa-solid fa-check"></i></div>
-                <span class="option-label">+20 000 000$ (24h)</span>
-              </div>
-              <span class="option-price-tag">4€</span>
-            </div>
-            <div class="option-item" data-name="+30M$ GTA Online" data-price="5" data-category="money">
-              <div class="option-info">
-                <div class="option-checkbox"><i class="fa-solid fa-check"></i></div>
-                <span class="option-label">+30 000 000$ (24h)</span>
-              </div>
-              <span class="option-price-tag">5€</span>
-            </div>
-            <div class="option-item" data-name="+50M$ GTA Online" data-price="7" data-category="money">
-              <div class="option-info">
-                <div class="option-checkbox"><i class="fa-solid fa-check"></i></div>
-                <span class="option-label">+50 000 000$ (48h)</span>
-              </div>
-              <span class="option-price-tag">7€</span>
-            </div>
-            <div class="option-item" data-name="+100M$ GTA Online" data-price="18" data-category="money">
-              <div class="option-info">
-                <div class="option-checkbox"><i class="fa-solid fa-check"></i></div>
-                <span class="option-label">+100 000 000$ (4 jours)</span>
-              </div>
-              <span class="option-price-tag">18€</span>
-            </div>
-            <div class="option-item" data-name="+200M$ GTA Online" data-price="30" data-category="money">
-              <div class="option-info">
-                <div class="option-checkbox"><i class="fa-solid fa-check"></i></div>
-                <span class="option-label">+200 000 000$ (7 jours)</span>
-              </div>
-              <span class="option-price-tag">30€</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Niveau & Stats -->
-        <div class="calc-card">
-          <h2><i class="fa-solid fa-chart-line" style="color: var(--accent-blue);"></i> Niveau & Statistiques</h2>
-          <div class="options-grid">
-            <div class="option-item" data-name="Niveau RP au choix" data-price="5" data-category="level">
-              <div class="option-info">
-                <div class="option-checkbox"><i class="fa-solid fa-check"></i></div>
-                <span class="option-label">Niveau au choix</span>
-              </div>
-              <span class="option-price-tag">5€</span>
-            </div>
-            <div class="option-item" data-name="Statistiques Maximum" data-price="2" data-category="stats">
-              <div class="option-info">
-                <div class="option-checkbox"><i class="fa-solid fa-check"></i></div>
-                <span class="option-label">Stats max (Course, Tir, Apnée...)</span>
-              </div>
-              <span class="option-price-tag">2€</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Véhicules & Tenues -->
-        <div class="calc-card">
-          <h2><i class="fa-solid fa-car" style="color: var(--accent-blue);"></i> Véhicules & Tenues</h2>
-          <div class="options-grid">
-            <div class="option-item" data-name="Pack 10 Véhicules moddés" data-price="10" data-category="vehicles">
-              <div class="option-info">
-                <div class="option-checkbox"><i class="fa-solid fa-check"></i></div>
-                <span class="option-label">Pack 10 Véhicules moddés</span>
-              </div>
-              <span class="option-price-tag">10€</span>
-            </div>
-            <div class="option-item" data-name="Pack 5 Tenues moddées" data-price="5" data-category="outfits">
-              <div class="option-info">
-                <div class="option-checkbox"><i class="fa-solid fa-check"></i></div>
-                <span class="option-label">Pack 5 Tenues moddées</span>
-              </div>
-              <span class="option-price-tag">5€</span>
-            </div>
-            <div class="option-item" data-name="Pack 20 Tenues (Max)" data-price="20" data-category="outfits">
-              <div class="option-info">
-                <div class="option-checkbox"><i class="fa-solid fa-check"></i></div>
-                <span class="option-label">Pack 20 Tenues (Max)</span>
-              </div>
-              <span class="option-price-tag">20€</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
+      <div class="calc-options" id="calc-options"></div>
 
       <!-- Résumé Sidebar -->
       <div class="summary-sidebar">
@@ -865,6 +779,11 @@
           <a href="#" id="discord-btn" class="btn btn-discord disabled" target="_blank" rel="noopener noreferrer">
             <i class="fa-brands fa-discord"></i> <span id="discord-btn-text">Commander via Discord</span>
           </a>
+          <p class="calc-hint" id="calc-hint" hidden>Récapitulatif copié ! Ouvre un ticket et colle-le (Ctrl + V).</p>
+
+          <button class="btn btn-reset" id="cart-btn" type="button" disabled>
+            <i class="fa-solid fa-cart-plus"></i> Ajouter au panier du catalogue
+          </button>
 
           <button class="btn btn-reset" id="reset-btn" type="button">
             Réinitialiser
@@ -880,6 +799,7 @@
     &copy; 2026 2DKR by Dekur. All rights reserved.
   </footer>
 
+  <script src="assets/panier.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const menuToggle = document.getElementById('menu-toggle');
@@ -897,90 +817,99 @@
         });
       }
 
-      const optionItems = document.querySelectorAll('.option-item');
+      // --- Options générées depuis assets/catalogue.js
+      const optionsContainer = document.getElementById('calc-options');
+      optionsContainer.innerHTML = DKR.catalogue.options.map(g => `
+        <div class="calc-card">
+          <h2><i class="fa-solid ${g.icone}" style="color: var(--accent-blue);"></i> ${g.titreCalc || g.titre}</h2>
+          <div class="options-grid">
+            ${g.items.map(o => `
+              <div class="option-item" data-id="${o.id}" data-excl="${o.groupe || (g.unique ? g.id : o.id)}" role="button" tabindex="0">
+                <div class="option-info">
+                  <div class="option-checkbox"><i class="fa-solid fa-check"></i></div>
+                  <span class="option-label">${(o.detail || o.nom) + (o.delai ? ' (' + o.delai + ')' : '')}</span>
+                </div>
+                <span class="option-price-tag">${DKR.prixDe(o)}€</span>
+              </div>`).join('')}
+          </div>
+        </div>`).join('');
+
+      const optionItems = optionsContainer.querySelectorAll('.option-item');
       const summaryContainer = document.getElementById('summary-items');
       const totalPriceEl = document.getElementById('total-price');
       const discordBtn = document.getElementById('discord-btn');
       const discordBtnText = document.getElementById('discord-btn-text');
       const resetBtn = document.getElementById('reset-btn');
+      const cartBtn = document.getElementById('cart-btn');
+      const hint = document.getElementById('calc-hint');
 
-      let selections = {
-        money: null,
-        level: null,
-        stats: null,
-        vehicles: null,
-        outfits: null
-      };
-
+      // Une seule option par "data-excl" (ex. un seul montant d'argent, un seul pack de tenues)
+      let selections = {};
       let currentDisplayPrice = 0;
 
+      function toggle(item) {
+        const excl = item.dataset.excl;
+        const wasSelected = item.classList.contains('selected');
+        optionItems.forEach(opt => { if (opt.dataset.excl === excl) opt.classList.remove('selected'); });
+        if (wasSelected) {
+          delete selections[excl];
+        } else {
+          item.classList.add('selected');
+          const o = DKRPanier.trouver(item.dataset.id);
+          selections[excl] = { id: o.id, nom: o.nom, prix: DKR.prixDe(o) };
+        }
+        updateSummary();
+      }
+
       optionItems.forEach(item => {
-        item.addEventListener('click', () => {
-          const category = item.getAttribute('data-category');
-          const name = item.getAttribute('data-name');
-          const price = parseInt(item.getAttribute('data-price'), 10);
-
-          if (category === 'money' || category === 'outfits') {
-            optionItems.forEach(opt => {
-              if (opt.getAttribute('data-category') === category && opt !== item) {
-                opt.classList.remove('selected');
-              }
-            });
-
-            if (item.classList.contains('selected')) {
-              item.classList.remove('selected');
-              selections[category] = null;
-            } else {
-              item.classList.add('selected');
-              selections[category] = { name, price };
-            }
-          } else {
-            if (item.classList.contains('selected')) {
-              item.classList.remove('selected');
-              selections[category] = null;
-            } else {
-              item.classList.add('selected');
-              selections[category] = { name, price };
-            }
-          }
-
-          updateSummary();
+        item.addEventListener('click', () => toggle(item));
+        item.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(item); }
         });
       });
 
       resetBtn.addEventListener('click', () => {
         optionItems.forEach(opt => opt.classList.remove('selected'));
-        selections = { money: null, level: null, stats: null, vehicles: null, outfits: null };
+        selections = {};
         updateSummary();
       });
 
-      function updateSummary() {
-        summaryContainer.innerHTML = '';
-        let activeSelections = [];
-        let calculatedTotal = 0;
+      // Commander : copie le récap puis ouvre Discord
+      discordBtn.addEventListener('click', (e) => {
+        const liste = Object.values(selections);
+        if (!liste.length) { e.preventDefault(); return; }
+        DKRPanier.copier(DKRPanier.recap(liste)).then(ok => { if (ok) hint.hidden = false; });
+      });
 
-        Object.keys(selections).forEach(cat => {
-          if (selections[cat]) {
-            activeSelections.push(selections[cat]);
-            calculatedTotal += selections[cat].price;
-          }
-        });
+      // Envoie la sélection dans le panier de la page Services
+      cartBtn.addEventListener('click', () => {
+        Object.values(selections).forEach(s => DKRPanier.ajouter(s.id));
+        window.location.href = 'services.html';
+      });
+
+      function updateSummary() {
+        const activeSelections = Object.values(selections);
+        const calculatedTotal = activeSelections.reduce((s, x) => s + x.prix, 0);
+        summaryContainer.innerHTML = '';
+        hint.hidden = true;
 
         if (activeSelections.length === 0) {
           summaryContainer.innerHTML = '<div class="summary-empty">Aucune option sélectionnée</div>';
           discordBtn.classList.add('disabled');
           discordBtn.setAttribute('href', '#');
           discordBtnText.textContent = 'Commander via Discord';
+          cartBtn.disabled = true;
         } else {
           activeSelections.forEach(sel => {
             const row = document.createElement('div');
             row.className = 'summary-item-row';
-            row.innerHTML = `<span>${sel.name}</span><span>${sel.price}€</span>`;
+            row.innerHTML = `<span>${sel.nom}</span><span>${sel.prix}€</span>`;
             summaryContainer.appendChild(row);
           });
           discordBtn.classList.remove('disabled');
-          discordBtn.setAttribute('href', 'https://discord.gg/mDpZT73FFG');
-          discordBtnText.textContent = `Commander via Discord (${calculatedTotal}€)`;
+          discordBtn.setAttribute('href', DKRPanier.DISCORD);
+          discordBtnText.textContent = `Copier et commander (${calculatedTotal}€)`;
+          cartBtn.disabled = false;
         }
 
         animateValue(totalPriceEl, currentDisplayPrice, calculatedTotal, 300);
@@ -1049,7 +978,7 @@
       { t: 'Pack Ultime', s: 'Le pack le plus complet', u: 'services.html', p: 'Services', k: 'pack ultime ultimate max tarif prix' },
       { t: 'Compte Complet', s: 'Compte GTA Online prêt à jouer', u: 'services.html', p: 'Services', k: 'compte complet account gta rank argent' },
       { t: 'Option Compte Simple', s: 'Formule compte allégée', u: 'services.html', p: 'Services', k: 'compte simple option account' },
-      { t: 'Promo Septembre -30%', s: 'Réduction en cours sur le catalogue', u: 'services.html', p: 'Services', k: 'promo reduction remise septembre 30 soldes' },
+      ...(window.DKR && DKR.promoActive() ? [{ t: DKR.catalogue.promo.titre, s: 'Réduction en cours sur le catalogue', u: 'services.html', p: 'Services', k: 'promo reduction remise soldes' }] : []),
       { t: 'Calculateur de prix', s: 'Estime ton pack sur mesure', u: 'calculateur.html', p: 'Calculateur', k: 'calculateur devis estimation prix sur mesure argent rang' },
       { t: 'Avis & Preuves clients', s: 'Retours et preuves en direct', u: 'avis.html', p: 'Avis', k: 'avis preuve review client temoignage confiance vouch' }
     ];

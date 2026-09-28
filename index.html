@@ -21,6 +21,7 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
+  <script src="assets/catalogue.js"></script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,6 +30,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
+    /* v0.4.0 — transition fluide entre les pages (navigateurs récents) */
+    @view-transition { navigation: auto; }
     :root {
       --bg: #090d16;
       --card-bg: rgba(22, 27, 34, 0.75);
@@ -712,6 +715,31 @@
       margin: 12px auto 0; right: auto;
     }
     .search-input { padding-right: 44px !important; }
+
+    /* v0.4.0 — journal des changements */
+    .changelog {
+      margin: auto;
+      width: min(520px, calc(100% - 32px));
+      background: #0d1117;
+      color: var(--text-main);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    }
+    .changelog::backdrop { background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(4px); }
+    .changelog-head {
+      display: flex; justify-content: space-between; align-items: center;
+      border-bottom: 1px solid var(--border); padding-bottom: 12px; margin-bottom: 16px;
+    }
+    .changelog-head h3 { font-size: 1.1rem; display: flex; gap: 10px; align-items: center; }
+    .changelog-close { background: none; border: 0; color: var(--text-muted); font-size: 1.1rem; cursor: pointer; padding: 4px; }
+    .changelog-close:hover { color: var(--text-main); }
+    .changelog ul { list-style: none; display: grid; gap: 10px; }
+    .changelog li { color: var(--text-muted); font-size: 0.92rem; line-height: 1.5; padding-left: 18px; position: relative; }
+    .changelog li::before { content: ''; position: absolute; left: 0; top: 0.6em; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-blue); }
+    .changelog li strong { color: var(--text-main); }
+    .changelog-old { margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.8rem; }
   </style>
 </head>
 <body>
@@ -740,9 +768,9 @@
     <p>Retrouve tous les accès à la communauté, aux services et aux moyens de paiement.</p>
     
     <div class="hero-badges">
-      <div class="badge-dev-mode">
+      <div class="badge-dev-mode" id="version-badge" role="button" tabindex="0" title="Voir les nouveautés" style="cursor: pointer;">
         <i class="fa-solid fa-code"></i>
-        <span>v0.3.4 — Site mis à jour</span>
+        <span>v0.4.0 — Nouveautés</span>
         <span class="extra-text">&nbsp;• by Dekur</span>
       </div>
       <div class="badge-status">
@@ -766,7 +794,7 @@
     </div>
 
     <div class="kbd-hint"><span class="kbd">Ctrl</span> + <span class="kbd">K</span> pour les commandes rapides</div>
-    <span class="beta-badge">BÊTA</span>
+   
   </section>
 
   <div class="container" id="projets">
@@ -876,9 +904,38 @@
 
   </div>
 
+  <!-- Journal des changements (ouvert en cliquant sur le badge de version) -->
+  <dialog class="changelog" id="changelog" aria-labelledby="changelog-title">
+    <div class="changelog-head">
+      <h3 id="changelog-title"><i class="fa-solid fa-code" style="color: var(--accent-blue);"></i> Nouveautés v0.4.0</h3>
+      <button type="button" class="changelog-close" aria-label="Fermer" onclick="this.closest('dialog').close()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <ul>
+      <li><strong>Aperçus de liens</strong> : belles cartes avec image quand tu partages le site sur Discord ou ailleurs.</li>
+      <li><strong>Panier commun</strong> : le panier du catalogue et le calculateur ne font plus qu'un, et ton panier est gardé si tu changes de page.</li>
+      <li><strong>Copie du récapitulatif</strong> : un clic pour copier ta commande et la coller dans ton ticket Discord.</li>
+      <li><strong>Promos automatiques</strong> : les réductions s'affichent et se terminent toutes seules à la bonne date.</li>
+      <li><strong>Transitions fluides</strong> entre les pages, nouvelle icône et vraie page 404.</li>
+      <li>Fin de la bêta : le calculateur et les commandes rapides (Ctrl + K) sont officiels.</li>
+    </ul>
+    <p class="changelog-old">v0.3.4 — thèmes bleu / dark or, filtres, recherche et commandes rapides.</p>
+  </dialog>
+
   <footer>
     &copy; 2026 2DKR by Dekur. All rights reserved.
   </footer>
+
+  <script>
+    (function () {
+      const badge = document.getElementById('version-badge');
+      const dlg = document.getElementById('changelog');
+      if (!badge || !dlg || !dlg.showModal) return;
+      const open = () => dlg.showModal();
+      badge.addEventListener('click', open);
+      badge.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
+      dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
+    })();
+  </script>
 
   <div id="copy-toast" class="toast">
     <i class="fa-solid fa-check-circle"></i> <span>Adresse du wallet copiée !</span>
@@ -1032,7 +1089,7 @@
       { t: 'Pack Ultime', s: 'Le pack le plus complet', u: 'services.html', p: 'Services', k: 'pack ultime ultimate max tarif prix' },
       { t: 'Compte Complet', s: 'Compte GTA Online prêt à jouer', u: 'services.html', p: 'Services', k: 'compte complet account gta rank argent' },
       { t: 'Option Compte Simple', s: 'Formule compte allégée', u: 'services.html', p: 'Services', k: 'compte simple option account' },
-      { t: 'Promo Septembre -30%', s: 'Réduction en cours sur le catalogue', u: 'services.html', p: 'Services', k: 'promo reduction remise septembre 30 soldes' },
+      ...(window.DKR && DKR.promoActive() ? [{ t: DKR.catalogue.promo.titre, s: 'Réduction en cours sur le catalogue', u: 'services.html', p: 'Services', k: 'promo reduction remise soldes' }] : []),
       { t: 'Calculateur de prix', s: 'Estime ton pack sur mesure', u: 'calculateur.html', p: 'Calculateur', k: 'calculateur devis estimation prix sur mesure argent rang' },
       { t: 'Avis & Preuves clients', s: 'Retours et preuves en direct', u: 'avis.html', p: 'Avis', k: 'avis preuve review client temoignage confiance vouch' }
     ];

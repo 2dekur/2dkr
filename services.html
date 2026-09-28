@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>2DKR — Promo Septembre -30% | Catalogue Lobby & Services</title>
+  <title>2DKR — Catalogue Lobby & Services</title>
 
   <!-- Open Graph / Meta Discord -->
-  <meta property="og:title" content="2DKR — Promo Septembre jusqu'à -30% !">
-  <meta property="og:description" content="Jusqu'à -30% sur tous les packs GTA Online tout le mois de septembre. Découvre nos packs, options à la carte et comptes prêts à jouer.">
+  <meta property="og:title" content="2DKR — Catalogue Lobby & Services">
+  <meta property="og:description" content="Découvre nos packs GTA Online, nos options à la carte et nos comptes prêts à jouer.">
   <meta property="og:type" content="website">
   <meta name="theme-color" content="#38bdf8">
   <meta name="description" content="Catalogue 2DKR : packs GTA Online (argent, véhicules et tenues moddés, RP), options à la carte et comptes prêts à jouer.">
@@ -22,6 +22,7 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
+  <script src="assets/catalogue.js"></script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,6 +31,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
+    /* v0.4.0 — transition fluide entre les pages (navigateurs récents) */
+    @view-transition { navigation: auto; }
     :root {
       --bg: #090d16;
       --card-bg: rgba(22, 27, 34, 0.75);
@@ -711,7 +714,47 @@
       cursor: pointer;
       margin-left: 10px;
       font-size: 0.9rem;
+      background: none;
+      border: 0;
+      padding: 4px;
     }
+
+    /* v0.4.0 — prix sans promo, panier, copie */
+    [hidden] { display: none !important; }
+
+    .price-new.price-normal {
+      color: var(--accent-blue);
+      background: rgba(var(--accent-blue-rgb), 0.12);
+      border-color: rgba(var(--accent-blue-rgb), 0.3);
+      box-shadow: none;
+    }
+
+    .btn.added { transform: scale(0.96); filter: brightness(1.2); }
+
+    .btn.copied {
+      color: var(--accent-green);
+      border-color: rgba(16, 185, 129, 0.5);
+      background: rgba(16, 185, 129, 0.12);
+    }
+
+    .modal-hint {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      text-align: center;
+      margin-top: 12px;
+    }
+
+    .modal-clear {
+      display: block;
+      margin: 10px auto 0;
+      background: none;
+      border: 0;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      cursor: pointer;
+    }
+
+    .modal-clear:hover { color: #ef4444; }
 
     /* Keyframe Animations */
     @keyframes fadeInDown {
@@ -962,18 +1005,15 @@
       <button class="chip" data-cat="packs"><i class="fa-solid fa-box-open"></i>Packs</button>
       <button class="chip" data-cat="options"><i class="fa-solid fa-sliders"></i>À la carte</button>
       <button class="chip" data-cat="comptes"><i class="fa-solid fa-user-plus"></i>Comptes</button>
-      <button class="chip" data-cat="promo"><i class="fa-solid fa-fire"></i>Promo -30%</button>
+      <button class="chip" data-cat="promo" id="chip-promo" hidden><i class="fa-solid fa-fire"></i>Promo</button>
     </div>
 
     <div class="kbd-hint"><span class="kbd">Ctrl</span> + <span class="kbd">K</span> pour les commandes rapides</div>
-    <span class="beta-badge">BÊTA</span>
   </section>
 
-  <!-- Promo Banner -->
-  <div class="promo-banner">
-    <div class="promo-banner-content">
-      🔥 Promo Septembre — <span>jusqu'à -30%</span> sur tous les packs, tout le mois de septembre !
-    </div>
+  <!-- Promo Banner (affichée automatiquement tant que la promo est en cours, voir assets/catalogue.js) -->
+  <div class="promo-banner" id="promo-banner" hidden>
+    <div class="promo-banner-content"></div>
   </div>
 
   <!-- Banner Calculator -->
@@ -997,177 +1037,15 @@
   <main class="container">
 
     <h2 class="section-heading"><i class="fa-solid fa-box-open" style="color: var(--accent-blue);" aria-hidden="true"></i> Nos Packs Disponibles</h2>
-    <div class="grid">
-
-      <!-- Pack Bronze 5€ -> 3€ -->
-      <div class="card card-bronze searchable" data-cat="packs promo">
-        <div>
-          <span class="card-badge badge-bronze">Bronze</span>
-          <div class="card-header">
-            <h2>Pack Bronze</h2>
-            <div class="price-promo"><span class="price-old">5€</span><span class="price-new">3€</span></div>
-          </div>
-          <ul class="feature-list">
-            <li>💰 <strong>Argent :</strong> 50 000 000$</li>
-            <li>⏳ <strong>Estimation :</strong> 2 jours</li>
-            <li>🏎️ 5 Véhicules moddés</li>
-            <li>👕 5 Tenues moddées</li>
-            <li>📈 RP 120</li>
-            <li>📊 Stats max</li>
-          </ul>
-        </div>
-        <div>
-          <div class="info-box">📦 Réalisé sur votre compte</div>
-          <button onclick="addToCart('Pack Bronze', 3)" class="btn btn-blue"><i class="fa-solid fa-cart-plus"></i> Ajouter au panier (3€)</button>
-        </div>
-      </div>
-
-      <!-- Pack Argent 10€ -> 7€ -->
-      <div class="card card-silver searchable" data-cat="packs promo">
-        <div>
-          <span class="card-badge badge-silver">Argent</span>
-          <div class="card-header">
-            <h2>Pack Argent</h2>
-            <div class="price-promo"><span class="price-old">10€</span><span class="price-new">7€</span></div>
-          </div>
-          <ul class="feature-list">
-            <li>💰 <strong>Argent :</strong> 100 000 000$</li>
-            <li>⏳ <strong>Estimation :</strong> 4 jours</li>
-            <li>🏎️ 10 Véhicules moddés</li>
-            <li>👕 10 Tenues moddées</li>
-            <li>📈 RP 200 | 📊 Stats max</li>
-            <li>🔓 Déblocages RP inclus</li>
-          </ul>
-        </div>
-        <div>
-          <div class="info-box">📦 Réalisé sur votre compte</div>
-          <button onclick="addToCart('Pack Argent', 7)" class="btn btn-blue"><i class="fa-solid fa-cart-plus"></i> Ajouter au panier (7€)</button>
-        </div>
-      </div>
-
-      <!-- Pack Or 15€ -> 11€ -->
-      <div class="card card-gold searchable" data-cat="packs promo">
-        <div>
-          <span class="card-badge badge-gold">Or</span>
-          <div class="card-header">
-            <h2>Pack Or</h2>
-            <div class="price-promo"><span class="price-old">15€</span><span class="price-new">11€</span></div>
-          </div>
-          <ul class="feature-list">
-            <li>💰 <strong>Argent :</strong> 150 000 000$</li>
-            <li>⏳ <strong>Estimation :</strong> 5 jours</li>
-            <li>🏎️ 15 Véhicules moddés</li>
-            <li>👕 15 Tenues moddées</li>
-            <li>📈 RP au choix | 📊 Stats max</li>
-            <li>🔓 Déblocages + 🔫 Toutes les armes</li>
-          </ul>
-        </div>
-        <div>
-          <div class="info-box">📦 Réalisé sur votre compte</div>
-          <button onclick="addToCart('Pack Or', 11)" class="btn btn-blue"><i class="fa-solid fa-cart-plus"></i> Ajouter au panier (11€)</button>
-        </div>
-      </div>
-
-      <!-- Pack Platine 20€ -> 14€ -->
-      <div class="card card-plat searchable" data-cat="packs promo">
-        <div>
-          <span class="card-badge badge-plat">Platine</span>
-          <div class="card-header">
-            <h2>Pack Platine</h2>
-            <div class="price-promo"><span class="price-old">20€</span><span class="price-new">14€</span></div>
-          </div>
-          <ul class="feature-list">
-            <li>💰 <strong>Argent :</strong> 200 000 000$</li>
-            <li>⏳ <strong>Estimation :</strong> 7 jours</li>
-            <li>🏎️ 20 Véhicules moddés</li>
-            <li>👕 20 Tenues (Maximum)</li>
-            <li>📈 RP au choix | 📊 Stats max</li>
-            <li>🔓 Tous déblocages + Manoirs + Armes + Business</li>
-          </ul>
-        </div>
-        <div>
-          <div class="info-box">📦 Réalisé sur votre compte</div>
-          <button onclick="addToCart('Pack Platine', 14)" class="btn btn-blue"><i class="fa-solid fa-cart-plus"></i> Ajouter au panier (14€)</button>
-        </div>
-      </div>
-
-      <!-- Pack Ultime 60€ -> 50€ -->
-      <div class="card card-ultimate searchable" data-cat="packs promo">
-        <div>
-          <span class="card-badge badge-ultimate">Ultime 👑 Populaire</span>
-          <div class="card-header">
-            <h2>Pack Ultime</h2>
-            <div class="price-promo"><span class="price-old">60€</span><span class="price-new">50€</span></div>
-          </div>
-          <ul class="feature-list">
-            <li>📦 <strong>Compte neuf fourni</strong> (Jeu inclus)</li>
-            <li>💰 <strong>Argent :</strong> 300 000 000$</li>
-            <li>⏳ <strong>Estimation :</strong> 10 jours</li>
-            <li>🏎️ 30 Véhicules moddés | 👕 20 Tenues</li>
-            <li>📈 RP au choix | 📊 Stats max</li>
-            <li>🏢 Business, Manoirs & Armes inclus</li>
-          </ul>
-        </div>
-        <div>
-          <div class="info-box">🎮 Prêt à jouer</div>
-          <button onclick="addToCart('Pack Ultime', 50)" class="btn btn-blue"><i class="fa-solid fa-cart-plus"></i> Ajouter au panier (50€)</button>
-        </div>
-      </div>
-
-    </div>
+    <div class="grid" id="packs-grid"></div>
 
     <!-- Options à la carte -->
     <h2 class="section-heading" style="margin-top: 50px;"><i class="fa-solid fa-sliders" style="color: var(--accent-blue);" aria-hidden="true"></i> Options à la carte</h2>
-    
-    <div class="grid">
-      <div class="card searchable" data-cat="options">
-        <h2><i class="fa-solid fa-coins" style="color: var(--accent-blue);" aria-hidden="true"></i> Argent supplémentaire</h2>
-        <div class="options-list" style="margin-top: 15px;">
-          <div class="option-row"><span>+10M GTA$ (1j)</span><div><span class="option-price">3€ </span><button onclick="addToCart('+10M GTA$', 3)" class="btn btn-outline btn-sm"><i class="fa-solid fa-plus"></i></button></div></div>
-          <div class="option-row"><span>+20M GTA$ (1j)</span><div><span class="option-price">4€ </span><button onclick="addToCart('+20M GTA$', 4)" class="btn btn-outline btn-sm"><i class="fa-solid fa-plus"></i></button></div></div>
-          <div class="option-row"><span>+30M GTA$ (1j)</span><div><span class="option-price">5€ </span><button onclick="addToCart('+30M GTA$', 5)" class="btn btn-outline btn-sm"><i class="fa-solid fa-plus"></i></button></div></div>
-          <div class="option-row"><span>+50M GTA$ (2j)</span><div><span class="option-price">7€ </span><button onclick="addToCart('+50M GTA$', 7)" class="btn btn-outline btn-sm"><i class="fa-solid fa-plus"></i></button></div></div>
-          <div class="option-row"><span>+100M GTA$ (4j)</span><div><span class="option-price">18€ </span><button onclick="addToCart('+100M GTA$', 18)" class="btn btn-outline btn-sm"><i class="fa-solid fa-plus"></i></button></div></div>
-          <div class="option-row"><span>+200M GTA$ (7j)</span><div><span class="option-price">30€ </span><button onclick="addToCart('+200M GTA$', 30)" class="btn btn-outline btn-sm"><i class="fa-solid fa-plus"></i></button></div></div>
-        </div>
-      </div>
-
-      <div style="display: flex; flex-direction: column; gap: 20px;">
-        <div class="card searchable" data-cat="options" style="flex: 1;">
-          <h2><i class="fa-solid fa-chart-line" style="color: var(--accent-blue);" aria-hidden="true"></i> Niveau & Stats</h2>
-          <div class="options-list" style="margin-top: 15px;">
-            <div class="option-row"><span>Niveau au choix</span><div><span class="option-price">5€ </span><button onclick="addToCart('Niveau au choix', 5)" class="btn btn-outline btn-sm"><i class="fa-solid fa-plus"></i></button></div></div>
-            <div class="option-row"><span>Stats max</span><div><span class="option-price">2€ </span><button onclick="addToCart('Stats max', 2)" class="btn btn-outline btn-sm"><i class="fa-solid fa-plus"></i></button></div></div>
-          </div>
-        </div>
-
-        <div class="card searchable" data-cat="options" style="flex: 1;">
-          <h2><i class="fa-solid fa-car" style="color: var(--accent-blue);" aria-hidden="true"></i> Véhicules & Tenues</h2>
-          <div class="options-list" style="margin-top: 15px;">
-            <div class="option-row"><span>10 Véhicules moddés</span><div><span class="option-price">10€ </span><button onclick="addToCart('10 Véhicules moddés', 10)" class="btn btn-outline btn-sm"><i class="fa-solid fa-plus"></i></button></div></div>
-            <div class="option-row"><span>5 Tenues moddées</span><div><span class="option-price">5€ </span><button onclick="addToCart('5 Tenues moddées', 5)" class="btn btn-outline btn-sm"><i class="fa-solid fa-plus"></i></button></div></div>
-            <div class="option-row"><span>20 Tenues (Max)</span><div><span class="option-price">20€ </span><button onclick="addToCart('20 Tenues (Max)', 20)" class="btn btn-outline btn-sm"><i class="fa-solid fa-plus"></i></button></div></div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div class="grid" id="options-grid"></div>
 
     <!-- Nouveaux Comptes -->
     <h2 class="section-heading" style="margin-top: 50px;"><i class="fa-solid fa-user-plus" style="color: var(--accent-blue);" aria-hidden="true"></i> Nouveaux Comptes</h2>
-    <div class="grid">
-      <div class="card searchable" data-cat="comptes">
-        <h2>Compte Complet</h2>
-        <p style="color: var(--text-muted); font-size: 0.9rem; margin: 10px 0;">Compte fourni avec jeu inclus + 30M offerts + RP 120.</p>
-        <div class="price-promo" style="margin-top: 10px;"><span class="price-old">30€</span><span class="price-new">22€</span></div>
-        <button onclick="addToCart('Compte Complet', 22)" class="btn btn-blue" style="margin-top: 20px;"><i class="fa-solid fa-cart-plus"></i> Ajouter au panier (22€)</button>
-      </div>
-      <div class="card searchable" data-cat="comptes">
-        <h2>Option Compte Simple</h2>
-        <p style="color: var(--text-muted); font-size: 0.9rem; margin: 10px 0;">Compte fourni avec le jeu inclus.</p>
-        <div class="price-promo" style="margin-top: 10px;"><span class="price-old">20€</span><span class="price-new">14€</span></div>
-        <button onclick="addToCart('Option Compte Simple', 14)" class="btn btn-blue" style="margin-top: 20px;"><i class="fa-solid fa-cart-plus"></i> Ajouter au panier (14€)</button>
-      </div>
-    </div>
+    <div class="grid" id="comptes-grid"></div>
 
     <h2 class="section-heading" style="margin-top: 50px;"><i class="fa-solid fa-circle-question" style="color: var(--accent-blue);" aria-hidden="true"></i> Comment commander ?</h2>
     <div class="steps-grid">
@@ -1223,9 +1101,14 @@
         <span style="font-weight: 700;">Total Final :</span>
         <span id="modalTotal" style="font-size: 1.3rem; font-weight: 900; color: var(--accent-green);">0€</span>
       </div>
-      <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="btn btn-blue">
-        <i class="fa-brands fa-discord"></i> Finaliser la commande sur Discord
+      <button type="button" id="copyRecap" class="btn btn-outline" style="margin-bottom: 10px;">
+        <i class="fa-regular fa-copy"></i> <span>Copier le récapitulatif</span>
+      </button>
+      <a href="https://discord.gg/mDpZT73FFG" id="finishOrder" target="_blank" rel="noopener noreferrer" class="btn btn-blue">
+        <i class="fa-brands fa-discord"></i> Copier et ouvrir Discord
       </a>
+      <p class="modal-hint">Ouvre un ticket sur le Discord et colle ton récapitulatif (Ctrl + V).</p>
+      <button type="button" onclick="DKRPanier.vider()" class="modal-clear"><i class="fa-solid fa-trash"></i> Vider le panier</button>
     </div>
   </div>
 
@@ -1233,6 +1116,8 @@
     &copy; 2026 2DKR by Dekur. All rights reserved.
   </footer>
 
+  <script src="assets/panier.js"></script>
+  <script src="assets/services.js"></script>
   <script>
     // Menu mobile toggle
     const menuToggle = document.getElementById('menu-toggle');
@@ -1244,63 +1129,6 @@
       });
     }
 
-    // Gestion du panier
-    let cart = [];
-
-    function addToCart(name, price) {
-      cart.push({ name, price });
-      updateCartUI();
-    }
-
-    function removeFromCart(index) {
-      cart.splice(index, 1);
-      updateCartUI();
-    }
-
-    function updateCartUI() {
-      const cartBar = document.getElementById('cartBar');
-      const cartCount = document.getElementById('cartCount');
-      const cartTotal = document.getElementById('cartTotal');
-      const cartItemsList = document.getElementById('cartItemsList');
-      const modalTotal = document.getElementById('modalTotal');
-
-      const total = cart.reduce((sum, item) => sum + item.price, 0);
-
-      cartCount.textContent = cart.length;
-      cartTotal.textContent = total + '€';
-      modalTotal.textContent = total + '€';
-
-      if (cart.length > 0) {
-        cartBar.classList.add('active');
-      } else {
-        cartBar.classList.remove('active');
-        closeModal();
-      }
-
-      cartItemsList.innerHTML = '';
-      cart.forEach((item, index) => {
-        const li = document.createElement('li');
-        li.className = 'cart-item';
-        li.innerHTML = `
-          <span class="cart-item-title">${item.name}</span>
-          <div>
-            <span class="cart-item-price">${item.price}€</span>
-            <i class="fa-solid fa-trash cart-item-remove" onclick="removeFromCart(${index})"></i>
-          </div>
-        `;
-        cartItemsList.appendChild(li);
-      });
-    }
-
-    function openModal() {
-      if (cart.length > 0) {
-        document.getElementById('orderModal').classList.add('active');
-      }
-    }
-
-    function closeModal() {
-      document.getElementById('orderModal').classList.remove('active');
-    }
     /* ===== v0.3.4 ===== */
 
     // --- Thème (bleu / dark or)
@@ -1340,7 +1168,7 @@
       { t: 'Pack Ultime', s: 'Le pack le plus complet', u: 'services.html', p: 'Services', k: 'pack ultime ultimate max tarif prix' },
       { t: 'Compte Complet', s: 'Compte GTA Online prêt à jouer', u: 'services.html', p: 'Services', k: 'compte complet account gta rank argent' },
       { t: 'Option Compte Simple', s: 'Formule compte allégée', u: 'services.html', p: 'Services', k: 'compte simple option account' },
-      { t: 'Promo Septembre -30%', s: 'Réduction en cours sur le catalogue', u: 'services.html', p: 'Services', k: 'promo reduction remise septembre 30 soldes' },
+      ...(window.DKR && DKR.promoActive() ? [{ t: DKR.catalogue.promo.titre, s: 'Réduction en cours sur le catalogue', u: 'services.html', p: 'Services', k: 'promo reduction remise soldes' }] : []),
       { t: 'Calculateur de prix', s: 'Estime ton pack sur mesure', u: 'calculateur.html', p: 'Calculateur', k: 'calculateur devis estimation prix sur mesure argent rang' },
       { t: 'Avis & Preuves clients', s: 'Retours et preuves en direct', u: 'avis.html', p: 'Avis', k: 'avis preuve review client temoignage confiance vouch' }
     ];
