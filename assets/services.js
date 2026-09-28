@@ -3,32 +3,29 @@
   var c = DKR.catalogue;
   var promo = DKR.promoActive();
 
-  // Prix "comme sur les sites" : prix barré à gauche + prix payé + mention des frais.
-  // En promo : ancien prix barré. Sinon (packs) : valeur à la carte barrée + % d'économie.
+  // Bulle "+ X€ frais" à côté d'un prix
+  function bulleFrais(item) {
+    var f = DKR.fraisDe(item);
+    return f ? '<span class="price-fee" title="Frais : ' + DKR.pourcentFrais(item) + ' % du prix">+ ' + DKR.euros(f) + ' frais</span>' : '';
+  }
+
+  // Prix + bulle frais + total. En promo : ancien prix barré à gauche.
   function prixHTML(item, extraStyle) {
     var style = extraStyle ? ' style="' + extraStyle + '"' : '';
-    var paye = DKR.prixDe(item);
-    var barre = '', eco = '';
-    if (DKR.enPromo(item)) {
-      barre = '<span class="price-old" title="Prix normal">' + DKR.prixNormal(item) + '€</span>';
-    } else {
-      var valeur = DKR.valeurCarte(item);
-      if (valeur && valeur > paye) {
-        barre = '<span class="price-ref" title="Ce que coûterait ce contenu acheté option par option">' +
-          '<span class="price-ref-label">À la carte</span><s>' + valeur + '€</s></span>';
-        eco = '<span class="price-save">-' + Math.round((1 - paye / valeur) * 100) + '%</span>';
-      }
-    }
+    var paye = DKR.prixDe(item), frais = DKR.fraisDe(item);
+    var barre = DKR.enPromo(item) ? '<span class="price-old" title="Prix normal">' + DKR.euros(DKR.prixNormal(item)) + '</span>' : '';
     return '<div class="price-block"' + style + '>' +
       '<div class="price-promo">' + barre +
-        '<span class="price-new' + (DKR.enPromo(item) ? '' : ' price-normal') + '">' + paye + '€</span>' + eco + '</div>' +
-      '<div class="price-note"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> ' + c.frais + '</div>' +
+        '<span class="price-new' + (DKR.enPromo(item) ? '' : ' price-normal') + '">' + DKR.euros(paye) + '</span>' + bulleFrais(item) + '</div>' +
+      '<div class="price-note">' + (frais
+        ? 'Total : <strong>' + DKR.euros(paye + frais) + '</strong> · frais ' + DKR.pourcentFrais(item) + ' %'
+        : '<i class="fa-solid fa-circle-check" aria-hidden="true"></i> Aucun frais') + '</div>' +
     '</div>';
   }
 
   function boutonAjout(item, style) {
     return '<button type="button" data-add="' + item.id + '" class="btn btn-blue"' + (style ? ' style="' + style + '"' : '') +
-      '><i class="fa-solid fa-cart-plus"></i> Ajouter au panier (' + DKR.prixDe(item) + '€)</button>';
+      '><i class="fa-solid fa-cart-plus"></i> Ajouter au panier (' + DKR.euros(DKR.prixDe(item) + DKR.fraisDe(item)) + ')</button>';
   }
 
   function cats(item) { return DKR.enPromo(item) ? ' promo' : ''; }
@@ -153,9 +150,9 @@
     var non = '<span class="cmp-no" aria-label="Non inclus">—</span>';
     var lignes = [
       ['Prix', function (p) {
-        var paye = DKR.prixDe(p), valeur = DKR.valeurCarte(p);
-        var barre = DKR.enPromo(p) ? DKR.prixNormal(p) : (valeur > paye ? valeur : null);
-        return (barre ? '<span class="cmp-old">' + barre + '€</span> ' : '') + '<strong class="cmp-price">' + paye + '€</strong>';
+        return (DKR.enPromo(p) ? '<span class="cmp-old">' + DKR.euros(DKR.prixNormal(p)) + '</span> ' : '') +
+          '<strong class="cmp-price">' + DKR.euros(DKR.prixDe(p)) + '</strong>' +
+          (DKR.fraisDe(p) ? '<br><span class="cmp-fee">+ ' + DKR.euros(DKR.fraisDe(p)) + ' frais</span>' : '');
       }],
       ['Argent', function (p) { return p.argent; }],
       ['Estimation', function (p) { return p.delai; }],
@@ -196,7 +193,7 @@
       '<div class="options-list" style="margin-top: 15px;">' +
       g.items.map(function (o) {
         var label = o.nom + (o.delai ? ' (' + o.delai + ')' : '');
-        return '<div class="option-row"><span>' + label + '</span><div><span class="option-price">' + DKR.prixDe(o) + '€ </span>' +
+        return '<div class="option-row"><span>' + label + '</span><div><span class="option-price">' + DKR.euros(DKR.prixDe(o)) + ' </span>' + bulleFrais(o) +
           '<button type="button" data-add="' + o.id + '" class="btn btn-outline btn-sm" aria-label="Ajouter ' + o.nom + '"><i class="fa-solid fa-plus"></i></button></div></div>';
       }).join('') +
       '</div></div>';
@@ -238,10 +235,11 @@
   modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
 
   DKRPanier.surChangement(function (liste) {
-    var total = DKRPanier.total();
     document.getElementById('cartCount').textContent = liste.length;
-    document.getElementById('cartTotal').textContent = total + '€';
-    document.getElementById('modalTotal').textContent = total + '€';
+    document.getElementById('cartTotal').textContent = DKR.euros(DKRPanier.total());
+    document.getElementById('modalSubtotal').textContent = DKR.euros(DKRPanier.sousTotal());
+    document.getElementById('modalFees').textContent = DKR.euros(DKRPanier.frais());
+    document.getElementById('modalTotal').textContent = DKR.euros(DKRPanier.total());
     bar.classList.toggle('active', liste.length > 0);
     if (!liste.length) closeModal();
 
@@ -250,13 +248,24 @@
     liste.forEach(function (a, i) {
       var li = document.createElement('li');
       li.className = 'cart-item';
-      li.innerHTML = '<span class="cart-item-title"></span><div><span class="cart-item-price">' + a.prix + '€</span>' +
+      li.innerHTML = '<span class="cart-item-title"></span><div><span class="cart-item-price">' + DKR.euros(a.prix) + '</span>' +
+        (a.frais ? '<span class="cart-item-fee">+ ' + DKR.euros(a.frais) + '</span>' : '') +
         '<button type="button" class="cart-item-remove" aria-label="Retirer"><i class="fa-solid fa-trash"></i></button></div>';
       li.querySelector('.cart-item-title').textContent = a.nom;
       li.querySelector('.cart-item-remove').addEventListener('click', function () { DKRPanier.retirer(i); });
       ul.appendChild(li);
     });
   });
+
+  // --- Section Paiement & frais : texte selon les % du catalogue
+  var fraisTxt = document.getElementById('fees-main');
+  if (fraisTxt) {
+    var pcts = c.packs.map(DKR.pourcentFrais);
+    var min = Math.min.apply(null, pcts), max = Math.max.apply(null, pcts);
+    fraisTxt.innerHTML = max
+      ? 'Des frais de <strong>' + (min === max ? min : min + ' à ' + max) + ' %</strong> s\'ajoutent selon le pack : plus un pack demande de temps, plus le % est élevé (' + (c.frais.defaut || 0) + ' % sur les options et les comptes). Ils sont affichés dans une bulle à côté de chaque prix, et le total est toujours indiqué.'
+      : 'Le prix affiché est celui que tu paies : <strong>aucun frais</strong> n\'est ajouté.';
+  }
 
   // --- Copier le récapitulatif
   function copier(btn) {

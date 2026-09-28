@@ -19,7 +19,7 @@
       // Recalcule les prix (si la promo s'est terminée entre-temps) et retire les articles disparus
       return brut.map(function (a) {
         var item = trouver(a.id);
-        return item ? { id: a.id, nom: item.nom, prix: DKR.prixDe(item) } : null;
+        return item ? article(item) : null;
       }).filter(Boolean);
     } catch (e) { return []; }
   }
@@ -29,17 +29,30 @@
     abonnes.forEach(function (f) { f(liste); });
   }
 
+  // Article du panier : prix payé + frais calculés depuis le catalogue
+  function article(item) {
+    return { id: item.id, nom: item.nom, prix: DKR.prixDe(item), frais: DKR.fraisDe(item) };
+  }
+
+  function somme(liste, cle) {
+    return Math.round(liste.reduce(function (s, a) { return s + (a[cle] || 0); }, 0) * 100) / 100;
+  }
+
   var panier = lire();
 
   window.DKRPanier = {
     DISCORD: DISCORD,
     trouver: trouver,
     liste: function () { return panier.slice(); },
-    total: function () { return panier.reduce(function (s, a) { return s + a.prix; }, 0); },
+    article: function (id) { var item = trouver(id); return item ? article(item) : null; },
+    sousTotal: function (liste) { return somme(liste || panier, 'prix'); },
+    frais: function (liste) { return somme(liste || panier, 'frais'); },
+    // Total à payer, frais compris
+    total: function (liste) { liste = liste || panier; return Math.round((somme(liste, 'prix') + somme(liste, 'frais')) * 100) / 100; },
     ajouter: function (id) {
       var item = trouver(id);
       if (!item) return;
-      panier.push({ id: id, nom: item.nom, prix: DKR.prixDe(item) });
+      panier.push(article(item));
       ecrire(panier);
     },
     retirer: function (index) { panier.splice(index, 1); ecrire(panier); },
@@ -49,10 +62,13 @@
     // Texte à coller dans le ticket Discord
     recap: function (articles) {
       articles = articles || panier;
-      var total = articles.reduce(function (s, a) { return s + a.prix; }, 0);
       var lignes = ['🛒 Commande 2DKR', ''];
-      articles.forEach(function (a) { lignes.push('• ' + a.nom + ' — ' + a.prix + '€'); });
-      lignes.push('', 'Frais de service : 0€', 'Total : ' + total + '€');
+      articles.forEach(function (a) {
+        lignes.push('• ' + a.nom + ' — ' + DKR.euros(a.prix) + (a.frais ? ' (+' + DKR.euros(a.frais) + ' de frais)' : ''));
+      });
+      lignes.push('', 'Sous-total : ' + DKR.euros(DKRPanier.sousTotal(articles)),
+        'Frais : ' + DKR.euros(DKRPanier.frais(articles)),
+        'Total : ' + DKR.euros(DKRPanier.total(articles)));
       if (DKR.promoActive()) lignes.push('(' + DKR.catalogue.promo.titre + ' appliquée)');
       return lignes.join('\n');
     },

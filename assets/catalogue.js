@@ -12,9 +12,6 @@
                   "date". Avant cette date, le site prévient les clients.
                   Une fois la date passée, tu peux recopier ces prix dans
                   "prix" et vider la liste.
-   - valeur (packs) : ce que le contenu du pack coûterait à la carte
-                  (id d'une option ou d'un compte, et quantité). Sert à
-                  afficher la "valeur à la carte" barrée à côté du prix.
 
    Astuce : ajoute ?apercu=2026-10-08 à l'adresse d'une page pour voir le
    site comme s'il était à cette date (rien n'est changé pour les autres).
@@ -40,8 +37,14 @@ window.DKR_CATALOGUE = {
     }
   },
 
-  // Texte affiché sous les prix et dans la section "Paiement & frais"
-  frais: 'Prix final · aucun frais ajouté',
+  // Frais / commission en % du prix, affichés dans une bulle "+ X€" à côté de chaque prix.
+  //   pourcent : % par pack (plus le pack prend de temps, plus le % est élevé)
+  //   defaut   : % pour les options à la carte et les comptes
+  //   Mets 0 pour ne pas mettre de frais sur un article.
+  frais: {
+    pourcent: { bronze: 3, argent: 4, or: 5, platine: 6, ultime: 8 },
+    defaut: 3
+  },
 
   // Packs : chaque info a sa propre ligne, pour les cartes ET le tableau comparatif.
   //   argent   : montant affiché       delai     : estimation
@@ -55,7 +58,6 @@ window.DKR_CATALOGUE = {
       prix: 5, prixPromo: 3,
       argent: '50 000 000$', delai: '2 jours', vehicules: 5, tenues: 5, rp: '120', stats: true,
       bonus: [],
-      valeur: [['m50', 1], ['v10', 0.5], ['t5', 1], ['niveau', 1], ['stats', 1]],
       info: 'Réalisé sur votre compte'
     },
     {
@@ -63,7 +65,6 @@ window.DKR_CATALOGUE = {
       prix: 10, prixPromo: 7,
       argent: '100 000 000$', delai: '4 jours', vehicules: 10, tenues: 10, rp: '200', stats: true,
       bonus: ['Déblocages RP'],
-      valeur: [['m100', 1], ['v10', 1], ['t5', 2], ['niveau', 1], ['stats', 1]],
       info: 'Réalisé sur votre compte'
     },
     {
@@ -71,7 +72,6 @@ window.DKR_CATALOGUE = {
       prix: 15, prixPromo: 11,
       argent: '150 000 000$', delai: '5 jours', vehicules: 15, tenues: 15, rp: 'Au choix', stats: true,
       bonus: ['Déblocages', 'Toutes les armes'],
-      valeur: [['m100', 1], ['m50', 1], ['v10', 1.5], ['t5', 3], ['niveau', 1], ['stats', 1]],
       info: 'Réalisé sur votre compte'
     },
     {
@@ -79,7 +79,6 @@ window.DKR_CATALOGUE = {
       prix: 20, prixPromo: 14,
       argent: '200 000 000$', delai: '7 jours', vehicules: 20, tenues: '20 (max)', rp: 'Au choix', stats: true,
       bonus: ['Tous déblocages', 'Manoirs', 'Armes', 'Business'],
-      valeur: [['m200', 1], ['v10', 2], ['t20', 1], ['niveau', 1], ['stats', 1]],
       info: 'Réalisé sur votre compte'
     },
     {
@@ -88,7 +87,6 @@ window.DKR_CATALOGUE = {
       argent: '300 000 000$', delai: '10 jours', vehicules: 30, tenues: 20, rp: 'Au choix', stats: true,
       bonus: ['Business', 'Manoirs', 'Armes'],
       compteNeuf: true,
-      valeur: [['compte-simple', 1], ['m200', 1], ['m100', 1], ['v10', 3], ['t20', 1], ['niveau', 1], ['stats', 1]],
       info: 'Prêt à jouer'
     }
   ],
@@ -182,12 +180,21 @@ window.DKR = {
     return item.prixPromo != null && DKR.promoActive();
   },
 
-  // Ce que coûterait le contenu d'un pack acheté à la carte
-  valeurCarte: function (pack) {
-    if (!pack.valeur || !window.DKRPanier) return null;
-    return Math.round(pack.valeur.reduce(function (s, v) {
-      var item = DKRPanier.trouver(v[0]);
-      return s + (item ? DKR.prixDe(item) * v[1] : 0);
-    }, 0));
+  // % de frais d'un article
+  pourcentFrais: function (item) {
+    var f = window.DKR_CATALOGUE.frais || {};
+    var p = (f.pourcent || {})[item.id];
+    return p != null ? p : (f.defaut || 0);
+  },
+
+  // Montant des frais (arrondi au centime), calculé sur le prix payé
+  fraisDe: function (item) {
+    return Math.round(DKR.prixDe(item) * DKR.pourcentFrais(item)) / 100;
+  },
+
+  // Affichage d'un montant : "9€" ou "9,27€"
+  euros: function (n) {
+    n = Math.round(n * 100) / 100;
+    return (n % 1 === 0 ? String(n) : n.toFixed(2).replace('.', ',')) + '€';
   }
 };

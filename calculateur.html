@@ -831,7 +831,7 @@
                   <div class="option-checkbox"><i class="fa-solid fa-check"></i></div>
                   <span class="option-label">${(o.detail || o.nom) + (o.delai ? ' (' + o.delai + ')' : '')}</span>
                 </div>
-                <span class="option-price-tag">${DKR.prixDe(o)}€</span>
+                <span class="option-price-tag">${DKR.euros(DKR.prixDe(o))}${DKR.fraisDe(o) ? `<small class="option-fee"> + ${DKR.euros(DKR.fraisDe(o))} frais</small>` : ''}</span>
               </div>`).join('')}
           </div>
         </div>`).join('');
@@ -858,7 +858,7 @@
         } else {
           item.classList.add('selected');
           const o = DKRPanier.trouver(item.dataset.id);
-          selections[excl] = { id: o.id, nom: o.nom, prix: DKR.prixDe(o) };
+          selections[excl] = DKRPanier.article(o.id);
         }
         updateSummary();
       }
@@ -891,7 +891,7 @@
 
       function updateSummary() {
         const activeSelections = Object.values(selections);
-        const calculatedTotal = activeSelections.reduce((s, x) => s + x.prix, 0);
+        const calculatedTotal = DKRPanier.total(activeSelections);
         summaryContainer.innerHTML = '';
         hint.hidden = true;
 
@@ -905,12 +905,16 @@
           activeSelections.forEach(sel => {
             const row = document.createElement('div');
             row.className = 'summary-item-row';
-            row.innerHTML = `<span>${sel.nom}</span><span>${sel.prix}€</span>`;
+            row.innerHTML = `<span>${sel.nom}</span><span>${DKR.euros(sel.prix)}</span>`;
             summaryContainer.appendChild(row);
           });
+          const fraisRow = document.createElement('div');
+          fraisRow.className = 'summary-item-row summary-fees';
+          fraisRow.innerHTML = `<span>Frais</span><span>${DKR.euros(DKRPanier.frais(activeSelections))}</span>`;
+          summaryContainer.appendChild(fraisRow);
           discordBtn.classList.remove('disabled');
           discordBtn.setAttribute('href', DKRPanier.DISCORD);
-          discordBtnText.textContent = `Copier et commander (${calculatedTotal}€)`;
+          discordBtnText.textContent = `Copier et commander (${DKR.euros(calculatedTotal)})`;
           cartBtn.disabled = false;
         }
 
@@ -922,8 +926,8 @@
       }
 
       function animateValue(obj, start, end, duration) {
-        if (start === end) {
-          obj.innerHTML = end + '€';
+        if (start === end || end % 1 !== 0 || start % 1 !== 0) {
+          obj.innerHTML = DKR.euros(end);
           return;
         }
         let startTimestamp = null;

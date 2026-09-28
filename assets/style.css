@@ -346,33 +346,6 @@ body::before {
 .card .price-block { align-self: flex-start; }
 .card > .price-block { align-items: flex-start; }
 
-.price-ref {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: flex-end;
-  line-height: 1.15;
-  color: var(--text-muted);
-  font-size: 0.85rem;
-}
-
-.price-ref-label {
-  font-size: 0.62rem;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-}
-
-.price-save {
-  align-self: center;
-  padding: 3px 7px;
-  border-radius: 999px;
-  font-size: 0.72rem;
-  font-weight: 800;
-  color: var(--accent-green);
-  background: rgba(16, 185, 129, 0.12);
-  border: 1px solid rgba(16, 185, 129, 0.3);
-}
-
 .price-block .price-promo { align-items: center; }
 
 .price-note {
@@ -382,6 +355,30 @@ body::before {
 }
 
 .price-note i { color: var(--accent-green); }
+.price-note strong { color: var(--text-main); }
+
+/* Bulle "+ X€ frais" à côté du prix */
+.price-fee {
+  align-self: center;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  white-space: nowrap;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+}
+
+.option-row .price-fee { margin-right: 8px; font-size: 0.68rem; padding: 2px 6px; }
+
+.cmp-fee { font-size: 0.72rem; color: var(--text-muted); }
+
+/* Calculateur : frais */
+.option-fee { font-size: 0.7rem; font-weight: 600; color: var(--text-muted); }
+.summary-fees { color: var(--text-muted); border-top: 1px dashed var(--border); padding-top: 8px; }
+
+.cart-item-fee { margin-left: 6px; font-size: 0.75rem; color: var(--text-muted); }
 
 .cmp-foot {
   margin-top: 10px;

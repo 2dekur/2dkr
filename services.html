@@ -1074,7 +1074,7 @@
     <!-- Tableau comparatif (généré depuis assets/catalogue.js) -->
     <h2 class="section-heading" style="margin-top: 50px;"><i class="fa-solid fa-table-columns" style="color: var(--accent-blue);" aria-hidden="true"></i> Comparer les packs</h2>
     <div class="cmp-wrap" id="packs-compare"></div>
-    <p class="cmp-foot">Prix barré : ancien prix pendant une promo, sinon ce que coûterait le même contenu acheté à la carte. Tous les prix sont finaux, sans frais ajoutés.</p>
+    <p class="cmp-foot">Prix barré : ancien prix pendant une promo.</p>
 
     <!-- Options à la carte -->
     <h2 class="section-heading" style="margin-top: 50px;"><i class="fa-solid fa-sliders" style="color: var(--accent-blue);" aria-hidden="true"></i> Options à la carte</h2>
@@ -1113,13 +1113,13 @@
     <div class="fees-grid">
       <div class="fees-card">
         <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
-        <h3>Prix final</h3>
-        <p>Le prix affiché est celui que tu paies. 2DKR n'ajoute <strong>aucune commission ni frais de service</strong> : 0€.</p>
+        <h3>Frais transparents</h3>
+        <p id="fees-main">Les frais sont affichés à côté de chaque prix, et le total est toujours indiqué.</p>
       </div>
       <div class="fees-card">
         <i class="fa-solid fa-building-columns" aria-hidden="true"></i>
         <h3>Frais de ton moyen de paiement</h3>
-        <p>Si ta banque, PayPal ou le réseau crypto prend des frais de son côté (ex. frais de carte, frais réseau de quelques centimes), ils ne viennent pas de 2DKR.</p>
+        <p>Si ta banque, PayPal ou le réseau crypto prend des frais de son côté (ex. frais de carte, frais réseau de quelques centimes), ils ne font pas partie des frais 2DKR.</p>
       </div>
       <div class="fees-card">
         <i class="fa-solid fa-calendar-check" aria-hidden="true"></i>
@@ -1155,8 +1155,12 @@
         <!-- Rempli en JS -->
       </ul>
       <div class="modal-fees">
-        <span>Frais de service / commission</span>
-        <span>0€</span>
+        <span>Sous-total</span>
+        <span id="modalSubtotal">0€</span>
+      </div>
+      <div class="modal-fees">
+        <span>Frais</span>
+        <span id="modalFees">0€</span>
       </div>
       <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 15px; margin-bottom: 20px;">
         <span style="font-weight: 700;">Total Final :</span>
