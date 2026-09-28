@@ -880,10 +880,11 @@
   <dialog class="changelog" id="changelog" aria-labelledby="changelog-title">
     <div class="changelog-head">
       <h3 id="changelog-title"><i class="fa-solid fa-code" style="color: var(--accent-blue);"></i> Nouveautés v0.4.2</h3>
-      <button type="button" class="changelog-close" aria-label="Fermer" onclick="this.closest('dialog').close()"><i class="fa-solid fa-xmark"></i></button>
+      <button type="button" class="changelog-close" aria-label="Fermer"><i class="fa-solid fa-xmark"></i></button>
     </div>
     <ul>
       <li><strong>Frais transparents</strong> : à partir du 7 octobre, des frais de service (5 à 10 % selon le temps de chaque pack, + 0,35€ par commande) seront affichés dans une bulle à côté de chaque prix, avec le total.</li>
+      <li><strong>Page Paiements &amp; frais</strong> : PayPal, crypto, virement bancaire et explication des frais, sur une page dédiée accessible depuis le menu.</li>
       <li><strong>Paiement protégé</strong> : PayPal passe en « Biens et services », pour que tes paiements soient protégés.</li>
       <li><strong>Panier détaillé</strong> : sous-total, frais et total dans le panier, le calculateur et le récapitulatif, plus une section « Paiement &amp; frais » qui explique tout.</li>
       <li><strong>Nouveaux tarifs annoncés</strong> : les prix changent le mardi 7 octobre. Clique sur la bannière de la page Services pour voir l'avant / après.</li>
@@ -917,10 +918,18 @@
       const badge = document.getElementById('version-badge');
       const dlg = document.getElementById('changelog');
       if (!badge || !dlg || !dlg.showModal) return;
-      const open = () => dlg.showModal();
+      const open = () => { dlg.classList.remove('is-closing'); dlg.showModal(); };
+      // Fermeture en douceur : on joue l'animation de sortie, puis on ferme
+      const fermer = () => {
+        if (!dlg.open || dlg.classList.contains('is-closing')) return;
+        dlg.classList.add('is-closing');
+        setTimeout(() => { dlg.classList.remove('is-closing'); dlg.close(); }, 250);
+      };
       badge.addEventListener('click', open);
       badge.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
-      dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
+      dlg.addEventListener('click', (e) => { if (e.target === dlg) fermer(); });
+      dlg.addEventListener('cancel', (e) => { e.preventDefault(); fermer(); });
+      dlg.querySelector('.changelog-close').addEventListener('click', fermer);
     })();
   </script>
 

@@ -461,6 +461,79 @@ body::before {
 .fees-card p { font-size: 0.88rem; line-height: 1.55; color: var(--text-muted); }
 .fees-card strong { color: var(--text-main); }
 
+/* ---------- Badge de version : survol fluide ---------- */
+.badge-dev-mode {
+  position: relative;
+  transition:
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.5s ease,
+    border-color 0.5s ease,
+    box-shadow 0.5s ease !important;
+}
+
+/* reflet lumineux qui traverse le badge au survol */
+.badge-dev-mode::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.18) 50%, transparent 70%);
+  transform: translateX(-120%);
+  pointer-events: none;
+}
+
+.badge-dev-mode:hover { transform: translateY(-2px); }
+.badge-dev-mode:hover::after { transform: translateX(120%); transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1); }
+.badge-dev-mode i { transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1); }
+.badge-dev-mode:hover i { transform: rotate(-12deg) scale(1.1); }
+.badge-dev-mode .extra-text { transition: max-width 0.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s ease 0.1s !important; }
+.badge-dev-mode:active { transform: translateY(0) scale(0.97); }
+
+/* ---------- Fenêtre des nouveautés : ouverture / fermeture en douceur ---------- */
+@keyframes dlg-in {
+  from { opacity: 0; transform: translateY(18px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes dlg-out {
+  from { opacity: 1; transform: translateY(0) scale(1); }
+  to   { opacity: 0; transform: translateY(12px) scale(0.97); }
+}
+
+@keyframes fond-in  { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fond-out { from { opacity: 1; } to { opacity: 0; } }
+
+@keyframes ligne-in {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.changelog[open] { animation: dlg-in 0.45s cubic-bezier(0.22, 1, 0.36, 1); }
+.changelog[open]::backdrop { animation: fond-in 0.4s ease; }
+.changelog.is-closing { animation: dlg-out 0.25s ease forwards; }
+.changelog.is-closing::backdrop { animation: fond-out 0.25s ease forwards; }
+
+/* les lignes du changelog apparaissent une par une */
+.changelog[open] li { animation: ligne-in 0.4s cubic-bezier(0.22, 1, 0.36, 1) backwards; }
+.changelog[open] li:nth-child(1) { animation-delay: 0.10s; }
+.changelog[open] li:nth-child(2) { animation-delay: 0.15s; }
+.changelog[open] li:nth-child(3) { animation-delay: 0.20s; }
+.changelog[open] li:nth-child(4) { animation-delay: 0.25s; }
+.changelog[open] li:nth-child(5) { animation-delay: 0.30s; }
+.changelog[open] li:nth-child(n+6) { animation-delay: 0.35s; }
+
+/* "Réduire les animations" activé : pas de mouvement, mais un fondu doux */
+@media (prefers-reduced-motion: reduce) {
+  .badge-dev-mode { transition-duration: 0.4s !important; }
+  .badge-dev-mode:hover, .badge-dev-mode:hover i { transform: none !important; }
+  .badge-dev-mode::after { display: none; }
+  .badge-dev-mode .extra-text { transition-duration: 0.4s !important; }
+  .changelog[open],
+  .changelog[open]::backdrop,
+  .changelog[open] li { animation: fond-in 0.35s ease backwards !important; }
+  .changelog.is-closing,
+  .changelog.is-closing::backdrop { animation: fond-out 0.25s ease forwards !important; }
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
