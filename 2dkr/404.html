@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2DKR — Page introuvable</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#38bdf8">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090d16;
+      --border: rgba(48, 54, 61, 0.6);
+      --accent-blue: #38bdf8;
+      --accent-blue-rgb: 56, 189, 248;
+      --accent-2: #818cf8;
+      --text-main: #f0f6fc;
+      --text-muted: #8b949e;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      background-image:
+        radial-gradient(circle at 15% 15%, rgba(var(--accent-blue-rgb), 0.08) 0%, transparent 45%),
+        radial-gradient(circle at 85% 85%, rgba(88, 101, 242, 0.08) 0%, transparent 45%);
+      background-attachment: fixed;
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+      text-align: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--text-main);
+      text-decoration: none;
+      letter-spacing: 1.5px;
+    }
+
+    .logo span { color: var(--accent-blue); }
+
+    .code {
+      font-size: clamp(5rem, 22vw, 9rem);
+      font-weight: 900;
+      line-height: 1;
+      margin: 32px 0 12px;
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    h1 { font-size: 1.5rem; font-weight: 800; margin-bottom: 10px; }
+
+    p { color: var(--text-muted); max-width: 420px; margin: 0 auto 28px; line-height: 1.6; }
+
+    .actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+    .btn {
+      padding: 12px 22px;
+      border-radius: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary { background: var(--accent-blue); color: #04121c; }
+
+    .btn-ghost { border: 1px solid var(--border); color: var(--text-main); }
+
+    .btn-ghost:hover { background: rgba(var(--accent-blue-rgb), 0.08); }
+  </style>
+</head>
+<body>
+  <main>
+    <a href="/" class="logo">2D<span>KR</span></a>
+    <div class="code">404</div>
+    <h1>Page introuvable</h1>
+    <p>Cette page n'existe pas ou a été déplacée. Retourne à l'accueil ou jette un œil au catalogue.</p>
+    <div class="actions">
+      <a href="/" class="btn btn-primary">Retour à l'accueil</a>
+      <a href="/services" class="btn btn-ghost">Voir le catalogue</a>
+    </div>
+  </main>
+</body>
+</html>
