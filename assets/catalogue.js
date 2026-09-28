@@ -37,13 +37,15 @@ window.DKR_CATALOGUE = {
     }
   },
 
-  // Frais / commission en % du prix, affichés dans une bulle "+ X€" à côté de chaque prix.
-  //   pourcent : % par pack (plus le pack prend de temps, plus le % est élevé)
-  //   defaut   : % pour les options à la carte et les comptes
-  //   Mets 0 pour ne pas mettre de frais sur un article.
+  // Frais de service 2DKR, affichés dans une bulle "+ X€" à côté de chaque prix.
+  //   pourcent     : % par pack (plus le pack prend de temps, plus le % est élevé)
+  //   defaut       : % pour les options à la carte et les comptes
+  //   fixeCommande : montant ajouté une seule fois par commande (couvre le fixe PayPal)
+  //   Mets 0 pour ne pas mettre de frais.
   frais: {
-    pourcent: { bronze: 3, argent: 4, or: 5, platine: 6, ultime: 8 },
-    defaut: 3
+    pourcent: { bronze: 5, argent: 6, or: 7, platine: 8, ultime: 10 },
+    defaut: 5,
+    fixeCommande: 0.35
   },
 
   // Packs : chaque info a sa propre ligne, pour les cartes ET le tableau comparatif.
@@ -85,7 +87,7 @@ window.DKR_CATALOGUE = {
       id: 'ultime', nom: 'Pack Ultime', badge: 'Ultime · Populaire', style: 'ultimate', populaire: true,
       prix: 60, prixPromo: 50,
       argent: '300 000 000$', delai: '10 jours', vehicules: 30, tenues: 20, rp: 'Au choix', stats: true,
-      bonus: ['Business', 'Manoirs', 'Armes'],
+      bonus: ['Tous déblocages', 'Déblocages RP', 'Toutes les armes', 'Manoirs', 'Business'],
       compteNeuf: true,
       info: 'Prêt à jouer'
     }
@@ -187,7 +189,12 @@ window.DKR = {
     return p != null ? p : (f.defaut || 0);
   },
 
-  // Montant des frais (arrondi au centime), calculé sur le prix payé
+  // Frais fixes ajoutés une fois par commande
+  fraisFixe: function () {
+    return (window.DKR_CATALOGUE.frais || {}).fixeCommande || 0;
+  },
+
+  // Montant des frais en % (arrondi au centime), calculé sur le prix payé
   fraisDe: function (item) {
     return Math.round(DKR.prixDe(item) * DKR.pourcentFrais(item)) / 100;
   },

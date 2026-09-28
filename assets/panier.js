@@ -46,9 +46,13 @@
     liste: function () { return panier.slice(); },
     article: function (id) { var item = trouver(id); return item ? article(item) : null; },
     sousTotal: function (liste) { return somme(liste || panier, 'prix'); },
-    frais: function (liste) { return somme(liste || panier, 'frais'); },
+    // Frais en % des articles + frais fixes (une fois par commande)
+    frais: function (liste) {
+      liste = liste || panier;
+      return liste.length ? Math.round((somme(liste, 'frais') + DKR.fraisFixe()) * 100) / 100 : 0;
+    },
     // Total à payer, frais compris
-    total: function (liste) { liste = liste || panier; return Math.round((somme(liste, 'prix') + somme(liste, 'frais')) * 100) / 100; },
+    total: function (liste) { liste = liste || panier; return Math.round((somme(liste, 'prix') + DKRPanier.frais(liste)) * 100) / 100; },
     ajouter: function (id) {
       var item = trouver(id);
       if (!item) return;
@@ -67,7 +71,7 @@
         lignes.push('• ' + a.nom + ' — ' + DKR.euros(a.prix) + (a.frais ? ' (+' + DKR.euros(a.frais) + ' de frais)' : ''));
       });
       lignes.push('', 'Sous-total : ' + DKR.euros(DKRPanier.sousTotal(articles)),
-        'Frais : ' + DKR.euros(DKRPanier.frais(articles)),
+        'Frais : ' + DKR.euros(DKRPanier.frais(articles)) + (DKR.fraisFixe() ? ' (dont ' + DKR.euros(DKR.fraisFixe()) + ' par commande)' : ''),
         'Total : ' + DKR.euros(DKRPanier.total(articles)));
       if (DKR.promoActive()) lignes.push('(' + DKR.catalogue.promo.titre + ' appliquée)');
       return lignes.join('\n');
