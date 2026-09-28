@@ -534,6 +534,15 @@ body::before {
   .changelog.is-closing::backdrop { animation: fond-out 0.25s ease forwards !important; }
 }
 
+.affil-note {
+  display: block;
+  margin-top: 8px;
+  text-align: center;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  opacity: 0.8;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
