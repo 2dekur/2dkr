@@ -1018,6 +1018,19 @@
     <div class="promo-banner-content"></div>
   </div>
 
+  <!-- Fenêtre "fin de la promo" (ouverte en cliquant sur la bannière) -->
+  <dialog class="dkr-dialog" id="promo-dialog" aria-labelledby="promo-dialog-title">
+    <div class="dkr-dialog-head">
+      <h3><i class="fa-solid fa-fire" style="color: var(--accent-green);" aria-hidden="true"></i> <span id="promo-dialog-title">Promo</span></h3>
+      <button type="button" class="dkr-dialog-close" aria-label="Fermer" onclick="this.closest('dialog').close()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <p class="promo-end-label">La promo se termine le</p>
+    <p class="promo-end-date" id="promo-end-date"></p>
+    <p class="promo-end-label">Il reste</p>
+    <div class="promo-countdown" id="promo-countdown" aria-live="off"></div>
+    <p class="promo-end-note">Après cette date, les prix normaux reviennent automatiquement, même dans ton panier.</p>
+  </dialog>
+
   <!-- Banner Calculator -->
   <div class="calc-banner">
     <div class="calc-banner-content">

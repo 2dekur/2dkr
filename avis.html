@@ -711,7 +711,7 @@
       <div class="review-card">
         <div>
           <div class="review-header">
-            <span class="user-info"><i class="fa-brands fa-discord"></i> Dias ☘️</span>
+            <span class="user-info"><i class="fa-brands fa-discord"></i> Dias ☘️ <span class="review-date">14/09/2026</span></span>
             <span class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
           </div>
           <p class="review-text">"Rapide - Efficace
@@ -723,34 +723,46 @@ La technique marche vraiment. Pas de risque de ban. Il a fait tous ce que je lui
 • Plusieurs achat de business
 • Tenu Modder"</p>
         </div>
-        <span class="review-tag">Pack Sur-Mesure</span>
+        <div class="review-foot"><span class="review-tag">Pack Sur-Mesure</span><button type="button" class="proof-btn" data-preuve="img/avis/dias.png" data-alt="Avis Discord de Dias du 14/09/2026"><i class="fa-regular fa-image" aria-hidden="true"></i> Voir la preuve</button></div>
       </div>
 
       <!-- AVIS RÉEL SHEIDHEDA -->
       <div class="review-card">
         <div>
           <div class="review-header">
-            <span class="user-info"><i class="fa-brands fa-discord"></i> SheidHeda</span>
+            <span class="user-info"><i class="fa-brands fa-discord"></i> SheidHeda <span class="review-date">16/09/2026</span></span>
             <span class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
           </div>
           <p class="review-text">"Super réactivité, commandé dans l'aprèm et livré le soir même.
 50M$ commandé sur légacy et au top et rapide.
 10/10"</p>
         </div>
-        <span class="review-tag">50M$ Legacy</span>
+        <div class="review-foot"><span class="review-tag">50M$ Legacy</span><button type="button" class="proof-btn" data-preuve="img/avis/sheidheda.png" data-alt="Avis Discord de SheidHeda du 16/09/2026"><i class="fa-regular fa-image" aria-hidden="true"></i> Voir la preuve</button></div>
       </div>
 
       <!-- AVIS RÉEL JD -->
       <div class="review-card">
         <div>
           <div class="review-header">
-            <span class="user-info"><i class="fa-brands fa-discord"></i> JD</span>
+            <span class="user-info"><i class="fa-brands fa-discord"></i> JD <span class="review-date">18/09/2026</span></span>
             <span class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
           </div>
           <p class="review-text">"Allez-y les yeux fermer
 Pour menu ou lobby 10/10 parfait"</p>
         </div>
-        <span class="review-tag">Menu &amp; Lobby</span>
+        <div class="review-foot"><span class="review-tag">Menu &amp; Lobby</span><button type="button" class="proof-btn" data-preuve="img/avis/jd.png" data-alt="Avis Discord de JD du 18/09/2026"><i class="fa-regular fa-image" aria-hidden="true"></i> Voir la preuve</button></div>
+      </div>
+
+      <!-- AVIS RÉEL LE BOSS -->
+      <div class="review-card">
+        <div>
+          <div class="review-header">
+            <span class="user-info"><i class="fa-brands fa-discord"></i> Le boss <span class="review-date">28/09/2026</span></span>
+            <span class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+          </div>
+          <p class="review-text">"Merci à @2dekur il m'a était réactive il m'a aidé jusqu'au bout acheter les yeux fermer pas de scam merci à lui"</p>
+        </div>
+        <div class="review-foot"><span class="review-tag">Menu</span><button type="button" class="proof-btn" data-preuve="img/avis/le-boss.png" data-alt="Avis Discord de Le boss du 28/09/2026 avec capture du menu"><i class="fa-regular fa-image" aria-hidden="true"></i> Voir la preuve</button></div>
       </div>
 
       <!-- CARTE EN ATTENTE D'AVIS DISCORD 2 -->
@@ -772,6 +784,28 @@ Pour menu ou lobby 10/10 parfait"</p>
     </div>
 
   </div>
+
+  <!-- Fenêtre "preuve" (capture Discord en grand) -->
+  <dialog class="dkr-dialog proof-dialog" id="proof-dialog" aria-label="Preuve Discord">
+    <div class="dkr-dialog-head">
+      <h3><i class="fa-brands fa-discord" style="color: #5865f2;" aria-hidden="true"></i> Preuve Discord</h3>
+      <button type="button" class="dkr-dialog-close" aria-label="Fermer" onclick="this.closest('dialog').close()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <img id="proof-img" src="" alt="">
+    <p class="promo-end-note">Capture du salon #avis-clients. Photos de profil floutées.</p>
+  </dialog>
+  <script>
+    (function () {
+      const dlg = document.getElementById('proof-dialog');
+      const img = document.getElementById('proof-img');
+      document.querySelectorAll('.proof-btn').forEach(btn => btn.addEventListener('click', () => {
+        img.src = btn.dataset.preuve;
+        img.alt = btn.dataset.alt;
+        dlg.showModal();
+      }));
+      dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
+    })();
+  </script>
 
   <!-- Footer -->
   <footer>

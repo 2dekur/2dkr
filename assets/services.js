@@ -21,9 +21,47 @@
   // --- Bannière + chip promo + titre de l'onglet
   if (promo) {
     var banner = document.getElementById('promo-banner');
-    banner.querySelector('.promo-banner-content').innerHTML =
-      '🔥 ' + c.promo.titre + ' — <span>' + c.promo.reduction + '</span> ' + c.promo.texte;
+    var contenu = banner.querySelector('.promo-banner-content');
+    contenu.innerHTML =
+      '🔥 ' + c.promo.titre + ' — <span>' + c.promo.reduction + '</span> ' + c.promo.texte +
+      ' <em class="promo-more">Voir la fin <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></em>';
+    contenu.setAttribute('role', 'button');
+    contenu.setAttribute('tabindex', '0');
+    contenu.setAttribute('title', 'Voir quand la promo se termine');
     banner.hidden = false;
+
+    // Fenêtre "fin de la promo" : date exacte + compte à rebours
+    var dlg = document.getElementById('promo-dialog');
+    var fin = new Date(c.promo.fin);
+    var chrono = null;
+    document.getElementById('promo-dialog-title').textContent = c.promo.titre;
+    document.getElementById('promo-end-date').textContent = fin.toLocaleString('fr-FR', {
+      weekday: 'long', day: 'numeric', month: 'long', year: 'numeric',
+      hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Paris'
+    }).replace(':', 'h') + ' (heure de Paris)';
+
+    function majChrono() {
+      var reste = fin.getTime() - Date.now();
+      var el = document.getElementById('promo-countdown');
+      if (reste <= 0) { el.textContent = 'La promo est terminée.'; clearInterval(chrono); return; }
+      var s = Math.floor(reste / 1000);
+      var j = Math.floor(s / 86400), h = Math.floor(s % 86400 / 3600), m = Math.floor(s % 3600 / 60);
+      el.innerHTML = [[j, 'j'], [h, 'h'], [m, 'min'], [s % 60, 's']]
+        .filter(function (x, i) { return i > 0 || x[0] > 0; })
+        .map(function (x) { return '<span><strong>' + x[0] + '</strong>' + x[1] + '</span>'; }).join('');
+    }
+
+    function ouvrirPromo() {
+      majChrono();
+      chrono = setInterval(majChrono, 1000);
+      dlg.showModal();
+    }
+    contenu.addEventListener('click', ouvrirPromo);
+    contenu.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); ouvrirPromo(); }
+    });
+    dlg.addEventListener('close', function () { clearInterval(chrono); });
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
     var chip = document.getElementById('chip-promo');
     chip.hidden = false;
     chip.lastChild.textContent = 'Promo ' + c.promo.reduction.replace(/^jusqu'à\s*/i, '');
