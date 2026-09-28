@@ -41,6 +41,9 @@ h1, h1 *, h2, h2 *, h3, h3 *,
   flex-shrink: 0;
 }
 
+/* Thème dark or : icône du logo en or */
+html[data-theme="gold"] .logo-mark { content: url('../favicon-or.svg'); }
+
 /* ---------- Fond : grille discrète qui s'efface vers le bas ---------- */
 body::before {
   content: '';
