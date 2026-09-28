@@ -1018,6 +1018,23 @@
     <div class="promo-banner-content"></div>
   </div>
 
+  <!-- Bannière "nouveaux tarifs" (affichée avant la date, voir nouveauxTarifs dans assets/catalogue.js) -->
+  <div class="promo-banner tarifs-banner" id="tarifs-banner" hidden>
+    <div class="promo-banner-content"></div>
+  </div>
+
+  <dialog class="dkr-dialog" id="tarifs-dialog" aria-labelledby="tarifs-dialog-title">
+    <div class="dkr-dialog-head">
+      <h3 id="tarifs-dialog-title"><i class="fa-solid fa-tags" style="color: var(--accent-blue);" aria-hidden="true"></i> Nouveaux tarifs</h3>
+      <button type="button" class="dkr-dialog-close" aria-label="Fermer" onclick="this.closest('dialog').close()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <table class="tarifs-table">
+      <thead><tr><th scope="col">Article</th><th scope="col">Avant</th><th scope="col"><span class="sr-only">vers</span></th><th scope="col">Après</th></tr></thead>
+      <tbody id="tarifs-list"></tbody>
+    </table>
+    <p class="promo-end-note" id="tarifs-detail"></p>
+  </dialog>
+
   <!-- Fenêtre "fin de la promo" (ouverte en cliquant sur la bannière) -->
   <dialog class="dkr-dialog" id="promo-dialog" aria-labelledby="promo-dialog-title">
     <div class="dkr-dialog-head">
@@ -1057,6 +1074,7 @@
     <!-- Tableau comparatif (généré depuis assets/catalogue.js) -->
     <h2 class="section-heading" style="margin-top: 50px;"><i class="fa-solid fa-table-columns" style="color: var(--accent-blue);" aria-hidden="true"></i> Comparer les packs</h2>
     <div class="cmp-wrap" id="packs-compare"></div>
+    <p class="cmp-foot">Prix barré : ancien prix pendant une promo, sinon ce que coûterait le même contenu acheté à la carte. Tous les prix sont finaux, sans frais ajoutés.</p>
 
     <!-- Options à la carte -->
     <h2 class="section-heading" style="margin-top: 50px;"><i class="fa-solid fa-sliders" style="color: var(--accent-blue);" aria-hidden="true"></i> Options à la carte</h2>
@@ -1090,6 +1108,26 @@
       </div>
     </div>
 
+    <!-- Paiement & frais : transparence -->
+    <h2 class="section-heading" style="margin-top: 50px;"><i class="fa-solid fa-receipt" style="color: var(--accent-blue);" aria-hidden="true"></i> Paiement &amp; frais</h2>
+    <div class="fees-grid">
+      <div class="fees-card">
+        <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+        <h3>Prix final</h3>
+        <p>Le prix affiché est celui que tu paies. 2DKR n'ajoute <strong>aucune commission ni frais de service</strong> : 0€.</p>
+      </div>
+      <div class="fees-card">
+        <i class="fa-solid fa-building-columns" aria-hidden="true"></i>
+        <h3>Frais de ton moyen de paiement</h3>
+        <p>Si ta banque, PayPal ou le réseau crypto prend des frais de son côté (ex. frais de carte, frais réseau de quelques centimes), ils ne viennent pas de 2DKR.</p>
+      </div>
+      <div class="fees-card">
+        <i class="fa-solid fa-calendar-check" aria-hidden="true"></i>
+        <h3>Prix garanti</h3>
+        <p>Les changements de prix sont toujours annoncés à l'avance. Une commande ouverte en ticket garde le prix du jour où elle a été passée.</p>
+      </div>
+    </div>
+
   </main>
 
   <!-- Bannière flottante du panier -->
@@ -1116,6 +1154,10 @@
       <ul id="cartItemsList" class="cart-items-list">
         <!-- Rempli en JS -->
       </ul>
+      <div class="modal-fees">
+        <span>Frais de service / commission</span>
+        <span>0€</span>
+      </div>
       <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 15px; margin-bottom: 20px;">
         <span style="font-weight: 700;">Total Final :</span>
         <span id="modalTotal" style="font-size: 1.3rem; font-weight: 900; color: var(--accent-green);">0€</span>

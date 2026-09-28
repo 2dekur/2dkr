@@ -3,12 +3,27 @@
   var c = DKR.catalogue;
   var promo = DKR.promoActive();
 
+  // Prix "comme sur les sites" : prix barré à gauche + prix payé + mention des frais.
+  // En promo : ancien prix barré. Sinon (packs) : valeur à la carte barrée + % d'économie.
   function prixHTML(item, extraStyle) {
     var style = extraStyle ? ' style="' + extraStyle + '"' : '';
+    var paye = DKR.prixDe(item);
+    var barre = '', eco = '';
     if (DKR.enPromo(item)) {
-      return '<div class="price-promo"' + style + '><span class="price-old">' + item.prix + '€</span><span class="price-new">' + item.prixPromo + '€</span></div>';
+      barre = '<span class="price-old" title="Prix normal">' + DKR.prixNormal(item) + '€</span>';
+    } else {
+      var valeur = DKR.valeurCarte(item);
+      if (valeur && valeur > paye) {
+        barre = '<span class="price-ref" title="Ce que coûterait ce contenu acheté option par option">' +
+          '<span class="price-ref-label">À la carte</span><s>' + valeur + '€</s></span>';
+        eco = '<span class="price-save">-' + Math.round((1 - paye / valeur) * 100) + '%</span>';
+      }
     }
-    return '<div class="price-promo"' + style + '><span class="price-new price-normal">' + item.prix + '€</span></div>';
+    return '<div class="price-block"' + style + '>' +
+      '<div class="price-promo">' + barre +
+        '<span class="price-new' + (DKR.enPromo(item) ? '' : ' price-normal') + '">' + paye + '€</span>' + eco + '</div>' +
+      '<div class="price-note"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> ' + c.frais + '</div>' +
+    '</div>';
   }
 
   function boutonAjout(item, style) {
@@ -68,6 +83,37 @@
     document.title = '2DKR — ' + c.promo.titre + ' | Catalogue Lobby & Services';
   }
 
+  // --- Bannière "nouveaux tarifs" (avant la date) + fenêtre avec l'ancien et le nouveau prix
+  if (DKR.nouveauxTarifsAVenir()) {
+    var nt = c.nouveauxTarifs;
+    var tb = document.getElementById('tarifs-banner');
+    var tc = tb.querySelector('.promo-banner-content');
+    tc.innerHTML = '<i class="fa-solid fa-tags" aria-hidden="true"></i> ' + nt.annonce +
+      ' <em class="promo-more">Voir les changements <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></em>';
+    tc.setAttribute('role', 'button');
+    tc.setAttribute('tabindex', '0');
+    tc.setAttribute('title', 'Voir les nouveaux tarifs');
+    tb.hidden = false;
+
+    var tous = c.packs.concat(c.comptes);
+    c.options.forEach(function (g) { tous = tous.concat(g.items); });
+    document.getElementById('tarifs-list').innerHTML = tous
+      .filter(function (it) { return nt.prix[it.id] != null && nt.prix[it.id] !== it.prix; })
+      .map(function (it) {
+        return '<tr><th scope="row">' + it.nom + '</th><td><s>' + it.prix + '€</s></td>' +
+          '<td><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></td><td><strong>' + nt.prix[it.id] + '€</strong></td></tr>';
+      }).join('');
+    document.getElementById('tarifs-detail').textContent = nt.detail;
+
+    var tdlg = document.getElementById('tarifs-dialog');
+    var ouvrirTarifs = function () { tdlg.showModal(); };
+    tc.addEventListener('click', ouvrirTarifs);
+    tc.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); ouvrirTarifs(); }
+    });
+    tdlg.addEventListener('click', function (e) { if (e.target === tdlg) tdlg.close(); });
+  }
+
   // --- Packs
   function ligne(icone, texte) {
     return '<li><i class="fa-solid ' + icone + '" aria-hidden="true"></i><span>' + texte + '</span></li>';
@@ -107,9 +153,9 @@
     var non = '<span class="cmp-no" aria-label="Non inclus">—</span>';
     var lignes = [
       ['Prix', function (p) {
-        return DKR.enPromo(p)
-          ? '<span class="cmp-old">' + p.prix + '€</span> <strong class="cmp-price">' + p.prixPromo + '€</strong>'
-          : '<strong class="cmp-price">' + p.prix + '€</strong>';
+        var paye = DKR.prixDe(p), valeur = DKR.valeurCarte(p);
+        var barre = DKR.enPromo(p) ? DKR.prixNormal(p) : (valeur > paye ? valeur : null);
+        return (barre ? '<span class="cmp-old">' + barre + '€</span> ' : '') + '<strong class="cmp-price">' + paye + '€</strong>';
       }],
       ['Argent', function (p) { return p.argent; }],
       ['Estimation', function (p) { return p.delai; }],

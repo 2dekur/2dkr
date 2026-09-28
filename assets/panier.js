@@ -52,7 +52,7 @@
       var total = articles.reduce(function (s, a) { return s + a.prix; }, 0);
       var lignes = ['🛒 Commande 2DKR', ''];
       articles.forEach(function (a) { lignes.push('• ' + a.nom + ' — ' + a.prix + '€'); });
-      lignes.push('', 'Total : ' + total + '€');
+      lignes.push('', 'Frais de service : 0€', 'Total : ' + total + '€');
       if (DKR.promoActive()) lignes.push('(' + DKR.catalogue.promo.titre + ' appliquée)');
       return lignes.join('\n');
     },

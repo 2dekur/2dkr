@@ -334,6 +334,115 @@ body::before {
   background: #000;
 }
 
+/* ---------- Prix "comme sur les sites" + frais ---------- */
+.price-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.card .price-block { align-self: flex-start; }
+.card > .price-block { align-items: flex-start; }
+
+.price-ref {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
+  line-height: 1.15;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.price-ref-label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.price-save {
+  align-self: center;
+  padding: 3px 7px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--accent-green);
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.price-block .price-promo { align-items: center; }
+
+.price-note {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.price-note i { color: var(--accent-green); }
+
+.cmp-foot {
+  margin-top: 10px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* Bannière nouveaux tarifs (bleue, pour la distinguer de la promo verte) */
+.tarifs-banner .promo-banner-content {
+  background: linear-gradient(135deg, rgba(var(--accent-blue-rgb), 0.15) 0%, rgba(13, 17, 23, 0.85) 100%);
+  border-color: rgba(var(--accent-blue-rgb), 0.4);
+  box-shadow: 0 4px 20px rgba(var(--accent-blue-rgb), 0.12);
+}
+
+.tarifs-banner .promo-banner-content i:first-child { color: var(--accent-blue); }
+.tarifs-banner .promo-banner-content[role="button"]:hover { border-color: var(--accent-blue); }
+
+.tarifs-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 14px;
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+.tarifs-table th,
+.tarifs-table td { padding: 8px 6px; border-bottom: 1px solid var(--border); }
+.tarifs-table thead th { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); }
+.tarifs-table tbody th { font-weight: 600; }
+.tarifs-table td { color: var(--text-muted); white-space: nowrap; }
+.tarifs-table td strong { color: var(--text-main); }
+.tarifs-table td i { font-size: 0.7rem; }
+
+/* Panier : ligne frais */
+.modal-fees {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin: 4px 0 10px;
+}
+
+/* Section Paiement & frais */
+.fees-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.fees-card {
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card-bg);
+}
+
+.fees-card > i { font-size: 1.2rem; color: var(--accent-blue); margin-bottom: 10px; }
+.fees-card h3 { font-size: 1.05rem; margin-bottom: 6px; }
+.fees-card p { font-size: 0.88rem; line-height: 1.55; color: var(--text-muted); }
+.fees-card strong { color: var(--text-main); }
+
 .sr-only {
   position: absolute;
   width: 1px;
