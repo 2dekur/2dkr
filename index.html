@@ -739,6 +739,8 @@
     .changelog li { color: var(--text-muted); font-size: 0.92rem; line-height: 1.5; padding-left: 18px; position: relative; }
     .changelog li::before { content: ''; position: absolute; left: 0; top: 0.6em; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-blue); }
     .changelog li strong { color: var(--text-main); }
+    .changelog-sub { margin: 18px 0 10px; font-size: 0.8rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted); }
+    .changelog { max-height: calc(100vh - 32px); overflow-y: auto; }
     .changelog-old { margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.8rem; }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -772,7 +774,7 @@
     <div class="hero-badges">
       <div class="badge-dev-mode" id="version-badge" role="button" tabindex="0" title="Voir les nouveautés" style="cursor: pointer;">
         <i class="fa-solid fa-code"></i>
-        <span>v0.4.0 — Nouveautés</span>
+        <span>v0.4.1 — Nouveautés</span>
         <span class="extra-text">&nbsp;• by Dekur</span>
       </div>
       <div class="badge-status">
@@ -909,9 +911,15 @@
   <!-- Journal des changements (ouvert en cliquant sur le badge de version) -->
   <dialog class="changelog" id="changelog" aria-labelledby="changelog-title">
     <div class="changelog-head">
-      <h3 id="changelog-title"><i class="fa-solid fa-code" style="color: var(--accent-blue);"></i> Nouveautés v0.4.0</h3>
+      <h3 id="changelog-title"><i class="fa-solid fa-code" style="color: var(--accent-blue);"></i> Nouveautés v0.4.1</h3>
       <button type="button" class="changelog-close" aria-label="Fermer" onclick="this.closest('dialog').close()"><i class="fa-solid fa-xmark"></i></button>
     </div>
+    <ul>
+      <li><strong>Nouveau style</strong> : nouvelle police pour les titres, logo avec icône (en or avec le thème dark or) et fond retravaillé.</li>
+      <li><strong>Packs plus lisibles</strong> : des icônes à la place des emojis, et le Pack Ultime mis en avant.</li>
+      <li><strong>Tableau comparatif</strong> : compare les 5 packs d'un coup d'œil sur la page Services, avec ajout au panier direct.</li>
+    </ul>
+    <h4 class="changelog-sub">v0.4.0</h4>
     <ul>
       <li><strong>Aperçus de liens</strong> : belles cartes avec image quand tu partages le site sur Discord ou ailleurs.</li>
       <li><strong>Panier commun</strong> : le panier du catalogue et le calculateur ne font plus qu'un, et ton panier est gardé si tu changes de page.</li>
