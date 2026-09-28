@@ -31,12 +31,29 @@
   }
 
   // --- Packs
+  function ligne(icone, texte) {
+    return '<li><i class="fa-solid ' + icone + '" aria-hidden="true"></i><span>' + texte + '</span></li>';
+  }
+
+  function lignesPack(p) {
+    var l = [];
+    if (p.compteNeuf) l.push(ligne('fa-user-plus', '<strong>Compte neuf fourni</strong> (jeu inclus)'));
+    var tenuesMax = /max/i.test(p.tenues);
+    l.push(ligne('fa-sack-dollar', 'Argent : <strong>' + p.argent + '</strong>'));
+    l.push(ligne('fa-clock', 'Estimation : <strong>' + p.delai + '</strong>'));
+    l.push(ligne('fa-car-side', p.vehicules + ' véhicules moddés'));
+    l.push(ligne('fa-shirt', parseInt(p.tenues, 10) + ' tenues moddées' + (tenuesMax ? ' (maximum)' : '')));
+    l.push(ligne('fa-chart-line', (/choix/i.test(p.rp) ? 'RP au choix' : 'RP ' + p.rp) + (p.stats ? ' · stats max' : '')));
+    if (p.bonus.length) l.push(ligne('fa-unlock', p.bonus.join(' · ')));
+    return l.join('');
+  }
+
   document.getElementById('packs-grid').innerHTML = c.packs.map(function (p) {
-    return '<div class="card card-' + p.style + ' searchable" data-cat="packs' + cats(p) + '">' +
+    return '<div class="card card-' + p.style + (p.populaire ? ' card-populaire' : '') + ' searchable" data-cat="packs' + cats(p) + '">' +
       '<div>' +
-        '<span class="card-badge badge-' + p.style + '">' + p.badge + '</span>' +
+        '<span class="card-badge badge-' + p.style + '">' + (p.populaire ? '<i class="fa-solid fa-crown" aria-hidden="true"></i> ' : '') + p.badge + '</span>' +
         '<div class="card-header"><h2>' + p.nom + '</h2>' + prixHTML(p) + '</div>' +
-        '<ul class="feature-list">' + p.details.map(function (d) { return '<li>' + d + '</li>'; }).join('') + '</ul>' +
+        '<ul class="feature-list">' + lignesPack(p) + '</ul>' +
       '</div>' +
       '<div>' +
         '<div class="info-box">' + p.info + '</div>' +
@@ -44,6 +61,49 @@
       '</div>' +
     '</div>';
   }).join('');
+
+  // --- Tableau comparatif des packs
+  var comparer = document.getElementById('packs-compare');
+  if (comparer) {
+    var oui = '<i class="fa-solid fa-check cmp-yes" aria-label="Inclus"></i>';
+    var non = '<span class="cmp-no" aria-label="Non inclus">—</span>';
+    var lignes = [
+      ['Prix', function (p) {
+        return DKR.enPromo(p)
+          ? '<span class="cmp-old">' + p.prix + '€</span> <strong class="cmp-price">' + p.prixPromo + '€</strong>'
+          : '<strong class="cmp-price">' + p.prix + '€</strong>';
+      }],
+      ['Argent', function (p) { return p.argent; }],
+      ['Estimation', function (p) { return p.delai; }],
+      ['Véhicules moddés', function (p) { return p.vehicules; }],
+      ['Tenues moddées', function (p) { return p.tenues; }],
+      ['Niveau RP', function (p) { return p.rp; }],
+      ['Stats max', function (p) { return p.stats ? oui : non; }],
+      ['Déblocages & bonus', function (p) { return p.bonus.length ? p.bonus.join('<br>') : non; }],
+      ['Compte neuf fourni', function (p) { return p.compteNeuf ? oui : non; }]
+    ];
+    comparer.innerHTML =
+      '<table class="cmp-table">' +
+        '<thead><tr><th scope="col"><span class="sr-only">Critère</span></th>' +
+          c.packs.map(function (p) {
+            return '<th scope="col" class="cmp-' + p.style + (p.populaire ? ' cmp-pop' : '') + '">' +
+              (p.populaire ? '<span class="cmp-flag">Populaire</span>' : '') + p.badge.split(' ·')[0] + '</th>';
+          }).join('') +
+        '</tr></thead>' +
+        '<tbody>' +
+          lignes.map(function (l) {
+            return '<tr><th scope="row">' + l[0] + '</th>' +
+              c.packs.map(function (p) { return '<td' + (p.populaire ? ' class="cmp-pop"' : '') + '>' + l[1](p) + '</td>'; }).join('') +
+            '</tr>';
+          }).join('') +
+          '<tr class="cmp-actions"><th scope="row"></th>' +
+            c.packs.map(function (p) {
+              return '<td' + (p.populaire ? ' class="cmp-pop"' : '') + '><button type="button" data-add="' + p.id + '" class="btn btn-outline btn-sm" aria-label="Ajouter ' + p.nom + ' au panier"><i class="fa-solid fa-cart-plus"></i></button></td>';
+            }).join('') +
+          '</tr>' +
+        '</tbody>' +
+      '</table>';
+  }
 
   // --- Options à la carte (1re carte à gauche, les autres empilées à droite)
   function carteOption(g, style) {

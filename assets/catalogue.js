@@ -19,71 +19,48 @@ window.DKR_CATALOGUE = {
     fin: '2026-09-30T23:59:59+02:00'
   },
 
+  // Packs : chaque info a sa propre ligne, pour les cartes ET le tableau comparatif.
+  //   argent   : montant affiché       delai     : estimation
+  //   vehicules / tenues : nombre (ou texte, ex. '20 (max)')
+  //   rp       : niveau RP             stats     : true = stats max incluses
+  //   bonus    : liste des extras      compteNeuf: true = compte fourni (jeu inclus)
+  //   populaire: true = mis en avant
   packs: [
     {
       id: 'bronze', nom: 'Pack Bronze', badge: 'Bronze', style: 'bronze',
       prix: 5, prixPromo: 3,
-      details: [
-        '💰 <strong>Argent :</strong> 50 000 000$',
-        '⏳ <strong>Estimation :</strong> 2 jours',
-        '🏎️ 5 Véhicules moddés',
-        '👕 5 Tenues moddées',
-        '📈 RP 120',
-        '📊 Stats max'
-      ],
-      info: '📦 Réalisé sur votre compte'
+      argent: '50 000 000$', delai: '2 jours', vehicules: 5, tenues: 5, rp: '120', stats: true,
+      bonus: [],
+      info: 'Réalisé sur votre compte'
     },
     {
       id: 'argent', nom: 'Pack Argent', badge: 'Argent', style: 'silver',
       prix: 10, prixPromo: 7,
-      details: [
-        '💰 <strong>Argent :</strong> 100 000 000$',
-        '⏳ <strong>Estimation :</strong> 4 jours',
-        '🏎️ 10 Véhicules moddés',
-        '👕 10 Tenues moddées',
-        '📈 RP 200 | 📊 Stats max',
-        '🔓 Déblocages RP inclus'
-      ],
-      info: '📦 Réalisé sur votre compte'
+      argent: '100 000 000$', delai: '4 jours', vehicules: 10, tenues: 10, rp: '200', stats: true,
+      bonus: ['Déblocages RP'],
+      info: 'Réalisé sur votre compte'
     },
     {
       id: 'or', nom: 'Pack Or', badge: 'Or', style: 'gold',
       prix: 15, prixPromo: 11,
-      details: [
-        '💰 <strong>Argent :</strong> 150 000 000$',
-        '⏳ <strong>Estimation :</strong> 5 jours',
-        '🏎️ 15 Véhicules moddés',
-        '👕 15 Tenues moddées',
-        '📈 RP au choix | 📊 Stats max',
-        '🔓 Déblocages + 🔫 Toutes les armes'
-      ],
-      info: '📦 Réalisé sur votre compte'
+      argent: '150 000 000$', delai: '5 jours', vehicules: 15, tenues: 15, rp: 'Au choix', stats: true,
+      bonus: ['Déblocages', 'Toutes les armes'],
+      info: 'Réalisé sur votre compte'
     },
     {
       id: 'platine', nom: 'Pack Platine', badge: 'Platine', style: 'plat',
       prix: 20, prixPromo: 14,
-      details: [
-        '💰 <strong>Argent :</strong> 200 000 000$',
-        '⏳ <strong>Estimation :</strong> 7 jours',
-        '🏎️ 20 Véhicules moddés',
-        '👕 20 Tenues (Maximum)',
-        '📈 RP au choix | 📊 Stats max',
-        '🔓 Tous déblocages + Manoirs + Armes + Business'
-      ],
-      info: '📦 Réalisé sur votre compte'
+      argent: '200 000 000$', delai: '7 jours', vehicules: 20, tenues: '20 (max)', rp: 'Au choix', stats: true,
+      bonus: ['Tous déblocages', 'Manoirs', 'Armes', 'Business'],
+      info: 'Réalisé sur votre compte'
     },
     {
-      id: 'ultime', nom: 'Pack Ultime', badge: 'Ultime 👑 Populaire', style: 'ultimate',
+      id: 'ultime', nom: 'Pack Ultime', badge: 'Ultime · Populaire', style: 'ultimate', populaire: true,
       prix: 60, prixPromo: 50,
-      details: [
-        '📦 <strong>Compte neuf fourni</strong> (Jeu inclus)',
-        '💰 <strong>Argent :</strong> 300 000 000$',
-        '⏳ <strong>Estimation :</strong> 10 jours',
-        '🏎️ 30 Véhicules moddés | 👕 20 Tenues',
-        '📈 RP au choix | 📊 Stats max',
-        '🏢 Business, Manoirs & Armes inclus'
-      ],
-      info: '🎮 Prêt à jouer'
+      argent: '300 000 000$', delai: '10 jours', vehicules: 30, tenues: 20, rp: 'Au choix', stats: true,
+      bonus: ['Business', 'Manoirs', 'Armes'],
+      compteNeuf: true,
+      info: 'Prêt à jouer'
     }
   ],
 

@@ -968,12 +968,14 @@
       padding: 2px 7px; border-radius: 999px;
     }
   </style>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
 
   <!-- Navigation -->
   <nav>
-    <a href="index.html" class="logo">2D<span>KR</span></a>
+    <a href="index.html" class="logo"><img src="favicon.svg" alt="" class="logo-mark" width="30" height="30">2D<span>KR</span></a>
     
     <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation">
       <i class="fa-solid fa-bars"></i>
@@ -1038,6 +1040,10 @@
 
     <h2 class="section-heading"><i class="fa-solid fa-box-open" style="color: var(--accent-blue);" aria-hidden="true"></i> Nos Packs Disponibles</h2>
     <div class="grid" id="packs-grid"></div>
+
+    <!-- Tableau comparatif (généré depuis assets/catalogue.js) -->
+    <h2 class="section-heading" style="margin-top: 50px;"><i class="fa-solid fa-table-columns" style="color: var(--accent-blue);" aria-hidden="true"></i> Comparer les packs</h2>
+    <div class="cmp-wrap" id="packs-compare"></div>
 
     <!-- Options à la carte -->
     <h2 class="section-heading" style="margin-top: 50px;"><i class="fa-solid fa-sliders" style="color: var(--accent-blue);" aria-hidden="true"></i> Options à la carte</h2>

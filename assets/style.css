@@ -1,0 +1,200 @@
+/* =====================================================================
+   2DKR — Nouveau style (chargé après les styles de chaque page)
+   Typo de titre, logo, fond, cartes, icônes, tableau comparatif.
+   Marche avec les deux thèmes (bleu / dark or) grâce aux variables.
+   ===================================================================== */
+
+:root {
+  --font-display: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  --radius: 16px;
+}
+
+/* ---------- Typo : titres en Space Grotesk ---------- */
+h1, h1 *, h2, h2 *, h3, h3 *,
+.logo, .logo *,
+.price-new, .cart-total, .total-amount {
+  font-family: var(--font-display);
+}
+
+.hero h1 {
+  font-size: clamp(2.3rem, 6vw, 3.6rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.hero p { max-width: 560px; margin-left: auto; margin-right: auto; }
+
+/* ---------- Logo ---------- */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.logo-mark {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  border-radius: 9px;
+  flex-shrink: 0;
+}
+
+/* ---------- Fond : grille discrète qui s'efface vers le bas ---------- */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 44px 44px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 0%, transparent 75%);
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 0%, transparent 75%);
+}
+
+/* ---------- Titres de section ---------- */
+.section-heading {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.section-heading::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  margin-left: 6px;
+  background: linear-gradient(90deg, var(--border), transparent);
+}
+
+/* ---------- Cartes ---------- */
+.card {
+  border-radius: var(--radius);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.005)),
+    var(--card-bg);
+}
+
+.card h2 { font-weight: 700; letter-spacing: -0.01em; }
+
+.card-badge { letter-spacing: 1px; }
+
+.card-populaire {
+  border-color: rgba(168, 85, 247, 0.45);
+  box-shadow: 0 0 0 1px rgba(168, 85, 247, 0.2), 0 24px 60px -24px rgba(168, 85, 247, 0.55);
+}
+
+/* Liste des packs : icônes alignées au lieu des emojis */
+.feature-list li {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.feature-list li i {
+  width: 18px;
+  flex-shrink: 0;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--accent-blue);
+}
+
+.info-box { border-radius: 10px; }
+
+/* ---------- Boutons ---------- */
+.btn { border-radius: 12px; font-weight: 700; }
+
+.price-new { font-weight: 700; letter-spacing: -0.01em; }
+
+/* ---------- Tableau comparatif ---------- */
+.cmp-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card-bg);
+}
+
+.cmp-table {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.cmp-table th,
+.cmp-table td {
+  padding: 12px 14px;
+  text-align: center;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+
+.cmp-table thead th {
+  position: relative;
+  padding-top: 26px;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.cmp-table tbody th {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  text-align: left;
+  white-space: nowrap;
+  font-weight: 600;
+  color: var(--text-main);
+  background: var(--bg);
+}
+
+.cmp-table thead th:first-child { position: sticky; left: 0; z-index: 1; background: var(--bg); }
+
+.cmp-bronze { color: #cd7f32 !important; }
+.cmp-silver { color: #c0c0c0 !important; }
+.cmp-gold { color: #ffd700 !important; }
+.cmp-plat { color: var(--accent-blue) !important; }
+.cmp-ultimate { color: #c084fc !important; }
+
+.cmp-pop { background: rgba(168, 85, 247, 0.07); }
+
+.cmp-flag {
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: #c084fc;
+}
+
+.cmp-yes { color: var(--accent-green); }
+.cmp-no { opacity: 0.45; }
+.cmp-old { text-decoration: line-through; font-size: 0.8rem; }
+.cmp-price { font-family: var(--font-display); font-size: 1.1rem; color: var(--text-main); }
+
+.cmp-actions th,
+.cmp-actions td { border-bottom: none; }
+
+.cmp-actions .btn { width: auto; }
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
