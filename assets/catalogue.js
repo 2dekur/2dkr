@@ -41,6 +41,7 @@ window.DKR_CATALOGUE = {
   //   pourcent     : % par pack (plus le pack prend de temps, plus le % est élevé)
   //   defaut       : % pour les options à la carte et les comptes
   //   fixeCommande : montant ajouté une seule fois par commande (couvre le fixe PayPal)
+  //   Les frais commencent en même temps que les nouveaux tarifs (nouveauxTarifs.date).
   //   Mets 0 pour ne pas mettre de frais.
   frais: {
     pourcent: { bronze: 5, argent: 6, or: 7, platine: 8, ultime: 10 },
@@ -183,7 +184,14 @@ window.DKR = {
   },
 
   // % de frais d'un article
+  // Les frais démarrent avec les nouveaux tarifs (annoncés à l'avance)
+  fraisActifs: function () {
+    var n = window.DKR_CATALOGUE.nouveauxTarifs;
+    return !n || !n.date || DKR.nouveauxTarifsActifs();
+  },
+
   pourcentFrais: function (item) {
+    if (!DKR.fraisActifs()) return 0;
     var f = window.DKR_CATALOGUE.frais || {};
     var p = (f.pourcent || {})[item.id];
     return p != null ? p : (f.defaut || 0);
@@ -191,6 +199,7 @@ window.DKR = {
 
   // Frais fixes ajoutés une fois par commande
   fraisFixe: function () {
+    if (!DKR.fraisActifs()) return 0;
     return (window.DKR_CATALOGUE.frais || {}).fixeCommande || 0;
   },
 

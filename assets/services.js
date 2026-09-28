@@ -100,7 +100,9 @@
         return '<tr><th scope="row">' + it.nom + '</th><td><s>' + it.prix + '€</s></td>' +
           '<td><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></td><td><strong>' + nt.prix[it.id] + '€</strong></td></tr>';
       }).join('');
-    document.getElementById('tarifs-detail').textContent = nt.detail;
+    var cf2 = c.frais || {};
+    document.getElementById('tarifs-detail').textContent = nt.detail +
+      ((cf2.defaut || cf2.fixeCommande) ? ' À partir de cette date, des frais de service s\'ajoutent aussi (voir « Paiement & frais » en bas de la page).' : '');
 
     var tdlg = document.getElementById('tarifs-dialog');
     var ouvrirTarifs = function () { tdlg.showModal(); };
@@ -260,11 +262,19 @@
   // --- Section Paiement & frais : texte selon les % du catalogue
   var fraisTxt = document.getElementById('fees-main');
   if (fraisTxt) {
-    var pcts = c.packs.map(DKR.pourcentFrais);
+    // Valeurs prévues dans le catalogue (même si les frais n'ont pas encore commencé)
+    var cf = c.frais || {}, pc = cf.pourcent || {};
+    var pcts = c.packs.map(function (p) { return pc[p.id] != null ? pc[p.id] : (cf.defaut || 0); });
     var min = Math.min.apply(null, pcts), max = Math.max.apply(null, pcts);
-    fraisTxt.innerHTML = max
-      ? 'Des frais de <strong>' + (min === max ? min : min + ' à ' + max) + ' %</strong> s\'ajoutent selon le pack : plus un pack demande de temps, plus le % est élevé (' + (c.frais.defaut || 0) + ' % sur les options et les comptes)' + (DKR.fraisFixe() ? ', plus <strong>' + DKR.euros(DKR.fraisFixe()) + ' une seule fois par commande</strong>' : '') + '. Ils sont affichés dans une bulle à côté de chaque prix, et le total est toujours indiqué.'
-      : 'Le prix affiché est celui que tu paies : <strong>aucun frais</strong> n\'est ajouté.';
+    var regle = 'des frais de <strong>' + (min === max ? min : min + ' à ' + max) + ' %</strong> selon le pack : plus un pack demande de temps, plus le % est élevé (' + (cf.defaut || 0) + ' % sur les options et les comptes)' +
+      (cf.fixeCommande ? ', plus <strong>' + DKR.euros(cf.fixeCommande) + ' une seule fois par commande</strong>' : '');
+    if (!max && !cf.fixeCommande) {
+      fraisTxt.innerHTML = 'Le prix affiché est celui que tu paies : <strong>aucun frais</strong> n\'est ajouté.';
+    } else if (DKR.fraisActifs()) {
+      fraisTxt.innerHTML = 'Il y a ' + regle + '. Ils sont affichés dans une bulle à côté de chaque prix, et le total est toujours indiqué.';
+    } else {
+      fraisTxt.innerHTML = '<strong>Aucun frais</strong> pour le moment. ' + c.nouveauxTarifs.annonce.replace(/^Nouveaux tarifs à partir/, 'À partir') + ', il y aura ' + regle + ', affichés à côté de chaque prix.';
+    }
   }
 
   // --- Copier le récapitulatif
