@@ -208,6 +208,18 @@ window.DKR = {
     return Math.round(DKR.prixDe(item) * DKR.pourcentFrais(item)) / 100;
   },
 
+  // Texte "Frais transparents" (section Paiements & frais), selon le catalogue
+  texteFrais: function () {
+    var c = window.DKR_CATALOGUE, cf = c.frais || {}, pc = cf.pourcent || {};
+    var pcts = c.packs.map(function (p) { return pc[p.id] != null ? pc[p.id] : (cf.defaut || 0); });
+    var min = Math.min.apply(null, pcts), max = Math.max.apply(null, pcts);
+    var regle = 'des frais de <strong>' + (min === max ? min : min + ' à ' + max) + ' %</strong> selon le pack : plus un pack demande de temps, plus le % est élevé (' + (cf.defaut || 0) + ' % sur les options et les comptes)' +
+      (cf.fixeCommande ? ', plus <strong>' + DKR.euros(cf.fixeCommande) + ' une seule fois par commande</strong>' : '');
+    if (!max && !cf.fixeCommande) return 'Le prix affiché est celui que tu paies : <strong>aucun frais</strong> n\'est ajouté.';
+    if (DKR.fraisActifs()) return 'Il y a ' + regle + '. Ils sont affichés dans une bulle à côté de chaque prix, et le total est toujours indiqué.';
+    return '<strong>Aucun frais</strong> pour le moment. ' + c.nouveauxTarifs.annonce.replace(/^Nouveaux tarifs à partir/, 'À partir') + ', il y aura ' + regle + ', affichés à côté de chaque prix.';
+  },
+
   // Affichage d'un montant : "9€" ou "9,27€"
   euros: function (n) {
     n = Math.round(n * 100) / 100;
