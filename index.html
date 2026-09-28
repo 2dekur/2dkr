@@ -760,7 +760,7 @@
       <a href="services.html">Services & Tarifs</a>
       <a href="calculateur.html">Calculateur</a>
       <a href="avis.html">Avis & Preuves</a>
-      <a href="#paiements">Paiements &amp; frais</a>
+      <a href="paiements.html">Paiements &amp; frais</a>
       <button class="theme-toggle" id="theme-toggle" title="Changer de thème" aria-label="Changer de thème"><i class="fa-solid fa-moon"></i></button>
       <a href="https://www.youtube.com/@Dekur7" target="_blank" rel="noopener noreferrer" class="nav-social-icon" style="color: #ff0000;" title="YouTube" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
       <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="nav-social-icon" style="color: #5865f2;" title="Discord" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
@@ -793,7 +793,6 @@
       <button class="chip" data-cat="offres"><i class="fa-solid fa-tags"></i>Offres</button>
       <button class="chip" data-cat="jeux"><i class="fa-solid fa-gamepad"></i>Jeux</button>
       <button class="chip" data-cat="services"><i class="fa-solid fa-bolt"></i>Services</button>
-      <button class="chip" data-cat="paiements"><i class="fa-solid fa-wallet"></i>Paiements</button>
       <button class="chip" data-cat="communaute"><i class="fa-brands fa-discord"></i>Communauté</button>
     </div>
 
@@ -858,73 +857,6 @@
       </div>
 
     </div>
-
-    <div class="section-heading" id="paiements" style="margin-top: 50px;"><i class="fa-solid fa-wallet" style="color: var(--accent-blue);" aria-hidden="true"></i> <span>Paiements &amp; frais</span></div>
-
-    <h3 class="pay-subheading">Moyens de paiement</h3>
-    <div class="grid">
-
-      <div class="card searchable" data-cat="paiements">
-        <div>
-          <span class="card-badge badge-payment">PayPal</span>
-          <div class="card-title-row">
-            <h2>Paiement PayPal</h2>
-            <i class="fa-brands fa-paypal" style="font-size: 1.4rem; color: var(--accent-green);"></i>
-          </div>
-          <p>Paiement en <strong>« Biens et services »</strong> (paiement protégé). Clique sur le bouton pour payer via PayPal.</p>
-        </div>
-        <a href="https://paypal.me/DekurFreekrd" target="_blank" rel="noopener noreferrer" class="btn btn-blue"><i class="fa-brands fa-paypal"></i> Payer par PayPal</a>
-      </div>
-
-      <div class="card searchable" data-cat="paiements">
-        <div>
-          <span class="card-badge badge-payment">Crypto</span>
-          <div class="card-title-row">
-            <h2>Crypto (SOL / USDC)</h2>
-            <i class="fa-solid fa-coins" style="font-size: 1.4rem; color: var(--accent-green);"></i>
-          </div>
-          <p>Clique sur le bouton pour copier rapidement l'adresse du wallet.</p>
-        </div>
-        <button class="btn btn-blue" id="btn-crypto" type="button" onclick="copyCryptoAddress(event)">
-          <i class="fa-solid fa-copy"></i> <span>Copier l'adresse crypto</span>
-        </button>
-      </div>
-
-      <div class="card searchable" data-cat="paiements">
-        <div>
-          <span class="card-badge badge-payment">Virement</span>
-          <div class="card-title-row">
-            <h2>Virement bancaire</h2>
-            <i class="fa-solid fa-building-columns" style="font-size: 1.4rem; color: var(--accent-green);"></i>
-          </div>
-          <p>Les coordonnées bancaires te sont données dans ton ticket Discord. Pratique si tu veux payer depuis ta banque.</p>
-        </div>
-        <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="btn btn-blue"><i class="fa-brands fa-discord"></i> Ouvrir un ticket</a>
-      </div>
-
-    </div>
-
-    <h3 class="pay-subheading">Frais</h3>
-    <div class="fees-grid">
-      <div class="fees-card searchable" data-cat="paiements">
-        <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
-        <h3>Frais transparents</h3>
-        <p id="fees-main">Les frais sont affichés à côté de chaque prix, et le total est toujours indiqué.</p>
-      </div>
-      <div class="fees-card searchable" data-cat="paiements">
-        <i class="fa-solid fa-building-columns" aria-hidden="true"></i>
-        <h3>Frais de ton moyen de paiement</h3>
-        <p>Si ta banque, PayPal ou le réseau crypto prend des frais de son côté (ex. frais de carte, frais réseau de quelques centimes), ils ne font pas partie des frais 2DKR.</p>
-      </div>
-      <div class="fees-card searchable" data-cat="paiements">
-        <i class="fa-solid fa-calendar-check" aria-hidden="true"></i>
-        <h3>Prix garanti</h3>
-        <p>Les changements de prix sont toujours annoncés à l'avance. Une commande ouverte en ticket garde le prix du jour où elle a été passée.</p>
-      </div>
-    </div>
-    <script>
-      (function () { var el = document.getElementById('fees-main'); if (el && window.DKR) el.innerHTML = DKR.texteFrais(); })();
-    </script>
 
     <div class="section-heading" style="margin-top: 50px;"><i class="fa-circle-question fa-solid" style="color: var(--accent-blue);" aria-hidden="true"></i> <span>Foire Aux Questions</span></div>
     
@@ -1135,7 +1067,7 @@
     // --- Index global du site (toutes les pages)
     const SITE_INDEX = [
       { t: 'Serveur Discord', s: 'Rejoindre la communauté 2DKR', u: 'https://discord.gg/mDpZT73FFG', p: 'Accueil', k: 'discord communaute ticket support chat' },
-      { t: 'Paiements & frais', s: 'PayPal, crypto, virement et frais', u: 'index.html#paiements', p: 'Accueil', k: 'paiement paiements frais commission paypal crypto solana virement banque carte argent' },
+      { t: 'Paiements & frais', s: 'PayPal, crypto, virement et frais', u: 'paiements.html', p: 'Paiements', k: 'paiement paiements frais commission paypal crypto solana virement banque carte argent' },
       { t: 'BeamNG.drive', s: 'Clés PC en stock, moins cher que Steam', u: 'https://discord.gg/mDpZT73FFG', p: 'Accueil', k: 'beamng jeu jeux cle key steam pc' },
       { t: 'Pack Bronze', s: 'Pack d\'entrée lobby moddé', u: 'services.html', p: 'Services', k: 'pack bronze tarif prix lobby gta' },
       { t: 'Pack Argent', s: 'Pack intermédiaire', u: 'services.html', p: 'Services', k: 'pack argent silver tarif prix lobby' },
@@ -1156,7 +1088,7 @@
       { t: 'Voir les avis & preuves', u: 'avis.html', i: 'fa-star', k: 'avis preuve review' },
       { t: 'Rejoindre le Discord', u: 'https://discord.gg/mDpZT73FFG', i: 'fa-brands fa-discord', k: 'discord ticket support' },
       { t: 'Chaîne YouTube', u: 'https://www.youtube.com/@Dekur7', i: 'fa-brands fa-youtube', k: 'youtube video chaine' },
-      { t: 'Paiements & frais', u: 'index.html#paiements', i: 'fa-wallet', k: 'paiement frais paypal crypto virement' },
+      { t: 'Paiements & frais', u: 'paiements.html', i: 'fa-wallet', k: 'paiement frais paypal crypto virement' },
       { t: 'Changer de thème (bleu / dark or)', u: '#theme', i: 'fa-palette', k: 'theme couleur dark or bleu mode' }
     ];
 

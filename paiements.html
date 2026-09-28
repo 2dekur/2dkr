@@ -3,19 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>2DKR — Calculateur de Prix</title>
-
-  <!-- Open Graph / Meta Discord -->
-  <meta property="og:title" content="2DKR — Calculateur sur mesure">
-  <meta property="og:description" content="Compose ton pack personnalisé GTA Online et calcule ton tarif en temps réel.">
+  <title>2DKR — Paiements & frais</title>
+  
+  <meta property="og:title" content="2DKR — Paiements & frais">
+  <meta property="og:description" content="Moyens de paiement acceptés (PayPal, crypto, virement) et frais de service 2DKR, expliqués simplement.">
   <meta property="og:type" content="website">
   <meta name="theme-color" content="#38bdf8">
-  <meta name="description" content="Compose ton pack GTA Online sur mesure et calcule ton tarif en temps réel avec le calculateur 2DKR.">
-  <link rel="canonical" href="https://2dkr.pages.dev/calculateur">
-  <meta property="og:url" content="https://2dkr.pages.dev/calculateur">
+  <meta name="description" content="Paiements 2DKR : PayPal Biens et services, crypto SOL/USDC, virement bancaire, et tout sur les frais de service.">
+  <link rel="canonical" href="https://2dkr.pages.dev/paiements">
+  <meta property="og:url" content="https://2dkr.pages.dev/paiements">
   <meta property="og:site_name" content="2DKR">
   <meta property="og:locale" content="fr_FR">
-  <meta property="og:image" content="https://2dkr.pages.dev/og/calculateur.png">
+  <meta property="og:image" content="https://2dkr.pages.dev/og/paiements.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
@@ -24,10 +23,10 @@
   <link rel="manifest" href="/site.webmanifest">
   <script src="assets/catalogue.js"></script>
 
-  <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
@@ -70,6 +69,7 @@
       overflow-x: hidden;
     }
 
+    /* Navigation Glassmorphism */
     nav {
       display: flex;
       justify-content: space-between;
@@ -82,14 +82,6 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      animation: fadeInDown 0.8s ease-out;
-    }
-
-    .logo-wrapper {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      position: relative;
     }
 
     .logo {
@@ -107,54 +99,6 @@
 
     .logo span {
       color: var(--accent-blue);
-    }
-
-    .beta-badge {
-      position: relative;
-      background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
-      color: #fff;
-      font-size: 0.68rem;
-      font-weight: 800;
-      padding: 3px 8px;
-      border-radius: 6px;
-      letter-spacing: 0.5px;
-      cursor: help;
-      box-shadow: 0 2px 8px rgba(249, 115, 22, 0.4);
-      transition: transform 0.2s ease;
-      user-select: none;
-    }
-
-    .beta-badge:hover {
-      transform: scale(1.08);
-    }
-
-    .beta-tooltip {
-      position: absolute;
-      top: 140%;
-      left: 50%;
-      transform: translateX(-50%) translateY(-6px);
-      background: rgba(13, 17, 23, 0.95);
-      border: 1px solid var(--border-glow);
-      color: var(--text-main);
-      font-size: 0.8rem;
-      font-weight: 500;
-      padding: 10px 14px;
-      border-radius: 10px;
-      width: 220px;
-      text-align: center;
-      line-height: 1.4;
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-      z-index: 200;
-    }
-
-    .beta-badge:hover .beta-tooltip {
-      opacity: 1;
-      visibility: visible;
-      transform: translateX(-50%) translateY(0);
     }
 
     .nav-links {
@@ -187,6 +131,7 @@
       transform: scale(1.25) rotate(5deg);
     }
 
+    /* Menu mobile burger */
     .menu-toggle {
       display: none;
       background: none;
@@ -196,19 +141,20 @@
       cursor: pointer;
     }
 
+    /* Hero Section */
     .hero {
       text-align: center;
-      padding: 50px 20px 25px 20px;
-      max-width: 800px;
+      padding: 70px 20px 30px 20px;
+      max-width: 750px;
       margin: 0 auto;
-      animation: fadeInDown 0.8s ease-out 0.1s backwards;
+      animation: fadeInDown 0.8s ease-out;
     }
 
     .hero h1 {
-      font-size: 2.8rem;
+      font-size: 3rem;
       font-weight: 900;
       letter-spacing: -0.5px;
-      margin-bottom: 12px;
+      margin-bottom: 15px;
       line-height: 1.15;
     }
 
@@ -219,11 +165,126 @@
     }
 
     .hero p {
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       color: var(--text-muted);
       line-height: 1.6;
+      margin-bottom: 20px;
     }
 
+    /* Badges Hero */
+    .hero-badges {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .badge-dev-mode {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(var(--accent-blue-rgb), 0.1);
+      color: var(--accent-blue);
+      border: 1px solid rgba(var(--accent-blue-rgb), 0.3);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: default;
+      overflow: hidden;
+      white-space: nowrap;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      backdrop-filter: blur(8px);
+    }
+
+    .badge-dev-mode .extra-text {
+      max-width: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+    }
+
+    .badge-dev-mode:hover {
+      background: rgba(var(--accent-blue-rgb), 0.2);
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 20px rgba(var(--accent-blue-rgb), 0.3);
+    }
+
+    .badge-dev-mode:hover .extra-text {
+      max-width: 150px;
+      opacity: 1;
+    }
+
+    .badge-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--accent-green);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--accent-green);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent-green);
+    }
+
+    /* Barre de recherche & Badge Beta */
+    .search-container {
+      max-width: 500px;
+      margin: 25px auto 0 auto;
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 12px 65px 12px 45px;
+      background: rgba(13, 17, 23, 0.8);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--text-main);
+      font-size: 0.95rem;
+      outline: none;
+      transition: all 0.25s ease;
+    }
+
+    .search-input:focus {
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 15px var(--accent-blue-glow);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 15px;
+      color: var(--text-muted);
+    }
+
+    .beta-badge {
+      position: absolute;
+      right: 12px;
+      background: rgba(249, 115, 22, 0.15);
+      color: var(--accent-orange);
+      border: 1px solid rgba(249, 115, 22, 0.35);
+      padding: 3px 8px;
+      border-radius: 8px;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* Container Principal */
     .container {
       max-width: 900px;
       margin: 20px auto 60px auto;
@@ -232,27 +293,39 @@
       animation: fadeInUp 0.8s ease-out 0.2s backwards;
     }
 
-    .calc-layout {
-      display: grid;
-      grid-template-columns: 1fr 340px;
-      gap: 24px;
-      align-items: start;
+    .section-heading {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin: 35px 0 15px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
-    .calc-card {
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 22px;
+    }
+
+    /* Cards Glassmorphism */
+    .card {
       background: var(--card-bg);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border: 1px solid var(--border);
       border-radius: 14px;
-      padding: 24px;
-      margin-bottom: 20px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       position: relative;
       overflow: hidden;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .calc-card::before {
+    .card::before {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0;
@@ -262,219 +335,142 @@
       transition: opacity 0.3s ease;
     }
 
-    .calc-card:hover {
+    .card:hover {
       border-color: var(--border-glow);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px var(--accent-blue-glow);
     }
 
-    .calc-card:hover::before {
+    .card:hover::before {
       opacity: 1;
     }
 
-    .calc-card:hover h2 {
+    .card:hover h2 {
       color: var(--accent-blue);
     }
 
-    .calc-card h2 {
-      font-size: 1.2rem;
+    .card h2 {
+      font-size: 1.3rem;
       font-weight: 700;
       color: var(--text-main);
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
       transition: color 0.2s ease;
     }
 
-    .options-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
+    .card-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+      align-self: flex-start;
     }
 
-    .option-item {
+    .badge-discord {
+      background-color: rgba(88, 101, 242, 0.15);
+      color: #5865f2;
+      border: 1px solid rgba(88, 101, 242, 0.35);
+    }
+
+    .badge-dev {
+      background-color: rgba(var(--accent-blue-rgb), 0.15);
+      color: var(--accent-blue);
+      border: 1px solid rgba(var(--accent-blue-rgb), 0.35);
+    }
+
+    .badge-payment {
+      background-color: rgba(16, 185, 129, 0.15);
+      color: var(--accent-green);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+    }
+
+    .badge-offer {
+      background-color: rgba(249, 115, 22, 0.15);
+      color: var(--accent-orange);
+      border: 1px solid rgba(249, 115, 22, 0.35);
+    }
+
+    .card-title-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(13, 17, 23, 0.5);
-      border: 1px solid var(--border);
-      padding: 14px 18px;
-      border-radius: 10px;
-      cursor: pointer;
-      user-select: none;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-      position: relative;
+      margin-bottom: 10px;
     }
 
-    .option-item:hover {
-      border-color: var(--accent-blue);
-      background: rgba(var(--accent-blue-rgb), 0.05);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(var(--accent-blue-rgb), 0.15);
-    }
-
-    .option-item:hover .option-label {
-      color: var(--accent-blue);
-    }
-
-    .option-item:active {
-      transform: scale(0.98);
-    }
-
-    .option-item.selected {
-      border-color: var(--accent-blue);
-      background: rgba(var(--accent-blue-rgb), 0.1);
-      box-shadow: 0 0 15px rgba(var(--accent-blue-rgb), 0.2);
-    }
-
-    .option-item.selected .option-label {
-      color: var(--accent-blue);
-      font-weight: 600;
-    }
-
-    .option-info {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .option-checkbox {
-      width: 20px;
-      height: 20px;
-      border: 2px solid var(--border);
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s ease;
-      background: rgba(13, 17, 23, 0.8);
-    }
-
-    .option-item.selected .option-checkbox {
-      background: var(--accent-blue);
-      border-color: var(--accent-blue);
-      color: #090d16;
-    }
-
-    .option-checkbox i {
-      font-size: 0.75rem;
-      opacity: 0;
-      transform: scale(0);
-      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .option-item.selected .option-checkbox i {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    .option-label {
+    .card p {
+      color: var(--text-muted);
       font-size: 0.95rem;
-      color: var(--text-main);
-      transition: color 0.2s ease;
+      line-height: 1.6;
+      margin-bottom: 24px;
     }
 
-    .option-price-tag {
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: var(--accent-green);
-      background: rgba(16, 185, 129, 0.12);
-      padding: 4px 10px;
-      border-radius: 6px;
-      border: 1px solid rgba(16, 185, 129, 0.3);
-    }
-
-    .summary-sidebar {
-      position: sticky;
-      top: 90px;
-    }
-
-    .summary-card {
-      background: var(--card-bg);
+    /* FAQ Details/Summary */
+    .faq-item {
+      background-color: var(--card-bg);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 24px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      border-radius: 12px;
+      padding: 18px 22px;
+      margin-bottom: 14px;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+      overflow: hidden;
     }
 
-    .summary-card h2 {
-      font-size: 1.2rem;
-      font-weight: 700;
-      margin-bottom: 16px;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 12px;
+    .faq-item:hover {
+      border-color: var(--accent-blue);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     }
 
-    .summary-items {
-      min-height: 90px;
-      max-height: 200px;
-      overflow-y: auto;
-      margin-bottom: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .summary-item-row {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      animation: fadeInDown 0.3s ease-out;
-    }
-
-    .summary-item-row span:last-child {
-      color: var(--text-main);
+    .faq-item summary {
       font-weight: 600;
-    }
-
-    .summary-empty {
-      color: var(--text-muted);
-      font-size: 0.88rem;
-      font-style: italic;
-      text-align: center;
-      padding: 20px 0;
-    }
-
-    .total-box {
-      background: rgba(13, 17, 23, 0.7);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 16px;
+      color: var(--text-main);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 16px;
+      list-style: none;
+      cursor: pointer;
+      user-select: none;
+      -webkit-user-select: none;
     }
 
-    .total-label {
-      font-size: 0.95rem;
-      font-weight: 600;
+    .faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-item summary i {
+      color: var(--accent-blue);
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .faq-item.is-open summary i {
+      transform: rotate(180deg);
+    }
+
+    .faq-content-wrapper {
+      overflow: hidden;
+    }
+
+    .faq-item p {
       color: var(--text-muted);
+      font-size: 0.92rem;
+      line-height: 1.6;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
     }
 
-    .total-amount {
-      font-size: 1.5rem;
-      font-weight: 900;
-      color: var(--accent-green);
-      text-shadow: 0 0 15px rgba(16, 185, 129, 0.25);
-      transition: transform 0.2s ease;
-    }
-
-    .total-amount.pulse {
-      transform: scale(1.1);
-    }
-
+    /* Buttons Modernes */
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 10px;
       width: 100%;
       text-align: center;
-      padding: 12px 18px;
+      padding: 13px 20px;
       border-radius: 10px;
       font-size: 0.95rem;
       font-weight: 600;
@@ -484,53 +480,71 @@
       border: none;
     }
 
-    .btn-discord {
-      background: linear-gradient(135deg, #5865f2 0%, #4752c4 100%);
-      color: #ffffff;
-      box-shadow: 0 4px 15px rgba(88, 101, 242, 0.3);
+    .btn-blue {
+      background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-blue-hover) 100%);
+      color: #090d16;
+      box-shadow: 0 4px 15px rgba(var(--accent-blue-rgb), 0.25);
     }
 
-    .btn-discord:hover:not(.disabled) {
-      box-shadow: 0 6px 20px rgba(88, 101, 242, 0.5);
+    .btn-blue:hover {
+      box-shadow: 0 6px 20px rgba(var(--accent-blue-rgb), 0.45);
       transform: translateY(-2px);
     }
 
-    .btn-discord.disabled {
-      background: rgba(48, 54, 61, 0.5);
-      color: var(--text-muted);
-      cursor: not-allowed;
-      box-shadow: none;
-      opacity: 0.6;
-    }
-
-    .btn-reset {
-      background: transparent;
-      color: var(--text-muted);
-      border: 1px solid var(--border);
-      margin-top: 10px;
-      font-size: 0.85rem;
-      padding: 8px;
-    }
-
-    .btn-reset:hover {
-      background: rgba(255, 255, 255, 0.03);
-      color: var(--text-main);
-      border-color: var(--text-muted);
-    }
-
-    /* v0.4.0 */
-    [hidden] { display: none !important; }
-
-    .btn-reset:disabled {
-      opacity: 0.45;
-      cursor: not-allowed;
-    }
-
-    .calc-hint {
-      color: var(--accent-green);
-      font-size: 0.85rem;
+    /* Toast Notification */
+    .toast {
+      visibility: hidden;
+      min-width: 280px;
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: #0f172a;
       text-align: center;
-      margin-top: 10px;
+      border-radius: 10px;
+      padding: 14px 22px;
+      position: fixed;
+      z-index: 1000;
+      bottom: 30px;
+      right: 30px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 15px rgba(16, 185, 129, 0.4);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    .toast.show {
+      visibility: visible;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive Mobile */
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(13, 17, 23, 0.95);
+        backdrop-filter: blur(16px);
+        padding: 20px;
+        border-bottom: 1px solid var(--border);
+        gap: 16px;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .hero h1 {
+        font-size: 2.2rem;
+      }
     }
 
     @keyframes fadeInDown {
@@ -551,29 +565,8 @@
       color: var(--text-muted);
       font-size: 0.85rem;
       background: rgba(9, 13, 22, 0.8);
-      animation: fadeInDown 0.8s ease-out 0.3s backwards;
     }
 
-    @media (max-width: 850px) {
-      .menu-toggle { display: block; }
-      .nav-links {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 0; right: 0;
-        background: rgba(13, 17, 23, 0.95);
-        backdrop-filter: blur(16px);
-        padding: 20px;
-        border-bottom: 1px solid var(--border);
-        gap: 16px;
-      }
-      .nav-links.active { display: flex; }
-      .calc-layout { grid-template-columns: 1fr; }
-      .summary-sidebar { position: static; }
-      nav { padding: 15px 5%; }
-      .hero h1 { font-size: 2.2rem; }
-    }
     /* ===== v0.3.4 — Thèmes, chips, palette de commandes ===== */
     :root {
       --ease: cubic-bezier(0.22, 1, 0.36, 1);
@@ -589,8 +582,6 @@
       --accent-blue: #f0b94c;
       --accent-blue-hover: #c98f1f;
       --accent-blue-glow: rgba(240, 185, 76, 0.25);
-      --accent-blue-rgb: 240, 185, 76;
-      --accent-2: #fcd34d;
       --accent-blue-rgb: 240, 185, 76;
       --accent-2: #fcd34d;
       --text-main: #fdf6e6;
@@ -724,227 +715,251 @@
       margin: 12px auto 0; right: auto;
     }
     .search-input { padding-right: 44px !important; }
+
+    /* v0.4.0 — journal des changements */
+    .changelog {
+      margin: auto;
+      width: min(520px, calc(100% - 32px));
+      background: #0d1117;
+      color: var(--text-main);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    }
+    .changelog::backdrop { background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(4px); }
+    .changelog-head {
+      display: flex; justify-content: space-between; align-items: center;
+      border-bottom: 1px solid var(--border); padding-bottom: 12px; margin-bottom: 16px;
+    }
+    .changelog-head h3 { font-size: 1.1rem; display: flex; gap: 10px; align-items: center; }
+    .changelog-close { background: none; border: 0; color: var(--text-muted); font-size: 1.1rem; cursor: pointer; padding: 4px; }
+    .changelog-close:hover { color: var(--text-main); }
+    .changelog ul { list-style: none; display: grid; gap: 10px; }
+    .changelog li { color: var(--text-muted); font-size: 0.92rem; line-height: 1.5; padding-left: 18px; position: relative; }
+    .changelog li::before { content: ''; position: absolute; left: 0; top: 0.6em; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-blue); }
+    .changelog li strong { color: var(--text-main); }
+    .changelog-sub { margin: 18px 0 10px; font-size: 0.8rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted); }
+    .changelog { max-height: calc(100vh - 32px); overflow-y: auto; }
+    .changelog-old { margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.8rem; }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
 
-  <!-- Navigation -->
   <nav>
-    <div class="logo-wrapper">
-      <a href="index.html" class="logo"><img src="favicon.svg" alt="" class="logo-mark" width="30" height="30">2D<span>KR</span></a>
-    </div>
-
+    <a href="index.html" class="logo"><img src="favicon.svg" alt="" class="logo-mark" width="30" height="30">2D<span>KR</span></a>
+    
     <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation">
       <i class="fa-solid fa-bars"></i>
     </button>
 
     <div class="nav-links" id="nav-links">
-  <a href="index.html">Accueil</a>
-  <a href="services.html">Services & Tarifs</a>
-  <a href="calculateur.html" class="active">Calculateur</a>
-  <a href="avis.html">Avis & Preuves</a>
-  <a href="paiements.html">Paiements &amp; frais</a>
-  <button class="theme-toggle" id="theme-toggle" title="Changer de thème" aria-label="Changer de thème"><i class="fa-solid fa-moon"></i></button>
-  <a href="https://www.youtube.com/@Dekur7" target="_blank" rel="noopener noreferrer" class="nav-social-icon" style="color: #ff0000;" title="YouTube" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-  <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="nav-social-icon" style="color: #5865f2;" title="Discord" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
-</div>
+      <a href="index.html">Accueil</a>
+      <a href="services.html">Services & Tarifs</a>
+      <a href="calculateur.html">Calculateur</a>
+      <a href="avis.html">Avis & Preuves</a>
+      <a href="paiements.html" class="active">Paiements &amp; frais</a>
+      <button class="theme-toggle" id="theme-toggle" title="Changer de thème" aria-label="Changer de thème"><i class="fa-solid fa-moon"></i></button>
+      <a href="https://www.youtube.com/@Dekur7" target="_blank" rel="noopener noreferrer" class="nav-social-icon" style="color: #ff0000;" title="YouTube" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+      <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="nav-social-icon" style="color: #5865f2;" title="Discord" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
+    </div>
   </nav>
 
-  <!-- Hero Section -->
   <section class="hero">
-    <h1>Calculateur de <span>Tarifs Sur Mesure</span></h1>
-    <p>Sélectionne les options de ton choix pour composer ton pack GTA Online personnalisé.</p>
+    <h1>Paiements <span>&amp; frais</span></h1>
+    <p>Les moyens de paiement acceptés et tout ce qu'il faut savoir sur les frais, sans surprise.</p>
+
+    <div class="kbd-hint"><span class="kbd">Ctrl</span> + <span class="kbd">K</span> pour les commandes rapides</div>
   </section>
 
-  <!-- Container Principal -->
-  <div class="container">
-    <div class="calc-layout">
-      
-      <div class="calc-options" id="calc-options"></div>
+  <div class="container" id="paiements">
 
-      <!-- Résumé Sidebar -->
-      <div class="summary-sidebar">
-        <div class="summary-card">
-          <h2>Résumé du Pack</h2>
-          
-          <div class="summary-items" id="summary-items">
-            <div class="summary-empty">Aucune option sélectionnée</div>
+    <h3 class="pay-subheading">Moyens de paiement</h3>
+    <div class="grid">
+
+      <div class="card searchable" data-cat="paiements">
+        <div>
+          <span class="card-badge badge-payment">PayPal</span>
+          <div class="card-title-row">
+            <h2>Paiement PayPal</h2>
+            <i class="fa-brands fa-paypal" style="font-size: 1.4rem; color: var(--accent-green);"></i>
           </div>
-
-          <div class="total-box">
-            <span class="total-label">Total :</span>
-            <span class="total-amount" id="total-price">0€</span>
-          </div>
-
-          <a href="#" id="discord-btn" class="btn btn-discord disabled" target="_blank" rel="noopener noreferrer">
-            <i class="fa-brands fa-discord"></i> <span id="discord-btn-text">Commander via Discord</span>
-          </a>
-          <p class="calc-hint" id="calc-hint" hidden>Récapitulatif copié ! Ouvre un ticket et colle-le (Ctrl + V).</p>
-
-          <button class="btn btn-reset" id="cart-btn" type="button" disabled>
-            <i class="fa-solid fa-cart-plus"></i> Ajouter au panier du catalogue
-          </button>
-
-          <button class="btn btn-reset" id="reset-btn" type="button">
-            Réinitialiser
-          </button>
+          <p>Paiement en <strong>« Biens et services »</strong> (paiement protégé). Clique sur le bouton pour payer via PayPal.</p>
         </div>
+        <a href="https://paypal.me/DekurFreekrd" target="_blank" rel="noopener noreferrer" class="btn btn-blue"><i class="fa-brands fa-paypal"></i> Payer par PayPal</a>
+      </div>
+
+      <div class="card searchable" data-cat="paiements">
+        <div>
+          <span class="card-badge badge-payment">Crypto</span>
+          <div class="card-title-row">
+            <h2>Crypto (SOL / USDC)</h2>
+            <i class="fa-solid fa-coins" style="font-size: 1.4rem; color: var(--accent-green);"></i>
+          </div>
+          <p>Clique sur le bouton pour copier rapidement l'adresse du wallet.</p>
+        </div>
+        <button class="btn btn-blue" id="btn-crypto" type="button" onclick="copyCryptoAddress(event)">
+          <i class="fa-solid fa-copy"></i> <span>Copier l'adresse crypto</span>
+        </button>
+      </div>
+
+      <div class="card searchable" data-cat="paiements">
+        <div>
+          <span class="card-badge badge-payment">Virement</span>
+          <div class="card-title-row">
+            <h2>Virement bancaire</h2>
+            <i class="fa-solid fa-building-columns" style="font-size: 1.4rem; color: var(--accent-green);"></i>
+          </div>
+          <p>Les coordonnées bancaires te sont données dans ton ticket Discord. Pratique si tu veux payer depuis ta banque.</p>
+        </div>
+        <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="btn btn-blue"><i class="fa-brands fa-discord"></i> Ouvrir un ticket</a>
       </div>
 
     </div>
+
+    <h3 class="pay-subheading">Frais</h3>
+    <div class="fees-grid">
+      <div class="fees-card searchable" data-cat="paiements">
+        <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+        <h3>Frais transparents</h3>
+        <p id="fees-main">Les frais sont affichés à côté de chaque prix, et le total est toujours indiqué.</p>
+      </div>
+      <div class="fees-card searchable" data-cat="paiements">
+        <i class="fa-solid fa-building-columns" aria-hidden="true"></i>
+        <h3>Frais de ton moyen de paiement</h3>
+        <p>Si ta banque, PayPal ou le réseau crypto prend des frais de son côté (ex. frais de carte, frais réseau de quelques centimes), ils ne font pas partie des frais 2DKR.</p>
+      </div>
+      <div class="fees-card searchable" data-cat="paiements">
+        <i class="fa-solid fa-calendar-check" aria-hidden="true"></i>
+        <h3>Prix garanti</h3>
+        <p>Les changements de prix sont toujours annoncés à l'avance. Une commande ouverte en ticket garde le prix du jour où elle a été passée.</p>
+      </div>
+    </div>
+    <script>
+      (function () { var el = document.getElementById('fees-main'); if (el && window.DKR) el.innerHTML = DKR.texteFrais(); })();
+    </script>
+
   </div>
 
-  <!-- Footer -->
   <footer>
     &copy; 2026 2DKR by Dekur. All rights reserved.
   </footer>
 
-  <script src="assets/panier.js"></script>
+  <div id="copy-toast" class="toast">
+    <i class="fa-solid fa-check-circle"></i> <span>Adresse du wallet copiée !</span>
+  </div>
+
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const menuToggle = document.getElementById('menu-toggle');
-      const navLinks = document.getElementById('nav-links');
+    const WALLET_ADDRESS = "HzBYYLgE5aJ9cKG9FmxUv3tZfiMSayd6YdADkVYzQA29";
 
-      if (menuToggle) {
-        menuToggle.addEventListener('click', () => {
-          navLinks.classList.toggle('active');
+    // Menu Mobile Burger
+    const menuToggle = document.getElementById('menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+
+    if (menuToggle) {
+      menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+      });
+
+      document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+          navLinks.classList.remove('active');
         });
+      });
+    }
 
-        document.querySelectorAll('.nav-links a').forEach(link => {
-          link.addEventListener('click', () => {
-            navLinks.classList.remove('active');
+    // Animation Fluide FAQ (Accordéon Pro)
+    document.querySelectorAll('.faq-item').forEach((el) => {
+      const summary = el.querySelector('summary');
+      const content = el.querySelector('.faq-content-wrapper');
+
+      summary.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        if (el.open) {
+          const startHeight = el.offsetHeight;
+          const endHeight = summary.offsetHeight;
+
+          el.classList.remove('is-open');
+
+          const animation = el.animate([
+            { height: `${startHeight}px` },
+            { height: `${endHeight}px` }
+          ], {
+            duration: 300,
+            easing: 'cubic-bezier(0.4, 0, 0.2, 1)'
           });
-        });
-      }
 
-      // --- Options générées depuis assets/catalogue.js
-      const optionsContainer = document.getElementById('calc-options');
-      optionsContainer.innerHTML = DKR.catalogue.options.map(g => `
-        <div class="calc-card">
-          <h2><i class="fa-solid ${g.icone}" style="color: var(--accent-blue);"></i> ${g.titreCalc || g.titre}</h2>
-          <div class="options-grid">
-            ${g.items.map(o => `
-              <div class="option-item" data-id="${o.id}" data-excl="${o.groupe || (g.unique ? g.id : o.id)}" role="button" tabindex="0">
-                <div class="option-info">
-                  <div class="option-checkbox"><i class="fa-solid fa-check"></i></div>
-                  <span class="option-label">${(o.detail || o.nom) + (o.delai ? ' (' + o.delai + ')' : '')}</span>
-                </div>
-                <span class="option-price-tag">${DKR.euros(DKR.prixDe(o))}${DKR.fraisDe(o) ? `<small class="option-fee"> + ${DKR.euros(DKR.fraisDe(o))} frais</small>` : ''}</span>
-              </div>`).join('')}
-          </div>
-        </div>`).join('');
-
-      const optionItems = optionsContainer.querySelectorAll('.option-item');
-      const summaryContainer = document.getElementById('summary-items');
-      const totalPriceEl = document.getElementById('total-price');
-      const discordBtn = document.getElementById('discord-btn');
-      const discordBtnText = document.getElementById('discord-btn-text');
-      const resetBtn = document.getElementById('reset-btn');
-      const cartBtn = document.getElementById('cart-btn');
-      const hint = document.getElementById('calc-hint');
-
-      // Une seule option par "data-excl" (ex. un seul montant d'argent, un seul pack de tenues)
-      let selections = {};
-      let currentDisplayPrice = 0;
-
-      function toggle(item) {
-        const excl = item.dataset.excl;
-        const wasSelected = item.classList.contains('selected');
-        optionItems.forEach(opt => { if (opt.dataset.excl === excl) opt.classList.remove('selected'); });
-        if (wasSelected) {
-          delete selections[excl];
+          animation.onfinish = () => {
+            el.open = false;
+            el.style.height = '';
+          };
         } else {
-          item.classList.add('selected');
-          const o = DKRPanier.trouver(item.dataset.id);
-          selections[excl] = DKRPanier.article(o.id);
-        }
-        updateSummary();
-      }
+          el.open = true;
+          el.classList.add('is-open');
 
-      optionItems.forEach(item => {
-        item.addEventListener('click', () => toggle(item));
-        item.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(item); }
-        });
-      });
+          const startHeight = el.offsetHeight - content.offsetHeight;
+          const endHeight = el.offsetHeight;
 
-      resetBtn.addEventListener('click', () => {
-        optionItems.forEach(opt => opt.classList.remove('selected'));
-        selections = {};
-        updateSummary();
-      });
+          el.style.height = `${startHeight}px`;
 
-      // Commander : copie le récap puis ouvre Discord
-      discordBtn.addEventListener('click', (e) => {
-        const liste = Object.values(selections);
-        if (!liste.length) { e.preventDefault(); return; }
-        DKRPanier.copier(DKRPanier.recap(liste)).then(ok => { if (ok) hint.hidden = false; });
-      });
-
-      // Envoie la sélection dans le panier de la page Services
-      cartBtn.addEventListener('click', () => {
-        Object.values(selections).forEach(s => DKRPanier.ajouter(s.id));
-        window.location.href = 'services.html';
-      });
-
-      function updateSummary() {
-        const activeSelections = Object.values(selections);
-        const calculatedTotal = DKRPanier.total(activeSelections);
-        summaryContainer.innerHTML = '';
-        hint.hidden = true;
-
-        if (activeSelections.length === 0) {
-          summaryContainer.innerHTML = '<div class="summary-empty">Aucune option sélectionnée</div>';
-          discordBtn.classList.add('disabled');
-          discordBtn.setAttribute('href', '#');
-          discordBtnText.textContent = 'Commander via Discord';
-          cartBtn.disabled = true;
-        } else {
-          activeSelections.forEach(sel => {
-            const row = document.createElement('div');
-            row.className = 'summary-item-row';
-            row.innerHTML = `<span>${sel.nom}</span><span>${DKR.euros(sel.prix)}</span>`;
-            summaryContainer.appendChild(row);
+          const animation = el.animate([
+            { height: `${startHeight}px` },
+            { height: `${endHeight}px` }
+          ], {
+            duration: 300,
+            easing: 'cubic-bezier(0.4, 0, 0.2, 1)'
           });
-          const fraisRow = document.createElement('div');
-          fraisRow.className = 'summary-item-row summary-fees';
-          fraisRow.innerHTML = `<span>Frais</span><span>${DKR.euros(DKRPanier.frais(activeSelections))}</span>`;
-          summaryContainer.appendChild(fraisRow);
-          discordBtn.classList.remove('disabled');
-          discordBtn.setAttribute('href', DKRPanier.DISCORD);
-          discordBtnText.textContent = `Copier et commander (${DKR.euros(calculatedTotal)})`;
-          cartBtn.disabled = false;
+
+          animation.onfinish = () => {
+            el.style.height = '';
+          };
         }
-
-        animateValue(totalPriceEl, currentDisplayPrice, calculatedTotal, 300);
-        currentDisplayPrice = calculatedTotal;
-
-        totalPriceEl.classList.add('pulse');
-        setTimeout(() => totalPriceEl.classList.remove('pulse'), 200);
-      }
-
-      function animateValue(obj, start, end, duration) {
-        if (start === end || end % 1 !== 0 || start % 1 !== 0) {
-          obj.innerHTML = DKR.euros(end);
-          return;
-        }
-        let startTimestamp = null;
-        const step = (timestamp) => {
-          if (!startTimestamp) startTimestamp = timestamp;
-          const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-          const currentVal = Math.floor(progress * (end - start) + start);
-          obj.innerHTML = currentVal + '€';
-          if (progress < 1) {
-            window.requestAnimationFrame(step);
-          } else {
-            obj.innerHTML = end + '€';
-          }
-        };
-        window.requestAnimationFrame(step);
-      }
+      });
     });
+
+    // Copie Adresse Crypto
+    function copyCryptoAddress(event) {
+      if (event) event.stopPropagation();
+
+      const handleSuccess = () => {
+        const btnCrypto = document.getElementById("btn-crypto");
+        const originalContent = btnCrypto.innerHTML;
+
+        btnCrypto.innerHTML = '<i class="fa-solid fa-check"></i> <span>Copié !</span>';
+        const toast = document.getElementById("copy-toast");
+        toast.classList.add("show");
+
+        setTimeout(() => {
+          toast.classList.remove("show");
+          btnCrypto.innerHTML = originalContent;
+        }, 3000);
+      };
+
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(WALLET_ADDRESS).then(handleSuccess).catch(err => {
+          console.error("Erreur lors de la copie : ", err);
+        });
+      } else {
+        const textarea = document.createElement("textarea");
+        textarea.value = WALLET_ADDRESS;
+        textarea.style.position = "fixed";
+        textarea.style.opacity = "0";
+        document.body.appendChild(textarea);
+        textarea.focus();
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          handleSuccess();
+        } catch (err) {
+          console.error('Erreur fallback copie : ', err);
+        }
+        document.body.removeChild(textarea);
+      }
+    }
+
     /* ===== v0.3.4 ===== */
 
     // --- Thème (bleu / dark or)
@@ -1077,7 +1092,7 @@
         const q = norm(input ? input.value : '');
         let shown = 0;
         cards.forEach(card => {
-          const okCat = cat === 'all' || (card.dataset.cat || '').split(' ').includes(cat);
+          const okCat = cat === 'all' || card.dataset.cat === cat;
           const okQ = !q || norm(card.textContent).includes(q);
           const show = okCat && okQ;
           if (show && card.classList.contains('is-hidden')) {
@@ -1123,6 +1138,7 @@
       }
     })();
   </script>
+
 
   <div class="cmdk-overlay" id="cmdk-overlay" role="dialog" aria-modal="true" aria-label="Commandes rapides">
     <div class="cmdk">
