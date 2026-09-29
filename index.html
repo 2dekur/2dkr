@@ -790,6 +790,14 @@
       </div>
     </div>
 
+    <div class="trust-strip">
+      <a href="avis.html"><strong>+60</strong> clients satisfaits</a>
+      <span class="trust-sep" aria-hidden="true"></span>
+      <a href="avis.html"><strong>5/5</strong> <i class="fa-solid fa-star" aria-hidden="true"></i> de moyenne</a>
+      <span class="trust-sep" aria-hidden="true"></span>
+      <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer"><strong id="discord-members">130+</strong> membres Discord</a>
+    </div>
+
     <div class="search-container">
       <i class="fa-solid fa-magnifying-glass search-icon"></i>
       <input type="text" id="search-input" class="search-input" placeholder="Rechercher un service, une offre, un moyen de paiement...">
@@ -1292,5 +1300,12 @@
     </div>
   </div>
   <button class="cmdk-fab" id="cmdk-fab" title="Commandes rapides" aria-label="Commandes rapides"><i class="fa-solid fa-terminal"></i></button>
+  <script>
+    // Nombre de membres Discord en direct (sinon on garde « 130+ »)
+    fetch('https://discord.com/api/v10/invites/mDpZT73FFG?with_counts=true')
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (j) { if (j && j.approximate_member_count) document.getElementById('discord-members').textContent = j.approximate_member_count; })
+      .catch(function () {});
+  </script>
 </body>
 </html>
