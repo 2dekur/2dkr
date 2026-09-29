@@ -927,13 +927,19 @@
         setTimeout(() => totalPriceEl.classList.remove('pulse'), 200);
       }
 
+      let animId = 0;
       function animateValue(obj, start, end, duration) {
+        const id = ++animId; // une nouvelle sélection annule l'animation précédente
         if (start === end || end % 1 !== 0 || start % 1 !== 0) {
           obj.innerHTML = DKR.euros(end);
           return;
         }
+        // Filet de sécurité : si l'onglet est en arrière-plan, l'animation est
+        // mise en pause par le navigateur ; on affiche quand même le bon total.
+        setTimeout(() => { if (id === animId) obj.innerHTML = DKR.euros(end); }, duration + 100);
         let startTimestamp = null;
         const step = (timestamp) => {
+          if (id !== animId) return;
           if (!startTimestamp) startTimestamp = timestamp;
           const progress = Math.min((timestamp - startTimestamp) / duration, 1);
           const currentVal = Math.floor(progress * (end - start) + start);

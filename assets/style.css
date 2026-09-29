@@ -543,6 +543,112 @@ body::before {
   opacity: 0.8;
 }
 
+/* =====================================================================
+   Thème « Dark Or » : NOIR PUR (#000, pixels OLED éteints) + or.
+   Les blocs ne sont plus séparés par des gris mais par de fines
+   bordures dorées ; l'or reste réservé aux accents.
+   ===================================================================== */
+html[data-theme="gold"] {
+  --bg: #000;
+  --card-bg: #000;
+  --border: rgba(240, 185, 76, 0.16);
+  --border-glow: rgba(240, 185, 76, 0.5);
+  --text-muted: #a8977a;
+  color-scheme: dark;
+}
+
+/* fond : noir absolu, sans halo ni grille */
+html[data-theme="gold"],
+html[data-theme="gold"] body {
+  background: #000 !important;
+  background-image: none !important;
+}
+
+html[data-theme="gold"] body::before { display: none; }
+
+/* toutes les surfaces en noir pur */
+html[data-theme="gold"] nav,
+html[data-theme="gold"] footer,
+html[data-theme="gold"] .card,
+html[data-theme="gold"] .calc-card,
+html[data-theme="gold"] .stat-card,
+html[data-theme="gold"] .review-card,
+html[data-theme="gold"] .faq-item,
+html[data-theme="gold"] .step-card,
+html[data-theme="gold"] .summary-card,
+html[data-theme="gold"] .total-box,
+html[data-theme="gold"] .info-box,
+html[data-theme="gold"] .cta-container,
+html[data-theme="gold"] .reviews-note,
+html[data-theme="gold"] .fees-card,
+html[data-theme="gold"] .cmp-wrap,
+html[data-theme="gold"] .modal,
+html[data-theme="gold"] .cmdk,
+html[data-theme="gold"] .changelog,
+html[data-theme="gold"] .dkr-dialog,
+html[data-theme="gold"] .cart-bar,
+html[data-theme="gold"] .cart-item,
+html[data-theme="gold"] .toast,
+html[data-theme="gold"] .search-input,
+html[data-theme="gold"] .cmdk-head input,
+html[data-theme="gold"] .chip,
+html[data-theme="gold"] .kbd,
+html[data-theme="gold"] .theme-toggle,
+html[data-theme="gold"] .option-item,
+html[data-theme="gold"] .option-row,
+html[data-theme="gold"] .promo-banner-content,
+html[data-theme="gold"] .calc-banner-content {
+  background: #000;
+  border-color: var(--border);
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+@media (max-width: 768px) {
+  html[data-theme="gold"] .nav-links { background: #000; border-color: var(--border); }
+}
+
+/* le menu du haut : noir avec un fil doré */
+html[data-theme="gold"] nav { border-bottom: 1px solid var(--border); }
+
+/* survols : l'or s'allume doucement, le fond reste noir */
+html[data-theme="gold"] .card:hover,
+html[data-theme="gold"] .review-card:hover,
+html[data-theme="gold"] .stat-card:hover,
+html[data-theme="gold"] .fees-card:hover,
+html[data-theme="gold"] .calc-banner-content:hover {
+  border-color: rgba(240, 185, 76, 0.55);
+  box-shadow: 0 0 0 1px rgba(240, 185, 76, 0.12), 0 0 28px -6px rgba(240, 185, 76, 0.35);
+}
+
+html[data-theme="gold"] .option-item:hover,
+html[data-theme="gold"] .option-row:hover { background: rgba(240, 185, 76, 0.05); }
+
+html[data-theme="gold"] .option-item.selected { background: rgba(240, 185, 76, 0.08); border-color: var(--accent-blue); }
+
+html[data-theme="gold"] .option-checkbox { background: #000; border-color: rgba(240, 185, 76, 0.35); }
+html[data-theme="gold"] .option-item.selected .option-checkbox { background: var(--accent-blue); border-color: var(--accent-blue); color: #000; }
+html[data-theme="gold"] .btn-discord.disabled { background: #000; border: 1px solid var(--border); }
+
+html[data-theme="gold"] .chip.active { background: var(--accent-blue); border-color: var(--accent-blue); color: #000; }
+
+html[data-theme="gold"] .search-input:focus { border-color: var(--accent-blue); box-shadow: 0 0 18px -4px rgba(240, 185, 76, 0.45); }
+
+/* bannières : noir, seul le bord garde sa couleur */
+html[data-theme="gold"] .promo-banner-content { border-color: rgba(16, 185, 129, 0.45); }
+html[data-theme="gold"] .tarifs-banner .promo-banner-content { border-color: rgba(240, 185, 76, 0.45); }
+
+/* fonds des fenêtres : noir profond */
+html[data-theme="gold"] .changelog::backdrop,
+html[data-theme="gold"] .dkr-dialog::backdrop { background: rgba(0, 0, 0, 0.85); }
+html[data-theme="gold"] .modal-overlay,
+html[data-theme="gold"] .cmdk-overlay { background: rgba(0, 0, 0, 0.85); }
+
+/* texte des boutons or : noir pour le contraste */
+html[data-theme="gold"] .btn-blue,
+html[data-theme="gold"] .calc-banner-btn { color: #000; }
+
 /* ---------- Barres de défilement au style du site ---------- */
 html {
   scrollbar-width: thin;
