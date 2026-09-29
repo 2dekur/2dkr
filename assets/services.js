@@ -194,7 +194,8 @@
       '<h2><i class="fa-solid ' + g.icone + '" style="color: var(--accent-blue);" aria-hidden="true"></i> ' + g.titre + '</h2>' +
       '<div class="options-list" style="margin-top: 15px;">' +
       g.items.map(function (o) {
-        var label = o.nom + (o.delai ? ' (' + o.delai + ')' : '');
+        var label = o.nom + (o.delai ? ' (' + o.delai + ')' : '')
+        if (o.nouveau) label += ' <span class="opt-new">Nouveau</span>';
         return '<div class="option-row"><span>' + label + '</span><div><span class="option-price">' + DKR.euros(DKR.prixDe(o)) + ' </span>' + bulleFrais(o) +
           '<button type="button" data-add="' + o.id + '" class="btn btn-outline btn-sm" aria-label="Ajouter ' + o.nom + '"><i class="fa-solid fa-plus"></i></button></div></div>';
       }).join('') +

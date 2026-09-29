@@ -106,6 +106,7 @@ window.DKR_CATALOGUE = {
     {
       id: 'argent', titre: 'Argent supplémentaire', titreCalc: 'Argent GTA Online', icone: 'fa-coins', unique: true,
       items: [
+        { id: 'm5',   nom: '+5M GTA$',   detail: '+5 000 000$',   delai: '24h',     prix: 2, nouveau: true },
         { id: 'm10',  nom: '+10M GTA$',  detail: '+10 000 000$',  delai: '24h',     prix: 3 },
         { id: 'm20',  nom: '+20M GTA$',  detail: '+20 000 000$',  delai: '24h',     prix: 4 },
         { id: 'm30',  nom: '+30M GTA$',  detail: '+30 000 000$',  delai: '24h',     prix: 5 },
