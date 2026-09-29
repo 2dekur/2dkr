@@ -645,6 +645,24 @@ html[data-theme="gold"] .dkr-dialog::backdrop { background: rgba(0, 0, 0, 0.85);
 html[data-theme="gold"] .modal-overlay,
 html[data-theme="gold"] .cmdk-overlay { background: rgba(0, 0, 0, 0.85); }
 
+/* titres en couleur : jaune or par défaut, couleur de la marque / du pack sinon */
+html[data-theme="gold"] .card h2,
+html[data-theme="gold"] .calc-card h2,
+html[data-theme="gold"] .fees-card h3 { color: var(--accent-blue); }
+
+html[data-theme="gold"] .card h2.t-discord { color: #7b86f7; }
+html[data-theme="gold"] .card h2.t-ig { color: #fb7a35; }
+html[data-theme="gold"] .card h2.t-paypal { color: #2ea3e6; }
+html[data-theme="gold"] .card h2.t-crypto { color: #b07cff; }
+html[data-theme="gold"] .card h2.t-paypal + i { color: #2ea3e6 !important; }
+html[data-theme="gold"] .card h2.t-crypto + i { color: #b07cff !important; }
+
+html[data-theme="gold"] .card h2.t-bronze { color: #d98c4a; }
+html[data-theme="gold"] .card h2.t-silver { color: #d6d6d6; }
+html[data-theme="gold"] .card h2.t-gold { color: #ffd54a; }
+html[data-theme="gold"] .card h2.t-plat { color: #c9dde8; }
+html[data-theme="gold"] .card h2.t-ultimate { color: #c084fc; }
+
 /* texte des boutons or : noir pour le contraste */
 html[data-theme="gold"] .btn-blue,
 html[data-theme="gold"] .calc-banner-btn { color: #000; }

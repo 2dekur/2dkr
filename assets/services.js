@@ -135,7 +135,7 @@
     return '<div class="card card-' + p.style + (p.populaire ? ' card-populaire' : '') + ' searchable" data-cat="packs' + cats(p) + '">' +
       '<div>' +
         '<span class="card-badge badge-' + p.style + '">' + (p.populaire ? '<i class="fa-solid fa-crown" aria-hidden="true"></i> ' : '') + p.badge + '</span>' +
-        '<div class="card-header"><h2>' + p.nom + '</h2>' + prixHTML(p) + '</div>' +
+        '<div class="card-header"><h2 class="t-' + p.style + '">' + p.nom + '</h2>' + prixHTML(p) + '</div>' +
         '<ul class="feature-list">' + lignesPack(p) + '</ul>' +
       '</div>' +
       '<div>' +
