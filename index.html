@@ -1318,14 +1318,12 @@
   </div>
   <button class="cmdk-fab" id="cmdk-fab" title="Commandes rapides" aria-label="Commandes rapides"><i class="fa-solid fa-terminal"></i></button>
   <script>
-    // Nombre de membres Discord en direct, sans les bots, arrondi à la dizaine en dessous
-    // (« 130+ »). Le chiffre public de Discord est approximatif : arrondir évite d'afficher un
-    // nombre faux. Sans réponse de Discord, on garde « 130+ ».
+    // Nombre de membres Discord en direct, sans les bots (sinon on garde « 130+ »).
     // BOTS = nombre de bots sur le serveur : à changer si tu en ajoutes ou en retires un.
-    var BOTS = 5;
+    var BOTS = 7;
     fetch('https://discord.com/api/v10/invites/mDpZT73FFG?with_counts=true')
       .then(function (r) { return r.ok ? r.json() : null; })
-      .then(function (j) { if (j && j.approximate_member_count) document.getElementById('discord-members').textContent = Math.floor((j.approximate_member_count - BOTS) / 10) * 10 + '+'; })
+      .then(function (j) { if (j && j.approximate_member_count) document.getElementById('discord-members').textContent = j.approximate_member_count - BOTS; })
       .catch(function () {});
   </script>
 </body>
