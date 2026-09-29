@@ -1033,7 +1033,7 @@
 
     // --- Chips de filtre + recherche globale
     (function () {
-      const chips = document.querySelectorAll('.chip');
+      const chips = document.querySelectorAll('.chip[data-cat]');
       const cards = Array.from(document.querySelectorAll('.card.searchable'));
       const input = document.getElementById('search-input');
       let cat = 'all';

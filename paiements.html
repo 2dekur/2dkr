@@ -778,12 +778,18 @@
     <h1>Paiements <span>&amp; garanties</span></h1>
     <p>Les moyens de paiement, les frais et la garantie anti-ban, sans surprise.</p>
 
+    <div class="chips page-jump">
+      <a class="chip" href="#moyens"><i class="fa-solid fa-wallet"></i>Moyens de paiement</a>
+      <a class="chip" href="#frais"><i class="fa-solid fa-receipt"></i>Frais</a>
+      <a class="chip" href="#garanties"><i class="fa-solid fa-shield-halved"></i>Garanties</a>
+    </div>
+
     <div class="kbd-hint"><span class="kbd">Ctrl</span> + <span class="kbd">K</span> pour les commandes rapides</div>
   </section>
 
   <div class="container" id="paiements">
 
-    <h3 class="pay-subheading">Moyens de paiement</h3>
+    <h3 class="pay-subheading jump-target" id="moyens">Moyens de paiement</h3>
     <div class="grid">
 
       <div class="card searchable" data-cat="paiements">
@@ -826,7 +832,7 @@
 
     </div>
 
-    <h3 class="pay-subheading">Frais</h3>
+    <h3 class="pay-subheading jump-target" id="frais">Frais</h3>
     <div class="fees-grid">
       <div class="fees-card searchable" data-cat="paiements">
         <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
@@ -1157,7 +1163,7 @@
 
     // --- Chips de filtre + recherche globale
     (function () {
-      const chips = document.querySelectorAll('.chip');
+      const chips = document.querySelectorAll('.chip[data-cat]');
       const cards = Array.from(document.querySelectorAll('.card.searchable'));
       const input = document.getElementById('search-input');
       let cat = 'all';

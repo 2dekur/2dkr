@@ -923,6 +923,7 @@
     </div>
     <ul>
       <li><strong>Interface liquid glass sur téléphone</strong> : barre du haut flottante, menu, bouton de commandes et panier en verre dépoli.</li>
+      <li><strong>Boutons de catégorie animés</strong> : ils font défiler jusqu'à la catégorie et la mettent en avant, sans rien cacher. Raccourcis vers chaque section sur Paiements &amp; garanties.</li>
       <li><strong>Nouvelle option +5M à 2 €</strong> : le premier achat idéal après le lobby gratuit, livré en 24h.</li>
       <li><strong>Menu plus simple</strong> : « Services » regroupe les packs, le lobby gratuit et le calculateur.</li>
       <li><strong>Lobby découverte gratuit</strong> : 6M, niveau 50 (ou +50 niveaux si tu l'as déjà) et 1 véhicule moddé, sessions annoncées sur le Discord, sur sa propre page.</li>
@@ -1233,7 +1234,7 @@
 
     // --- Chips de filtre + recherche globale
     (function () {
-      const chips = document.querySelectorAll('.chip');
+      const chips = document.querySelectorAll('.chip[data-cat]');
       const cards = Array.from(document.querySelectorAll('.card.searchable'));
       const input = document.getElementById('search-input');
       let cat = 'all';
@@ -1275,11 +1276,26 @@
           : '<div class="cmdk-empty">Aucun résultat sur le site. <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener" style="color:var(--accent-blue)">Demande sur le Discord</a></div>';
       }
 
+      // Les boutons ne cachent plus rien : ils font défiler jusqu'à la catégorie et la mettent en avant
+      function highlight(c) {
+        const on = c !== 'all';
+        let first = null;
+        cards.forEach(card => {
+          const match = on && (card.dataset.cat || '').split(' ').includes(c);
+          card.classList.toggle('is-focus', match);
+          card.classList.toggle('is-dim', on && !match);
+          DKRAnim.fade(card, on && !match ? 0.35 : 1);
+          if (match && !first && !card.classList.contains('is-hidden')) first = card;
+        });
+        if (first) DKRAnim.scrollTo(first.getBoundingClientRect().top + window.scrollY - 170, function () {
+          cards.forEach(card => { if (card.classList.contains('is-focus')) DKRAnim.pulse(card); });
+        });
+      }
+
       chips.forEach(chip => chip.addEventListener('click', () => {
         chips.forEach(c => c.classList.remove('active'));
         chip.classList.add('active');
-        cat = chip.dataset.cat;
-        refresh();
+        highlight(chip.dataset.cat);
       }));
 
       if (input) {

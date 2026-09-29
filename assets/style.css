@@ -1067,3 +1067,14 @@ html[data-theme="gold"] .lobby-get { background: #000; }
   border-radius: 6px;
   vertical-align: 1px;
 }
+
+/* ---------- Boutons de catégorie : mise en avant sans rien cacher ---------- */
+.card.searchable.is-focus {
+  border-color: var(--accent-blue) !important;
+  box-shadow: 0 0 0 1px var(--accent-blue), 0 0 26px var(--accent-blue-glow) !important;
+}
+
+/* ---------- Paiements & garanties : raccourcis vers les sections ---------- */
+.page-jump { margin-top: 18px; }
+.page-jump .chip { text-decoration: none; }
+.jump-target { scroll-margin-top: 100px; }
