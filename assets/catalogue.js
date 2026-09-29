@@ -37,6 +37,13 @@ window.DKR_CATALOGUE = {
     }
   },
 
+  // Garantie anti-ban : montant minimum dépensé dans la boutique pour être couvert.
+  //   minimumNouveauxTarifs s'applique tout seul à partir de nouveauxTarifs.date.
+  garantie: {
+    minimum: 30,
+    minimumNouveauxTarifs: 26
+  },
+
   // Frais de service 2DKR, affichés dans une bulle "+ X€" à côté de chaque prix.
   //   pourcent     : % par pack (plus le pack prend de temps, plus le % est élevé)
   //   defaut       : % pour les options à la carte et les comptes
@@ -226,3 +233,14 @@ window.DKR = {
     return (n % 1 === 0 ? String(n) : n.toFixed(2).replace('.', ',')) + '€';
   }
 };
+
+/* Garantie : met le bon minimum partout (.guar-min) et retire la mention
+   « à partir du 7 octobre » (.guar-min-note) une fois les nouveaux tarifs en place */
+document.addEventListener('DOMContentLoaded', function () {
+  var g = window.DKR_CATALOGUE.garantie;
+  if (!g) return;
+  var nouveau = g.minimumNouveauxTarifs != null && DKR.nouveauxTarifsActifs();
+  var min = (nouveau ? g.minimumNouveauxTarifs : g.minimum) + ' €';
+  document.querySelectorAll('.guar-min').forEach(function (el) { el.textContent = min; });
+  document.querySelectorAll('.guar-min-note').forEach(function (el) { if (nouveau || g.minimumNouveauxTarifs == null) el.remove(); });
+});
