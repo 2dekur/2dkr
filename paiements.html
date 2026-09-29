@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>2DKR — Paiements & frais</title>
+  <title>2DKR — Paiements & garanties</title>
   
-  <meta property="og:title" content="2DKR — Paiements & frais">
-  <meta property="og:description" content="Moyens de paiement acceptés (PayPal, crypto, virement) et frais de service 2DKR, expliqués simplement.">
+  <meta property="og:title" content="2DKR — Paiements & garanties">
+  <meta property="og:description" content="Moyens de paiement (PayPal, crypto, virement), frais de service et garantie anti-ban 2DKR.">
   <meta property="og:type" content="website">
   <meta name="theme-color" content="#38bdf8">
-  <meta name="description" content="Paiements 2DKR : PayPal, crypto SOL/USDC, virement bancaire, et tout sur les frais de service.">
+  <meta name="description" content="Paiements et garanties 2DKR : PayPal, crypto SOL/USDC, virement bancaire, frais de service et garantie anti-ban remboursée.">
   <link rel="canonical" href="https://2dkr.pages.dev/paiements">
   <meta property="og:url" content="https://2dkr.pages.dev/paiements">
   <meta property="og:site_name" content="2DKR">
@@ -745,6 +745,7 @@
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/style.css">
+  <script src="assets/nav.js" defer></script>
 </head>
 <body>
 
@@ -757,11 +758,16 @@
 
     <div class="nav-links" id="nav-links">
       <a href="index.html">Accueil</a>
-      <a href="services.html">Services & Tarifs</a>
-      <a href="calculateur.html">Calculateur</a>
-      <a href="avis.html">Avis & Preuves</a>
-      <a href="paiements.html" class="active">Paiements &amp; frais</a>
-      <a href="garanties.html">Garanties</a>
+      <div class="nav-drop">
+        <button type="button" class="nav-drop-btn" aria-expanded="false" aria-haspopup="true">Services <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></button>
+        <div class="nav-drop-menu">
+          <a href="services.html"><i class="fa-solid fa-tags" aria-hidden="true"></i> Packs &amp; tarifs</a>
+          <a href="lobby.html"><i class="fa-solid fa-gift" aria-hidden="true"></i> Lobby gratuit <span class="nav-free">0 €</span></a>
+          <a href="calculateur.html"><i class="fa-solid fa-calculator" aria-hidden="true"></i> Calculateur</a>
+        </div>
+      </div>
+      <a href="avis.html">Avis &amp; Preuves</a>
+      <a href="paiements.html" class="active">Paiements &amp; garanties</a>
       <button class="theme-toggle" id="theme-toggle" title="Changer de thème" aria-label="Changer de thème"><i class="fa-solid fa-moon"></i></button>
       <a href="https://www.youtube.com/@Dekur7" target="_blank" rel="noopener noreferrer" class="nav-social-icon" style="color: #ff0000;" title="YouTube" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
       <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="nav-social-icon" style="color: #5865f2;" title="Discord" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
@@ -769,8 +775,8 @@
   </nav>
 
   <section class="hero">
-    <h1>Paiements <span>&amp; frais</span></h1>
-    <p>Les moyens de paiement acceptés et tout ce qu'il faut savoir sur les frais, sans surprise.</p>
+    <h1>Paiements <span>&amp; garanties</span></h1>
+    <p>Les moyens de paiement, les frais et la garantie anti-ban, sans surprise.</p>
 
     <div class="kbd-hint"><span class="kbd">Ctrl</span> + <span class="kbd">K</span> pour les commandes rapides</div>
   </section>
@@ -841,6 +847,70 @@
     <script>
       (function () { var el = document.getElementById('fees-main'); if (el && window.DKR) el.innerHTML = DKR.texteFrais(); })();
     </script>
+
+    <h2 class="section-heading guar-anchor" id="garanties" style="margin-top: 50px;"><i class="fa-solid fa-shield-halved" style="color: var(--accent-green);" aria-hidden="true"></i> Garanties</h2>
+    <div class="guar-banner searchable" data-cat="garanties">
+      <div class="guar-icon"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></div>
+      <div class="guar-text">
+        <h2>Garantie anti-ban : remboursé à 100 %</h2>
+        <p>Si ton compte est banni dans les 7 jours après notre intervention, on te rembourse ta commande.</p>
+      </div>
+    </div>
+
+    <h3 class="pay-subheading">Conditions</h3>
+    <div class="fees-grid guar-grid">
+      <div class="fees-card searchable" data-cat="garanties">
+        <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+        <h3>Commande via le site</h3>
+        <p>Commande passée avec le panier du site, pour <strong>30 € payés minimum</strong>.</p>
+      </div>
+      <div class="fees-card searchable" data-cat="garanties">
+        <i class="fa-solid fa-clock" aria-hidden="true"></i>
+        <h3>Ban dans les 7 jours</h3>
+        <p>Le ban doit arriver dans les <strong>7 jours</strong> qui suivent la livraison de ta commande.</p>
+      </div>
+      <div class="fees-card searchable" data-cat="garanties">
+        <i class="fa-solid fa-ban" aria-hidden="true"></i>
+        <h3>Aucun autre mod menu</h3>
+        <p>Aucun mod menu, triche ou outil externe utilisé de ton côté pendant ces 7 jours.</p>
+      </div>
+      <div class="fees-card searchable" data-cat="garanties">
+        <i class="fa-solid fa-user-check" aria-hidden="true"></i>
+        <h3>Comportement correct</h3>
+        <p>Pas de grief, de provocation ni de signalements de joueurs contre toi en jeu.</p>
+      </div>
+    </div>
+
+    <h3 class="pay-subheading">Non couvert</h3>
+    <div class="guar-excl searchable" data-cat="garanties">
+      <ul>
+        <li><i class="fa-solid fa-xmark" aria-hidden="true"></i> Les commandes de moins de 30 €.</li>
+        <li><i class="fa-solid fa-xmark" aria-hidden="true"></i> Les lobbys gratuits.</li>
+        <li><i class="fa-solid fa-xmark" aria-hidden="true"></i> Les commandes passées en dehors du panier du site.</li>
+        <li><i class="fa-solid fa-xmark" aria-hidden="true"></i> Un ban qui arrive plus de 7 jours après la livraison.</li>
+        <li><i class="fa-solid fa-xmark" aria-hidden="true"></i> Une seule garantie par client.</li>
+      </ul>
+    </div>
+
+    <h3 class="pay-subheading">Comment demander un remboursement ?</h3>
+    <div class="fees-grid">
+      <div class="fees-card searchable" data-cat="garanties">
+        <i class="fa-brands fa-discord" aria-hidden="true"></i>
+        <h3><span class="step-n">1.</span> Ouvre un ticket</h3>
+        <p>Sur le serveur Discord, avec ton récapitulatif de commande.</p>
+      </div>
+      <div class="fees-card searchable" data-cat="garanties">
+        <i class="fa-solid fa-camera" aria-hidden="true"></i>
+        <h3><span class="step-n">2.</span> Envoie une capture</h3>
+        <p>Une capture du message de ban affiché en jeu.</p>
+      </div>
+      <div class="fees-card searchable" data-cat="garanties">
+        <i class="fa-solid fa-rotate-left" aria-hidden="true"></i>
+        <h3><span class="step-n">3.</span> On te rembourse</h3>
+        <p>On vérifie les conditions, puis on te rembourse par le moyen de paiement utilisé.</p>
+      </div>
+    </div>
+
 
   </div>
 
@@ -991,9 +1061,9 @@
     // --- Index global du site (toutes les pages)
     const SITE_INDEX = [
       { t: 'Serveur Discord', s: 'Rejoindre la communauté 2DKR', u: 'https://discord.gg/mDpZT73FFG', p: 'Accueil', k: 'discord communaute ticket support chat' },
-      { t: 'Paiements & frais', s: 'PayPal, crypto, virement et frais', u: 'paiements.html', p: 'Paiements', k: 'paiement paiements frais commission paypal crypto solana virement banque carte argent' },
-      { t: 'Garanties', s: 'Garantie anti-ban : remboursé si ban sous 7 jours', u: 'garanties.html', p: 'Garanties', k: 'garantie garanties ban banni rembourse remboursement securite conditions' },
-      { t: 'Lobby découverte gratuit', s: '6M, niveau 50 et 1 véhicule moddé', u: 'services.html#lobby', p: 'Services', k: 'lobby gratuit free decouverte essai test offert' },
+      { t: 'Paiements & garanties', s: 'PayPal, crypto, virement et frais', u: 'paiements.html', p: 'Paiements', k: 'paiement paiements frais commission paypal crypto solana virement banque carte argent' },
+      { t: 'Garanties', s: 'Garantie anti-ban : remboursé si ban sous 7 jours', u: 'paiements.html#garanties', p: 'Paiements', k: 'garantie garanties ban banni rembourse remboursement securite conditions' },
+      { t: 'Lobby découverte gratuit', s: '6M, niveau 50 et 1 véhicule moddé', u: 'lobby.html', p: 'Lobby', k: 'lobby gratuit free decouverte essai test offert' },
       { t: 'Instant Gaming', s: 'Achète tes jeux via mon lien et soutiens 2DKR', u: 'https://www.instant-gaming.com/fr/?igr=Bydekur', p: 'Accueil', k: 'instant gaming jeu jeux cle key steam pc soutien affilie acheter' },
       { t: 'Pack Bronze', s: 'Pack d\'entrée lobby moddé', u: 'services.html', p: 'Services', k: 'pack bronze tarif prix lobby gta' },
       { t: 'Pack Argent', s: 'Pack intermédiaire', u: 'services.html', p: 'Services', k: 'pack argent silver tarif prix lobby' },
@@ -1014,8 +1084,8 @@
       { t: 'Voir les avis & preuves', u: 'avis.html', i: 'fa-star', k: 'avis preuve review' },
       { t: 'Rejoindre le Discord', u: 'https://discord.gg/mDpZT73FFG', i: 'fa-brands fa-discord', k: 'discord ticket support' },
       { t: 'Chaîne YouTube', u: 'https://www.youtube.com/@Dekur7', i: 'fa-brands fa-youtube', k: 'youtube video chaine' },
-      { t: 'Paiements & frais', u: 'paiements.html', i: 'fa-wallet', k: 'paiement frais paypal crypto virement' },
-      { t: 'Garanties', u: 'garanties.html', i: 'fa-shield-halved', k: 'garantie ban rembourse' },
+      { t: 'Paiements & garanties', u: 'paiements.html', i: 'fa-wallet', k: 'paiement frais paypal crypto virement' },
+      { t: 'Garanties', u: 'paiements.html#garanties', i: 'fa-shield-halved', k: 'garantie ban rembourse' },
       { t: 'Changer de thème (bleu / dark or)', u: '#theme', i: 'fa-palette', k: 'theme couleur dark or bleu mode' }
     ];
 

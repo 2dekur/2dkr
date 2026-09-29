@@ -970,6 +970,7 @@
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/style.css">
+  <script src="assets/nav.js" defer></script>
 </head>
 <body>
 
@@ -983,11 +984,16 @@
 
     <div class="nav-links" id="nav-links">
       <a href="index.html">Accueil</a>
-      <a href="services.html" class="active">Services & Tarifs</a>
-      <a href="calculateur.html">Calculateur</a>
-      <a href="avis.html">Avis & Preuves</a>
-      <a href="paiements.html">Paiements &amp; frais</a>
-      <a href="garanties.html">Garanties</a>
+      <div class="nav-drop">
+        <button type="button" class="nav-drop-btn active" aria-expanded="false" aria-haspopup="true">Services <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></button>
+        <div class="nav-drop-menu">
+          <a href="services.html" class="active" aria-current="page"><i class="fa-solid fa-tags" aria-hidden="true"></i> Packs &amp; tarifs</a>
+          <a href="lobby.html"><i class="fa-solid fa-gift" aria-hidden="true"></i> Lobby gratuit <span class="nav-free">0 €</span></a>
+          <a href="calculateur.html"><i class="fa-solid fa-calculator" aria-hidden="true"></i> Calculateur</a>
+        </div>
+      </div>
+      <a href="avis.html">Avis &amp; Preuves</a>
+      <a href="paiements.html">Paiements &amp; garanties</a>
       <button class="theme-toggle" id="theme-toggle" title="Changer de thème" aria-label="Changer de thème"><i class="fa-solid fa-moon"></i></button>
       <a href="https://www.youtube.com/@Dekur7" target="_blank" rel="noopener noreferrer" class="nav-social-icon" style="color: #ff0000;" title="YouTube" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
       <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="nav-social-icon" style="color: #5865f2;" title="Discord" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
@@ -1068,7 +1074,11 @@
   </div>
 
   <main class="container">
-    <a href="garanties.html" class="guar-banner guar-top searchable" data-cat="services">
+
+    <h2 class="section-heading"><i class="fa-solid fa-box-open" style="color: var(--accent-blue);" aria-hidden="true"></i> Nos Packs Disponibles</h2>
+    <div class="grid" id="packs-grid"></div>
+
+    <a href="paiements.html#garanties" class="guar-banner guar-below searchable" data-cat="services">
       <span class="guar-icon"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></span>
       <div class="guar-text">
         <strong>Garantie anti-ban 2DKR</strong>
@@ -1076,30 +1086,6 @@
       </div>
       <span class="guar-more">Voir les conditions</span>
     </a>
-
-    <section class="lobby-card" id="lobby">
-      <div class="lobby-head">
-        <div>
-          <span class="lobby-tag">Gratuit · 1 fois par compte</span>
-          <h2>Lobby découverte</h2>
-          <p>Teste 2DKR gratuitement avant de commander.</p>
-        </div>
-        <span class="lobby-price">0 €</span>
-      </div>
-      <div class="lobby-grid">
-        <div class="lobby-item"><span><i class="fa-solid fa-coins" aria-hidden="true"></i> Argent</span><strong>6 000 000$</strong></div>
-        <div class="lobby-item"><span><i class="fa-solid fa-arrow-trend-up" aria-hidden="true"></i> Niveau</span><strong>Niveau 50</strong><small>Déjà niveau 50 ou plus ? +50 niveaux</small></div>
-        <div class="lobby-item"><span><i class="fa-solid fa-car" aria-hidden="true"></i> Véhicule</span><strong>1 véhicule moddé</strong></div>
-      </div>
-      <div class="lobby-foot">
-        <p><i class="fa-regular fa-calendar" aria-hidden="true"></i> Sessions à heure fixe, annoncées sur le Discord<br><i class="fa-solid fa-circle-info" aria-hidden="true"></i> Non couvert par la <a href="garanties.html">garantie anti-ban</a></p>
-        <a href="https://discord.gg/zPKEmYwfr8" target="_blank" rel="noopener noreferrer" class="btn btn-blue"><i class="fa-brands fa-discord"></i> Réserver ma place</a>
-      </div>
-    </section>
-
-
-    <h2 class="section-heading"><i class="fa-solid fa-box-open" style="color: var(--accent-blue);" aria-hidden="true"></i> Nos Packs Disponibles</h2>
-    <div class="grid" id="packs-grid"></div>
 
     <!-- Tableau comparatif (généré depuis assets/catalogue.js) -->
     <h2 class="section-heading" style="margin-top: 50px;"><i class="fa-solid fa-table-columns" style="color: var(--accent-blue);" aria-hidden="true"></i> Comparer les packs</h2>
@@ -1254,9 +1240,9 @@
     // --- Index global du site (toutes les pages)
     const SITE_INDEX = [
       { t: 'Serveur Discord', s: 'Rejoindre la communauté 2DKR', u: 'https://discord.gg/mDpZT73FFG', p: 'Accueil', k: 'discord communaute ticket support chat' },
-      { t: 'Paiements & frais', s: 'PayPal, crypto, virement et frais', u: 'paiements.html', p: 'Paiements', k: 'paiement paiements frais commission paypal crypto solana virement banque carte argent' },
-      { t: 'Garanties', s: 'Garantie anti-ban : remboursé si ban sous 7 jours', u: 'garanties.html', p: 'Garanties', k: 'garantie garanties ban banni rembourse remboursement securite conditions' },
-      { t: 'Lobby découverte gratuit', s: '6M, niveau 50 et 1 véhicule moddé', u: 'services.html#lobby', p: 'Services', k: 'lobby gratuit free decouverte essai test offert' },
+      { t: 'Paiements & garanties', s: 'PayPal, crypto, virement et frais', u: 'paiements.html', p: 'Paiements', k: 'paiement paiements frais commission paypal crypto solana virement banque carte argent' },
+      { t: 'Garanties', s: 'Garantie anti-ban : remboursé si ban sous 7 jours', u: 'paiements.html#garanties', p: 'Paiements', k: 'garantie garanties ban banni rembourse remboursement securite conditions' },
+      { t: 'Lobby découverte gratuit', s: '6M, niveau 50 et 1 véhicule moddé', u: 'lobby.html', p: 'Lobby', k: 'lobby gratuit free decouverte essai test offert' },
       { t: 'Instant Gaming', s: 'Achète tes jeux via mon lien et soutiens 2DKR', u: 'https://www.instant-gaming.com/fr/?igr=Bydekur', p: 'Accueil', k: 'instant gaming jeu jeux cle key steam pc soutien affilie acheter' },
       { t: 'Pack Bronze', s: 'Pack d\'entrée lobby moddé', u: 'services.html', p: 'Services', k: 'pack bronze tarif prix lobby gta' },
       { t: 'Pack Argent', s: 'Pack intermédiaire', u: 'services.html', p: 'Services', k: 'pack argent silver tarif prix lobby' },
@@ -1277,8 +1263,8 @@
       { t: 'Voir les avis & preuves', u: 'avis.html', i: 'fa-star', k: 'avis preuve review' },
       { t: 'Rejoindre le Discord', u: 'https://discord.gg/mDpZT73FFG', i: 'fa-brands fa-discord', k: 'discord ticket support' },
       { t: 'Chaîne YouTube', u: 'https://www.youtube.com/@Dekur7', i: 'fa-brands fa-youtube', k: 'youtube video chaine' },
-      { t: 'Paiements & frais', u: 'paiements.html', i: 'fa-wallet', k: 'paiement frais paypal crypto virement' },
-      { t: 'Garanties', u: 'garanties.html', i: 'fa-shield-halved', k: 'garantie ban rembourse' },
+      { t: 'Paiements & garanties', u: 'paiements.html', i: 'fa-wallet', k: 'paiement frais paypal crypto virement' },
+      { t: 'Garanties', u: 'paiements.html#garanties', i: 'fa-shield-halved', k: 'garantie ban rembourse' },
       { t: 'Changer de thème (bleu / dark or)', u: '#theme', i: 'fa-palette', k: 'theme couleur dark or bleu mode' }
     ];
 

@@ -774,41 +774,265 @@ html[data-theme="gold"] .guar-banner,
 html[data-theme="gold"] .guar-excl { background: #000; }
 .guar-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
 
-/* ---------- Lobby découverte (page Services) ---------- */
-.lobby-card {
-  margin: 16px 0 10px;
-  padding: 22px;
-  border: 1px solid var(--border-glow);
-  border-radius: var(--radius);
-  background: var(--card-bg);
-  scroll-margin-top: 110px;
+/* ---------- Menu déroulant « Services » ---------- */
+.nav-drop { position: relative; }
+.nav-drop-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.2s ease;
 }
-.lobby-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap; }
-.lobby-tag {
-  display: inline-block;
-  margin-bottom: 8px;
-  padding: 3px 9px;
-  font-size: 0.72rem;
+.nav-drop-btn i { font-size: 0.7rem; transition: transform 0.2s ease; }
+.nav-drop-btn:hover,
+.nav-drop-btn.active,
+.nav-drop.open .nav-drop-btn { color: var(--accent-blue); }
+.nav-drop.open .nav-drop-btn i { transform: rotate(180deg); }
+.nav-drop-menu {
+  position: absolute;
+  top: calc(100% + 14px);
+  left: -14px;
+  z-index: 200;
+  min-width: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 6px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: rgba(13, 17, 23, 0.97);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+}
+/* pont invisible pour ne pas perdre le survol entre le bouton et le menu */
+.nav-drop-menu::before { content: ''; position: absolute; left: 0; right: 0; top: -16px; height: 16px; }
+.nav-drop.open .nav-drop-menu { opacity: 1; visibility: visible; transform: none; }
+@media (hover: hover) and (min-width: 769px) {
+  .nav-drop:hover .nav-drop-menu { opacity: 1; visibility: visible; transform: none; }
+  .nav-drop:hover .nav-drop-btn i { transform: rotate(180deg); }
+}
+nav .nav-drop-menu a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 10px;
+  border-radius: 8px;
+  color: var(--text-main);
+  font-size: 0.9rem !important;
+  text-shadow: none !important;
+}
+.nav-drop-menu a i { width: 16px; text-align: center; color: var(--accent-blue); }
+.nav-drop-menu a .fa-gift { color: var(--accent-orange); }
+nav .nav-drop-menu a:hover,
+nav .nav-drop-menu a.active { background: rgba(var(--accent-blue-rgb), 0.1); color: var(--accent-blue); }
+.nav-free {
+  margin-left: auto;
+  padding: 0 6px;
+  font-size: 0.68rem;
   font-weight: 700;
   color: var(--accent-orange);
-  border: 1px solid rgba(249, 115, 22, 0.35);
-  border-radius: 8px;
-  background: rgba(249, 115, 22, 0.12);
+  border: 1px solid rgba(249, 115, 22, 0.4);
+  border-radius: 6px;
 }
-.lobby-head h2 { font-family: var(--font-display); font-size: 1.3rem; margin-bottom: 4px; }
-.lobby-head p { font-size: 0.9rem; color: var(--text-muted); }
-.lobby-price { font-family: var(--font-display); font-size: 1.8rem; font-weight: 700; color: var(--accent-green); }
-.lobby-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin-top: 18px; }
-.lobby-item { padding: 14px; border: 1px solid var(--border); border-radius: var(--radius); display: flex; flex-direction: column; gap: 4px; }
-.lobby-item span { font-size: 0.82rem; color: var(--text-muted); }
-.lobby-item span i { color: var(--accent-blue); margin-right: 4px; }
-.lobby-item strong { font-size: 1.05rem; color: var(--text-main); }
-.lobby-item small { font-size: 0.75rem; color: var(--text-muted); }
-.lobby-foot {
-  display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap;
-  margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--border);
+@media (min-width: 769px) and (max-width: 1100px) {
+  .nav-drop-btn { font-size: 0.86rem; }
 }
-.lobby-foot p { font-size: 0.82rem; line-height: 1.7; color: var(--text-muted); }
-.lobby-foot p a { color: var(--accent-blue); }
-.lobby-foot .btn { width: auto; margin: 0; }
-html[data-theme="gold"] .lobby-card { background: #000; }
+/* Téléphone : sous-liens toujours visibles, décalés sous « Services » */
+@media (max-width: 768px) {
+  .nav-drop-btn { cursor: default; pointer-events: none; }
+  .nav-drop-btn i { display: none; }
+  .nav-drop { display: flex; flex-direction: column; align-items: center; }
+  .nav-drop-menu {
+    position: static;
+    min-width: 0;
+    margin-top: 6px;
+    padding: 4px;
+    align-items: center;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+  .nav-drop-menu::before { display: none; }
+  nav .nav-drop-menu a { padding: 7px 8px; color: var(--text-muted); }
+}
+html[data-theme="gold"] .nav-drop-menu { background: #000; }
+@media (max-width: 768px) { html[data-theme="gold"] .nav-drop-menu { background: none; } }
+.guar-anchor { scroll-margin-top: 100px; }
+.guar-below { margin-top: 22px; }
+
+/* ---------- Page Lobby gratuit ---------- */
+.lobby-gets { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+.lobby-get {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 22px 16px;
+  text-align: center;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card-bg);
+}
+.lobby-get i { font-size: 1.4rem; color: var(--accent-blue); margin-bottom: 4px; }
+.lobby-get strong { font-family: var(--font-display); font-size: 1.25rem; color: var(--text-main); }
+.lobby-get small { font-size: 0.8rem; color: var(--text-muted); }
+.lobby-gets + .pay-subheading { margin-top: 28px; }
+.guar-excl li a { color: var(--accent-blue); }
+.lobby-cta { max-width: 340px; margin: 30px auto 0; text-align: center; }
+.lobby-cta p { margin-top: 14px; font-size: 0.88rem; color: var(--text-muted); }
+.lobby-cta p a { color: var(--accent-blue); }
+html[data-theme="gold"] .lobby-get { background: #000; }
+
+/* =====================================================================
+   v0.4.3 — Interface « liquid glass » sur téléphone
+   Barre du haut flottante, menu, bouton de commandes et panier en verre
+   dépoli (flou + saturation + reflet). Le flou est porté par un calque
+   ::before pour que le menu, placé dans la barre, floute bien la page.
+   ===================================================================== */
+@media (max-width: 768px) {
+  :root {
+    --glass-tint: rgba(18, 24, 36, 0.46);
+    --glass-tint-strong: rgba(13, 17, 23, 0.97);
+    --glass-edge: rgba(255, 255, 255, 0.14);
+    --glass-shine: rgba(255, 255, 255, 0.24);
+    --glass-blur: blur(22px) saturate(180%);
+  }
+  html[data-theme="gold"] {
+    --glass-tint: rgba(0, 0, 0, 0.5);
+    --glass-tint-strong: rgba(0, 0, 0, 0.97);
+    --glass-edge: rgba(240, 185, 76, 0.22);
+    --glass-shine: rgba(255, 222, 160, 0.2);
+  }
+
+  /* Barre du haut : capsule de verre flottante */
+  nav,
+  html[data-theme="gold"] nav {
+    top: 10px;
+    margin: 10px 12px 0;
+    padding: 10px 12px 10px 16px !important;
+    border: 1px solid var(--glass-edge) !important;
+    border-radius: 22px;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35), inset 0 1px 0 var(--glass-shine);
+  }
+  nav::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background:
+      linear-gradient(160deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0) 45%, rgba(255, 255, 255, 0.05)),
+      var(--glass-tint);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+  }
+  .menu-toggle {
+    width: 40px;
+    height: 40px;
+    border-radius: 14px;
+    font-size: 1.15rem !important;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--glass-edge);
+  }
+
+  /* Menu ouvert : feuille de verre sous la capsule */
+  .nav-links,
+  html[data-theme="gold"] .nav-links {
+    top: calc(100% + 10px);
+    left: 0;
+    right: 0;
+    padding: 18px 16px 20px;
+    gap: 14px;
+    border: 1px solid var(--glass-edge);
+    border-radius: 22px;
+    background:
+      linear-gradient(170deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0) 40%),
+      var(--glass-tint-strong);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45), inset 0 1px 0 var(--glass-shine);
+  }
+  .nav-links.active {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    justify-content: center;
+    align-items: center;
+    column-gap: 22px;
+  }
+  .nav-links > a:not(.nav-social-icon),
+  .nav-links > .nav-drop { grid-column: 1 / -1; }
+  .nav-links > .theme-toggle { margin-top: 4px; }
+  .nav-links > .nav-social-icon { margin-top: 4px; font-size: 1.3rem; }
+  .nav-links.active { animation: glassIn 0.28s cubic-bezier(0.2, 0.9, 0.3, 1.2); transform-origin: top center; }
+  .nav-links > a:not(.nav-social-icon),
+  .nav-drop-btn {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    padding: 6px 0;
+  }
+  /* sous-catégories : mêmes couleurs que les autres liens du menu, sans fond plus clair */
+  nav .nav-drop-menu a,
+  nav .nav-drop-menu a:hover { background: none; color: var(--text-muted); }
+  nav .nav-drop-menu a.active { background: none; color: var(--accent-blue); }
+  nav .nav-drop-menu a i,
+  nav .nav-drop-menu a .fa-gift { color: inherit; }
+
+  /* Bouton des commandes rapides : bulle de verre */
+  .cmdk-fab,
+  html[data-theme="gold"] .cmdk-fab {
+    background:
+      linear-gradient(160deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0) 55%),
+      rgba(var(--accent-blue-rgb), 0.55) !important;
+    color: #fff !important;
+    border: 1px solid rgba(255, 255, 255, 0.28) !important;
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.4) !important;
+  }
+
+  /* Panier flottant et notifications en verre */
+  .cart-bar,
+  .toast {
+    border: 1px solid var(--glass-edge) !important;
+    background:
+      linear-gradient(160deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0) 45%),
+      var(--glass-tint-strong) !important;
+    backdrop-filter: var(--glass-blur) !important;
+    -webkit-backdrop-filter: var(--glass-blur) !important;
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.45), inset 0 1px 0 var(--glass-shine) !important;
+    border-radius: 20px !important;
+  }
+}
+
+@keyframes glassIn {
+  from { opacity: 0; transform: translateY(-6px) scale(0.97); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Accessibilité : verre plus opaque si la transparence est réduite ou le flou non géré */
+@media (max-width: 768px) and (prefers-reduced-transparency: reduce) {
+  :root, html[data-theme="gold"] { --glass-tint: rgba(13, 17, 23, 0.96); --glass-tint-strong: rgba(13, 17, 23, 0.98); }
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  @media (max-width: 768px) { :root { --glass-tint: rgba(13, 17, 23, 0.94); --glass-tint-strong: rgba(13, 17, 23, 0.97); } }
+}
+@media (prefers-reduced-motion: reduce) { .nav-links.active { animation: none; } }
