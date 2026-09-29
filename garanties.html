@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>2DKR — Paiements & frais</title>
+  <title>2DKR — Garanties</title>
   
-  <meta property="og:title" content="2DKR — Paiements & frais">
-  <meta property="og:description" content="Moyens de paiement acceptés (PayPal, crypto, virement) et frais de service 2DKR, expliqués simplement.">
+  <meta property="og:title" content="2DKR — Garanties">
+  <meta property="og:description" content="Garantie anti-ban 2DKR : remboursé à 100 % si ton compte est banni dans les 7 jours, conditions et démarche.">
   <meta property="og:type" content="website">
   <meta name="theme-color" content="#38bdf8">
-  <meta name="description" content="Paiements 2DKR : PayPal, crypto SOL/USDC, virement bancaire, et tout sur les frais de service.">
-  <link rel="canonical" href="https://2dkr.pages.dev/paiements">
-  <meta property="og:url" content="https://2dkr.pages.dev/paiements">
+  <meta name="description" content="Garanties 2DKR : garantie anti-ban remboursée à 100 %, conditions, cas non couverts et comment demander un remboursement.">
+  <link rel="canonical" href="https://2dkr.pages.dev/garanties">
+  <meta property="og:url" content="https://2dkr.pages.dev/garanties">
   <meta property="og:site_name" content="2DKR">
   <meta property="og:locale" content="fr_FR">
-  <meta property="og:image" content="https://2dkr.pages.dev/og/paiements.png">
+  <meta property="og:image" content="https://2dkr.pages.dev/og/garanties.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
@@ -760,87 +760,89 @@
       <a href="services.html">Services & Tarifs</a>
       <a href="calculateur.html">Calculateur</a>
       <a href="avis.html">Avis & Preuves</a>
-      <a href="paiements.html" class="active">Paiements &amp; frais</a>
-      <a href="garanties.html">Garanties</a>
+      <a href="paiements.html">Paiements &amp; frais</a>
+      <a href="garanties.html" class="active">Garanties</a>
       <button class="theme-toggle" id="theme-toggle" title="Changer de thème" aria-label="Changer de thème"><i class="fa-solid fa-moon"></i></button>
       <a href="https://www.youtube.com/@Dekur7" target="_blank" rel="noopener noreferrer" class="nav-social-icon" style="color: #ff0000;" title="YouTube" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
       <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="nav-social-icon" style="color: #5865f2;" title="Discord" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
     </div>
   </nav>
 
+
   <section class="hero">
-    <h1>Paiements <span>&amp; frais</span></h1>
-    <p>Les moyens de paiement acceptés et tout ce qu'il faut savoir sur les frais, sans surprise.</p>
+    <h1>Garanties <span>2DKR</span></h1>
+    <p>Ce qu'on te garantit, et à quelles conditions.</p>
 
     <div class="kbd-hint"><span class="kbd">Ctrl</span> + <span class="kbd">K</span> pour les commandes rapides</div>
   </section>
 
-  <div class="container" id="paiements">
+  <div class="container" id="garanties">
 
-    <h3 class="pay-subheading">Moyens de paiement</h3>
-    <div class="grid">
-
-      <div class="card searchable" data-cat="paiements">
-        <div>
-          <span class="card-badge badge-payment">PayPal</span>
-          <div class="card-title-row">
-            <h2 class="t-paypal">Paiement PayPal</h2>
-            <i class="fa-brands fa-paypal" style="font-size: 1.4rem; color: var(--accent-green);"></i>
-          </div>
-          <p>Clique sur le bouton pour payer via PayPal.</p>
-        </div>
-        <a href="https://paypal.me/DekurFreekrd" target="_blank" rel="noopener noreferrer" class="btn btn-blue"><i class="fa-brands fa-paypal"></i> Payer par PayPal</a>
+    <div class="guar-banner searchable" data-cat="garanties">
+      <div class="guar-icon"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></div>
+      <div class="guar-text">
+        <h2>Garantie anti-ban : remboursé à 100 %</h2>
+        <p>Si ton compte est banni dans les 7 jours après notre intervention, on te rembourse ta commande.</p>
       </div>
-
-      <div class="card searchable" data-cat="paiements">
-        <div>
-          <span class="card-badge badge-payment">Crypto</span>
-          <div class="card-title-row">
-            <h2 class="t-crypto">Crypto (SOL / USDC)</h2>
-            <i class="fa-solid fa-coins" style="font-size: 1.4rem; color: var(--accent-green);"></i>
-          </div>
-          <p>Clique sur le bouton pour copier rapidement l'adresse du wallet.</p>
-        </div>
-        <button class="btn btn-blue" id="btn-crypto" type="button" onclick="copyCryptoAddress(event)">
-          <i class="fa-solid fa-copy"></i> <span>Copier l'adresse crypto</span>
-        </button>
-      </div>
-
-      <div class="card searchable" data-cat="paiements">
-        <div>
-          <span class="card-badge badge-payment">Virement</span>
-          <div class="card-title-row">
-            <h2>Virement bancaire</h2>
-            <i class="fa-solid fa-building-columns" style="font-size: 1.4rem; color: var(--accent-green);"></i>
-          </div>
-          <p>Les coordonnées bancaires te sont données dans ton ticket Discord. Pratique si tu veux payer depuis ta banque.</p>
-        </div>
-        <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="btn btn-blue"><i class="fa-brands fa-discord"></i> Ouvrir un ticket</a>
-      </div>
-
     </div>
 
-    <h3 class="pay-subheading">Frais</h3>
+    <h3 class="pay-subheading">Conditions</h3>
+    <div class="fees-grid guar-grid">
+      <div class="fees-card searchable" data-cat="garanties">
+        <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+        <h3>Commande via le site</h3>
+        <p>Commande passée avec le panier du site, pour <strong>30 € payés minimum</strong>.</p>
+      </div>
+      <div class="fees-card searchable" data-cat="garanties">
+        <i class="fa-solid fa-clock" aria-hidden="true"></i>
+        <h3>Ban dans les 7 jours</h3>
+        <p>Le ban doit arriver dans les <strong>7 jours</strong> qui suivent la livraison de ta commande.</p>
+      </div>
+      <div class="fees-card searchable" data-cat="garanties">
+        <i class="fa-solid fa-ban" aria-hidden="true"></i>
+        <h3>Aucun autre mod menu</h3>
+        <p>Aucun mod menu, triche ou outil externe utilisé de ton côté pendant ces 7 jours.</p>
+      </div>
+      <div class="fees-card searchable" data-cat="garanties">
+        <i class="fa-solid fa-user-check" aria-hidden="true"></i>
+        <h3>Comportement correct</h3>
+        <p>Pas de grief, de provocation ni de signalements de joueurs contre toi en jeu.</p>
+      </div>
+    </div>
+
+    <h3 class="pay-subheading">Non couvert</h3>
+    <div class="guar-excl searchable" data-cat="garanties">
+      <ul>
+        <li><i class="fa-solid fa-xmark" aria-hidden="true"></i> Les commandes de moins de 30 €.</li>
+        <li><i class="fa-solid fa-xmark" aria-hidden="true"></i> Les lobbys gratuits.</li>
+        <li><i class="fa-solid fa-xmark" aria-hidden="true"></i> Les commandes passées en dehors du panier du site.</li>
+        <li><i class="fa-solid fa-xmark" aria-hidden="true"></i> Un ban qui arrive plus de 7 jours après la livraison.</li>
+        <li><i class="fa-solid fa-xmark" aria-hidden="true"></i> Une seule garantie par client.</li>
+      </ul>
+    </div>
+
+    <h3 class="pay-subheading">Comment demander un remboursement ?</h3>
     <div class="fees-grid">
-      <div class="fees-card searchable" data-cat="paiements">
-        <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
-        <h3>Prix tout compris</h3>
-        <p id="fees-main">Les frais sont affichés à côté de chaque prix, et le total est toujours indiqué.</p>
+      <div class="fees-card searchable" data-cat="garanties">
+        <i class="fa-brands fa-discord" aria-hidden="true"></i>
+        <h3><span class="step-n">1.</span> Ouvre un ticket</h3>
+        <p>Sur le serveur Discord, avec ton récapitulatif de commande.</p>
       </div>
-      <div class="fees-card searchable" data-cat="paiements">
-        <i class="fa-solid fa-building-columns" aria-hidden="true"></i>
-        <h3>Frais de ta banque ou de PayPal</h3>
-        <p>Les frais 2DKR sont ceux affichés sur le site. Si ta banque, PayPal ou le réseau crypto te prend quelque chose de son côté (ex. paiement par carte), ça dépend de ton compte, pas de 2DKR.</p>
+      <div class="fees-card searchable" data-cat="garanties">
+        <i class="fa-solid fa-camera" aria-hidden="true"></i>
+        <h3><span class="step-n">2.</span> Envoie une capture</h3>
+        <p>Une capture du message de ban affiché en jeu.</p>
       </div>
-      <div class="fees-card searchable" data-cat="paiements">
-        <i class="fa-solid fa-calendar-check" aria-hidden="true"></i>
-        <h3>Prix garanti</h3>
-        <p>Les changements de prix sont toujours annoncés à l'avance. Une commande ouverte en ticket garde le prix du jour où elle a été passée.</p>
+      <div class="fees-card searchable" data-cat="garanties">
+        <i class="fa-solid fa-rotate-left" aria-hidden="true"></i>
+        <h3><span class="step-n">3.</span> On te rembourse</h3>
+        <p>On vérifie les conditions, puis on te rembourse par le moyen de paiement utilisé.</p>
       </div>
     </div>
-    <script>
-      (function () { var el = document.getElementById('fees-main'); if (el && window.DKR) el.innerHTML = DKR.texteFrais(); })();
-    </script>
+
+    <div style="max-width: 320px; margin: 28px auto 0;">
+      <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="btn btn-blue"><i class="fa-brands fa-discord"></i> Ouvrir un ticket</a>
+    </div>
 
   </div>
 
@@ -848,13 +850,8 @@
     &copy; 2026 2DKR by Dekur. All rights reserved.
   </footer>
 
-  <div id="copy-toast" class="toast">
-    <i class="fa-solid fa-check-circle"></i> <span>Adresse du wallet copiée !</span>
-  </div>
 
   <script>
-    const WALLET_ADDRESS = "HzBYYLgE5aJ9cKG9FmxUv3tZfiMSayd6YdADkVYzQA29";
-
     // Menu Mobile Burger
     const menuToggle = document.getElementById('menu-toggle');
     const navLinks = document.getElementById('nav-links');
@@ -920,46 +917,6 @@
         }
       });
     });
-
-    // Copie Adresse Crypto
-    function copyCryptoAddress(event) {
-      if (event) event.stopPropagation();
-
-      const handleSuccess = () => {
-        const btnCrypto = document.getElementById("btn-crypto");
-        const originalContent = btnCrypto.innerHTML;
-
-        btnCrypto.innerHTML = '<i class="fa-solid fa-check"></i> <span>Copié !</span>';
-        const toast = document.getElementById("copy-toast");
-        toast.classList.add("show");
-
-        setTimeout(() => {
-          toast.classList.remove("show");
-          btnCrypto.innerHTML = originalContent;
-        }, 3000);
-      };
-
-      if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(WALLET_ADDRESS).then(handleSuccess).catch(err => {
-          console.error("Erreur lors de la copie : ", err);
-        });
-      } else {
-        const textarea = document.createElement("textarea");
-        textarea.value = WALLET_ADDRESS;
-        textarea.style.position = "fixed";
-        textarea.style.opacity = "0";
-        document.body.appendChild(textarea);
-        textarea.focus();
-        textarea.select();
-        try {
-          document.execCommand('copy');
-          handleSuccess();
-        } catch (err) {
-          console.error('Erreur fallback copie : ', err);
-        }
-        document.body.removeChild(textarea);
-      }
-    }
 
     /* ===== v0.3.4 ===== */
 

@@ -761,6 +761,7 @@
       <a href="calculateur.html">Calculateur</a>
       <a href="avis.html">Avis & Preuves</a>
       <a href="paiements.html">Paiements &amp; frais</a>
+      <a href="garanties.html">Garanties</a>
       <button class="theme-toggle" id="theme-toggle" title="Changer de thème" aria-label="Changer de thème"><i class="fa-solid fa-moon"></i></button>
       <a href="https://www.youtube.com/@Dekur7" target="_blank" rel="noopener noreferrer" class="nav-social-icon" style="color: #ff0000;" title="YouTube" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
       <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer" class="nav-social-icon" style="color: #5865f2;" title="Discord" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
@@ -801,6 +802,15 @@
   </section>
 
   <div class="container" id="projets">
+    <a href="garanties.html" class="guar-banner guar-top searchable" data-cat="services">
+      <span class="guar-icon"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></span>
+      <div class="guar-text">
+        <strong>Garantie anti-ban 2DKR</strong>
+        <p>Banni dans les 7 jours après notre intervention ? On te rembourse à 100 % (dès 30 € de commande).</p>
+      </div>
+      <span class="guar-more">Voir les conditions</span>
+    </a>
+
     
     <div class="section-heading"><i class="fa-solid fa-layer-group" style="color: var(--accent-blue);" aria-hidden="true"></i> <span>Communauté & Soutien</span></div>
     <div class="grid">
@@ -859,6 +869,18 @@
         </div>
       </div>
 
+      <div class="card searchable" data-cat="offres services">
+        <div>
+          <span class="card-badge badge-offer">Gratuit</span>
+          <div class="card-title-row">
+            <h2>Lobby découverte</h2>
+            <i class="fa-solid fa-gift" style="font-size: 1.4rem; color: var(--accent-orange);"></i>
+          </div>
+          <p>Teste 2DKR gratuitement : <strong>6M, niveau 50 et 1 véhicule moddé</strong>. Sessions annoncées sur le Discord.</p>
+        </div>
+        <a href="services.html#lobby" class="btn btn-blue"><i class="fa-solid fa-gift"></i> Voir le lobby gratuit</a>
+      </div>
+
     </div>
 
     <div class="section-heading" style="margin-top: 50px;"><i class="fa-circle-question fa-solid" style="color: var(--accent-blue);" aria-hidden="true"></i> <span>Foire Aux Questions</span></div>
@@ -886,6 +908,9 @@
       <button type="button" class="changelog-close" aria-label="Fermer"><i class="fa-solid fa-xmark"></i></button>
     </div>
     <ul>
+      <li><strong>Lobby découverte gratuit</strong> : 6M, niveau 50 (ou +50 niveaux si tu l'as déjà) et 1 véhicule moddé, sessions annoncées sur le Discord.</li>
+      <li><strong>Page Garanties</strong> : garantie anti-ban, remboursé à 100 % si ton compte est banni dans les 7 jours (conditions sur la page).</li>
+      <li><strong>Tableau comparatif</strong> : la molette fait de nouveau défiler la page quand la souris est sur le tableau.</li>
       <li><strong>Nouveaux tarifs le 7 octobre</strong> : annoncés à l'avance. Clique sur la bannière bleue de la page Services pour voir l'avant / après. Les commandes passées avant gardent l'ancien prix.</li>
       <li><strong>Prix tout compris</strong> : aucun frais ni commission ajouté, le prix affiché est celui que tu paies.</li>
       <li><strong>Page Paiements &amp; frais</strong> : PayPal, crypto et virement bancaire réunis sur une page dédiée, accessible depuis le menu.</li>
@@ -1093,6 +1118,8 @@
     const SITE_INDEX = [
       { t: 'Serveur Discord', s: 'Rejoindre la communauté 2DKR', u: 'https://discord.gg/mDpZT73FFG', p: 'Accueil', k: 'discord communaute ticket support chat' },
       { t: 'Paiements & frais', s: 'PayPal, crypto, virement et frais', u: 'paiements.html', p: 'Paiements', k: 'paiement paiements frais commission paypal crypto solana virement banque carte argent' },
+      { t: 'Garanties', s: 'Garantie anti-ban : remboursé si ban sous 7 jours', u: 'garanties.html', p: 'Garanties', k: 'garantie garanties ban banni rembourse remboursement securite conditions' },
+      { t: 'Lobby découverte gratuit', s: '6M, niveau 50 et 1 véhicule moddé', u: 'services.html#lobby', p: 'Services', k: 'lobby gratuit free decouverte essai test offert' },
       { t: 'Instant Gaming', s: 'Achète tes jeux via mon lien et soutiens 2DKR', u: 'https://www.instant-gaming.com/fr/?igr=Bydekur', p: 'Accueil', k: 'instant gaming jeu jeux cle key steam pc soutien affilie acheter' },
       { t: 'Pack Bronze', s: 'Pack d\'entrée lobby moddé', u: 'services.html', p: 'Services', k: 'pack bronze tarif prix lobby gta' },
       { t: 'Pack Argent', s: 'Pack intermédiaire', u: 'services.html', p: 'Services', k: 'pack argent silver tarif prix lobby' },
@@ -1114,6 +1141,7 @@
       { t: 'Rejoindre le Discord', u: 'https://discord.gg/mDpZT73FFG', i: 'fa-brands fa-discord', k: 'discord ticket support' },
       { t: 'Chaîne YouTube', u: 'https://www.youtube.com/@Dekur7', i: 'fa-brands fa-youtube', k: 'youtube video chaine' },
       { t: 'Paiements & frais', u: 'paiements.html', i: 'fa-wallet', k: 'paiement frais paypal crypto virement' },
+      { t: 'Garanties', u: 'garanties.html', i: 'fa-shield-halved', k: 'garantie ban rembourse' },
       { t: 'Changer de thème (bleu / dark or)', u: '#theme', i: 'fa-palette', k: 'theme couleur dark or bleu mode' }
     ];
 

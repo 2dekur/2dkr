@@ -689,6 +689,9 @@ html {
   overscroll-behavior: contain;
 }
 
+/* Le tableau ne bloque que le défilement horizontal : la molette fait défiler la page */
+.cmp-wrap { overscroll-behavior: auto; overscroll-behavior-x: contain; }
+
 /* anciens navigateurs (Safari…) */
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-track { background: transparent; }
@@ -708,3 +711,104 @@ html {
   clip: rect(0 0 0 0);
   white-space: nowrap;
 }
+
+/* ---------- Garanties (page Garanties + bandeau accueil / services) ---------- */
+.guar-banner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 20px;
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  border-radius: var(--radius);
+  background: rgba(16, 185, 129, 0.08);
+  color: var(--text-main);
+  text-decoration: none;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+a.guar-banner:hover { border-color: var(--accent-green); transform: translateY(-2px); }
+.guar-icon {
+  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--accent-green);
+  font-size: 1.3rem;
+}
+.guar-text { flex: 1; min-width: 0; }
+.guar-text h2, .guar-text strong { display: block; font-size: 1.05rem; margin-bottom: 4px; color: var(--text-main); }
+.guar-text p { font-size: 0.88rem; line-height: 1.55; color: var(--text-muted); }
+.guar-more {
+  flex-shrink: 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent-green);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  border-radius: 20px;
+  padding: 5px 12px;
+  white-space: nowrap;
+}
+.guar-top { margin-bottom: 10px; }
+.guar-excl {
+  padding: 16px 20px;
+  border: 1px solid rgba(249, 115, 22, 0.3);
+  border-radius: var(--radius);
+  background: rgba(249, 115, 22, 0.06);
+}
+.guar-excl ul { list-style: none; display: grid; gap: 8px; }
+.guar-excl li { font-size: 0.9rem; color: var(--text-muted); display: flex; gap: 10px; align-items: baseline; }
+.guar-excl li i { color: var(--accent-orange); }
+.fees-grid + .pay-subheading,
+.guar-banner + .pay-subheading,
+.guar-excl + .pay-subheading { margin-top: 28px; }
+.fees-card .step-n { font-family: var(--font-display); font-weight: 700; color: var(--accent-blue); margin-right: 4px; }
+@media (max-width: 600px) {
+  .guar-banner { flex-wrap: wrap; }
+  .guar-text { flex-basis: calc(100% - 62px); }
+  .guar-more { margin-left: 62px; }
+}
+html[data-theme="gold"] .guar-banner,
+html[data-theme="gold"] .guar-excl { background: #000; }
+.guar-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+
+/* ---------- Lobby découverte (page Services) ---------- */
+.lobby-card {
+  margin: 16px 0 10px;
+  padding: 22px;
+  border: 1px solid var(--border-glow);
+  border-radius: var(--radius);
+  background: var(--card-bg);
+  scroll-margin-top: 110px;
+}
+.lobby-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap; }
+.lobby-tag {
+  display: inline-block;
+  margin-bottom: 8px;
+  padding: 3px 9px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--accent-orange);
+  border: 1px solid rgba(249, 115, 22, 0.35);
+  border-radius: 8px;
+  background: rgba(249, 115, 22, 0.12);
+}
+.lobby-head h2 { font-family: var(--font-display); font-size: 1.3rem; margin-bottom: 4px; }
+.lobby-head p { font-size: 0.9rem; color: var(--text-muted); }
+.lobby-price { font-family: var(--font-display); font-size: 1.8rem; font-weight: 700; color: var(--accent-green); }
+.lobby-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin-top: 18px; }
+.lobby-item { padding: 14px; border: 1px solid var(--border); border-radius: var(--radius); display: flex; flex-direction: column; gap: 4px; }
+.lobby-item span { font-size: 0.82rem; color: var(--text-muted); }
+.lobby-item span i { color: var(--accent-blue); margin-right: 4px; }
+.lobby-item strong { font-size: 1.05rem; color: var(--text-main); }
+.lobby-item small { font-size: 0.75rem; color: var(--text-muted); }
+.lobby-foot {
+  display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap;
+  margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--border);
+}
+.lobby-foot p { font-size: 0.82rem; line-height: 1.7; color: var(--text-muted); }
+.lobby-foot p a { color: var(--accent-blue); }
+.lobby-foot .btn { width: auto; margin: 0; }
+html[data-theme="gold"] .lobby-card { background: #000; }
