@@ -31,8 +31,8 @@ window.DKR_CATALOGUE = {
     annonce: 'Nouveaux tarifs à partir du mardi 7 octobre',
     detail: "Les commandes passées avant cette date gardent l'ancien prix.",
     prix: {
-      bronze: 10, argent: 16, or: 24, platine: 32, ultime: 72,
-      'compte-simple': 23, 'compte-complet': 36,
+      bronze: 8, argent: 13, or: 19, platine: 26, ultime: 70,
+      'compte-simple': 23, 'compte-complet': 35,
       m20: 5, m30: 7, m50: 10
     }
   },
