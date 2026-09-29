@@ -908,10 +908,12 @@
             row.innerHTML = `<span>${sel.nom}</span><span>${DKR.euros(sel.prix)}</span>`;
             summaryContainer.appendChild(row);
           });
-          const fraisRow = document.createElement('div');
-          fraisRow.className = 'summary-item-row summary-fees';
-          fraisRow.innerHTML = `<span>Frais</span><span>${DKR.euros(DKRPanier.frais(activeSelections))}</span>`;
-          summaryContainer.appendChild(fraisRow);
+          if (DKRPanier.frais(activeSelections)) {
+            const fraisRow = document.createElement('div');
+            fraisRow.className = 'summary-item-row summary-fees';
+            fraisRow.innerHTML = `<span>Frais</span><span>${DKR.euros(DKRPanier.frais(activeSelections))}</span>`;
+            summaryContainer.appendChild(fraisRow);
+          }
           discordBtn.classList.remove('disabled');
           discordBtn.setAttribute('href', DKRPanier.DISCORD);
           discordBtnText.textContent = `Copier et commander (${DKR.euros(calculatedTotal)})`;

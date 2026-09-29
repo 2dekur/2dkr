@@ -31,8 +31,8 @@ window.DKR_CATALOGUE = {
     annonce: 'Nouveaux tarifs à partir du mardi 7 octobre',
     detail: "Les commandes passées avant cette date gardent l'ancien prix.",
     prix: {
-      bronze: 9, argent: 15, or: 22, platine: 29, ultime: 65,
-      'compte-simple': 22, 'compte-complet': 35,
+      bronze: 10, argent: 16, or: 24, platine: 32, ultime: 72,
+      'compte-simple': 23, 'compte-complet': 36,
       m20: 5, m30: 7, m50: 10
     }
   },
@@ -44,9 +44,9 @@ window.DKR_CATALOGUE = {
   //   Les frais commencent en même temps que les nouveaux tarifs (nouveauxTarifs.date).
   //   Mets 0 pour ne pas mettre de frais.
   frais: {
-    pourcent: { bronze: 5, argent: 6, or: 7, platine: 8, ultime: 10 },
-    defaut: 5,
-    fixeCommande: 0.35
+    pourcent: {},
+    defaut: 0,
+    fixeCommande: 0
   },
 
   // Packs : chaque info a sa propre ligne, pour les cartes ET le tableau comparatif.

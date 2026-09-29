@@ -19,7 +19,7 @@
         '<span class="price-new' + (DKR.enPromo(item) ? '' : ' price-normal') + '">' + DKR.euros(paye) + '</span>' + bulleFrais(item) + '</div>' +
       '<div class="price-note">' + (frais
         ? 'Total : <strong>' + DKR.euros(paye + frais + DKR.fraisFixe()) + '</strong> · frais ' + DKR.pourcentFrais(item) + ' %' + (DKR.fraisFixe() ? ' + ' + DKR.euros(DKR.fraisFixe()) : '')
-        : '<i class="fa-solid fa-circle-check" aria-hidden="true"></i> Aucun frais') + '</div>' +
+        : '<i class="fa-solid fa-circle-check" aria-hidden="true"></i> Prix tout compris') + '</div>' +
     '</div>';
   }
 
@@ -241,6 +241,8 @@
     document.getElementById('cartTotal').textContent = DKR.euros(DKRPanier.total());
     document.getElementById('modalSubtotal').textContent = DKR.euros(DKRPanier.sousTotal());
     document.getElementById('modalFees').textContent = DKR.euros(DKRPanier.frais());
+    // Pas de frais : on cache les lignes sous-total / frais
+    document.querySelectorAll('.modal-fees').forEach(function (el) { el.hidden = !DKRPanier.frais(); });
     document.getElementById('modalTotal').textContent = DKR.euros(DKRPanier.total());
     bar.classList.toggle('active', liste.length > 0);
     if (!liste.length) closeModal();

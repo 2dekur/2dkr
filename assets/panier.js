@@ -70,9 +70,13 @@
       articles.forEach(function (a) {
         lignes.push('• ' + a.nom + ' — ' + DKR.euros(a.prix) + (a.frais ? ' (+' + DKR.euros(a.frais) + ' de frais)' : ''));
       });
-      lignes.push('', 'Sous-total : ' + DKR.euros(DKRPanier.sousTotal(articles)),
-        'Frais : ' + DKR.euros(DKRPanier.frais(articles)) + (DKR.fraisFixe() ? ' (dont ' + DKR.euros(DKR.fraisFixe()) + ' par commande)' : ''),
-        'Total : ' + DKR.euros(DKRPanier.total(articles)));
+      lignes.push('');
+      // Lignes sous-total / frais seulement s'il y a des frais
+      if (DKRPanier.frais(articles)) {
+        lignes.push('Sous-total : ' + DKR.euros(DKRPanier.sousTotal(articles)),
+          'Frais : ' + DKR.euros(DKRPanier.frais(articles)) + (DKR.fraisFixe() ? ' (dont ' + DKR.euros(DKR.fraisFixe()) + ' par commande)' : ''));
+      }
+      lignes.push('Total : ' + DKR.euros(DKRPanier.total(articles)));
       if (DKR.promoActive()) lignes.push('(' + DKR.catalogue.promo.titre + ' appliquée)');
       return lignes.join('\n');
     },
