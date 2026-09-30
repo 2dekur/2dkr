@@ -85,6 +85,10 @@
     .btn-primary { background: var(--accent-blue); color: #04121c; }
 
     .btn-ghost { border: 1px solid var(--border); color: var(--text-main); }
+    .shortcuts { margin-top: 26px; display: flex; gap: 8px 18px; justify-content: center; flex-wrap: wrap; font-size: 0.88rem; }
+    .shortcuts a { color: var(--text-muted); text-decoration: none; transition: color .2s ease; }
+    .shortcuts a:hover { color: var(--accent-blue); }
+    .shortcuts-title { margin-top: 30px; font-size: 0.72rem; letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted); opacity: .7; }
 
     .btn-ghost:hover { background: rgba(var(--accent-blue-rgb), 0.08); }
   </style>
@@ -99,6 +103,13 @@
       <a href="/" class="btn btn-primary">Retour à l'accueil</a>
       <a href="/services" class="btn btn-ghost">Voir le catalogue</a>
     </div>
+    <div class="shortcuts-title">Ou va directement à</div>
+    <nav class="shortcuts" aria-label="Raccourcis">
+      <a href="/lobby">🎁 Lobby gratuit</a>
+      <a href="/paiements">🛡️ Paiements &amp; garanties</a>
+      <a href="/avis">⭐ Avis &amp; Preuves</a>
+      <a href="https://discord.gg/mDpZT73FFG" target="_blank" rel="noopener noreferrer">💬 Discord</a>
+    </nav>
   </main>
 </body>
 </html>
