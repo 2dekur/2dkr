@@ -969,6 +969,7 @@
     </div>
     <ul>
       <li><strong>FAQ complète</strong> : 8 questions sur l'accueil (délais, accès au compte, ban, lobby gratuit, paiements…).</li>
+      <li><strong>FAQ animée</strong> : « Voir les autres questions » déplie les questions en douceur, une par une, et « Voir moins » les replie.</li>
       <li><strong>Page 404</strong> : raccourcis vers le lobby gratuit, les paiements &amp; garanties, les avis et le Discord.</li>
     </ul>
     <h4 class="changelog-sub">v0.4.3</h4>
@@ -1373,12 +1374,43 @@
     (function () {
       var btn = document.getElementById('faq-toggle'), more = document.getElementById('faq-more');
       if (!btn || !more) return;
+      var busy = false;
+      var ease = 'cubic-bezier(0.2, 0.8, 0.2, 1)';
       btn.addEventListener('click', function () {
+        if (busy) return;
         var open = more.hidden;
-        more.hidden = !open;
         btn.setAttribute('aria-expanded', open ? 'true' : 'false');
         btn.querySelector('span').textContent = open ? 'Voir moins' : 'Voir les autres questions';
-        if (open && more.animate) more.animate([{ opacity: 0, transform: 'translateY(-6px)' }, { opacity: 1, transform: 'none' }], { duration: 300, easing: 'ease-out' });
+        if (!more.animate) { more.hidden = !open; return; }
+        busy = true;
+        var items = more.querySelectorAll('.faq-item');
+        if (open) {
+          // Ouverture : la zone se déplie, puis les questions arrivent une par une
+          more.hidden = false;
+          var h = more.scrollHeight;
+          more.style.overflow = 'hidden';
+          more.animate([{ height: '0px', opacity: 0 }, { height: h + 'px', opacity: 1 }], { duration: 420, easing: ease })
+            .onfinish = function () { more.style.overflow = ''; busy = false; };
+          items.forEach(function (it, i) {
+            it.animate([{ opacity: 0, transform: 'translateY(-10px)' }, { opacity: 1, transform: 'none' }],
+              { duration: 360, delay: 60 * i, easing: ease, fill: 'backwards' });
+          });
+        } else {
+          // Fermeture : les questions s'effacent, puis la zone se replie
+          var h2 = more.scrollHeight;
+          more.style.overflow = 'hidden';
+          items.forEach(function (it, i) {
+            it.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(-8px)' }],
+              { duration: 220, delay: 40 * (items.length - 1 - i), easing: 'ease-in', fill: 'forwards' });
+          });
+          more.animate([{ height: h2 + 'px', opacity: 1 }, { height: '0px', opacity: 0 }], { duration: 380, delay: 120, easing: ease, fill: 'forwards' })
+            .onfinish = function () {
+              more.hidden = true;
+              more.style.overflow = '';
+              more.getAnimations({ subtree: true }).forEach(function (a) { a.cancel(); });
+              busy = false;
+            };
+        }
       });
     })();
   </script>
