@@ -69,12 +69,37 @@
 
   function prevenir() { abonnes.forEach(function (f) { f(panier.slice()); }); }
 
+  /* Mémoire « code déjà utilisé sur cet appareil » : un code réservé à la 1re commande
+     (BIENVENUE, code parrain utilisé par un pote) est noté dès que le récap est copié.
+     Simple frein : la vraie vérification se fait dans le ticket (rôle Client Vérifié). */
+  var CLE_UTILISES = '2dkr-codes-utilises';
+  var DELAI_GRACE = 60 * 60 * 1000; // 1 h pour finir la commande en cours après la copie
+
+  function utilises() {
+    try { return JSON.parse(localStorage.getItem(CLE_UTILISES) || '{}') || {}; } catch (e) { return {}; }
+  }
+  // Le parrain qui a atteint ses potes parrainés garde son code à vie : jamais bloqué
+  function premiereCommandeSeulement(info) {
+    return info && !(info.type === 'parrain' && info.filleuls >= DKR.catalogue.codes.parrainage.filleulsRequis);
+  }
+  function dejaUtilise(info, avecGrace) {
+    if (!premiereCommandeSeulement(info)) return false;
+    var t = utilises()[info.code];
+    return !!t && !(avecGrace && Date.now() - t < DELAI_GRACE);
+  }
+  function marquerUtilise(info) {
+    if (!premiereCommandeSeulement(info)) return;
+    var u = utilises();
+    if (!u[info.code]) { u[info.code] = Date.now(); try { localStorage.setItem(CLE_UTILISES, JSON.stringify(u)); } catch (e) {} }
+  }
+
   // Code gardé d'une visite à l'autre : on le revérifie au chargement
+  // (et on le retire s'il a déjà servi pour une commande copiée il y a plus d'1 h)
   try {
     var garde = localStorage.getItem(CLE_CODE);
     if (garde) chercherCode(garde).then(function (info) {
-      codeActif = info;
-      if (!info) { try { localStorage.removeItem(CLE_CODE); } catch (e) {} }
+      codeActif = info && !dejaUtilise(info, true) ? info : null;
+      if (!codeActif) { try { localStorage.removeItem(CLE_CODE); } catch (e) {} }
       prevenir();
     });
   } catch (e) {}
@@ -110,6 +135,7 @@
       var code = normaliser(saisie);
       return chercherCode(code).then(function (info) {
         if (!info) return { ok: false };
+        if (dejaUtilise(info, true)) return { ok: false, deja: true };
         codeActif = info;
         try { localStorage.setItem(CLE_CODE, code); } catch (e) {}
         prevenir();
@@ -165,6 +191,7 @@
       if (red) {
         lignes.push('Code ' + codeActif.code + ' (-' + codeActif.reduction + ' %) : -' + DKR.euros(red) +
           (codeActif.type === 'parrain' ? ' — parrain : ' + codeActif.nom : ' — 1er achat'));
+        marquerUtilise(codeActif);
       }
       lignes.push('Total : ' + DKR.euros(DKRPanier.total(articles)));
       if (DKR.promoActive()) lignes.push('(' + DKR.catalogue.promo.titre + ' appliquée)');
@@ -205,7 +232,13 @@
         e.preventDefault();
         if (!input.value.trim()) { msg.className = 'code-msg is-error'; msg.textContent = 'Entre un code.'; return; }
         DKRPanier.appliquerCode(input.value).then(function (r) {
-          if (!r.ok) { msg.className = 'code-msg is-error'; msg.textContent = 'Ce code n\'existe pas. Vérifie l\'orthographe.'; return; }
+          if (!r.ok) {
+            msg.className = 'code-msg is-error';
+            msg.textContent = r.deja
+              ? 'Tu as déjà utilisé ce code sur cet appareil : il est réservé à la 1re commande.'
+              : 'Ce code n\'existe pas. Vérifie l\'orthographe.';
+            return;
+          }
           input.value = '';
         });
       });
