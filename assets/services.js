@@ -236,6 +236,8 @@
   window.openModal = function () { if (DKRPanier.liste().length) modal.classList.add('active'); };
   window.closeModal = function () { modal.classList.remove('active'); };
   modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
+  // Arrivée depuis une autre page avec « ?panier » (ex. Mod menus) : on ouvre le récapitulatif
+  if (/[?&]panier(=|&|$)/.test(location.search)) window.addEventListener('load', function () { setTimeout(function () { window.openModal(); }, 150); });
 
   DKRPanier.surChangement(function (liste) {
     document.getElementById('cartCount').textContent = liste.length;

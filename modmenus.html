@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>2DKR — Site officiel de Dekur</title>
+  <title>2DKR — Mod menus</title>
   
-  <meta property="og:title" content="2DKR — Espace Officiel De Dekur">
-  <meta property="og:description" content="Retrouve tous nos boosts GTA Online, véhicules moddés, tenues et packs sur mesure.">
+  <meta property="og:title" content="2DKR — Mod menus">
+  <meta property="og:description" content="Achète ton mod menu GTA directement via 2DKR : Cherax, Yari et Lexis (BE, à vie). Installation expliquée en français.">
   <meta property="og:type" content="website">
   <meta name="theme-color" content="#38bdf8">
-  <meta name="description" content="Espace officiel 2DKR by Dekur : communauté Discord, services GTA Online, offres et moyens de paiement.">
-  <link rel="canonical" href="https://2dkr.pages.dev/">
-  <meta property="og:url" content="https://2dkr.pages.dev/">
+  <meta name="description" content="Mod menus GTA Online sur 2DKR : Cherax Standard et Premium, Yari et Lexis à vie. Paiement PayPal, crypto ou virement, clé livrée dans ton ticket.">
+  <link rel="canonical" href="https://2dkr.pages.dev/modmenus">
+  <meta property="og:url" content="https://2dkr.pages.dev/modmenus">
   <meta property="og:site_name" content="2DKR">
   <meta property="og:locale" content="fr_FR">
-  <meta property="og:image" content="https://2dkr.pages.dev/og/accueil.png">
+  <meta property="og:image" content="https://2dkr.pages.dev/og/modmenus.png?v=1">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
@@ -757,13 +757,13 @@
     </button>
 
     <div class="nav-links" id="nav-links">
-      <a href="index.html" class="active">Accueil</a>
+      <a href="index.html">Accueil</a>
       <div class="nav-drop">
-        <button type="button" class="nav-drop-btn" aria-expanded="false" aria-haspopup="true">Services <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></button>
+        <button type="button" class="nav-drop-btn active" aria-expanded="false" aria-haspopup="true">Services <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></button>
         <div class="nav-drop-menu">
           <a href="services.html"><i class="fa-solid fa-tags" aria-hidden="true"></i> Packs &amp; tarifs</a>
           <a href="lobby.html"><i class="fa-solid fa-gift" aria-hidden="true"></i> Lobby gratuit <span class="nav-free">0 €</span></a>
-          <a href="modmenus.html"><i class="fa-solid fa-bars-staggered" aria-hidden="true"></i> Mod menus</a>
+          <a href="modmenus.html" class="active" aria-current="page"><i class="fa-solid fa-bars-staggered" aria-hidden="true"></i> Mod menus</a>
           <a href="calculateur.html"><i class="fa-solid fa-calculator" aria-hidden="true"></i> Calculateur</a>
         </div>
       </div>
@@ -777,300 +777,109 @@
   </nav>
 
   <section class="hero">
-    <h1>L'Espace <span>2DKR</span></h1>
-    <p>Retrouve tous les accès à la communauté, aux services et aux moyens de paiement.</p>
-    
-    <div class="hero-badges">
-      <div class="badge-dev-mode" id="version-badge" role="button" tabindex="0" title="Voir les nouveautés" style="cursor: pointer;">
-        <i class="fa-solid fa-code"></i>
-        <span>v0.4.6 — Nouveautés</span>
-        <span class="extra-text">&nbsp;• by Dekur</span>
-      </div>
-      <div class="badge-status">
-        <span class="status-dot"></span>
-        <span>Services opérationnels</span>
-      </div>
-    </div>
-
-    <div class="trust-strip">
-      <a href="avis.html"><strong>+60</strong> clients satisfaits</a>
-      <span class="trust-sep" aria-hidden="true"></span>
-      <a href="avis.html"><strong>5/5</strong> <i class="fa-solid fa-star" aria-hidden="true"></i> de moyenne</a>
-      <span class="trust-sep" aria-hidden="true"></span>
-      <a href="https://discord.gg/sUAdU5v9aD" target="_blank" rel="noopener noreferrer"><strong id="discord-members">130+</strong> membres Discord</a>
-    </div>
-
-    <div class="search-container">
-      <i class="fa-solid fa-magnifying-glass search-icon"></i>
-      <input type="text" id="search-input" class="search-input" placeholder="Rechercher un service, une offre, un moyen de paiement...">
-    </div>
-
-    <div class="chips" id="chips">
-      <button class="chip active" data-cat="all"><i class="fa-solid fa-border-all"></i>Tout</button>
-      <button class="chip" data-cat="offres"><i class="fa-solid fa-tags"></i>Offres</button>
-      <button class="chip" data-cat="jeux"><i class="fa-solid fa-gamepad"></i>Jeux</button>
-      <button class="chip" data-cat="services"><i class="fa-solid fa-bolt"></i>Services</button>
-      <button class="chip" data-cat="communaute"><i class="fa-brands fa-discord"></i>Communauté</button>
-    </div>
+    <h1>Mod <span>menus</span></h1>
+    <p>Achète ton menu directement via 2DKR, installation expliquée en français.</p>
 
     <div class="kbd-hint"><span class="kbd">Ctrl</span> + <span class="kbd">K</span> ou <span class="kbd">/</span> pour chercher sur le site</div>
-   
   </section>
 
-  <div class="container" id="projets">
-    <a href="paiements.html#garanties" class="guar-banner guar-top searchable" data-cat="services">
-      <span class="guar-icon"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></span>
-      <div class="guar-text">
-        <strong>Garantie anti-ban 2DKR</strong>
-        <p>Banni dans les 7 jours après notre intervention ? On te rembourse à 100 % (dès <span class="guar-min">30 €</span> dépensés dans la boutique<span class="guar-min-note">, 26 € à partir du 7 octobre</span>).</p>
-      </div>
-      <span class="guar-more">Voir les conditions</span>
-    </a>
+  <div class="container" id="modmenus">
 
-    
-    <div class="section-heading"><i class="fa-solid fa-layer-group" style="color: var(--accent-blue);" aria-hidden="true"></i> <span>Communauté & Soutien</span></div>
-    <div class="grid">
-      
-      <div class="card searchable" data-cat="communaute">
-        <div>
-          <span class="card-badge badge-discord">Communauté</span>
-          <div class="card-title-row">
-            <h2 class="t-discord">Serveur Discord</h2>
-            <i class="fa-brands fa-discord" style="font-size: 1.5rem; color: #5865f2;"></i>
-          </div>
-          <p>Rejoins-nous sur Discord pour voir les nouveautés à propos du serveur, parler, suggérer ou ouvrir un ticket.</p>
-        </div>
-        <a href="https://discord.gg/sUAdU5v9aD" target="_blank" rel="noopener noreferrer" class="btn btn-blue"><i class="fa-brands fa-discord"></i> Rejoindre le Discord</a>
-      </div>
+    <h3 class="pay-subheading">Nos menus</h3>
+    <div class="menus-grid" id="menus-grid"></div>
 
-      <div class="card searchable" data-cat="jeux offres">
-        <div>
-          <span class="card-badge badge-offer">Soutien</span>
-          <div class="card-title-row">
-            <h2 class="t-ig">Instant Gaming</h2>
-            <i class="fa-solid fa-gamepad" style="font-size: 1.4rem; color: var(--accent-orange);"></i>
-          </div>
-          <p>Tu achètes tes jeux sur Instant Gaming ? Passe par mon lien : <strong>ça ne te coûte rien de plus</strong> et ça soutient 2DKR. Merci à ceux qui l'utilisent !</p>
-        </div>
-        <div>
-          <a href="https://www.instant-gaming.com/fr/?igr=Bydekur" target="_blank" rel="noopener noreferrer sponsored" class="btn btn-blue"><i class="fa-solid fa-cart-shopping"></i> Acheter sur Instant Gaming</a>
-          <span class="affil-note">Lien affilié</span>
-        </div>
+    <h3 class="pay-subheading">Comment ça se passe ?</h3>
+    <div class="fees-grid">
+      <div class="fees-card">
+        <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+        <h3><span class="step-n">1.</span> Ajoute ton menu</h3>
+        <p>Ajoute-le au panier, copie ton récap et ouvre un ticket sur le Discord.</p>
       </div>
-
+      <div class="fees-card">
+        <i class="fa-solid fa-wallet" aria-hidden="true"></i>
+        <h3><span class="step-n">2.</span> Paie</h3>
+        <p>PayPal, crypto ou virement. Prix tout compris.</p>
+      </div>
+      <div class="fees-card">
+        <i class="fa-solid fa-key" aria-hidden="true"></i>
+        <h3><span class="step-n">3.</span> Reçois ta clé</h3>
+        <p>Clé livrée dans ton ticket, et je t'explique l'installation, <strong>en vocal si besoin</strong>.</p>
+      </div>
     </div>
 
-    <div class="section-heading" style="margin-top: 50px;"><i class="fa-solid fa-shield-halved" style="color: var(--accent-blue);" aria-hidden="true"></i> <span>Pourquoi choisir 2DKR ?</span></div>
-    <div class="grid">
-      
-      <div class="card searchable" data-cat="services">
-        <div>
-          <span class="card-badge badge-dev">Avantage</span>
-          <div class="card-title-row">
-            <h2>Livraison Rapide</h2>
-            <i class="fa-solid fa-bolt" style="font-size: 1.4rem; color: var(--accent-blue);"></i>
-          </div>
-          <p>Prise en charge directe de tes demandes et tickets sur notre Discord dédié.</p>
-        </div>
-      </div>
-
-      <div class="card searchable" data-cat="services">
-        <div>
-          <span class="card-badge badge-dev">Sécurité</span>
-          <div class="card-title-row">
-            <h2>Fiabilité & Support</h2>
-            <i class="fa-solid fa-headset" style="font-size: 1.4rem; color: var(--accent-blue);"></i>
-          </div>
-          <p>Un support réactif en français pour t'aider dans la configuration et l'utilisation.</p>
-        </div>
-      </div>
-
-      <div class="card searchable" data-cat="offres services">
-        <div>
-          <span class="card-badge badge-offer">Gratuit</span>
-          <div class="card-title-row">
-            <h2>Lobby découverte</h2>
-            <i class="fa-solid fa-gift" style="font-size: 1.4rem; color: var(--accent-orange);"></i>
-          </div>
-          <p>Teste 2DKR gratuitement : <strong>6M, niveau 50, 3 véhicules et 3 tenues moddés</strong>. À demander par ticket sur le Discord.</p>
-        </div>
-        <a href="lobby.html" class="btn btn-blue"><i class="fa-solid fa-gift"></i> Voir le lobby gratuit</a>
-      </div>
-
+    <h3 class="pay-subheading">À savoir</h3>
+    <div class="guar-excl">
+      <ul>
+        <li><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> <span>Utiliser un mod menu comporte un <strong>risque de ban</strong> sur GTA Online. 2DKR ne peut être tenu responsable d'une sanction de Rockstar.</span></li>
+        <li><i class="fa-solid fa-circle-info" aria-hidden="true"></i> <span>La <a href="paiements.html#garanties">garantie anti-ban</a> ne couvre pas l'usage d'un menu.</span></li>
+        <li><i class="fa-solid fa-circle-info" aria-hidden="true"></i> <span>Les codes promo et parrain ne s'appliquent pas aux mod menus.</span></li>
+      </ul>
     </div>
 
-    <div class="section-heading" style="margin-top: 50px;"><i class="fa-circle-question fa-solid" style="color: var(--accent-blue);" aria-hidden="true"></i> <span>Foire Aux Questions</span></div>
-    
-    <details class="faq-item">
-      <summary><span>Comment passer commande ?</span> <i class="fa-solid fa-chevron-down"></i></summary>
-      <div class="faq-content-wrapper">
-        <p>Ajoute tes packs ou options au panier sur la page <a href="services.html">Services</a>, valide pour copier ton récapitulatif, puis ouvre un ticket sur le Discord et colle-le.</p>
-      </div>
-    </details>
-
-    <details class="faq-item">
-      <summary><span>Quels sont les délais ?</span> <i class="fa-solid fa-chevron-down"></i></summary>
-      <div class="faq-content-wrapper">
-        <p>Dès que ta commande est effectuée, je m'y mets tout de suite. Les <strong>nouveaux comptes</strong> sont livrés en <strong>moins de 5 minutes</strong> ; pour les packs et options, le délai estimé est affiché sur chaque fiche.</p>
-      </div>
-    </details>
-
-    <details class="faq-item">
-      <summary><span>Est-ce que je risque un ban ?</span> <i class="fa-solid fa-chevron-down"></i></summary>
-      <div class="faq-content-wrapper">
-        <p>Je teste mes méthodes très régulièrement sur <strong>mes propres comptes de test</strong> avant de les utiliser sur le tien : je sais exactement ce qu'il faut faire et ne pas faire. Résultat : <strong>aucun client banni à ce jour</strong>. Et tu restes couvert par la <a href="paiements.html#garanties">garantie anti-ban</a> (remboursé à 100 % sous 7 jours).</p>
-      </div>
-    </details>
-
-    <details class="faq-item">
-      <summary><span>Tu as besoin de l'accès à mon compte ?</span> <i class="fa-solid fa-chevron-down"></i></summary>
-      <div class="faq-content-wrapper">
-        <p>Oui, le temps de la livraison. Tes identifiants ne sont pas gardés : change ton mot de passe une fois terminé.</p>
-      </div>
-    </details>
-
-    <div class="faq-more" id="faq-more" hidden>
-
-    <details class="faq-item">
-      <summary><span>Le lobby gratuit, c'est vraiment gratuit ?</span> <i class="fa-solid fa-chevron-down"></i></summary>
-      <div class="faq-content-wrapper">
-        <p>Oui : 6M, niveau 50 (ou +50), 3 véhicules et 3 tenues moddés, une fois par compte. À demander par ticket, tous les détails sur la page <a href="lobby.html">Lobby gratuit</a>.</p>
-      </div>
-    </details>
-
-    <details class="faq-item">
-      <summary><span>Tu réponds vite ?</span> <i class="fa-solid fa-chevron-down"></i></summary>
-      <div class="faq-content-wrapper">
-        <p>2DKR est géré par <strong>une seule personne, Dekur</strong>. Je réponds dès que je suis dispo, et la commu salue régulièrement ma réactivité et mon écoute (voir <a href="avis.html">Avis &amp; Preuves</a>).</p>
-      </div>
-    </details>
-
-    <details class="faq-item">
-      <summary><span>Sur quelles plateformes ?</span> <i class="fa-solid fa-chevron-down"></i></summary>
-      <div class="faq-content-wrapper">
-        <p>Pour l'instant, <strong>uniquement sur PC</strong>.</p>
-      </div>
-    </details>
-
-    <details class="faq-item">
-      <summary><span>Comment payer ?</span> <i class="fa-solid fa-chevron-down"></i></summary>
-      <div class="faq-content-wrapper">
-        <p>PayPal, crypto (SOL / USDC) ou virement. Prix tout compris, sans frais ajoutés par 2DKR. Tout est expliqué sur <a href="paiements.html">Paiements &amp; garanties</a>.</p>
-      </div>
-    </details>
-
+    <div class="lobby-cta">
+      <a href="services.html?panier" class="btn btn-blue" id="menus-voir-panier"><i class="fa-solid fa-cart-shopping"></i> Voir mon panier</a>
+      <p>Une question avant d'acheter ? <a href="https://discord.gg/sUAdU5v9aD" target="_blank" rel="noopener noreferrer">Ouvre un ticket</a>.</p>
     </div>
-    <button type="button" class="faq-toggle" id="faq-toggle" aria-expanded="false" aria-controls="faq-more"><span>Voir les autres questions</span> <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></button>
+
   </div>
 
-  <!-- Journal des changements (ouvert en cliquant sur le badge de version) -->
-  <dialog class="changelog" id="changelog" aria-labelledby="changelog-title">
-    <div class="changelog-head">
-      <h3 id="changelog-title"><i class="fa-solid fa-code" style="color: var(--accent-blue);"></i> Nouveautés v0.4.6</h3>
-      <button type="button" class="changelog-close" aria-label="Fermer"><i class="fa-solid fa-xmark"></i></button>
-    </div>
-    <ul>
-      <li><strong>Mod menus</strong> : nouvelle page avec Cherax, Yari et Lexis (BE, à vie), ajout direct au panier. Un autre menu ? Demande-le en ticket.</li>
-      <li><strong>Barre code promo</strong> en haut de la page Services.</li>
-      <li><strong>Codes 1re commande protégés</strong> : « déjà utilisé sur cet appareil », et pas de code de bienvenue ou parrain avec le rôle Client Vérifié.</li>
-      <li><strong>Parrainage plus clair</strong> : on parle maintenant de « potes parrainés ».</li>
-      <li><strong>Corrections</strong> : nouveau lien Discord (l'ancien avait expiré), compteur de membres réparé, messages du code promo plus clairs selon le panier.</li>
-    </ul>
-    <h4 class="changelog-sub">v0.4.5</h4>
-    <ul>
-      <li><strong>Parrainage</strong> : ramène 5 potes (15 € dépensés chacun) et gagne -5 % à vie sur toutes tes commandes, même en promo. Tes potes ont -5 % sur leur 1re commande.</li>
-      <li><strong>Codes promo</strong> : un champ « Code promo ou parrain » dans le panier et le calculateur, avec la réduction calculée en direct et ajoutée au récap.</li>
-      <li><strong>Code BIENVENUE10</strong> : -10 % sur ton 1er achat dès 10 €.</li>
-      <li><strong>Recherche réparée</strong> : <strong>Ctrl + K</strong> ou <strong>/</strong> ouvrent bien la recherche du site (avant, le navigateur lançait une recherche Google). Le bouton de recherche sur téléphone remarche aussi.</li>
-    </ul>
-    <h4 class="changelog-sub">v0.4.4</h4>
-    <ul>
-      <li><strong>FAQ complète</strong> : 8 questions sur l'accueil (délais, accès au compte, ban, lobby gratuit, paiements…).</li>
-      <li><strong>FAQ animée</strong> : « Voir les autres questions » déplie les questions en douceur, une par une, et « Voir moins » les replie.</li>
-      <li><strong>Page 404</strong> : raccourcis vers le lobby gratuit, les paiements &amp; garanties, les avis et le Discord.</li>
-    </ul>
-    <h4 class="changelog-sub">v0.4.3</h4>
-    <ul>
-      <li><strong>Interface liquid glass sur téléphone</strong> : barre du haut flottante, menu, bouton de commandes et panier en verre dépoli.</li>
-      <li><strong>Boutons de catégorie animés</strong> : ils font défiler jusqu'à la catégorie et la mettent en avant, sans rien cacher. Raccourcis vers chaque section sur Paiements &amp; garanties.</li>
-      <li><strong>Nouvelle option +5M à 2 €</strong> : le premier achat idéal après le lobby gratuit, livré en 24h.</li>
-      <li><strong>Menu plus simple</strong> : « Services » regroupe les packs, le lobby gratuit et le calculateur.</li>
-      <li><strong>Lobby découverte gratuit</strong> : 6M, niveau 50 (ou +50 niveaux si tu l'as déjà), 3 véhicules et 3 tenues moddés, à demander par ticket, sur sa propre page.</li>
-      <li><strong>Paiements &amp; garanties</strong> : garantie anti-ban, remboursé à 100 % si ton compte est banni dans les 7 jours (conditions sur la page).</li>
-      <li><strong>Tableau comparatif</strong> : la molette fait de nouveau défiler la page quand la souris est sur le tableau.</li>
-    </ul>
-    <h4 class="changelog-sub">v0.4.2</h4>
-    <ul>
-      <li><strong>Nouveaux tarifs le 7 octobre</strong> : annoncés à l'avance. Clique sur la bannière bleue de la page Services pour voir l'avant / après. Les commandes passées avant gardent l'ancien prix.</li>
-      <li><strong>Prix tout compris</strong> : aucun frais ni commission ajouté, le prix affiché est celui que tu paies.</li>
-      <li><strong>Page Paiements &amp; frais</strong> : PayPal, crypto et virement bancaire réunis sur une page dédiée, accessible depuis le menu.</li>
-      <li><strong>Récap plus clair</strong> : le total est affiché dans le panier, le calculateur et le récapitulatif copié pour ton ticket.</li>
-      <li><strong>Pack Ultime complet</strong> : tous déblocages, déblocages RP, toutes les armes, manoirs et business.</li>
-      <li><strong>Instant Gaming</strong> : achète tes jeux via le lien de l'accueil pour soutenir 2DKR, sans payer plus cher.</li>
-      <li><strong>Animations</strong> : badge de version plus fluide et fenêtre des nouveautés qui s'ouvre en douceur.</li>
-    </ul>
-    <h4 class="changelog-sub">v0.4.1</h4>
-    <ul>
-      <li><strong>Nouveau style</strong> : nouvelle police pour les titres, logo avec icône (en or avec le thème dark or) et fond retravaillé.</li>
-      <li><strong>Packs plus lisibles</strong> : des icônes à la place des emojis, et le Pack Ultime mis en avant.</li>
-      <li><strong>Tableau comparatif</strong> : compare les 5 packs d'un coup d'œil sur la page Services, avec ajout au panier direct.</li>
-      <li><strong>Fin de promo en direct</strong> : clique sur la bannière promo pour voir la date exacte de fin et un compte à rebours.</li>
-      <li><strong>Preuves Discord</strong> : chaque avis a maintenant sa date et sa capture du salon #avis-clients, plus un nouvel avis client.</li>
-    </ul>
-    <h4 class="changelog-sub">v0.4.0</h4>
-    <ul>
-      <li><strong>Aperçus de liens</strong> : belles cartes avec image quand tu partages le site sur Discord ou ailleurs.</li>
-      <li><strong>Panier commun</strong> : le panier du catalogue et le calculateur ne font plus qu'un, et ton panier est gardé si tu changes de page.</li>
-      <li><strong>Copie du récapitulatif</strong> : un clic pour copier ta commande et la coller dans ton ticket Discord.</li>
-      <li><strong>Promos automatiques</strong> : les réductions s'affichent et se terminent toutes seules à la bonne date.</li>
-      <li><strong>Transitions fluides</strong> entre les pages, nouvelle icône et vraie page 404.</li>
-      <li>Fin de la bêta : le calculateur et les commandes rapides (Ctrl + K) sont officiels.</li>
-    </ul>
-    <p class="changelog-old">v0.3.4 — thèmes bleu / dark or, filtres, recherche et commandes rapides.</p>
-  </dialog>
+  <div class="toast menus-toast" id="menus-toast" role="status" aria-live="polite">
+    <i class="fa-solid fa-check-circle"></i> <span id="menus-toast-txt">Ajouté au panier</span>
+    <a href="services.html?panier">Voir mon panier <i class="fa-solid fa-chevron-right"></i></a>
+  </div>
+
+  <script src="assets/panier.js"></script>
+  <script>
+    // Cartes des mod menus, générées depuis assets/catalogue.js (menus)
+    (function () {
+      var menus = DKR.catalogue.menus || [];
+      var groupes = [];
+      menus.forEach(function (m) {
+        var g = groupes.filter(function (x) { return x.nom === m.menu; })[0];
+        if (!g) { g = { nom: m.menu, be: m.be, vie: m.vie, items: [] }; groupes.push(g); }
+        g.items.push(m);
+      });
+      var html = groupes.map(function (g) {
+        var sous = g.vie ? 'À vie (lifetime)' : (g.items.length > 1 ? g.items.length + ' formules' : '');
+        return '<div class="menu-card' + (g.be ? ' menu-card-be' : '') + '">' +
+          '<h2>' + g.nom + (g.be ? ' <span class="menu-badge">BE</span>' : '') + '</h2>' +
+          (sous ? '<p class="menu-sous">' + sous + '</p>' : '') +
+          g.items.map(function (m) {
+            return '<div class="menu-row"><span>' + (m.formule || 'Licence') + '</span>' +
+              '<span class="menu-prix">' + DKR.euros(m.prix) + '</span>' +
+              '<button type="button" class="btn btn-outline btn-sm" data-add-menu="' + m.id + '" aria-label="Ajouter ' + m.nom + ' au panier"><i class="fa-solid fa-cart-plus"></i></button></div>';
+          }).join('') +
+          '</div>';
+      }).join('') +
+      '<div class="menu-card menu-card-autre"><h2>Un autre menu ?</h2><p class="menu-sous">Demande-moi dans ton ticket, je te le propose.</p>' +
+      '<a href="https://discord.gg/sUAdU5v9aD" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">Demander</a></div>';
+      document.getElementById('menus-grid').innerHTML = html;
+
+      var toast = document.getElementById('menus-toast'), minuteur;
+      document.getElementById('menus-grid').addEventListener('click', function (e) {
+        var b = e.target.closest('[data-add-menu]');
+        if (!b) return;
+        var m = DKRPanier.trouver(b.getAttribute('data-add-menu'));
+        DKRPanier.ajouter(m.id);
+        document.getElementById('menus-toast-txt').textContent = m.nom + ' ajouté au panier';
+        toast.classList.add('show');
+        clearTimeout(minuteur);
+        minuteur = setTimeout(function () { toast.classList.remove('show'); }, 4000);
+      });
+
+      // Le bouton « Voir mon panier » indique le nombre d'articles
+      DKRPanier.surChangement(function (liste) {
+        document.getElementById('menus-voir-panier').innerHTML = '<i class="fa-solid fa-cart-shopping"></i> Voir mon panier' + (liste.length ? ' (' + liste.length + ')' : '');
+      });
+    })();
+  </script>
 
   <footer>
     &copy; 2026 2DKR by Dekur. All rights reserved.
   </footer>
 
-  <script>
-    (function () {
-      const badge = document.getElementById('version-badge');
-      const dlg = document.getElementById('changelog');
-      if (!badge || !dlg || !dlg.showModal) return;
-      const open = () => { dlg.classList.remove('is-closing'); dlg.showModal(); };
-      // Fermeture en douceur : on joue l'animation de sortie, puis on ferme
-      const fermer = () => {
-        if (!dlg.open || dlg.classList.contains('is-closing')) return;
-        dlg.classList.add('is-closing');
-        setTimeout(() => { dlg.classList.remove('is-closing'); dlg.close(); }, 250);
-      };
-      badge.addEventListener('click', open);
-      badge.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
-      dlg.addEventListener('click', (e) => { if (e.target === dlg) fermer(); });
-      dlg.addEventListener('cancel', (e) => { e.preventDefault(); fermer(); });
-      // Fenêtre ouverte : la page derrière ne bouge plus, et la molette
-      // fait défiler la fenêtre même quand la souris est sur le fond sombre
-      document.addEventListener('wheel', (e) => {
-        if (!dlg.open) return;
-        const r = dlg.getBoundingClientRect();
-        const dedans = e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom;
-        if (!dedans) { e.preventDefault(); dlg.scrollBy({ top: e.deltaY }); }
-      }, { passive: false });
-      new MutationObserver(() => {
-        document.documentElement.style.overflow = dlg.open ? 'hidden' : '';
-      }).observe(dlg, { attributes: true, attributeFilter: ['open'] });
-      dlg.querySelector('.changelog-close').addEventListener('click', fermer);
-    })();
-  </script>
-
-  <div id="copy-toast" class="toast">
-    <i class="fa-solid fa-check-circle"></i> <span>Adresse du wallet copiée !</span>
-  </div>
 
   <script>
-    const WALLET_ADDRESS = "HzBYYLgE5aJ9cKG9FmxUv3tZfiMSayd6YdADkVYzQA29";
-
     // Menu Mobile Burger
     const menuToggle = document.getElementById('menu-toggle');
     const navLinks = document.getElementById('nav-links');
@@ -1136,46 +945,6 @@
         }
       });
     });
-
-    // Copie Adresse Crypto
-    function copyCryptoAddress(event) {
-      if (event) event.stopPropagation();
-
-      const handleSuccess = () => {
-        const btnCrypto = document.getElementById("btn-crypto");
-        const originalContent = btnCrypto.innerHTML;
-
-        btnCrypto.innerHTML = '<i class="fa-solid fa-check"></i> <span>Copié !</span>';
-        const toast = document.getElementById("copy-toast");
-        toast.classList.add("show");
-
-        setTimeout(() => {
-          toast.classList.remove("show");
-          btnCrypto.innerHTML = originalContent;
-        }, 3000);
-      };
-
-      if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(WALLET_ADDRESS).then(handleSuccess).catch(err => {
-          console.error("Erreur lors de la copie : ", err);
-        });
-      } else {
-        const textarea = document.createElement("textarea");
-        textarea.value = WALLET_ADDRESS;
-        textarea.style.position = "fixed";
-        textarea.style.opacity = "0";
-        document.body.appendChild(textarea);
-        textarea.focus();
-        textarea.select();
-        try {
-          document.execCommand('copy');
-          handleSuccess();
-        } catch (err) {
-          console.error('Erreur fallback copie : ', err);
-        }
-        document.body.removeChild(textarea);
-      }
-    }
 
     /* ===== v0.3.4 ===== */
 
@@ -1351,26 +1120,11 @@
           : '<div class="cmdk-empty">Aucun résultat sur le site. <a href="https://discord.gg/sUAdU5v9aD" target="_blank" rel="noopener" style="color:var(--accent-blue)">Demande sur le Discord</a></div>';
       }
 
-      // Les boutons ne cachent plus rien : ils font défiler jusqu'à la catégorie et la mettent en avant
-      function highlight(c) {
-        const on = c !== 'all';
-        let first = null;
-        cards.forEach(card => {
-          const match = on && (card.dataset.cat || '').split(' ').includes(c);
-          card.classList.toggle('is-focus', match);
-          card.classList.toggle('is-dim', on && !match);
-          DKRAnim.fade(card, on && !match ? 0.35 : 1);
-          if (match && !first && !card.classList.contains('is-hidden')) first = card;
-        });
-        if (first) DKRAnim.scrollTo(first.getBoundingClientRect().top + window.scrollY - 170, function () {
-          cards.forEach(card => { if (card.classList.contains('is-focus')) DKRAnim.pulse(card); });
-        });
-      }
-
       chips.forEach(chip => chip.addEventListener('click', () => {
         chips.forEach(c => c.classList.remove('active'));
         chip.classList.add('active');
-        highlight(chip.dataset.cat);
+        cat = chip.dataset.cat;
+        refresh();
       }));
 
       if (input) {
@@ -1392,59 +1146,5 @@
     </div>
   </div>
   <button class="cmdk-fab" id="cmdk-fab" title="Commandes rapides" aria-label="Commandes rapides"><i class="fa-solid fa-terminal"></i></button>
-  <script>
-    // FAQ : afficher / masquer les questions en plus
-    (function () {
-      var btn = document.getElementById('faq-toggle'), more = document.getElementById('faq-more');
-      if (!btn || !more) return;
-      var busy = false;
-      var ease = 'cubic-bezier(0.2, 0.8, 0.2, 1)';
-      btn.addEventListener('click', function () {
-        if (busy) return;
-        var open = more.hidden;
-        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-        btn.querySelector('span').textContent = open ? 'Voir moins' : 'Voir les autres questions';
-        if (!more.animate) { more.hidden = !open; return; }
-        busy = true;
-        var items = more.querySelectorAll('.faq-item');
-        if (open) {
-          // Ouverture : la zone se déplie, puis les questions arrivent une par une
-          more.hidden = false;
-          var h = more.scrollHeight;
-          more.style.overflow = 'hidden';
-          more.animate([{ height: '0px', opacity: 0 }, { height: h + 'px', opacity: 1 }], { duration: 420, easing: ease })
-            .onfinish = function () { more.style.overflow = ''; busy = false; };
-          items.forEach(function (it, i) {
-            it.animate([{ opacity: 0, transform: 'translateY(-10px)' }, { opacity: 1, transform: 'none' }],
-              { duration: 360, delay: 60 * i, easing: ease, fill: 'backwards' });
-          });
-        } else {
-          // Fermeture : les questions s'effacent, puis la zone se replie
-          var h2 = more.scrollHeight;
-          more.style.overflow = 'hidden';
-          items.forEach(function (it, i) {
-            it.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(-8px)' }],
-              { duration: 220, delay: 40 * (items.length - 1 - i), easing: 'ease-in', fill: 'forwards' });
-          });
-          more.animate([{ height: h2 + 'px', opacity: 1 }, { height: '0px', opacity: 0 }], { duration: 380, delay: 120, easing: ease, fill: 'forwards' })
-            .onfinish = function () {
-              more.hidden = true;
-              more.style.overflow = '';
-              more.getAnimations({ subtree: true }).forEach(function (a) { a.cancel(); });
-              busy = false;
-            };
-        }
-      });
-    })();
-  </script>
-  <script>
-    // Nombre de membres Discord en direct, sans les bots (sinon on garde « 130+ »).
-    // BOTS = nombre de bots sur le serveur : à changer si tu en ajoutes ou en retires un.
-    var BOTS = 7;
-    fetch('https://discord.com/api/v10/invites/sUAdU5v9aD?with_counts=true')
-      .then(function (r) { return r.ok ? r.json() : null; })
-      .then(function (j) { if (j && j.approximate_member_count) document.getElementById('discord-members').textContent = j.approximate_member_count - BOTS; })
-      .catch(function () {});
-  </script>
 </body>
 </html>

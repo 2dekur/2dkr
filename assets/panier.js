@@ -7,7 +7,7 @@
   // Retrouve un article du catalogue par son id (packs, comptes, options)
   function trouver(id) {
     var c = DKR.catalogue;
-    var tous = c.packs.concat(c.comptes);
+    var tous = c.packs.concat(c.comptes, c.menus || []);
     c.options.forEach(function (g) { tous = tous.concat(g.items); });
     for (var i = 0; i < tous.length; i++) if (tous[i].id === id) return tous[i];
     return null;
@@ -31,12 +31,15 @@
 
   // Article du panier : prix payé + frais calculés depuis le catalogue
   function article(item) {
-    return { id: item.id, nom: item.nom, prix: DKR.prixDe(item), frais: DKR.fraisDe(item) };
+    return { id: item.id, nom: item.nom, prix: DKR.prixDe(item), frais: DKR.fraisDe(item), sansCode: !!item.sansCode };
   }
 
   function somme(liste, cle) {
     return Math.round(liste.reduce(function (s, a) { return s + (a[cle] || 0); }, 0) * 100) / 100;
   }
+
+  // Articles sur lesquels un code promo / parrain peut s'appliquer (pas les mod menus)
+  function eligibles(liste) { return liste.filter(function (a) { return !a.sansCode; }); }
 
   var panier = lire();
 
@@ -119,7 +122,8 @@
     reduction: function (liste) {
       liste = liste || panier;
       if (!codeActif || !liste.length) return 0;
-      var st = somme(liste, 'prix');
+      var st = somme(eligibles(liste), 'prix');
+      if (!st) return 0;
       if (st < codeActif.minimum) return 0;
       return Math.round(st * codeActif.reduction) / 100;
     },
@@ -153,16 +157,25 @@
       var c = codeActif;
       if (!c) return '';
       var p = DKR.catalogue.codes.parrainage;
+      var aDesMenus = liste.some(function (a) { return a.sansCode; });
+      var stEligible = somme(eligibles(liste), 'prix');
+      var horsMenus = aDesMenus ? ' Les mod menus ne sont pas concernés par les codes.' : '';
+      var nomCode = c.type === 'bienvenue' ? 'Code de bienvenue' : 'Code parrain de ' + c.nom;
+      // Panier avec seulement des mod menus : le code n'a rien sur quoi s'appliquer
+      if (aDesMenus && liste.length && !stEligible) {
+        return nomCode + ' : ne s\'applique pas aux mod menus. Ajoute un pack ou une option pour en profiter.';
+      }
       if (c.type === 'bienvenue') {
-        var manque = c.minimum - somme(liste, 'prix');
+        var manque = c.minimum - stEligible;
         return manque > 0
-          ? 'Code de bienvenue : -' + c.reduction + ' % sur ton 1er achat. Ajoute encore ' + DKR.euros(manque) + ' pour l\'utiliser (minimum ' + DKR.euros(c.minimum) + ').'
-          : 'Code de bienvenue : -' + c.reduction + ' % sur ton 1er achat.';
+          ? 'Code de bienvenue : -' + c.reduction + ' % sur ton 1er achat dès ' + DKR.euros(c.minimum) +
+            (aDesMenus ? ' de packs ou options (hors mod menus)' : '') + '. Ajoute encore ' + DKR.euros(manque) + ' pour l\'utiliser.'
+          : 'Code de bienvenue : -' + c.reduction + ' % sur ton 1er achat.' + horsMenus;
       }
       return 'Code parrain de ' + c.nom + ' : -' + c.reduction + ' % sur ta 1re commande.' +
         (c.filleuls >= p.filleulsRequis
           ? ' ' + c.nom + ' a l\'avantage parrain à vie.'
-          : ' (' + c.nom + ' : ' + c.filleuls + '/' + p.filleulsRequis + ' potes parrainés)');
+          : ' (' + c.nom + ' : ' + c.filleuls + '/' + p.filleulsRequis + ' potes parrainés)') + horsMenus;
     },
     ajouter: function (id) {
       var item = trouver(id);

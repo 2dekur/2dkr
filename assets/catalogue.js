@@ -147,6 +147,16 @@ window.DKR_CATALOGUE = {
     }
   ],
 
+  // Mod menus (page Mod menus) : s'ajoutent au panier, mais les codes promo /
+  // parrain ne s'y appliquent pas (sansCode: true).
+  //   formule : précision affichée sous le nom · be : badge « BE » · vie : licence à vie
+  menus: [
+    { id: 'cherax-standard', nom: 'Cherax Standard', menu: 'Cherax', formule: 'Standard', prix: 25, sansCode: true },
+    { id: 'cherax-premium',  nom: 'Cherax Premium',  menu: 'Cherax', formule: 'Premium',  prix: 50, sansCode: true },
+    { id: 'yari',  nom: 'Yari (BE, à vie)',  menu: 'Yari',  be: true, vie: true, prix: 110, sansCode: true },
+    { id: 'lexis', nom: 'Lexis (BE, à vie)', menu: 'Lexis', be: true, vie: true, prix: 130, sansCode: true }
+  ],
+
   comptes: [
     {
       id: 'compte-complet', nom: 'Compte Complet',
