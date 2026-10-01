@@ -136,7 +136,7 @@
       return 'Code parrain de ' + c.nom + ' : -' + c.reduction + ' % sur ta 1re commande.' +
         (c.filleuls >= p.filleulsRequis
           ? ' ' + c.nom + ' a l\'avantage parrain à vie.'
-          : ' (' + c.nom + ' : ' + c.filleuls + '/' + p.filleulsRequis + ' filleuls)');
+          : ' (' + c.nom + ' : ' + c.filleuls + '/' + p.filleulsRequis + ' potes parrainés)');
     },
     ajouter: function (id) {
       var item = trouver(id);
