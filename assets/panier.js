@@ -40,6 +40,45 @@
 
   var panier = lire();
 
+  /* ---------- Code promo / parrain (un seul par commande, gardé dans le navigateur) ---------- */
+  var CLE_CODE = '2dkr-code';
+  var codeActif = null; // { code, type: 'bienvenue' | 'parrain', reduction, minimum, nom, filleuls }
+
+  function normaliser(c) { return String(c || '').toUpperCase().replace(/\s+/g, ''); }
+
+  // Empreinte SHA-256 de « 2DKR:CODE » (les codes parrain ne sont jamais écrits en clair)
+  function empreinte(code) {
+    if (!(window.crypto && crypto.subtle && window.TextEncoder)) return Promise.resolve(null);
+    return crypto.subtle.digest('SHA-256', new TextEncoder().encode('2DKR:' + code)).then(function (buf) {
+      return Array.prototype.map.call(new Uint8Array(buf), function (b) { return ('0' + b.toString(16)).slice(-2); }).join('');
+    });
+  }
+
+  // Cherche un code : renvoie ses infos, ou null s'il n'existe pas
+  function chercherCode(code) {
+    var c = DKR.catalogue.codes;
+    if (!c || !code) return Promise.resolve(null);
+    if (c.bienvenue && normaliser(c.bienvenue.code) === code) {
+      return Promise.resolve({ code: code, type: 'bienvenue', reduction: c.bienvenue.reduction, minimum: c.bienvenue.minimum || 0 });
+    }
+    return empreinte(code).then(function (h) {
+      var p = h && c.parrains && c.parrains[h];
+      return p ? { code: code, type: 'parrain', reduction: c.parrainage.reduction, minimum: 0, nom: p.nom, filleuls: p.filleuls || 0 } : null;
+    });
+  }
+
+  function prevenir() { abonnes.forEach(function (f) { f(panier.slice()); }); }
+
+  // Code gardé d'une visite à l'autre : on le revérifie au chargement
+  try {
+    var garde = localStorage.getItem(CLE_CODE);
+    if (garde) chercherCode(garde).then(function (info) {
+      codeActif = info;
+      if (!info) { try { localStorage.removeItem(CLE_CODE); } catch (e) {} }
+      prevenir();
+    });
+  } catch (e) {}
+
   window.DKRPanier = {
     DISCORD: DISCORD,
     trouver: trouver,
@@ -51,8 +90,54 @@
       liste = liste || panier;
       return liste.length ? Math.round((somme(liste, 'frais') + DKR.fraisFixe()) * 100) / 100 : 0;
     },
-    // Total à payer, frais compris
-    total: function (liste) { liste = liste || panier; return Math.round((somme(liste, 'prix') + DKRPanier.frais(liste)) * 100) / 100; },
+    // Réduction du code actif (sur le prix des articles, pas sur les frais)
+    reduction: function (liste) {
+      liste = liste || panier;
+      if (!codeActif || !liste.length) return 0;
+      var st = somme(liste, 'prix');
+      if (st < codeActif.minimum) return 0;
+      return Math.round(st * codeActif.reduction) / 100;
+    },
+    // Total à payer, frais compris, réduction déduite
+    total: function (liste) {
+      liste = liste || panier;
+      return Math.round((somme(liste, 'prix') + DKRPanier.frais(liste) - DKRPanier.reduction(liste)) * 100) / 100;
+    },
+
+    code: function () { return codeActif; },
+    // Applique un code : renvoie une promesse { ok, info }
+    appliquerCode: function (saisie) {
+      var code = normaliser(saisie);
+      return chercherCode(code).then(function (info) {
+        if (!info) return { ok: false };
+        codeActif = info;
+        try { localStorage.setItem(CLE_CODE, code); } catch (e) {}
+        prevenir();
+        return { ok: true, info: info };
+      });
+    },
+    retirerCode: function () {
+      codeActif = null;
+      try { localStorage.removeItem(CLE_CODE); } catch (e) {}
+      prevenir();
+    },
+    // Phrase qui explique le code actif (et s'il manque des € pour l'utiliser)
+    texteCode: function (liste) {
+      liste = liste || panier;
+      var c = codeActif;
+      if (!c) return '';
+      var p = DKR.catalogue.codes.parrainage;
+      if (c.type === 'bienvenue') {
+        var manque = c.minimum - somme(liste, 'prix');
+        return manque > 0
+          ? 'Code de bienvenue : -' + c.reduction + ' % sur ton 1er achat. Ajoute encore ' + DKR.euros(manque) + ' pour l\'utiliser (minimum ' + DKR.euros(c.minimum) + ').'
+          : 'Code de bienvenue : -' + c.reduction + ' % sur ton 1er achat.';
+      }
+      return 'Code parrain de ' + c.nom + ' : -' + c.reduction + ' % sur ta 1re commande.' +
+        (c.filleuls >= p.filleulsRequis
+          ? ' ' + c.nom + ' a l\'avantage parrain à vie.'
+          : ' (' + c.nom + ' : ' + c.filleuls + '/' + p.filleulsRequis + ' filleuls)');
+    },
     ajouter: function (id) {
       var item = trouver(id);
       if (!item) return;
@@ -71,14 +156,64 @@
         lignes.push('• ' + a.nom + ' — ' + DKR.euros(a.prix) + (a.frais ? ' (+' + DKR.euros(a.frais) + ' de frais)' : ''));
       });
       lignes.push('');
-      // Lignes sous-total / frais seulement s'il y a des frais
+      var red = DKRPanier.reduction(articles);
+      // Lignes sous-total / frais / réduction seulement si besoin
+      if (DKRPanier.frais(articles) || red) lignes.push('Sous-total : ' + DKR.euros(DKRPanier.sousTotal(articles)));
       if (DKRPanier.frais(articles)) {
-        lignes.push('Sous-total : ' + DKR.euros(DKRPanier.sousTotal(articles)),
-          'Frais : ' + DKR.euros(DKRPanier.frais(articles)) + (DKR.fraisFixe() ? ' (dont ' + DKR.euros(DKR.fraisFixe()) + ' par commande)' : ''));
+        lignes.push('Frais : ' + DKR.euros(DKRPanier.frais(articles)) + (DKR.fraisFixe() ? ' (dont ' + DKR.euros(DKR.fraisFixe()) + ' par commande)' : ''));
+      }
+      if (red) {
+        lignes.push('Code ' + codeActif.code + ' (-' + codeActif.reduction + ' %) : -' + DKR.euros(red) +
+          (codeActif.type === 'parrain' ? ' — parrain : ' + codeActif.nom : ' — 1er achat'));
       }
       lignes.push('Total : ' + DKR.euros(DKRPanier.total(articles)));
       if (DKR.promoActive()) lignes.push('(' + DKR.catalogue.promo.titre + ' appliquée)');
       return lignes.join('\n');
+    },
+
+    // Champ « Code promo ou parrain » dans un conteneur (panier, calculateur)
+    //   getListe : renvoie les articles concernés (par défaut, le panier)
+    monterChampCode: function (zone, getListe) {
+      if (!zone) return;
+      getListe = getListe || function () { return panier; };
+      zone.className = 'code-zone';
+      zone.innerHTML =
+        '<label class="code-label" for="' + zone.id + '-input">Code promo ou parrain</label>' +
+        '<form class="code-form" novalidate>' +
+          '<input type="text" id="' + zone.id + '-input" class="code-input" placeholder="Ex. BIENVENUE15" autocomplete="off" spellcheck="false" maxlength="32">' +
+          '<button type="submit" class="code-btn">Appliquer</button>' +
+        '</form>' +
+        '<div class="code-actif" hidden><span class="code-nom"></span><button type="button" class="code-retirer">Retirer</button></div>' +
+        '<p class="code-msg" aria-live="polite"></p>';
+      var form = zone.querySelector('.code-form');
+      var input = zone.querySelector('.code-input');
+      var actif = zone.querySelector('.code-actif');
+      var msg = zone.querySelector('.code-msg');
+
+      function afficher() {
+        var c = codeActif;
+        form.hidden = !!c;
+        actif.hidden = !c;
+        if (c) {
+          zone.querySelector('.code-nom').textContent = c.code;
+          var ok = DKRPanier.reduction(getListe()) > 0 || !getListe().length;
+          msg.className = 'code-msg ' + (ok ? 'is-ok' : 'is-warn');
+          msg.textContent = DKRPanier.texteCode(getListe());
+        }
+      }
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (!input.value.trim()) { msg.className = 'code-msg is-error'; msg.textContent = 'Entre un code.'; return; }
+        DKRPanier.appliquerCode(input.value).then(function (r) {
+          if (!r.ok) { msg.className = 'code-msg is-error'; msg.textContent = 'Ce code n\'existe pas. Vérifie l\'orthographe.'; return; }
+          input.value = '';
+        });
+      });
+      input.addEventListener('input', function () { if (msg.classList.contains('is-error')) { msg.textContent = ''; msg.className = 'code-msg'; } });
+      zone.querySelector('.code-retirer').addEventListener('click', function () { DKRPanier.retirerCode(); msg.textContent = ''; msg.className = 'code-msg'; });
+      abonnes.push(afficher);
+      afficher();
+      return afficher;
     },
 
     copier: function (texte) {

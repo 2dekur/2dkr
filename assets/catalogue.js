@@ -44,6 +44,21 @@ window.DKR_CATALOGUE = {
     minimumNouveauxTarifs: 26
   },
 
+  // Codes promo et parrainage (un seul code par commande).
+  //   bienvenue : code public, affiché sur le site.
+  //   parrains  : codes cachés. On ne met JAMAIS le code en clair, seulement son
+  //               empreinte SHA-256 de « 2DKR:CODE » (en majuscules). Pour la calculer
+  //               dans PowerShell (remplace DKR-ALEX-7Q2 par le code du parrain) :
+  //   [BitConverter]::ToString([Security.Cryptography.SHA256]::Create().ComputeHash([Text.Encoding]::UTF8.GetBytes('2DKR:DKR-ALEX-7Q2'))).Replace('-','').ToLower()
+  //               nom : pseudo affiché · filleuls : nombre de filleuls validés (15 € dépensés chacun).
+  codes: {
+    bienvenue: { code: 'BIENVENUE15', reduction: 15, minimum: 15 },
+    parrainage: { reduction: 5, filleulsRequis: 5, minimumFilleul: 15 },
+    parrains: {
+      // 'empreinte_sha256': { nom: 'Alex', filleuls: 0 },
+    }
+  },
+
   // Frais de service 2DKR, affichés dans une bulle "+ X€" à côté de chaque prix.
   //   pourcent     : % par pack (plus le pack prend de temps, plus le % est élevé)
   //   defaut       : % pour les options à la carte et les comptes

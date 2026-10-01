@@ -766,6 +766,7 @@
           <a href="calculateur.html"><i class="fa-solid fa-calculator" aria-hidden="true"></i> Calculateur</a>
         </div>
       </div>
+      <a href="parrainage.html">Parrainage</a>
       <a href="avis.html">Avis &amp; Preuves</a>
       <a href="paiements.html">Paiements &amp; garanties</a>
       <button class="theme-toggle" id="theme-toggle" title="Changer de thème" aria-label="Changer de thème"><i class="fa-solid fa-moon"></i></button>
@@ -778,7 +779,7 @@
     <h1>Lobby <span>gratuit</span></h1>
     <p>Teste 2DKR sans payer. Une fois par compte.</p>
 
-    <div class="kbd-hint"><span class="kbd">Ctrl</span> + <span class="kbd">K</span> pour les commandes rapides</div>
+    <div class="kbd-hint"><span class="kbd">Ctrl</span> + <span class="kbd">K</span> ou <span class="kbd">/</span> pour chercher sur le site</div>
   </section>
 
   <div class="container" id="lobby">
@@ -944,6 +945,7 @@
       { t: 'Paiements & garanties', s: 'PayPal, crypto, virement et frais', u: 'paiements.html', p: 'Paiements', k: 'paiement paiements frais commission paypal crypto solana virement banque carte argent' },
       { t: 'Garanties', s: 'Garantie anti-ban : remboursé si ban sous 7 jours', u: 'paiements.html#garanties', p: 'Paiements', k: 'garantie garanties ban banni rembourse remboursement securite conditions' },
       { t: 'Lobby découverte gratuit', s: '6M, niveau 50, 3 véhicules et 3 tenues moddés', u: 'lobby.html', p: 'Lobby', k: 'lobby gratuit free decouverte essai test offert' },
+      { t: 'Parrainage', s: '-5 % à vie dès 5 filleuls, -5 % pour tes filleuls', u: 'parrainage.html', p: 'Parrainage', k: 'parrainage parrain filleul code promo reduction bienvenue bienvenue15 remise' },
       { t: 'Instant Gaming', s: 'Achète tes jeux via mon lien et soutiens 2DKR', u: 'https://www.instant-gaming.com/fr/?igr=Bydekur', p: 'Accueil', k: 'instant gaming jeu jeux cle key steam pc soutien affilie acheter' },
       { t: 'Pack Bronze', s: 'Pack d\'entrée lobby moddé', u: 'services.html', p: 'Services', k: 'pack bronze tarif prix lobby gta' },
       { t: 'Pack Argent', s: 'Pack intermédiaire', u: 'services.html', p: 'Services', k: 'pack argent silver tarif prix lobby' },
@@ -966,13 +968,15 @@
       { t: 'Chaîne YouTube', u: 'https://www.youtube.com/@Dekur7', i: 'fa-brands fa-youtube', k: 'youtube video chaine' },
       { t: 'Paiements & garanties', u: 'paiements.html', i: 'fa-wallet', k: 'paiement frais paypal crypto virement' },
       { t: 'Garanties', u: 'paiements.html#garanties', i: 'fa-shield-halved', k: 'garantie ban rembourse' },
+      { t: 'Parrainage et codes promo', u: 'parrainage.html', i: 'fa-handshake', k: 'parrainage code promo bienvenue' },
       { t: 'Changer de thème (bleu / dark or)', u: '#theme', i: 'fa-palette', k: 'theme couleur dark or bleu mode' }
     ];
 
     const norm = (s) => (s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
     // --- Palette de commandes (Ctrl+K)
-    (function () {
+    // Lancée une fois la page chargée : la fenêtre de recherche est placée après ce script
+    document.addEventListener('DOMContentLoaded', function () {
       const overlay = document.getElementById('cmdk-overlay');
       const input = document.getElementById('cmdk-input');
       const list = document.getElementById('cmdk-list');
@@ -1028,12 +1032,14 @@
       overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
       document.addEventListener('keydown', (e) => {
         if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); overlay.classList.contains('open') ? close() : open(); }
+        // « / » : ouvre aussi la recherche (sauf si on est en train d'écrire dans un champ)
+        else if (e.key === '/' && !e.ctrlKey && !e.metaKey && !e.altKey && !/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName) && !document.activeElement.isContentEditable && !overlay.classList.contains('open')) { e.preventDefault(); open(); }
         else if (e.key === 'Escape') close();
       });
       window.openCmdk = open;
       const fab = document.getElementById('cmdk-fab');
       if (fab) fab.addEventListener('click', open);
-    })();
+    });
 
     // --- Chips de filtre + recherche globale
     (function () {

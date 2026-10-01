@@ -242,8 +242,15 @@
     document.getElementById('cartTotal').textContent = DKR.euros(DKRPanier.total());
     document.getElementById('modalSubtotal').textContent = DKR.euros(DKRPanier.sousTotal());
     document.getElementById('modalFees').textContent = DKR.euros(DKRPanier.frais());
-    // Pas de frais : on cache les lignes sous-total / frais
-    document.querySelectorAll('.modal-fees').forEach(function (el) { el.hidden = !DKRPanier.frais(); });
+    // Sous-total / frais / réduction : affichés seulement si utiles
+    var red = DKRPanier.reduction();
+    document.querySelectorAll('.modal-fees').forEach(function (el) { el.hidden = !DKRPanier.frais() && !red; });
+    document.getElementById('modalFees').parentElement.hidden = !DKRPanier.frais();
+    document.getElementById('modalReducRow').hidden = !red;
+    if (red) {
+      document.getElementById('modalReduc').textContent = '-' + DKR.euros(red);
+      document.getElementById('modalReducLabel').textContent = 'Réduction (' + DKRPanier.code().code + ')';
+    }
     document.getElementById('modalTotal').textContent = DKR.euros(DKRPanier.total());
     bar.classList.toggle('active', liste.length > 0);
     if (!liste.length) closeModal();
@@ -261,6 +268,9 @@
       ul.appendChild(li);
     });
   });
+
+  // --- Champ code promo / parrain dans le récapitulatif
+  DKRPanier.monterChampCode(document.getElementById('codeZone'));
 
   // --- Section Paiement & frais : texte selon les % du catalogue
   var fraisTxt = document.getElementById('fees-main');
