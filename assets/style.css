@@ -1165,3 +1165,20 @@ html[data-theme="gold"] .code-input { background: #000; }
 .lobby-get-ok { border-color: rgba(16, 185, 129, 0.45); }
 .lobby-get-ok i, .lobby-get-ok strong { color: var(--accent-green); }
 .code-public { color: var(--accent-green); letter-spacing: 0.5px; }
+
+/* ---------- Services : bannière code promo ---------- */
+.code-banner .promo-banner-content {
+  display: block;
+  background: linear-gradient(135deg, rgba(249, 115, 22, 0.14) 0%, rgba(13, 17, 23, 0.85) 100%);
+  border-color: rgba(249, 115, 22, 0.4);
+  box-shadow: 0 4px 20px rgba(249, 115, 22, 0.12);
+  text-decoration: none;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+.code-banner .promo-banner-content:hover { border-color: var(--accent-orange); transform: translateY(-1px); }
+.code-banner .promo-banner-content > i { color: var(--accent-orange); margin-right: 4px; }
+.code-banner .code-public { color: var(--accent-orange); }
+.code-banner .code-banner-txt { color: var(--text-main); }
+.code-banner small { margin-left: 8px; font-size: 0.8rem; font-weight: 600; color: var(--text-muted); }
+.code-banner small i { font-size: 0.65rem; }
+html[data-theme="gold"] .code-banner .promo-banner-content { background: #000; }

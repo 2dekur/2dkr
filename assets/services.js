@@ -292,3 +292,13 @@
   // Le lien s'ouvre normalement ; on copie juste le récap au passage
   document.getElementById('finishOrder').addEventListener('click', function () { copier(document.getElementById('copyRecap')); });
 })();
+
+/* Bannière code promo : reprend le code de bienvenue du catalogue */
+(function () {
+  var b = DKR.catalogue.codes && DKR.catalogue.codes.bienvenue;
+  var zone = document.getElementById('code-banner');
+  if (!zone) return;
+  if (!b) { zone.hidden = true; return; }
+  document.getElementById('code-banner-code').textContent = b.code;
+  document.getElementById('code-banner-txt').textContent = '-' + b.reduction + ' % sur ton 1er achat' + (b.minimum ? ' dès ' + b.minimum + ' €' : '');
+})();
