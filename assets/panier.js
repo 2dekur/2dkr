@@ -180,7 +180,7 @@
       zone.innerHTML =
         '<label class="code-label" for="' + zone.id + '-input">Code promo ou parrain</label>' +
         '<form class="code-form" novalidate>' +
-          '<input type="text" id="' + zone.id + '-input" class="code-input" placeholder="Ex. BIENVENUE15" autocomplete="off" spellcheck="false" maxlength="32">' +
+          '<input type="text" id="' + zone.id + '-input" class="code-input" placeholder="Ex. BIENVENUE10" autocomplete="off" spellcheck="false" maxlength="32">' +
           '<button type="submit" class="code-btn">Appliquer</button>' +
         '</form>' +
         '<div class="code-actif" hidden><span class="code-nom"></span><button type="button" class="code-retirer">Retirer</button></div>' +

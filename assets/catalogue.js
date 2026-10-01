@@ -52,7 +52,7 @@ window.DKR_CATALOGUE = {
   //   [BitConverter]::ToString([Security.Cryptography.SHA256]::Create().ComputeHash([Text.Encoding]::UTF8.GetBytes('2DKR:DKR-ALEX-7Q2'))).Replace('-','').ToLower()
   //               nom : pseudo affiché · filleuls : nombre de filleuls validés (15 € dépensés chacun).
   codes: {
-    bienvenue: { code: 'BIENVENUE15', reduction: 15, minimum: 15 },
+    bienvenue: { code: 'BIENVENUE10', reduction: 10, minimum: 10 },
     parrainage: { reduction: 5, filleulsRequis: 5, minimumFilleul: 15 },
     parrains: {
       // 'empreinte_sha256': { nom: 'Alex', filleuls: 0 },
