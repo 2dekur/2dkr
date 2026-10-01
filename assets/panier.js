@@ -1,7 +1,7 @@
 /* 2DKR — Panier partagé entre Services et Calculateur (gardé dans le navigateur) */
 (function () {
   var CLE = '2dkr-panier';
-  var DISCORD = 'https://discord.gg/mDpZT73FFG';
+  var DISCORD = 'https://discord.gg/sUAdU5v9aD';
   var abonnes = [];
 
   // Retrouve un article du catalogue par son id (packs, comptes, options)
