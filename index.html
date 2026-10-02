@@ -491,6 +491,36 @@
       transform: translateY(-2px);
     }
 
+    /* Boutons d'action du hero */
+    .hero-cta {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 22px 0 6px;
+    }
+
+    .hero-cta .btn {
+      width: auto;
+      min-width: 190px;
+    }
+
+    @media (max-width: 480px) {
+      .hero-cta { flex-direction: column; align-items: center; }
+      .hero-cta .btn { width: 100%; max-width: 280px; }
+    }
+
+    .btn-discord {
+      background: var(--discord);
+      color: #fff;
+      box-shadow: 0 4px 15px rgba(88, 101, 242, 0.3);
+    }
+
+    .btn-discord:hover {
+      box-shadow: 0 6px 20px rgba(88, 101, 242, 0.5);
+      transform: translateY(-2px);
+    }
+
     /* Toast Notification */
     .toast {
       visibility: hidden;
@@ -687,12 +717,15 @@
     .cmdk-tag { margin-left: auto; font-size: .68rem; border: 1px solid var(--border); padding: 2px 8px; border-radius: 999px; }
 
     @media (max-width: 768px) { .chips { gap: 8px; } .kbd-hint { display: none; } }
+    /* Accueil épuré : ~6 cartes, les filtres et l'astuce clavier n'apportent rien (la recherche reste active). */
+    .chips, .kbd-hint { display: none; }
 
     /* Bouton flottant mobile pour ouvrir la palette de commandes */
     .cmdk-fab { display: none; }
+    /* Masqué sur mobile : la barre de recherche de l'accueil fait déjà le travail. Remettre « flex » pour le réactiver. */
     @media (max-width: 768px) {
       .cmdk-fab {
-        display: flex; align-items: center; justify-content: center;
+        display: none; align-items: center; justify-content: center;
         position: fixed; right: 18px; bottom: 18px; z-index: 400;
         width: 52px; height: 52px; border-radius: 50%;
         background: var(--accent-blue); color: var(--bg);
@@ -783,7 +816,7 @@
     <div class="hero-badges">
       <div class="badge-dev-mode" id="version-badge" role="button" tabindex="0" title="Voir les nouveautés" style="cursor: pointer;">
         <i class="fa-solid fa-code"></i>
-        <span>v0.4.6 — Nouveautés</span>
+        <span>v0.4.7 — Nouveautés</span>
         <span class="extra-text">&nbsp;• by Dekur</span>
       </div>
       <div class="badge-status">
@@ -798,6 +831,11 @@
       <a href="avis.html"><strong>5/5</strong> <i class="fa-solid fa-star" aria-hidden="true"></i> de moyenne</a>
       <span class="trust-sep" aria-hidden="true"></span>
       <a href="https://discord.gg/sUAdU5v9aD" target="_blank" rel="noopener noreferrer"><strong id="discord-members">130+</strong> membres Discord</a>
+    </div>
+
+    <div class="hero-cta">
+      <a href="services.html" class="btn btn-blue"><i class="fa-solid fa-bolt"></i> Voir les services</a>
+      <a href="https://discord.gg/sUAdU5v9aD" target="_blank" rel="noopener noreferrer" class="btn btn-discord"><i class="fa-brands fa-discord"></i> Rejoindre le Discord</a>
     </div>
 
     <div class="search-container">
@@ -966,9 +1004,15 @@
   <!-- Journal des changements (ouvert en cliquant sur le badge de version) -->
   <dialog class="changelog" id="changelog" aria-labelledby="changelog-title">
     <div class="changelog-head">
-      <h3 id="changelog-title"><i class="fa-solid fa-code" style="color: var(--accent-blue);"></i> Nouveautés v0.4.6</h3>
+      <h3 id="changelog-title"><i class="fa-solid fa-code" style="color: var(--accent-blue);"></i> Nouveautés v0.4.7</h3>
       <button type="button" class="changelog-close" aria-label="Fermer"><i class="fa-solid fa-xmark"></i></button>
     </div>
+    <ul>
+      <li><strong>Accueil plus clair</strong> : deux gros boutons sous le titre, « Voir les services » et « Rejoindre le Discord ».</li>
+      <li><strong>Moins d'encombrement</strong> : les filtres et l'astuce clavier de l'accueil sont retirés, la recherche reste là.</li>
+      <li><strong>Téléphone</strong> : le bouton rond de recherche n'apparaît plus sur l'accueil, la barre de recherche suffit. Il reste sur les autres pages.</li>
+    </ul>
+    <h4 class="changelog-sub">v0.4.6</h4>
     <ul>
       <li><strong>Mod menus</strong> : nouvelle page avec Cherax, Yari et Lexis (BE, à vie), ajout direct au panier. Un autre menu ? Demande-le en ticket.</li>
       <li><strong>Barre code promo</strong> en haut de la page Services.</li>
