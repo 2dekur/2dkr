@@ -1,0 +1,352 @@
+/* =====================================================================
+   2DKR v0.5 — Nouvelle interface, deux thèmes (chargé après style.css)
+   Thème 1 (par défaut, bleu)       : sobre premium
+   Thème 2 (html[data-theme="gold"]): néon noir et or
+   Le bouton de thème en haut du site passe de l'un à l'autre.
+   ===================================================================== */
+
+/* =====================================================================
+   THÈME 1 — SOBRE PREMIUM
+   Fond uni, cartes à fine bordure, boutons blancs, titres légers,
+   en-tête aligné à gauche. Le bleu reste l'accent discret.
+   ===================================================================== */
+html:not([data-theme="gold"]) {
+  --bg: #0a0d12;
+  --card-bg: rgba(255, 255, 255, 0.025);
+  --border: rgba(255, 255, 255, 0.09);
+  --border-glow: rgba(255, 255, 255, 0.24);
+  --accent-blue-glow: rgba(56, 189, 248, 0.18);
+  --text-muted: #8b949e;
+  --radius: 12px;
+}
+html:not([data-theme="gold"]) body { background-image: none; }
+html:not([data-theme="gold"]) body::before { display: none; }
+
+/* Menu (ordinateur) : barre simple, lien actif en blanc */
+@media (min-width: 769px) {
+  html:not([data-theme="gold"]) nav {
+    background: rgba(10, 13, 18, 0.82);
+    border-bottom: 1px solid var(--border);
+  }
+  html:not([data-theme="gold"]) .nav-links a:hover,
+  html:not([data-theme="gold"]) .nav-links a.active,
+  html:not([data-theme="gold"]) .nav-drop-btn:hover,
+  html:not([data-theme="gold"]) .nav-drop-btn.active,
+  html:not([data-theme="gold"]) .nav-drop.open .nav-drop-btn {
+    color: var(--text-main);
+    text-shadow: none;
+  }
+  html:not([data-theme="gold"]) nav .nav-drop-menu a:hover,
+  html:not([data-theme="gold"]) nav .nav-drop-menu a.active {
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--text-main);
+  }
+}
+
+/* En-tête de page : aligné à gauche, titre léger */
+html:not([data-theme="gold"]) .hero { text-align: left; width: 100%; max-width: 900px; padding: 60px 20px 22px; }
+html:not([data-theme="gold"]) body:has(#packs-grid) .hero { max-width: 1050px; }
+html:not([data-theme="gold"]) body:has(.reviews-grid) .hero { max-width: 1000px; }
+html:not([data-theme="gold"]) .hero h1 {
+  font-size: clamp(2.2rem, 5.4vw, 3.4rem);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+}
+html:not([data-theme="gold"]) .hero h1 span {
+  background: none;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  -webkit-text-fill-color: currentColor;
+  color: var(--accent-blue);
+}
+html:not([data-theme="gold"]) .hero p { margin-left: 0; margin-right: 0; }
+html:not([data-theme="gold"]) .hero-badges,
+html:not([data-theme="gold"]) .hero-cta,
+html:not([data-theme="gold"]) .trust-strip,
+html:not([data-theme="gold"]) .chips { justify-content: flex-start; }
+html:not([data-theme="gold"]) .chips { margin-left: 0; padding-left: 0; max-width: none; }
+html:not([data-theme="gold"]) .search-container { margin-left: 0; margin-right: 0; }
+@media (max-width: 480px) {
+  html:not([data-theme="gold"]) .hero-cta { align-items: stretch; }
+}
+
+/* Titres de section */
+html:not([data-theme="gold"]) .section-heading { font-size: 1.35rem; font-weight: 500; letter-spacing: -0.02em; }
+html:not([data-theme="gold"]) .section-heading i { color: var(--text-muted) !important; }
+
+/* Surfaces : fond quasi transparent + fine bordure, sans flou ni ombre */
+html:not([data-theme="gold"]) :is(.card, .fees-card, .calc-card, .review-card, .stat-card, .faq-item, .step-card, .summary-card, .total-box, .info-box, .cta-container, .reviews-note, .lobby-get, .menu-card, .cmp-wrap, .option-item, .option-row, .cart-item) {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+html:not([data-theme="gold"]) :is(.card, .fees-card, .review-card, .stat-card, .menu-card, .lobby-get):hover {
+  transform: none;
+  border-color: var(--border-glow);
+  box-shadow: none;
+}
+html:not([data-theme="gold"]) .card::before { display: none; }
+html:not([data-theme="gold"]) .card h2 { font-weight: 600; }
+html:not([data-theme="gold"]) .card-populaire { border-color: rgba(168, 85, 247, 0.5); }
+html:not([data-theme="gold"]) .option-item:hover,
+html:not([data-theme="gold"]) .option-row:hover { background: rgba(255, 255, 255, 0.04); }
+html:not([data-theme="gold"]) .option-item.selected { background: rgba(56, 189, 248, 0.08); border-color: var(--accent-blue); }
+
+/* Pastilles et puces */
+html:not([data-theme="gold"]) .card-badge { border-radius: 6px; }
+html:not([data-theme="gold"]) .chip { border-radius: 8px; background: transparent; }
+html:not([data-theme="gold"]) .chip.active {
+  background: var(--text-main);
+  border-color: var(--text-main);
+  color: var(--bg);
+  box-shadow: none;
+}
+
+/* Champs */
+html:not([data-theme="gold"]) .search-input { border-radius: 10px; background: rgba(255, 255, 255, 0.03); }
+html:not([data-theme="gold"]) .search-input:focus { border-color: rgba(255, 255, 255, 0.32); box-shadow: none; }
+
+/* Boutons : principal blanc, secondaire en contour */
+html:not([data-theme="gold"]) .btn { border-radius: 10px; font-weight: 600; }
+html:not([data-theme="gold"]) .btn-blue { background: #f0f6fc; color: #0a0d12; box-shadow: none; }
+html:not([data-theme="gold"]) .btn-blue:hover { background: #ffffff; box-shadow: none; transform: translateY(-1px); }
+html:not([data-theme="gold"]) .btn-outline { background: transparent; color: var(--text-main); border: 1px solid var(--border); }
+html:not([data-theme="gold"]) .btn-outline:hover { background: rgba(255, 255, 255, 0.05); border-color: var(--border-glow); }
+html:not([data-theme="gold"]) .btn-discord { box-shadow: none; }
+html:not([data-theme="gold"]) .btn-discord:hover { box-shadow: none; transform: translateY(-1px); }
+
+/* Bannières : fond neutre, seule la bordure garde sa couleur */
+html:not([data-theme="gold"]) :is(.promo-banner-content, .calc-banner-content) {
+  background: rgba(255, 255, 255, 0.025);
+  border-color: rgba(16, 185, 129, 0.35);
+  box-shadow: none;
+}
+html:not([data-theme="gold"]) .tarifs-banner .promo-banner-content { border-color: rgba(56, 189, 248, 0.35); }
+html:not([data-theme="gold"]) .code-banner .promo-banner-content { border-color: rgba(249, 115, 22, 0.4); box-shadow: none; }
+html:not([data-theme="gold"]) .calc-banner-content { border-color: var(--border); }
+html:not([data-theme="gold"]) .calc-banner-content:hover { border-color: var(--border-glow); box-shadow: none; }
+
+/* Panier flottant, fenêtres, pied de page */
+html:not([data-theme="gold"]) .cart-bar { border-color: var(--border-glow); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45); }
+html:not([data-theme="gold"]) .modal { border-radius: 16px; }
+html:not([data-theme="gold"]) footer { background: transparent; }
+
+/* =====================================================================
+   THÈME 2 — NÉON NOIR ET OR
+   Fond noir chaud, grille dorée, cartes cernées d'or qui brillent,
+   titres en capitales inclinées, boutons en biais.
+   ===================================================================== */
+html[data-theme="gold"] {
+  --bg: #060500;
+  --card-bg: rgba(12, 9, 0, 0.9);
+  --border: rgba(240, 185, 76, 0.28);
+  --border-glow: rgba(240, 185, 76, 0.75);
+  --accent-blue: #f0b94c;
+  --accent-2: #ffde9f;
+  --text-main: #fff7e6;
+  --text-muted: #b59a5a;
+  --radius: 4px;
+}
+html[data-theme="gold"] { background: #060500 !important; }
+html[data-theme="gold"] body {
+  background: #060500 !important;
+  background-image: radial-gradient(ellipse 70% 38% at 50% -6%, rgba(240, 185, 76, 0.15), transparent 70%) !important;
+}
+/* grille dorée discrète en haut de page */
+html[data-theme="gold"] body::before {
+  display: block;
+  background-image:
+    linear-gradient(rgba(240, 185, 76, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(240, 185, 76, 0.05) 1px, transparent 1px);
+}
+
+/* Menu (ordinateur) : capitales, lien actif qui brille */
+@media (min-width: 769px) {
+  html[data-theme="gold"] nav {
+    background: rgba(6, 5, 0, 0.9);
+    border-bottom: 1px solid rgba(240, 185, 76, 0.38);
+    box-shadow: 0 0 24px rgba(240, 185, 76, 0.08);
+  }
+  html[data-theme="gold"] .nav-links > a:not(.nav-social-icon),
+  html[data-theme="gold"] .nav-drop-btn {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.78rem;
+  }
+  html[data-theme="gold"] .nav-links a:hover,
+  html[data-theme="gold"] .nav-links a.active,
+  html[data-theme="gold"] .nav-drop-btn:hover,
+  html[data-theme="gold"] .nav-drop-btn.active,
+  html[data-theme="gold"] .nav-drop.open .nav-drop-btn {
+    color: #f0b94c;
+    text-shadow: 0 0 12px rgba(240, 185, 76, 0.6);
+  }
+  html[data-theme="gold"] .nav-drop-menu { border-radius: 4px; border-color: rgba(240, 185, 76, 0.45); box-shadow: 0 0 20px rgba(240, 185, 76, 0.15); }
+  html[data-theme="gold"] nav .nav-drop-menu a { text-transform: none; letter-spacing: 0; font-size: 0.88rem !important; }
+}
+
+/* Titres : capitales italiques lumineuses */
+html[data-theme="gold"] .hero h1 {
+  font-size: clamp(2.1rem, 5.8vw, 3.5rem);
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  color: #ffe9b3;
+  text-shadow: 0 0 22px rgba(240, 185, 76, 0.5);
+}
+html[data-theme="gold"] .hero h1 span {
+  background: none;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  -webkit-text-fill-color: currentColor;
+  color: #f0b94c;
+}
+html[data-theme="gold"] .section-heading {
+  font-size: 1.05rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #f0b94c;
+  text-shadow: 0 0 14px rgba(240, 185, 76, 0.45);
+}
+html[data-theme="gold"] .section-heading::after { background: linear-gradient(90deg, rgba(240, 185, 76, 0.6), transparent); }
+
+/* Surfaces : bordure dorée qui brille */
+html[data-theme="gold"] :is(.card, .fees-card, .calc-card, .review-card, .stat-card, .faq-item, .step-card, .summary-card, .total-box, .info-box, .cta-container, .reviews-note, .lobby-get, .menu-card, .cmp-wrap, .option-item, .option-row, .cart-item) {
+  background: var(--card-bg);
+  border: 1px solid rgba(240, 185, 76, 0.38);
+  border-radius: var(--radius);
+  box-shadow: 0 0 14px rgba(240, 185, 76, 0.08);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+html[data-theme="gold"] :is(.card, .fees-card, .review-card, .stat-card, .menu-card, .lobby-get):hover {
+  border-color: #f0b94c;
+  box-shadow: 0 0 22px rgba(240, 185, 76, 0.35);
+  transform: translateY(-2px);
+}
+html[data-theme="gold"] .card::before {
+  height: 2px;
+  opacity: 0.7;
+  background: linear-gradient(90deg, transparent, #f0b94c, transparent);
+}
+html[data-theme="gold"] .card h2 { text-transform: uppercase; letter-spacing: 0.04em; font-size: 1.1rem; }
+html[data-theme="gold"] .option-item.selected { background: rgba(240, 185, 76, 0.1); border-color: #f0b94c; box-shadow: 0 0 14px rgba(240, 185, 76, 0.3); }
+html[data-theme="gold"] .option-item:hover,
+html[data-theme="gold"] .option-row:hover { background: rgba(240, 185, 76, 0.06); }
+
+/* Pastilles et puces */
+html[data-theme="gold"] .card-badge { border-radius: 2px; }
+html[data-theme="gold"] .chip {
+  border-radius: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.72rem;
+  background: transparent;
+  border-color: rgba(240, 185, 76, 0.4);
+}
+html[data-theme="gold"] .chip.active {
+  background: linear-gradient(90deg, #f0b94c, #ffde9f);
+  border-color: transparent;
+  color: #1a1200;
+  box-shadow: 0 0 16px rgba(240, 185, 76, 0.5);
+}
+
+/* Champs */
+html[data-theme="gold"] .search-input { border-radius: 2px; background: rgba(12, 9, 0, 0.9); border-color: rgba(240, 185, 76, 0.38); }
+html[data-theme="gold"] .search-input:focus { border-color: #f0b94c; box-shadow: 0 0 18px rgba(240, 185, 76, 0.4); }
+
+/* Boutons : en biais, capitales, halo doré */
+html[data-theme="gold"] .btn {
+  border-radius: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 800;
+  font-size: 0.85rem;
+  transform: skewX(-8deg);
+}
+html[data-theme="gold"] .btn:hover { transform: skewX(-8deg) translateY(-2px); }
+html[data-theme="gold"] .btn-blue {
+  background: linear-gradient(90deg, #f0b94c, #ffde9f);
+  color: #1a1200;
+  box-shadow: 0 0 16px rgba(240, 185, 76, 0.45);
+}
+html[data-theme="gold"] .btn-blue:hover { box-shadow: 0 0 28px rgba(240, 185, 76, 0.7); }
+html[data-theme="gold"] .btn-outline {
+  background: transparent;
+  color: #f0b94c;
+  border: 1px solid #f0b94c;
+  box-shadow: none;
+}
+html[data-theme="gold"] .btn-outline:hover { background: rgba(240, 185, 76, 0.1); box-shadow: 0 0 16px rgba(240, 185, 76, 0.35); }
+html[data-theme="gold"] .btn-discord { box-shadow: 0 0 16px rgba(88, 101, 242, 0.45); }
+
+/* Bannières */
+html[data-theme="gold"] :is(.promo-banner-content, .calc-banner-content) {
+  background: rgba(12, 9, 0, 0.9);
+  border-radius: 4px;
+  border-color: rgba(16, 185, 129, 0.5);
+  box-shadow: 0 0 16px rgba(16, 185, 129, 0.12);
+}
+html[data-theme="gold"] .tarifs-banner .promo-banner-content { border-color: rgba(240, 185, 76, 0.6); box-shadow: 0 0 16px rgba(240, 185, 76, 0.15); }
+html[data-theme="gold"] .code-banner .promo-banner-content { border-color: rgba(249, 115, 22, 0.6); box-shadow: 0 0 16px rgba(249, 115, 22, 0.15); }
+html[data-theme="gold"] .calc-banner-content { border-color: rgba(240, 185, 76, 0.45); box-shadow: 0 0 16px rgba(240, 185, 76, 0.1); }
+
+/* Panier flottant, pied de page */
+html[data-theme="gold"] .cart-bar { border-color: #f0b94c; box-shadow: 0 0 24px rgba(240, 185, 76, 0.3); }
+html[data-theme="gold"] footer { background: transparent; border-top: 1px solid rgba(240, 185, 76, 0.25); }
+
+
+/* =====================================================================
+   Connexion Discord (v0.5) : bouton, menu du compte, message
+   ===================================================================== */
+nav .nav-links a.nav-login {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border: 1px solid rgba(88, 101, 242, 0.6);
+  border-radius: 10px;
+  background: rgba(88, 101, 242, 0.16);
+  color: #c7ccff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  text-shadow: none;
+}
+nav .nav-links a.nav-login:hover { background: rgba(88, 101, 242, 0.32); color: #fff; text-shadow: none; }
+.nav-user .nav-avatar { width: 24px; height: 24px; border-radius: 50%; object-fit: cover; margin-right: 8px; }
+.nav-user .nav-drop-btn { color: var(--text-main); }
+.nav-user .nav-pseudo { max-width: 110px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.nav-user .nav-drop-menu { left: auto; right: -6px; min-width: 190px; }
+.nav-user-info { display: block; padding: 8px 10px 6px; font-size: 0.78rem; color: var(--text-muted); }
+nav .nav-drop-menu a.nav-logout { color: var(--text-muted); }
+.dkr-flash {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  z-index: 3000;
+  transform: translate(-50%, 20px);
+  opacity: 0;
+  padding: 11px 18px;
+  border: 1px solid var(--border-glow);
+  border-radius: 12px;
+  background: rgba(13, 17, 23, 0.96);
+  color: var(--text-main);
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+.dkr-flash.show { opacity: 1; transform: translate(-50%, 0); }
+.code-msg .code-login { color: var(--accent-blue); font-weight: 700; text-decoration: underline; }
+html[data-theme="gold"] nav .nav-links a.nav-login { border-radius: 2px; text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.74rem; }
+html[data-theme="gold"] .dkr-flash { background: #060500; border-color: #f0b94c; box-shadow: 0 0 20px rgba(240, 185, 76, 0.3); border-radius: 2px; }
+@media (max-width: 768px) {
+  nav .nav-links a.nav-login { justify-content: center; }
+  .nav-user .nav-drop-menu { right: auto; }
+}

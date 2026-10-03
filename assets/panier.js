@@ -96,12 +96,30 @@
     if (!u[info.code]) { u[info.code] = Date.now(); try { localStorage.setItem(CLE_UTILISES, JSON.stringify(u)); } catch (e) {} }
   }
 
+  /* Vérification côté serveur (v0.5) : quand la connexion Discord est active, un code de
+     1re commande est lié au compte Discord. Renvoie null si tout est bon (ou si le serveur
+     n'est pas configuré : on garde alors la protection de l'appareil), sinon la raison du refus. */
+  function verifierCompte(info) {
+    if (!premiereCommandeSeulement(info) || !window.DKRAuth) return Promise.resolve(null);
+    return DKRAuth.pret().then(function (e) {
+      if (!e.configured) return null;
+      if (!e.user) return { ok: false, login: true };
+      return DKRAuth.verifierCode(info.code).then(function (r) {
+        if (!r || r.serveur === false || r.ok) return null;
+        return { ok: false, serveur: r.raison };
+      });
+    });
+  }
+
   // Code gardé d'une visite à l'autre : on le revérifie au chargement
   // (et on le retire s'il a déjà servi pour une commande copiée il y a plus d'1 h)
   try {
     var garde = localStorage.getItem(CLE_CODE);
     if (garde) chercherCode(garde).then(function (info) {
-      codeActif = info && !dejaUtilise(info, true) ? info : null;
+      if (!info || dejaUtilise(info, true)) return null;
+      return verifierCompte(info).then(function (refus) { return refus ? null : info; });
+    }).then(function (info) {
+      codeActif = info || null;
       if (!codeActif) { try { localStorage.removeItem(CLE_CODE); } catch (e) {} }
       prevenir();
     });
@@ -140,10 +158,13 @@
       return chercherCode(code).then(function (info) {
         if (!info) return { ok: false };
         if (dejaUtilise(info, true)) return { ok: false, deja: true };
-        codeActif = info;
-        try { localStorage.setItem(CLE_CODE, code); } catch (e) {}
-        prevenir();
-        return { ok: true, info: info };
+        return verifierCompte(info).then(function (refus) {
+          if (refus) return refus;
+          codeActif = info;
+          try { localStorage.setItem(CLE_CODE, code); } catch (e) {}
+          prevenir();
+          return { ok: true, info: info };
+        });
       });
     },
     retirerCode: function () {
@@ -191,6 +212,9 @@
     recap: function (articles) {
       articles = articles || panier;
       var lignes = ['🛒 Commande 2DKR', ''];
+      // Compte Discord connecté : le ticket indique tout de suite qui commande et son statut
+      var compte = window.DKRAuth && DKRAuth.etat().user;
+      if (compte) lignes.push('Discord : ' + compte.nom + (compte.verifie ? ' (Client vérifié)' : ''), '');
       articles.forEach(function (a) {
         lignes.push('• ' + a.nom + ' — ' + DKR.euros(a.prix) + (a.frais ? ' (+' + DKR.euros(a.frais) + ' de frais)' : ''));
       });
@@ -205,6 +229,8 @@
         lignes.push('Code ' + codeActif.code + ' (-' + codeActif.reduction + ' %) : -' + DKR.euros(red) +
           (codeActif.type === 'parrain' ? ' — parrain : ' + codeActif.nom : ' — 1er achat'));
         marquerUtilise(codeActif);
+        // Connecté avec Discord : le serveur note aussi que ce compte a utilisé le code
+        if (compte && premiereCommandeSeulement(codeActif)) DKRAuth.noterCode(codeActif.code);
       }
       lignes.push('Total : ' + DKR.euros(DKRPanier.total(articles)));
       if (DKR.promoActive()) lignes.push('(' + DKR.catalogue.promo.titre + ' appliquée)');
@@ -247,9 +273,24 @@
         DKRPanier.appliquerCode(input.value).then(function (r) {
           if (!r.ok) {
             msg.className = 'code-msg is-error';
-            msg.textContent = r.deja
-              ? 'Tu as déjà utilisé ce code sur cet appareil : il est réservé à la 1re commande.'
-              : 'Ce code n\'existe pas. Vérifie l\'orthographe.';
+            if (r.login) {
+              msg.textContent = 'Ce code est lié à ton compte : connecte-toi avec Discord pour l\'utiliser. ';
+              var lien = document.createElement('a');
+              lien.href = DKRAuth.urlConnexion();
+              lien.className = 'code-login';
+              lien.textContent = 'Se connecter';
+              msg.appendChild(lien);
+              return;
+            }
+            var raisons = {
+              client_verifie: 'Ce code est réservé à la 1re commande : ton compte Discord a déjà le rôle Client Vérifié.',
+              deja_utilise: 'Tu as déjà utilisé ce code avec ton compte Discord : il est réservé à la 1re commande.'
+            };
+            msg.textContent = r.serveur
+              ? (raisons[r.serveur] || 'Ce code ne peut pas être utilisé avec ton compte.')
+              : r.deja
+                ? 'Tu as déjà utilisé ce code sur cet appareil : il est réservé à la 1re commande.'
+                : 'Ce code n\'existe pas. Vérifie l\'orthographe.';
             return;
           }
           input.value = '';

@@ -1234,3 +1234,8 @@ html[data-theme="gold"] .menu-card { background: #000; }
 }
 .menu-card .btn-outline:hover { background: rgba(var(--accent-blue-rgb), 0.2); border-color: var(--accent-blue); }
 .menu-card .btn-sm { padding: 6px 12px; font-size: 0.85rem; }
+
+/* ---------- Nouveau logo : mot « 2DKR » (v0.5) ---------- */
+.logo-word { display: block; height: 34px; width: auto; }
+@media (max-width: 768px) { .logo-word { height: 30px; } }
+html[data-theme="gold"] .logo-word { content: url('../logo-site-or.svg'); }

@@ -14,7 +14,7 @@
   <meta property="og:url" content="https://2dkr.pages.dev/">
   <meta property="og:site_name" content="2DKR">
   <meta property="og:locale" content="fr_FR">
-  <meta property="og:image" content="https://2dkr.pages.dev/og/accueil.png">
+  <meta property="og:image" content="https://2dkr.pages.dev/og/accueil.png?v=4">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
@@ -778,12 +778,13 @@
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/theme.css?v=1">
   <script src="assets/nav.js" defer></script>
 </head>
 <body>
 
   <nav>
-    <a href="index.html" class="logo"><img src="favicon.svg" alt="" class="logo-mark" width="30" height="30">2D<span>KR</span></a>
+    <a href="index.html" class="logo" aria-label="2DKR, accueil"><img src="logo-site.svg" alt="2DKR" class="logo-word" height="26"></a>
     
     <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation">
       <i class="fa-solid fa-bars"></i>
@@ -816,7 +817,7 @@
     <div class="hero-badges">
       <div class="badge-dev-mode" id="version-badge" role="button" tabindex="0" title="Voir les nouveautés" style="cursor: pointer;">
         <i class="fa-solid fa-code"></i>
-        <span>v0.4.7 — Nouveautés</span>
+        <span>v0.5 — Nouveautés</span>
         <span class="extra-text">&nbsp;• by Dekur</span>
       </div>
       <div class="badge-status">
@@ -1004,9 +1005,17 @@
   <!-- Journal des changements (ouvert en cliquant sur le badge de version) -->
   <dialog class="changelog" id="changelog" aria-labelledby="changelog-title">
     <div class="changelog-head">
-      <h3 id="changelog-title"><i class="fa-solid fa-code" style="color: var(--accent-blue);"></i> Nouveautés v0.4.7</h3>
+      <h3 id="changelog-title"><i class="fa-solid fa-code" style="color: var(--accent-blue);"></i> Nouveautés v0.5</h3>
       <button type="button" class="changelog-close" aria-label="Fermer"><i class="fa-solid fa-xmark"></i></button>
     </div>
+    <ul>
+      <li><strong>Nouvelle interface, deux thèmes</strong> : un thème sobre en bleu et un thème néon noir et or. Le bouton en haut du site passe de l'un à l'autre.</li>
+      <li><strong>Nouveau logo</strong> : « 2DKR » incliné, aussi sur le serveur Discord et le bot.</li>
+      <li><strong>Connexion avec Discord</strong> : un bouton « Se connecter » dans le menu, sans mot de passe.</li>
+      <li><strong>Codes protégés</strong> : un code de 1re commande est lié à ton compte Discord. Il ne marche qu'une fois, et pas si tu as déjà le rôle Client Vérifié.</li>
+      <li><strong>Ticket plus clair</strong> : connecté, ton pseudo Discord est ajouté au récapitulatif de commande.</li>
+    </ul>
+    <h4 class="changelog-sub">v0.4.7</h4>
     <ul>
       <li><strong>Accueil plus clair</strong> : deux gros boutons sous le titre, « Voir les services » et « Rejoindre le Discord ».</li>
       <li><strong>Moins d'encombrement</strong> : les filtres et l'astuce clavier de l'accueil sont retirés, la recherche reste là.</li>
