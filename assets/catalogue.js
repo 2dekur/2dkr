@@ -28,7 +28,7 @@ window.DKR_CATALOGUE = {
 
   nouveauxTarifs: {
     date: '2026-10-07T00:00:00+02:00',
-    annonce: 'Nouveaux tarifs à partir du mardi 7 octobre',
+    annonce: 'Nouveaux tarifs à partir du mercredi 7 octobre',
     detail: "Les commandes passées avant cette date gardent l'ancien prix.",
     prix: {
       bronze: 8, argent: 13, or: 19, platine: 26, ultime: 70,
