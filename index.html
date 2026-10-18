@@ -1,16 +1,14 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>2DKR — Site officiel de Dekur</title>
-  
+  <meta name="description" content="Espace officiel 2DKR by Dekur : communauté Discord, services GTA Online, offres et moyens de paiement.">
+  <meta name="theme-color" content="#0c0d0f">
   <meta property="og:title" content="2DKR — Espace Officiel De Dekur">
   <meta property="og:description" content="Retrouve tous nos boosts GTA Online, véhicules moddés, tenues et packs sur mesure.">
   <meta property="og:type" content="website">
-  <meta name="theme-color" content="#38bdf8">
-  <meta name="description" content="Espace officiel 2DKR by Dekur : communauté Discord, services GTA Online, offres et moyens de paiement.">
-  <link rel="canonical" href="https://2dkr.pages.dev/">
   <meta property="og:url" content="https://2dkr.pages.dev/">
   <meta property="og:site_name" content="2DKR">
   <meta property="og:locale" content="fr_FR">
@@ -18,1487 +16,704 @@
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://2dkr.pages.dev/">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
   <script src="assets/catalogue.js"></script>
-
+  <script src="assets/nav.js" defer></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,800;1,800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
   <style>
-    /* v0.4.0 — transition fluide entre les pages (navigateurs récents) */
-    @view-transition { navigation: auto; }
     :root {
-      --bg: #090d16;
-      --card-bg: rgba(22, 27, 34, 0.75);
-      --border: rgba(48, 54, 61, 0.6);
-      --border-glow: rgba(var(--accent-blue-rgb), 0.4);
-      --accent-blue: #38bdf8;
-      --accent-blue-hover: #0284c7;
-      --accent-blue-glow: rgba(var(--accent-blue-rgb), 0.25);
-      --accent-blue-rgb: 56, 189, 248;
-      --accent-2: #818cf8;
+      --ink: #0c0d0f;
+      --ink-2: #131518;
+      --ink-3: #1b1e22;
+      --line: #282c32;
+      --paper: #efece6;
+      --muted: #9b9a94;
+      --accent: #38bdf8;
+      --ok: #3ddc84;
       --discord: #5865f2;
-      --accent-green: #10b981;
-      --accent-orange: #f97316;
-      --text-main: #f0f6fc;
-      --text-muted: #8b949e;
+      --display: 'Barlow Condensed', Impact, sans-serif;
+      --body: 'Barlow', system-ui, sans-serif;
+      --mono: 'JetBrains Mono', ui-monospace, monospace;
+      --wrap: 1200px;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
     body {
-      background-color: var(--bg);
-      background-image: 
-        radial-gradient(circle at 15% 15%, rgba(var(--accent-blue-rgb), 0.08) 0%, transparent 45%),
-        radial-gradient(circle at 85% 85%, rgba(88, 101, 242, 0.08) 0%, transparent 45%);
-      background-attachment: fixed;
-      color: var(--text-main);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      background: var(--ink);
+      color: var(--paper);
+      font: 400 1.0625rem/1.6 var(--body);
+      -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }
+    a { color: inherit; text-decoration: none; }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 24px; }
+    .mono { font-family: var(--mono); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; }
 
-    /* Navigation Glassmorphism */
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 16px 8%;
-      background: rgba(13, 17, 23, 0.75);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      z-index: 100;
+    /* ---------- barre de statut ---------- */
+    .status {
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
     }
+    .status .wrap { display: flex; gap: 24px; align-items: center; height: 34px; overflow-x: auto; white-space: nowrap; scrollbar-width: none; }
+    .status .wrap::-webkit-scrollbar { display: none; }
+    .status a:hover { color: var(--paper); }
+    .dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--ok); margin-right: 8px; vertical-align: 1px; box-shadow: 0 0 0 3px rgba(61, 220, 132, .15); }
 
-    .logo {
-      font-size: 1.5rem;
-      font-weight: 900;
-      color: var(--text-main);
-      text-decoration: none;
-      letter-spacing: 1.5px;
-      transition: transform 0.2s ease;
+    /* ---------- nav ---------- */
+    header.nav {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(12, 13, 15, .92);
+      border-bottom: 1px solid var(--line);
     }
+    @supports (backdrop-filter: blur(1px)) { header.nav { background: rgba(12, 13, 15, .8); backdrop-filter: blur(10px); } }
+    header.nav .wrap { display: flex; align-items: center; gap: 32px; height: 68px; }
+    .logo { display: block; line-height: 0; }
+    .logo img { height: 28px; width: auto; }
+    .status button.ver { background: none; border: 0; color: inherit; font: inherit; letter-spacing: inherit; text-transform: inherit; cursor: pointer; }
+    .status button.ver:hover { color: var(--accent); }
+    .status button.ver b { color: var(--accent); font-weight: 500; }
 
-    .logo:hover {
-      transform: scale(1.03);
+    /* compte Discord (rempli par DKRAuth, assets/nav.js) */
+    .auth[hidden] { display: none; }
+    .user { position: relative; }
+    .user summary { list-style: none; display: flex; align-items: center; gap: 10px; height: 40px; padding: 0 12px; border: 1px solid var(--line); cursor: pointer; font-weight: 600; font-size: .9rem; }
+    .user summary::-webkit-details-marker { display: none; }
+    .user img { width: 24px; height: 24px; border-radius: 50%; }
+    .user .drop-menu { left: auto; right: 0; }
+    .user .drop-menu span { display: block; padding: 10px 12px; color: var(--ok); font-family: var(--mono); font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; }
+    .user .drop-menu button { width: 100%; text-align: left; background: none; border: 0; color: var(--paper); font: 500 .95rem var(--body); padding: 10px 12px; cursor: pointer; }
+    .user .drop-menu button:hover { background: var(--ink-3); }
+    .dkr-flash {
+      position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 20px); z-index: 200;
+      background: var(--paper); color: var(--ink); padding: 12px 18px; font-weight: 600;
+      opacity: 0; transition: opacity .3s, transform .3s;
     }
+    .dkr-flash.show { opacity: 1; transform: translate(-50%, 0); }
 
-    .logo span {
-      color: var(--accent-blue);
+    /* changelog */
+    .changelog {
+      margin: auto; width: min(640px, calc(100% - 32px)); max-height: calc(100vh - 48px);
+      background: var(--ink-2); color: var(--paper); border: 1px solid var(--line); padding: 0;
     }
-
-    .nav-links {
-      display: flex;
-      gap: 22px;
-      align-items: center;
+    .changelog::backdrop { background: rgba(0, 0, 0, .75); }
+    .cl-head { position: sticky; top: 0; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 20px 24px; background: var(--ink-2); border-bottom: 1px solid var(--line); }
+    .cl-head h2 { font: 800 2rem/1 var(--display); text-transform: uppercase; }
+    .cl-head h2 em { font-style: normal; color: var(--accent); }
+    .cl-close { width: 40px; height: 40px; background: none; border: 1px solid var(--line); color: var(--paper); cursor: pointer; font-size: 1rem; }
+    .cl-close:hover { border-color: var(--paper); }
+    .cl-body { padding: 8px 24px 28px; }
+    .cl-body h3 { margin: 24px 0 10px; color: var(--muted); }
+    .cl-body h3:first-child { color: var(--accent); }
+    .cl-body ul { list-style: none; display: grid; gap: 10px; }
+    .cl-body li { padding-left: 18px; position: relative; color: #c9c7c0; font-size: .95rem; }
+    .cl-body li::before { content: ""; position: absolute; left: 0; top: .65em; width: 8px; height: 1px; background: var(--muted); }
+    .cl-body li strong { color: var(--paper); font-weight: 600; }
+    .cl-body .old { margin-top: 24px; color: var(--muted); font-size: .9rem; }
+    .links { display: flex; gap: 4px; margin-right: auto; }
+    .links > a, .links summary {
+      display: block; padding: 8px 12px;
+      font-weight: 500; font-size: .95rem; color: var(--muted);
+      cursor: pointer; list-style: none; transition: color .15s; white-space: nowrap;
     }
-
-    .nav-links a {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 0.95rem;
-      font-weight: 500;
-      transition: all 0.2s ease;
+    .links summary::-webkit-details-marker { display: none; }
+    .links > a:hover, .links summary:hover, .links a[aria-current] { color: var(--paper); }
+    .links summary i { font-size: .65rem; margin-left: 4px; }
+    .drop { position: relative; }
+    .drop-menu {
+      position: absolute; top: calc(100% + 10px); left: 0; min-width: 220px;
+      background: var(--ink-2); border: 1px solid var(--line); padding: 6px;
     }
+    .drop-menu a { display: flex; justify-content: space-between; padding: 10px 12px; font-size: .95rem; }
+    .drop-menu a:hover { background: var(--ink-3); }
+    .drop-menu small { color: var(--ok); font-family: var(--mono); font-size: .7rem; }
+    .nav-end { display: flex; align-items: center; gap: 8px; }
+    .icon-btn { width: 40px; height: 40px; display: grid; place-items: center; color: var(--muted); transition: color .15s; }
+    .icon-btn:hover { color: var(--paper); }
 
-    .nav-links a:hover,
-    .nav-links a.active {
-      color: var(--accent-blue);
-      text-shadow: 0 0 10px var(--accent-blue-glow);
-    }
-
-    .nav-social-icon {
-      font-size: 1.25rem;
-      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s ease;
-      display: inline-block;
-    }
-
-    .nav-social-icon:hover {
-      transform: scale(1.25) rotate(5deg);
-    }
-
-    /* Menu mobile burger */
-    .menu-toggle {
-      display: none;
-      background: none;
-      border: none;
-      color: var(--text-main);
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
-
-    /* Hero Section */
-    .hero {
-      text-align: center;
-      padding: 70px 20px 30px 20px;
-      max-width: 750px;
-      margin: 0 auto;
-      animation: fadeInDown 0.8s ease-out;
-    }
-
-    .hero h1 {
-      font-size: 3rem;
-      font-weight: 900;
-      letter-spacing: -0.5px;
-      margin-bottom: 15px;
-      line-height: 1.15;
-    }
-
-    .hero h1 span {
-      background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-2) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero p {
-      font-size: 1.15rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-      margin-bottom: 20px;
-    }
-
-    /* Badges Hero */
-    .hero-badges {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .badge-dev-mode {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(var(--accent-blue-rgb), 0.1);
-      color: var(--accent-blue);
-      border: 1px solid rgba(var(--accent-blue-rgb), 0.3);
-      padding: 6px 16px;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      cursor: default;
-      overflow: hidden;
-      white-space: nowrap;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      backdrop-filter: blur(8px);
-    }
-
-    .badge-dev-mode .extra-text {
-      max-width: 0;
-      opacity: 0;
-      overflow: hidden;
-      transition: max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
-    }
-
-    .badge-dev-mode:hover {
-      background: rgba(var(--accent-blue-rgb), 0.2);
-      border-color: var(--accent-blue);
-      box-shadow: 0 0 20px rgba(var(--accent-blue-rgb), 0.3);
-    }
-
-    .badge-dev-mode:hover .extra-text {
-      max-width: 150px;
-      opacity: 1;
-    }
-
-    .badge-status {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(16, 185, 129, 0.1);
-      color: var(--accent-green);
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      padding: 6px 16px;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      font-weight: 600;
-    }
-
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      background-color: var(--accent-green);
-      border-radius: 50%;
-      box-shadow: 0 0 8px var(--accent-green);
-    }
-
-    /* Barre de recherche & Badge Beta */
-    .search-container {
-      max-width: 500px;
-      margin: 25px auto 0 auto;
-      position: relative;
-      display: flex;
-      align-items: center;
-    }
-
-    .search-input {
-      width: 100%;
-      padding: 12px 65px 12px 45px;
-      background: rgba(13, 17, 23, 0.8);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      color: var(--text-main);
-      font-size: 0.95rem;
-      outline: none;
-      transition: all 0.25s ease;
-    }
-
-    .search-input:focus {
-      border-color: var(--accent-blue);
-      box-shadow: 0 0 15px var(--accent-blue-glow);
-    }
-
-    .search-icon {
-      position: absolute;
-      left: 15px;
-      color: var(--text-muted);
-    }
-
-    .beta-badge {
-      position: absolute;
-      right: 12px;
-      background: rgba(249, 115, 22, 0.15);
-      color: var(--accent-orange);
-      border: 1px solid rgba(249, 115, 22, 0.35);
-      padding: 3px 8px;
-      border-radius: 8px;
-      font-size: 0.65rem;
-      font-weight: 800;
-      letter-spacing: 0.5px;
-      pointer-events: none;
-      user-select: none;
-    }
-
-    /* Container Principal */
-    .container {
-      max-width: 900px;
-      margin: 20px auto 60px auto;
-      padding: 0 20px;
-      width: 100%;
-      animation: fadeInUp 0.8s ease-out 0.2s backwards;
-    }
-
-    .section-heading {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--text-main);
-      margin: 35px 0 15px 0;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 22px;
-    }
-
-    /* Cards Glassmorphism */
-    .card {
-      background: var(--card-bg);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 28px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .card:hover {
-      border-color: var(--border-glow);
-      transform: translateY(-5px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px var(--accent-blue-glow);
-    }
-
-    .card:hover::before {
-      opacity: 1;
-    }
-
-    .card:hover h2 {
-      color: var(--accent-blue);
-    }
-
-    .card h2 {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--text-main);
-      transition: color 0.2s ease;
-    }
-
-    .card-badge {
-      display: inline-block;
-      padding: 4px 12px;
-      border-radius: 20px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 16px;
-      align-self: flex-start;
-    }
-
-    .badge-discord {
-      background-color: rgba(88, 101, 242, 0.15);
-      color: #5865f2;
-      border: 1px solid rgba(88, 101, 242, 0.35);
-    }
-
-    .badge-dev {
-      background-color: rgba(var(--accent-blue-rgb), 0.15);
-      color: var(--accent-blue);
-      border: 1px solid rgba(var(--accent-blue-rgb), 0.35);
-    }
-
-    .badge-payment {
-      background-color: rgba(16, 185, 129, 0.15);
-      color: var(--accent-green);
-      border: 1px solid rgba(16, 185, 129, 0.35);
-    }
-
-    .badge-offer {
-      background-color: rgba(249, 115, 22, 0.15);
-      color: var(--accent-orange);
-      border: 1px solid rgba(249, 115, 22, 0.35);
-    }
-
-    .card-title-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-    }
-
-    .card p {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      line-height: 1.6;
-      margin-bottom: 24px;
-    }
-
-    /* FAQ Details/Summary */
-    .faq-item {
-      background-color: var(--card-bg);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 18px 22px;
-      margin-bottom: 14px;
-      transition: border-color 0.25s ease, box-shadow 0.25s ease;
-      overflow: hidden;
-    }
-
-    .faq-item:hover {
-      border-color: var(--accent-blue);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    }
-
-    .faq-item summary {
-      font-weight: 600;
-      color: var(--text-main);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      list-style: none;
-      cursor: pointer;
-      user-select: none;
-      -webkit-user-select: none;
-    }
-
-    .faq-item summary::-webkit-details-marker {
-      display: none;
-    }
-
-    .faq-item summary i {
-      color: var(--accent-blue);
-      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .faq-item.is-open summary i {
-      transform: rotate(180deg);
-    }
-
-    .faq-content-wrapper {
-      overflow: hidden;
-    }
-
-    .faq-item p {
-      color: var(--text-muted);
-      font-size: 0.92rem;
-      line-height: 1.6;
-      margin-top: 12px;
-      padding-top: 12px;
-      border-top: 1px solid var(--border);
-    }
-
-    /* Buttons Modernes */
+    /* ---------- boutons ---------- */
     .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      width: 100%;
-      text-align: center;
-      padding: 13px 20px;
-      border-radius: 10px;
-      font-size: 0.95rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.25s ease;
-      cursor: pointer;
-      border: none;
+      display: inline-flex; align-items: center; gap: 10px;
+      height: 52px; padding: 0 22px;
+      font: 600 1rem/1 var(--body);
+      border: 1px solid var(--line); background: var(--ink-2);
+      cursor: pointer; transition: background .15s, border-color .15s, transform .15s;
     }
+    .btn:hover { border-color: var(--paper); }
+    .btn:active { transform: translateY(1px); }
+    .btn-primary { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+    .btn-primary:hover { background: #fff; }
+    .btn-discord { background: var(--discord); border-color: var(--discord); color: #fff; }
+    .btn-discord:hover { background: #4752e0; border-color: #4752e0; }
+    .btn-sm { height: 40px; padding: 0 14px; font-size: .9rem; }
+    .btn .fa-arrow-right { transition: transform .15s; }
+    .btn:hover .fa-arrow-right { transform: translateX(3px); }
 
-    .btn-blue {
-      background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-blue-hover) 100%);
-      color: #090d16;
-      box-shadow: 0 4px 15px rgba(var(--accent-blue-rgb), 0.25);
+    /* ---------- hero ---------- */
+    .hero { padding: 72px 0 0; }
+    .hero-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 56px; align-items: end; }
+    .kicker { color: var(--accent); margin-bottom: 20px; }
+    h1 {
+      font: 800 clamp(4rem, 11vw, 9.5rem)/.86 var(--display);
+      text-transform: uppercase; letter-spacing: -.02em;
     }
+    h1 em { font-style: italic; color: var(--accent); }
+    .lede { max-width: 30em; margin: 28px 0 32px; color: #c9c7c0; font-size: 1.15rem; }
+    .ctas { display: flex; flex-wrap: wrap; gap: 12px; }
 
-    .btn-blue:hover {
-      box-shadow: 0 6px 20px rgba(var(--accent-blue-rgb), 0.45);
-      transform: translateY(-2px);
+    .sheet { border: 1px solid var(--line); background: var(--ink-2); }
+    .sheet-head { display: flex; justify-content: space-between; padding: 14px 18px; border-bottom: 1px solid var(--line); color: var(--muted); }
+    .sheet dl { display: grid; grid-template-columns: auto 1fr; }
+    .sheet dt, .sheet dd { padding: 14px 18px; border-bottom: 1px solid var(--line); }
+    .sheet dt { color: var(--muted); }
+    .sheet dd { text-align: right; font-weight: 500; }
+    .sheet dl > :nth-last-child(-n+2) { border-bottom: 0; }
+    .sheet dd a { border-bottom: 1px solid var(--line); transition: border-color .15s; }
+    .sheet dd a:hover { border-color: var(--accent); }
+
+    /* recherche */
+    .search { position: relative; margin-top: 56px; }
+    .search label { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
+    .search input {
+      width: 100%; height: 60px; padding: 0 64px 0 52px;
+      background: transparent; border: 1px solid var(--line); color: var(--paper);
+      font: 500 1.05rem var(--body);
+      transition: border-color .15s;
     }
-
-    /* Boutons d'action du hero */
-    .hero-cta {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin: 22px 0 6px;
+    .search input::placeholder { color: #6d6c67; }
+    .search input:focus { outline: none; border-color: var(--accent); }
+    .search kbd { position: absolute; right: 18px; top: 50%; transform: translateY(-50%); color: var(--muted); border: 1px solid var(--line); padding: 2px 7px; }
+    .results {
+      position: absolute; top: 100%; left: 0; right: 0; z-index: 20;
+      background: var(--ink-2); border: 1px solid var(--accent); border-top: 0;
+      list-style: none;
     }
+    .results a { display: flex; justify-content: space-between; gap: 16px; padding: 14px 20px; }
+    .results a:hover, .results a.on { background: var(--ink-3); }
+    .results span:last-child { color: var(--muted); }
+    .results .empty { padding: 14px 20px; color: var(--muted); }
 
-    .hero-cta .btn {
-      width: auto;
-      min-width: 190px;
+    /* chiffres */
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 72px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .stats a { padding: 28px 24px; border-left: 1px solid var(--line); transition: background .15s; }
+    .stats a:first-child { border-left: 0; padding-left: 0; }
+    .stats a:hover { background: var(--ink-2); }
+    .stats strong { display: block; font: 800 clamp(2.6rem, 6vw, 4.5rem)/1 var(--display); }
+    .stats strong i { font-size: .45em; color: #f5c84b; vertical-align: .55em; margin-left: 6px; }
+    .stats span { color: var(--muted); }
+
+    /* ---------- garantie ---------- */
+    .guarantee { margin-top: 96px; background: var(--ok); color: #06140c; }
+    .guarantee .wrap { display: grid; grid-template-columns: auto 1fr auto; gap: 40px; align-items: center; padding-top: 40px; padding-bottom: 40px; }
+    .guarantee .big { font: 800 clamp(4.5rem, 10vw, 7.5rem)/.8 var(--display); letter-spacing: -.03em; }
+    .guarantee h2 { font: 800 2rem/1 var(--display); text-transform: uppercase; margin-bottom: 8px; }
+    .guarantee p { max-width: 36em; font-weight: 500; }
+    .guarantee .btn { background: #06140c; color: var(--ok); border-color: #06140c; }
+    .guarantee .btn:hover { background: #000; }
+
+    /* ---------- sections ---------- */
+    section.block { padding: 112px 0 0; }
+    .sec-head { display: flex; align-items: baseline; gap: 20px; padding-bottom: 20px; margin-bottom: 40px; border-bottom: 1px solid var(--line); }
+    .sec-head .mono { color: var(--accent); }
+    h2.title { font: 800 clamp(2.4rem, 5vw, 3.6rem)/1 var(--display); text-transform: uppercase; letter-spacing: -.01em; }
+
+    .duo { display: grid; grid-template-columns: 1.2fr 1fr; gap: 24px; }
+    .panel { padding: 36px; border: 1px solid var(--line); display: flex; flex-direction: column; gap: 16px; min-height: 340px; }
+    .panel h3 { font: 800 2.4rem/1 var(--display); text-transform: uppercase; }
+    .panel p { color: #c9c7c0; max-width: 32em; }
+    .panel .tag { opacity: .75; }
+    .panel .foot { margin-top: auto; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    .panel-discord { background: var(--discord); border-color: var(--discord); color: #fff; position: relative; overflow: hidden; }
+    .panel-discord p { color: rgba(255, 255, 255, .88); }
+    .panel-discord .fa-discord.bg { position: absolute; right: -40px; bottom: -60px; font-size: 18rem; opacity: .12; pointer-events: none; }
+    .panel-discord .btn { background: #fff; color: #1e2299; border-color: #fff; }
+    .panel-discord .members { font-family: var(--mono); font-size: .8rem; }
+    .panel-ig img { width: 44px; height: 44px; }
+    .aff { color: var(--muted); }
+
+    .why { display: grid; grid-template-columns: repeat(3, 1fr); counter-reset: why; }
+    .why article { padding: 0 32px 0 0; counter-increment: why; }
+    .why article + article { padding-left: 32px; border-left: 1px solid var(--line); }
+    .why article::before {
+      content: "0" counter(why);
+      display: block; font: 800 4rem/1 var(--display); color: var(--ink-3);
+      -webkit-text-stroke: 1px var(--line); margin-bottom: 20px;
     }
+    .why .mono { color: var(--muted); }
+    .why h3 { font: 800 1.9rem/1.05 var(--display); text-transform: uppercase; margin: 6px 0 12px; }
+    .why p { color: #c9c7c0; }
+    .why .free h3 { color: var(--ok); }
+    .why a.inline { display: inline-flex; gap: 8px; align-items: center; margin-top: 16px; font-weight: 600; color: var(--ok); }
 
-    @media (max-width: 480px) {
-      .hero-cta { flex-direction: column; align-items: center; }
-      .hero-cta .btn { width: 100%; max-width: 280px; }
+    /* FAQ */
+    .faq { display: grid; grid-template-columns: 1fr 2fr; gap: 56px; }
+    .faq-side p { color: var(--muted); margin: 16px 0 24px; }
+    .faq details { border-bottom: 1px solid var(--line); }
+    .faq details:first-child { border-top: 1px solid var(--line); }
+    .faq summary {
+      display: flex; justify-content: space-between; gap: 24px; align-items: center;
+      padding: 22px 0; cursor: pointer; list-style: none;
+      font-weight: 600; font-size: 1.15rem; transition: color .15s;
     }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary:hover { color: var(--accent); }
+    .faq summary::after { content: "+"; font: 500 1.6rem/1 var(--mono); color: var(--muted); transition: transform .2s; }
+    .faq details[open] summary::after { transform: rotate(45deg); color: var(--accent); }
+    .faq details p { padding: 0 48px 24px 0; color: #c9c7c0; }
+    .faq details p a { color: var(--paper); border-bottom: 1px solid var(--accent); }
 
-    .btn-discord {
-      background: var(--discord);
-      color: #fff;
-      box-shadow: 0 4px 15px rgba(88, 101, 242, 0.3);
-    }
+    /* ---------- footer ---------- */
+    footer { margin-top: 128px; border-top: 1px solid var(--line); }
+    .foot-cta { padding: 72px 0; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: end; gap: 32px; flex-wrap: wrap; }
+    .foot-cta h2 { font: 800 clamp(2.8rem, 7vw, 5.5rem)/.9 var(--display); text-transform: uppercase; }
+    .foot-cta h2 em { color: var(--accent); }
+    .foot-row { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; padding: 28px 0 40px; color: var(--muted); font-size: .95rem; }
+    .foot-row nav { display: flex; flex-wrap: wrap; gap: 20px; }
+    .foot-row a:hover { color: var(--paper); }
 
-    .btn-discord:hover {
-      box-shadow: 0 6px 20px rgba(88, 101, 242, 0.5);
-      transform: translateY(-2px);
-    }
-
-    /* Toast Notification */
-    .toast {
-      visibility: hidden;
-      min-width: 280px;
-      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-      color: #0f172a;
-      text-align: center;
-      border-radius: 10px;
-      padding: 14px 22px;
-      position: fixed;
-      z-index: 1000;
-      bottom: 30px;
-      right: 30px;
-      font-weight: 700;
-      font-size: 0.9rem;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 15px rgba(16, 185, 129, 0.4);
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    }
-
-    .toast.show {
-      visibility: visible;
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Responsive Mobile */
-    @media (max-width: 768px) {
-      .menu-toggle {
-        display: block;
+    /* ---------- mobile ---------- */
+    .burger { display: none; }
+    .btn { white-space: nowrap; }
+    @media (max-width: 1080px) {
+      .links, .nav-end .icon-btn, .nav-end .login-label { display: none; }
+      .burger { display: block; margin-left: auto; }
+      .burger summary { list-style: none; cursor: pointer; }
+      .burger summary::-webkit-details-marker { display: none; }
+      .burger-menu {
+        position: absolute; left: 0; right: 0; top: 68px;
+        background: var(--ink); border-bottom: 1px solid var(--line);
+        padding: 8px 24px 24px; max-height: calc(100vh - 68px); overflow-y: auto;
       }
+      .burger-menu a { display: block; padding: 14px 0; border-bottom: 1px solid var(--line); font-weight: 500; }
+      .burger-menu .sub { padding-left: 16px; color: var(--muted); }
+      .burger-menu .socials { display: flex; gap: 20px; padding-top: 20px; font-size: 1.3rem; }
+      .burger-menu .socials a { border: 0; padding: 0; }
+      header.nav .wrap { gap: 12px; }
 
-      .nav-links {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: rgba(13, 17, 23, 0.95);
-        backdrop-filter: blur(16px);
-        padding: 20px;
-        border-bottom: 1px solid var(--border);
-        gap: 16px;
-      }
-
-      .nav-links.active {
-        display: flex;
-      }
-
-      .hero h1 {
-        font-size: 2.2rem;
-      }
+      .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+      .guarantee .wrap { grid-template-columns: 1fr; gap: 20px; }
+      .duo { grid-template-columns: 1fr; }
+      .why { grid-template-columns: 1fr; gap: 40px; }
+      .why article, .why article + article { padding: 0; border: 0; }
+      .why article + article { padding-top: 40px; border-top: 1px solid var(--line); }
+      .faq { grid-template-columns: 1fr; gap: 24px; }
     }
-
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    footer {
-      margin-top: auto;
-      text-align: center;
-      padding: 28px 20px;
-      border-top: 1px solid var(--border);
-      color: var(--text-muted);
-      font-size: 0.85rem;
-      background: rgba(9, 13, 22, 0.8);
-    }
-
-    /* ===== v0.3.4 — Thèmes, chips, palette de commandes ===== */
-    :root {
-      --ease: cubic-bezier(0.22, 1, 0.36, 1);
-      --accent: var(--accent-blue);
-      --accent-hover: var(--accent-blue-hover);
-      --accent-glow: var(--accent-blue-glow);
-    }
-    html[data-theme="gold"] {
-      --bg: #0b0906;
-      --card-bg: rgba(30, 24, 14, 0.75);
-      --border: rgba(83, 66, 32, 0.6);
-      --border-glow: rgba(240, 185, 76, 0.45);
-      --accent-blue: #f0b94c;
-      --accent-blue-hover: #c98f1f;
-      --accent-blue-glow: rgba(240, 185, 76, 0.25);
-      --accent-blue-rgb: 240, 185, 76;
-      --accent-2: #fcd34d;
-      --text-main: #fdf6e6;
-      --text-muted: #a2937a;
-    }
-    html { transition: none; }
-    body, nav, .card, .btn, .search-input {
-      transition: background-color .35s var(--ease), color .35s var(--ease), border-color .35s var(--ease);
-    }
-
-    /* Bouton thème */
-    .theme-toggle {
-      background: rgba(255,255,255,.04);
-      border: 1px solid var(--border);
-      color: var(--accent-blue);
-      width: 36px; height: 36px; border-radius: 10px;
-      cursor: pointer; font-size: 1rem; line-height: 1;
-      display: inline-flex; align-items: center; justify-content: center;
-      transition: transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease);
-    }
-    .theme-toggle:hover {
-      transform: translateY(-2px) rotate(-12deg);
-      border-color: var(--accent-blue);
-      box-shadow: 0 0 14px var(--accent-blue-glow);
-    }
-
-    /* Chips de filtre */
-    .chips {
-      display: flex; flex-wrap: wrap; justify-content: center;
-      gap: 10px; margin: 18px auto 0; max-width: 760px; padding: 0 20px;
-    }
-    .chip {
-      background: rgba(255,255,255,.03);
-      border: 1px solid var(--border);
-      color: var(--text-muted);
-      padding: 7px 16px; border-radius: 999px;
-      font-size: .85rem; font-weight: 600; font-family: inherit;
-      cursor: pointer; white-space: nowrap;
-      transition: transform .2s var(--ease), color .2s var(--ease), border-color .2s var(--ease), box-shadow .2s var(--ease), background-color .2s var(--ease);
-    }
-    .chip i { margin-right: 6px; font-size: .8rem; }
-    .chip:hover { transform: translateY(-2px); color: var(--text-main); border-color: var(--border-glow); }
-    .chip.active {
-      color: var(--bg); border-color: var(--accent-blue);
-      background: var(--accent-blue);
-      box-shadow: 0 0 18px var(--accent-blue-glow);
-    }
-    .card.searchable { transition: opacity .25s var(--ease), transform .25s var(--ease), border-color .3s var(--ease), box-shadow .3s var(--ease); }
-    .card.is-hidden { display: none !important; }
-    .card.is-enter { opacity: 0; transform: translateY(10px); }
-
-    .kbd-hint {
-      display: inline-flex; align-items: center; gap: 6px;
-      margin-top: 14px; font-size: .78rem; color: var(--text-muted);
-    }
-    .kbd {
-      border: 1px solid var(--border); border-radius: 6px;
-      padding: 2px 7px; font-size: .72rem; font-family: ui-monospace, monospace;
-      background: rgba(255,255,255,.04); color: var(--text-main);
-    }
-
-    /* Palette de commandes */
-    .cmdk-overlay {
-      position: fixed; inset: 0; z-index: 500;
-      background: rgba(3, 6, 12, .72);
-      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
-      display: flex; justify-content: center; align-items: flex-start;
-      padding: 12vh 20px 20px;
-      opacity: 0; pointer-events: none;
-      transition: opacity .22s var(--ease);
-    }
-    .cmdk-overlay.open { opacity: 1; pointer-events: auto; }
-    .cmdk {
-      width: 100%; max-width: 620px;
-      background: var(--card-bg);
-      border: 1px solid var(--border-glow);
-      border-radius: 16px; overflow: hidden;
-      backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
-      box-shadow: 0 24px 60px rgba(0,0,0,.6), 0 0 30px var(--accent-blue-glow);
-      transform: translateY(-14px) scale(.98);
-      transition: transform .26s var(--ease);
-    }
-    .cmdk-overlay.open .cmdk { transform: translateY(0) scale(1); }
-    .cmdk-head { display: flex; align-items: center; gap: 12px; padding: 16px 18px; border-bottom: 1px solid var(--border); }
-    .cmdk-head i { color: var(--accent-blue); }
-    .cmdk-head input {
-      flex: 1; background: none; border: none; outline: none;
-      color: var(--text-main); font-size: 1rem; font-family: inherit;
-    }
-    .cmdk-list { max-height: 52vh; overflow-y: auto; padding: 8px; }
-    .cmdk-group { padding: 10px 12px 4px; font-size: .7rem; letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted); font-weight: 700; }
-    .cmdk-item {
-      display: flex; align-items: center; gap: 12px;
-      padding: 11px 12px; border-radius: 10px; cursor: pointer;
-      color: var(--text-muted); text-decoration: none;
-      transition: background-color .15s var(--ease), color .15s var(--ease), transform .15s var(--ease);
-    }
-    .cmdk-item i { width: 18px; text-align: center; color: var(--accent-blue); }
-    .cmdk-item .cmdk-title { color: var(--text-main); font-weight: 600; font-size: .92rem; }
-    .cmdk-item .cmdk-sub { font-size: .78rem; }
-    .cmdk-item.sel, .cmdk-item:hover { background: rgba(255,255,255,.06); transform: translateX(3px); }
-    .cmdk-empty { padding: 26px; text-align: center; color: var(--text-muted); font-size: .9rem; }
-    .cmdk-tag { margin-left: auto; font-size: .68rem; border: 1px solid var(--border); padding: 2px 8px; border-radius: 999px; }
-
-    @media (max-width: 768px) { .chips { gap: 8px; } .kbd-hint { display: none; } }
-    /* Accueil épuré : ~6 cartes, les filtres et l'astuce clavier n'apportent rien (la recherche reste active). */
-    .chips, .kbd-hint { display: none; }
-
-    /* Bouton flottant mobile pour ouvrir la palette de commandes */
-    .cmdk-fab { display: none; }
-    /* Masqué sur mobile : la barre de recherche de l'accueil fait déjà le travail. Remettre « flex » pour le réactiver. */
-    @media (max-width: 768px) {
-      .cmdk-fab {
-        display: none; align-items: center; justify-content: center;
-        position: fixed; right: 18px; bottom: 18px; z-index: 400;
-        width: 52px; height: 52px; border-radius: 50%;
-        background: var(--accent-blue); color: var(--bg);
-        border: none; font-size: 1.1rem; cursor: pointer;
-        box-shadow: 0 8px 24px rgba(0,0,0,.5), 0 0 20px var(--accent-blue-glow);
-        transition: transform .18s var(--ease);
-      }
-      .cmdk-fab:active { transform: scale(.9); }
+    @media (max-width: 560px) {
+      .wrap { padding: 0 16px; }
+      .hero { padding-top: 48px; }
+      .stats { grid-template-columns: 1fr; }
+      .stats a { border-left: 0; border-top: 1px solid var(--line); padding: 20px 0; display: flex; align-items: baseline; gap: 16px; }
+      .stats a:first-child { border-top: 0; }
+      .ctas .btn { flex: 1 1 100%; justify-content: center; }
+      .panel { padding: 24px; min-height: 0; }
+      .search kbd { display: none; }
+      .search input { padding-right: 16px; }
+      .faq details p { padding-right: 0; }
+      section.block { padding-top: 80px; }
     }
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: .01ms !important; animation-iteration-count: 1 !important;
-        transition-duration: .01ms !important; scroll-behavior: auto !important;
-      }
+      html { scroll-behavior: auto; }
+      * { transition: none !important; }
     }
-
-    .beta-badge {
-      position: static !important;
-      display: inline-flex; align-items: center; justify-content: center;
-      margin: 12px auto 0; right: auto;
-    }
-    .search-input { padding-right: 44px !important; }
-
-    /* v0.4.0 — journal des changements */
-    .changelog {
-      margin: auto;
-      width: min(520px, calc(100% - 32px));
-      background: #0d1117;
-      color: var(--text-main);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 24px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-    }
-    .changelog::backdrop { background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(4px); }
-    .changelog-head {
-      display: flex; justify-content: space-between; align-items: center;
-      border-bottom: 1px solid var(--border); padding-bottom: 12px; margin-bottom: 16px;
-    }
-    .changelog-head h3 { font-size: 1.1rem; display: flex; gap: 10px; align-items: center; }
-    .changelog-close { background: none; border: 0; color: var(--text-muted); font-size: 1.1rem; cursor: pointer; padding: 4px; }
-    .changelog-close:hover { color: var(--text-main); }
-    .changelog ul { list-style: none; display: grid; gap: 10px; }
-    .changelog li { color: var(--text-muted); font-size: 0.92rem; line-height: 1.5; padding-left: 18px; position: relative; }
-    .changelog li::before { content: ''; position: absolute; left: 0; top: 0.6em; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-blue); }
-    .changelog li strong { color: var(--text-main); }
-    .changelog-sub { margin: 18px 0 10px; font-size: 0.8rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted); }
-    .changelog { max-height: calc(100vh - 32px); overflow-y: auto; }
-    .changelog-old { margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.8rem; }
   </style>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/style.css">
-  <link rel="stylesheet" href="assets/theme.css?v=1">
-  <script src="assets/nav.js" defer></script>
 </head>
 <body>
 
-  <nav>
-    <a href="index.html" class="logo" aria-label="2DKR, accueil"><img src="logo-site.svg" alt="2DKR" class="logo-word" height="26"></a>
-    
-    <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation">
-      <i class="fa-solid fa-bars"></i>
-    </button>
-
-    <div class="nav-links" id="nav-links">
-      <a href="index.html" class="active">Accueil</a>
-      <div class="nav-drop">
-        <button type="button" class="nav-drop-btn" aria-expanded="false" aria-haspopup="true">Services <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></button>
-        <div class="nav-drop-menu">
-          <a href="services.html"><i class="fa-solid fa-tags" aria-hidden="true"></i> Packs &amp; tarifs</a>
-          <a href="lobby.html"><i class="fa-solid fa-gift" aria-hidden="true"></i> Lobby gratuit <span class="nav-free">0 €</span></a>
-          <a href="modmenus.html"><i class="fa-solid fa-bars-staggered" aria-hidden="true"></i> Mod menus</a>
-          <a href="calculateur.html"><i class="fa-solid fa-calculator" aria-hidden="true"></i> Calculateur</a>
-        </div>
-      </div>
-      <a href="parrainage.html">Parrainage</a>
-      <a href="avis.html">Avis &amp; Preuves</a>
-      <a href="paiements.html">Paiements &amp; garanties</a>
-      <button class="theme-toggle" id="theme-toggle" title="Changer de thème" aria-label="Changer de thème"><i class="fa-solid fa-moon"></i></button>
-      <a href="https://www.youtube.com/@Dekur7" target="_blank" rel="noopener noreferrer" class="nav-social-icon" style="color: #ff0000;" title="YouTube" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-      <a href="https://discord.gg/sUAdU5v9aD" target="_blank" rel="noopener noreferrer" class="nav-social-icon" style="color: #5865f2;" title="Discord" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
+  <div class="status mono">
+    <div class="wrap">
+      <span><i class="dot"></i>Services opérationnels</span>
+      <button type="button" class="ver" id="version-badge" aria-haspopup="dialog"><b>v0.6</b> — Nouveautés</button>
+      <span>PC uniquement</span>
+      <span>PayPal · SOL / USDC · Virement</span>
     </div>
-  </nav>
-
-  <section class="hero">
-    <h1>L'Espace <span>2DKR</span></h1>
-    <p>Retrouve tous les accès à la communauté, aux services et aux moyens de paiement.</p>
-    
-    <div class="hero-badges">
-      <div class="badge-dev-mode" id="version-badge" role="button" tabindex="0" title="Voir les nouveautés" style="cursor: pointer;">
-        <i class="fa-solid fa-code"></i>
-        <span>v0.5 — Nouveautés</span>
-        <span class="extra-text">&nbsp;• by Dekur</span>
-      </div>
-      <div class="badge-status">
-        <span class="status-dot"></span>
-        <span>Services opérationnels</span>
-      </div>
-    </div>
-
-    <div class="trust-strip">
-      <a href="avis.html"><strong>+60</strong> clients satisfaits</a>
-      <span class="trust-sep" aria-hidden="true"></span>
-      <a href="avis.html"><strong>5/5</strong> <i class="fa-solid fa-star" aria-hidden="true"></i> de moyenne</a>
-      <span class="trust-sep" aria-hidden="true"></span>
-      <a href="https://discord.gg/sUAdU5v9aD" target="_blank" rel="noopener noreferrer"><strong id="discord-members">130+</strong> membres Discord</a>
-    </div>
-
-    <div class="hero-cta">
-      <a href="services.html" class="btn btn-blue"><i class="fa-solid fa-bolt"></i> Voir les services</a>
-      <a href="https://discord.gg/sUAdU5v9aD" target="_blank" rel="noopener noreferrer" class="btn btn-discord"><i class="fa-brands fa-discord"></i> Rejoindre le Discord</a>
-    </div>
-
-    <div class="search-container">
-      <i class="fa-solid fa-magnifying-glass search-icon"></i>
-      <input type="text" id="search-input" class="search-input" placeholder="Rechercher un service, une offre, un moyen de paiement...">
-    </div>
-
-    <div class="chips" id="chips">
-      <button class="chip active" data-cat="all"><i class="fa-solid fa-border-all"></i>Tout</button>
-      <button class="chip" data-cat="offres"><i class="fa-solid fa-tags"></i>Offres</button>
-      <button class="chip" data-cat="jeux"><i class="fa-solid fa-gamepad"></i>Jeux</button>
-      <button class="chip" data-cat="services"><i class="fa-solid fa-bolt"></i>Services</button>
-      <button class="chip" data-cat="communaute"><i class="fa-brands fa-discord"></i>Communauté</button>
-    </div>
-
-    <div class="kbd-hint"><span class="kbd">Ctrl</span> + <span class="kbd">K</span> ou <span class="kbd">/</span> pour chercher sur le site</div>
-   
-  </section>
-
-  <div class="container" id="projets">
-    <a href="paiements.html#garanties" class="guar-banner guar-top searchable" data-cat="services">
-      <span class="guar-icon"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></span>
-      <div class="guar-text">
-        <strong>Garantie anti-ban 2DKR</strong>
-        <p>Banni dans les 7 jours après notre intervention ? On te rembourse à 100 % (dès <span class="guar-min">30 €</span> dépensés dans la boutique<span class="guar-min-note">, 26 € à partir du 7 octobre</span>).</p>
-      </div>
-      <span class="guar-more">Voir les conditions</span>
-    </a>
-
-    
-    <div class="section-heading"><i class="fa-solid fa-layer-group" style="color: var(--accent-blue);" aria-hidden="true"></i> <span>Communauté & Soutien</span></div>
-    <div class="grid">
-      
-      <div class="card searchable" data-cat="communaute">
-        <div>
-          <span class="card-badge badge-discord">Communauté</span>
-          <div class="card-title-row">
-            <h2 class="t-discord">Serveur Discord</h2>
-            <i class="fa-brands fa-discord" style="font-size: 1.5rem; color: #5865f2;"></i>
-          </div>
-          <p>Rejoins-nous sur Discord pour voir les nouveautés à propos du serveur, parler, suggérer ou ouvrir un ticket.</p>
-        </div>
-        <a href="https://discord.gg/sUAdU5v9aD" target="_blank" rel="noopener noreferrer" class="btn btn-blue"><i class="fa-brands fa-discord"></i> Rejoindre le Discord</a>
-      </div>
-
-      <div class="card searchable" data-cat="jeux offres">
-        <div>
-          <span class="card-badge badge-offer">Soutien</span>
-          <div class="card-title-row">
-            <h2 class="t-ig">Instant Gaming</h2>
-            <img src="img/instant-gaming-icon.png" alt="" width="323" height="347" style="height: 26px; width: auto;">
-          </div>
-          <p>Tu achètes tes jeux sur Instant Gaming ? Passe par mon lien : <strong>ça ne te coûte rien de plus</strong> et ça soutient 2DKR. Merci à ceux qui l'utilisent !</p>
-        </div>
-        <div>
-          <a href="https://www.instant-gaming.com/fr/?igr=Bydekur" target="_blank" rel="noopener noreferrer sponsored" class="btn btn-blue"><i class="fa-solid fa-cart-shopping"></i> Acheter sur Instant Gaming</a>
-          <span class="affil-note">Lien affilié</span>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="section-heading" style="margin-top: 50px;"><i class="fa-solid fa-shield-halved" style="color: var(--accent-blue);" aria-hidden="true"></i> <span>Pourquoi choisir 2DKR ?</span></div>
-    <div class="grid">
-      
-      <div class="card searchable" data-cat="services">
-        <div>
-          <span class="card-badge badge-dev">Avantage</span>
-          <div class="card-title-row">
-            <h2>Livraison Rapide</h2>
-            <i class="fa-solid fa-bolt" style="font-size: 1.4rem; color: var(--accent-blue);"></i>
-          </div>
-          <p>Prise en charge directe de tes demandes et tickets sur notre Discord dédié.</p>
-        </div>
-      </div>
-
-      <div class="card searchable" data-cat="services">
-        <div>
-          <span class="card-badge badge-dev">Sécurité</span>
-          <div class="card-title-row">
-            <h2>Fiabilité & Support</h2>
-            <i class="fa-solid fa-headset" style="font-size: 1.4rem; color: var(--accent-blue);"></i>
-          </div>
-          <p>Un support réactif en français pour t'aider dans la configuration et l'utilisation.</p>
-        </div>
-      </div>
-
-      <div class="card searchable" data-cat="offres services">
-        <div>
-          <span class="card-badge badge-offer">Gratuit</span>
-          <div class="card-title-row">
-            <h2>Lobby découverte</h2>
-            <i class="fa-solid fa-gift" style="font-size: 1.4rem; color: var(--accent-orange);"></i>
-          </div>
-          <p>Teste 2DKR gratuitement : <strong>6M, niveau 50, 3 véhicules et 3 tenues moddés</strong>. À demander par ticket sur le Discord.</p>
-        </div>
-        <a href="lobby.html" class="btn btn-blue"><i class="fa-solid fa-gift"></i> Voir le lobby gratuit</a>
-      </div>
-
-    </div>
-
-    <div class="section-heading" style="margin-top: 50px;"><i class="fa-circle-question fa-solid" style="color: var(--accent-blue);" aria-hidden="true"></i> <span>Foire Aux Questions</span></div>
-    
-    <details class="faq-item">
-      <summary><span>Comment passer commande ?</span> <i class="fa-solid fa-chevron-down"></i></summary>
-      <div class="faq-content-wrapper">
-        <p>Ajoute tes packs ou options au panier sur la page <a href="services.html">Services</a>, valide pour copier ton récapitulatif, puis ouvre un ticket sur le Discord et colle-le.</p>
-      </div>
-    </details>
-
-    <details class="faq-item">
-      <summary><span>Quels sont les délais ?</span> <i class="fa-solid fa-chevron-down"></i></summary>
-      <div class="faq-content-wrapper">
-        <p>Dès que ta commande est effectuée, je m'y mets tout de suite. Les <strong>nouveaux comptes</strong> sont livrés en <strong>moins de 5 minutes</strong> ; pour les packs et options, le délai estimé est affiché sur chaque fiche.</p>
-      </div>
-    </details>
-
-    <details class="faq-item">
-      <summary><span>Est-ce que je risque un ban ?</span> <i class="fa-solid fa-chevron-down"></i></summary>
-      <div class="faq-content-wrapper">
-        <p>Je teste mes méthodes très régulièrement sur <strong>mes propres comptes de test</strong> avant de les utiliser sur le tien : je sais exactement ce qu'il faut faire et ne pas faire. Résultat : <strong>aucun client banni à ce jour</strong>. Et tu restes couvert par la <a href="paiements.html#garanties">garantie anti-ban</a> (remboursé à 100 % sous 7 jours).</p>
-      </div>
-    </details>
-
-    <details class="faq-item">
-      <summary><span>Tu as besoin de l'accès à mon compte ?</span> <i class="fa-solid fa-chevron-down"></i></summary>
-      <div class="faq-content-wrapper">
-        <p>Oui, le temps de la livraison. Tes identifiants ne sont pas gardés : change ton mot de passe une fois terminé.</p>
-      </div>
-    </details>
-
-    <div class="faq-more" id="faq-more" hidden>
-
-    <details class="faq-item">
-      <summary><span>Le lobby gratuit, c'est vraiment gratuit ?</span> <i class="fa-solid fa-chevron-down"></i></summary>
-      <div class="faq-content-wrapper">
-        <p>Oui : 6M, niveau 50 (ou +50), 3 véhicules et 3 tenues moddés, une fois par compte. À demander par ticket, tous les détails sur la page <a href="lobby.html">Lobby gratuit</a>.</p>
-      </div>
-    </details>
-
-    <details class="faq-item">
-      <summary><span>Tu réponds vite ?</span> <i class="fa-solid fa-chevron-down"></i></summary>
-      <div class="faq-content-wrapper">
-        <p>2DKR est géré par <strong>une seule personne, Dekur</strong>. Je réponds dès que je suis dispo, et la commu salue régulièrement ma réactivité et mon écoute (voir <a href="avis.html">Avis &amp; Preuves</a>).</p>
-      </div>
-    </details>
-
-    <details class="faq-item">
-      <summary><span>Sur quelles plateformes ?</span> <i class="fa-solid fa-chevron-down"></i></summary>
-      <div class="faq-content-wrapper">
-        <p>Pour l'instant, <strong>uniquement sur PC</strong>.</p>
-      </div>
-    </details>
-
-    <details class="faq-item">
-      <summary><span>Comment payer ?</span> <i class="fa-solid fa-chevron-down"></i></summary>
-      <div class="faq-content-wrapper">
-        <p>PayPal, crypto (SOL / USDC) ou virement. Prix tout compris, sans frais ajoutés par 2DKR. Tout est expliqué sur <a href="paiements.html">Paiements &amp; garanties</a>.</p>
-      </div>
-    </details>
-
-    </div>
-    <button type="button" class="faq-toggle" id="faq-toggle" aria-expanded="false" aria-controls="faq-more"><span>Voir les autres questions</span> <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></button>
   </div>
 
-  <!-- Journal des changements (ouvert en cliquant sur le badge de version) -->
-  <dialog class="changelog" id="changelog" aria-labelledby="changelog-title">
-    <div class="changelog-head">
-      <h3 id="changelog-title"><i class="fa-solid fa-code" style="color: var(--accent-blue);"></i> Nouveautés v0.5</h3>
-      <button type="button" class="changelog-close" aria-label="Fermer"><i class="fa-solid fa-xmark"></i></button>
+  <header class="nav">
+    <div class="wrap">
+      <a class="logo" href="index.html" aria-label="2DKR — Accueil"><img src="logo-site.svg" alt="2DKR" width="65" height="28"></a>
+
+      <nav class="links" aria-label="Navigation principale">
+        <a href="index.html" aria-current="page">Accueil</a>
+        <details class="drop">
+          <summary>Services <i class="fa-solid fa-chevron-down"></i></summary>
+          <div class="drop-menu">
+            <a href="services.html">Packs &amp; tarifs</a>
+            <a href="lobby.html">Lobby gratuit <small>0 €</small></a>
+            <a href="modmenus.html">Mod menus</a>
+            <a href="calculateur.html">Calculateur</a>
+          </div>
+        </details>
+        <a href="parrainage.html">Parrainage</a>
+        <a href="avis.html">Avis &amp; Preuves</a>
+        <a href="paiements.html">Paiements &amp; garanties</a>
+      </nav>
+
+      <div class="nav-end">
+        <a class="icon-btn" href="https://www.youtube.com/@Dekur7" target="_blank" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        <a class="icon-btn" href="https://discord.gg/sUAdU5v9aD" target="_blank" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
+        <a class="btn btn-sm auth" id="auth-login" href="/api/auth/login?retour=%2F" hidden><i class="fa-brands fa-discord"></i><span class="login-label">Se connecter</span></a>
+        <details class="user auth" id="auth-user" hidden>
+          <summary><img alt="" width="24" height="24"><span class="login-label pseudo"></span><i class="fa-solid fa-chevron-down" style="font-size:.65rem"></i></summary>
+          <div class="drop-menu">
+            <span class="info"></span>
+            <button type="button" class="logout"><i class="fa-solid fa-right-from-bracket"></i> Se déconnecter</button>
+          </div>
+        </details>
+      </div>
+
+      <details class="burger">
+        <summary class="icon-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></summary>
+        <nav class="burger-menu" aria-label="Menu mobile">
+          <a href="index.html">Accueil</a>
+          <a href="services.html">Services</a>
+          <a class="sub" href="services.html">Packs &amp; tarifs</a>
+          <a class="sub" href="lobby.html">Lobby gratuit — 0 €</a>
+          <a class="sub" href="modmenus.html">Mod menus</a>
+          <a class="sub" href="calculateur.html">Calculateur</a>
+          <a href="parrainage.html">Parrainage</a>
+          <a href="avis.html">Avis &amp; Preuves</a>
+          <a href="paiements.html">Paiements &amp; garanties</a>
+          <a class="auth" id="auth-login-m" href="/api/auth/login?retour=%2F" hidden><i class="fa-brands fa-discord"></i> Se connecter avec Discord</a>
+          <div class="socials">
+            <a href="https://discord.gg/sUAdU5v9aD" target="_blank" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
+            <a href="https://www.youtube.com/@Dekur7" target="_blank" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          </div>
+        </nav>
+      </details>
     </div>
-    <ul>
-      <li><strong>Nouvelle interface, deux thèmes</strong> : un thème sobre en bleu et un thème néon noir et or. Le bouton en haut du site passe de l'un à l'autre.</li>
-      <li><strong>Nouveau logo</strong> : « 2DKR » incliné, aussi sur le serveur Discord et le bot.</li>
-      <li><strong>Connexion avec Discord</strong> : un bouton « Se connecter » dans le menu, sans mot de passe.</li>
-      <li><strong>Codes protégés</strong> : un code de 1re commande est lié à ton compte Discord. Il ne marche qu'une fois, et pas si tu as déjà le rôle Client Vérifié.</li>
-      <li><strong>Ticket plus clair</strong> : connecté, ton pseudo Discord est ajouté au récapitulatif de commande.</li>
-    </ul>
-    <h4 class="changelog-sub">v0.4.7</h4>
-    <ul>
-      <li><strong>Accueil plus clair</strong> : deux gros boutons sous le titre, « Voir les services » et « Rejoindre le Discord ».</li>
-      <li><strong>Moins d'encombrement</strong> : les filtres et l'astuce clavier de l'accueil sont retirés, la recherche reste là.</li>
-      <li><strong>Téléphone</strong> : le bouton rond de recherche n'apparaît plus sur l'accueil, la barre de recherche suffit. Il reste sur les autres pages.</li>
-      <li><strong>Instant Gaming</strong> : le logo officiel remplace l'ancienne icône sur la carte.</li>
-    </ul>
-    <h4 class="changelog-sub">v0.4.6</h4>
-    <ul>
-      <li><strong>Mod menus</strong> : nouvelle page avec Cherax, Yari et Lexis (BE, à vie), ajout direct au panier. Un autre menu ? Demande-le en ticket.</li>
-      <li><strong>Barre code promo</strong> en haut de la page Services.</li>
-      <li><strong>Codes 1re commande protégés</strong> : « déjà utilisé sur cet appareil », et pas de code de bienvenue ou parrain avec le rôle Client Vérifié.</li>
-      <li><strong>Parrainage plus clair</strong> : on parle maintenant de « potes parrainés ».</li>
-      <li><strong>Corrections</strong> : nouveau lien Discord (l'ancien avait expiré), compteur de membres réparé, messages du code promo plus clairs selon le panier.</li>
-    </ul>
-    <h4 class="changelog-sub">v0.4.5</h4>
-    <ul>
-      <li><strong>Parrainage</strong> : ramène 5 potes (15 € dépensés chacun) et gagne -5 % à vie sur toutes tes commandes, même en promo. Tes potes ont -5 % sur leur 1re commande.</li>
-      <li><strong>Codes promo</strong> : un champ « Code promo ou parrain » dans le panier et le calculateur, avec la réduction calculée en direct et ajoutée au récap.</li>
-      <li><strong>Code BIENVENUE10</strong> : -10 % sur ton 1er achat dès 10 €.</li>
-      <li><strong>Recherche réparée</strong> : <strong>Ctrl + K</strong> ou <strong>/</strong> ouvrent bien la recherche du site (avant, le navigateur lançait une recherche Google). Le bouton de recherche sur téléphone remarche aussi.</li>
-    </ul>
-    <h4 class="changelog-sub">v0.4.4</h4>
-    <ul>
-      <li><strong>FAQ complète</strong> : 8 questions sur l'accueil (délais, accès au compte, ban, lobby gratuit, paiements…).</li>
-      <li><strong>FAQ animée</strong> : « Voir les autres questions » déplie les questions en douceur, une par une, et « Voir moins » les replie.</li>
-      <li><strong>Page 404</strong> : raccourcis vers le lobby gratuit, les paiements &amp; garanties, les avis et le Discord.</li>
-    </ul>
-    <h4 class="changelog-sub">v0.4.3</h4>
-    <ul>
-      <li><strong>Interface liquid glass sur téléphone</strong> : barre du haut flottante, menu, bouton de commandes et panier en verre dépoli.</li>
-      <li><strong>Boutons de catégorie animés</strong> : ils font défiler jusqu'à la catégorie et la mettent en avant, sans rien cacher. Raccourcis vers chaque section sur Paiements &amp; garanties.</li>
-      <li><strong>Nouvelle option +5M à 2 €</strong> : le premier achat idéal après le lobby gratuit, livré en 24h.</li>
-      <li><strong>Menu plus simple</strong> : « Services » regroupe les packs, le lobby gratuit et le calculateur.</li>
-      <li><strong>Lobby découverte gratuit</strong> : 6M, niveau 50 (ou +50 niveaux si tu l'as déjà), 3 véhicules et 3 tenues moddés, à demander par ticket, sur sa propre page.</li>
-      <li><strong>Paiements &amp; garanties</strong> : garantie anti-ban, remboursé à 100 % si ton compte est banni dans les 7 jours (conditions sur la page).</li>
-      <li><strong>Tableau comparatif</strong> : la molette fait de nouveau défiler la page quand la souris est sur le tableau.</li>
-    </ul>
-    <h4 class="changelog-sub">v0.4.2</h4>
-    <ul>
-      <li><strong>Nouveaux tarifs le 7 octobre</strong> : annoncés à l'avance. Clique sur la bannière bleue de la page Services pour voir l'avant / après. Les commandes passées avant gardent l'ancien prix.</li>
-      <li><strong>Prix tout compris</strong> : aucun frais ni commission ajouté, le prix affiché est celui que tu paies.</li>
-      <li><strong>Page Paiements &amp; frais</strong> : PayPal, crypto et virement bancaire réunis sur une page dédiée, accessible depuis le menu.</li>
-      <li><strong>Récap plus clair</strong> : le total est affiché dans le panier, le calculateur et le récapitulatif copié pour ton ticket.</li>
-      <li><strong>Pack Ultime complet</strong> : tous déblocages, déblocages RP, toutes les armes, manoirs et business.</li>
-      <li><strong>Instant Gaming</strong> : achète tes jeux via le lien de l'accueil pour soutenir 2DKR, sans payer plus cher.</li>
-      <li><strong>Animations</strong> : badge de version plus fluide et fenêtre des nouveautés qui s'ouvre en douceur.</li>
-    </ul>
-    <h4 class="changelog-sub">v0.4.1</h4>
-    <ul>
-      <li><strong>Nouveau style</strong> : nouvelle police pour les titres, logo avec icône (en or avec le thème dark or) et fond retravaillé.</li>
-      <li><strong>Packs plus lisibles</strong> : des icônes à la place des emojis, et le Pack Ultime mis en avant.</li>
-      <li><strong>Tableau comparatif</strong> : compare les 5 packs d'un coup d'œil sur la page Services, avec ajout au panier direct.</li>
-      <li><strong>Fin de promo en direct</strong> : clique sur la bannière promo pour voir la date exacte de fin et un compte à rebours.</li>
-      <li><strong>Preuves Discord</strong> : chaque avis a maintenant sa date et sa capture du salon #avis-clients, plus un nouvel avis client.</li>
-    </ul>
-    <h4 class="changelog-sub">v0.4.0</h4>
-    <ul>
-      <li><strong>Aperçus de liens</strong> : belles cartes avec image quand tu partages le site sur Discord ou ailleurs.</li>
-      <li><strong>Panier commun</strong> : le panier du catalogue et le calculateur ne font plus qu'un, et ton panier est gardé si tu changes de page.</li>
-      <li><strong>Copie du récapitulatif</strong> : un clic pour copier ta commande et la coller dans ton ticket Discord.</li>
-      <li><strong>Promos automatiques</strong> : les réductions s'affichent et se terminent toutes seules à la bonne date.</li>
-      <li><strong>Transitions fluides</strong> entre les pages, nouvelle icône et vraie page 404.</li>
-      <li>Fin de la bêta : le calculateur et les commandes rapides (Ctrl + K) sont officiels.</li>
-    </ul>
-    <p class="changelog-old">v0.3.4 — thèmes bleu / dark or, filtres, recherche et commandes rapides.</p>
-  </dialog>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <div class="hero-grid">
+          <div>
+            <p class="kicker mono">Site officiel · by Dekur</p>
+            <h1>L'espace<br><em>2DKR</em></h1>
+            <p class="lede">Retrouve tous les accès à la communauté, aux services et aux moyens de paiement.</p>
+            <div class="ctas">
+              <a class="btn btn-primary" href="services.html">Voir les services <i class="fa-solid fa-arrow-right"></i></a>
+              <a class="btn btn-discord" href="https://discord.gg/sUAdU5v9aD" target="_blank"><i class="fa-brands fa-discord"></i> Rejoindre le Discord</a>
+            </div>
+          </div>
+
+          <aside class="sheet" aria-label="En bref">
+            <div class="sheet-head mono"><span>En bref</span><span>2DKR</span></div>
+            <dl>
+              <dt>Statut</dt><dd><i class="dot"></i>Opérationnel</dd>
+              <dt>Géré par</dt><dd>Dekur, en solo</dd>
+              <dt>Plateforme</dt><dd>PC</dd>
+              <dt>Livraison compte</dt><dd>&lt; 5 min</dd>
+              <dt>Paiement</dt><dd><a href="paiements.html">PayPal, crypto, virement</a></dd>
+              <dt>Essai</dt><dd><a href="lobby.html">Lobby gratuit</a></dd>
+            </dl>
+          </aside>
+        </div>
+
+        <form class="search" role="search" onsubmit="return false">
+          <label for="q"><i class="fa-solid fa-magnifying-glass"></i></label>
+          <input id="q" type="search" autocomplete="off" placeholder="Rechercher : packs, lobby, paiement…" aria-controls="results">
+          <kbd class="mono">/</kbd>
+          <ul class="results" id="results" hidden></ul>
+        </form>
+
+        <div class="stats">
+          <a href="avis.html"><strong>+60</strong><span>clients satisfaits</span></a>
+          <a href="avis.html"><strong>5/5<i class="fa-solid fa-star"></i></strong><span>de moyenne</span></a>
+          <a href="https://discord.gg/sUAdU5v9aD" target="_blank"><strong class="js-members">190+</strong><span>membres Discord</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="guarantee" aria-labelledby="g-title">
+      <div class="wrap">
+        <div class="big">100&nbsp;%</div>
+        <div>
+          <h2 id="g-title">Garantie anti-ban</h2>
+          <p>Banni dans les 7 jours après notre intervention ? On te rembourse à 100 % (dès 26 € dépensés dans la boutique).</p>
+        </div>
+        <a class="btn" href="paiements.html#garanties">Voir les conditions <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </section>
+
+    <section class="block" aria-labelledby="c-title">
+      <div class="wrap">
+        <div class="sec-head"><span class="mono">01</span><h2 class="title" id="c-title">Communauté &amp; soutien</h2></div>
+        <div class="duo">
+          <article class="panel panel-discord">
+            <i class="fa-brands fa-discord bg" aria-hidden="true"></i>
+            <span class="tag mono">Communauté</span>
+            <h3>Serveur Discord</h3>
+            <p>Rejoins-nous sur Discord pour voir les nouveautés à propos du serveur, parler, suggérer ou ouvrir un ticket.</p>
+            <div class="foot">
+              <a class="btn" href="https://discord.gg/sUAdU5v9aD" target="_blank">Rejoindre le Discord <i class="fa-solid fa-arrow-right"></i></a>
+              <span class="members"><span class="js-members">190+</span> membres</span>
+            </div>
+          </article>
+          <article class="panel panel-ig">
+            <img src="img/instant-gaming-icon.png" alt="" width="44" height="44" onerror="this.remove()">
+            <span class="tag mono">Soutien</span>
+            <h3>Instant Gaming</h3>
+            <p>Tu achètes tes jeux sur Instant Gaming ? Passe par mon lien : ça ne te coûte rien de plus et ça soutient 2DKR. Merci à ceux qui l'utilisent !</p>
+            <div class="foot">
+              <a class="btn" href="https://www.instant-gaming.com/fr/?igr=Bydekur" target="_blank" rel="sponsored noopener">Acheter sur Instant Gaming <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+              <span class="aff mono">Lien affilié</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" aria-labelledby="w-title">
+      <div class="wrap">
+        <div class="sec-head"><span class="mono">02</span><h2 class="title" id="w-title">Pourquoi 2DKR</h2></div>
+        <div class="why">
+          <article>
+            <span class="mono">Avantage</span>
+            <h3>Livraison rapide</h3>
+            <p>Prise en charge directe de tes demandes et tickets sur notre Discord dédié.</p>
+          </article>
+          <article>
+            <span class="mono">Sécurité</span>
+            <h3>Fiabilité &amp; support</h3>
+            <p>Un support réactif en français pour t'aider dans la configuration et l'utilisation.</p>
+          </article>
+          <article class="free">
+            <span class="mono">Gratuit</span>
+            <h3>Lobby découverte</h3>
+            <p>Teste 2DKR gratuitement : 6M, niveau 50, 3 véhicules et 3 tenues moddés. À demander par ticket sur le Discord.</p>
+            <a class="inline" href="lobby.html">Voir le lobby gratuit <i class="fa-solid fa-arrow-right"></i></a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" aria-labelledby="f-title">
+      <div class="wrap">
+        <div class="sec-head"><span class="mono">03</span><h2 class="title" id="f-title">Questions</h2></div>
+        <div class="faq">
+          <div class="faq-side">
+            <p>Pas trouvé ta réponse ? Ouvre un ticket sur le Discord, je réponds dès que je suis dispo.</p>
+            <a class="btn btn-discord" href="https://discord.gg/sUAdU5v9aD" target="_blank"><i class="fa-brands fa-discord"></i> Ouvrir un ticket</a>
+          </div>
+          <div>
+            <details>
+              <summary>Comment passer commande ?</summary>
+              <p>Ajoute tes packs ou options au panier sur la page <a href="services.html">Services</a>, valide pour copier ton récapitulatif, puis ouvre un ticket sur le Discord et colle-le.</p>
+            </details>
+            <details>
+              <summary>Quels sont les délais ?</summary>
+              <p>Dès que ta commande est effectuée, je m'y mets tout de suite. Les nouveaux comptes sont livrés en moins de 5 minutes ; pour les packs et options, le délai estimé est affiché sur chaque fiche.</p>
+            </details>
+            <details>
+              <summary>Est-ce que je risque un ban ?</summary>
+              <p>Je teste mes méthodes très régulièrement sur mes propres comptes de test avant de les utiliser sur le tien : je sais exactement ce qu'il faut faire et ne pas faire. Résultat : aucun client banni à ce jour. Et tu restes couvert par la <a href="paiements.html#garanties">garantie anti-ban</a> (remboursé à 100 % sous 7 jours).</p>
+            </details>
+            <details>
+              <summary>Tu as besoin de l'accès à mon compte ?</summary>
+              <p>Oui, le temps de la livraison. Tes identifiants ne sont pas gardés : change ton mot de passe une fois terminé.</p>
+            </details>
+            <details>
+              <summary>Le lobby gratuit, c'est vraiment gratuit ?</summary>
+              <p>Oui : 6M, niveau 50 (ou +50), 3 véhicules et 3 tenues moddés, une fois par compte. À demander par ticket, tous les détails sur la page <a href="lobby.html">Lobby gratuit</a>.</p>
+            </details>
+            <details>
+              <summary>Tu réponds vite ?</summary>
+              <p>2DKR est géré par une seule personne, Dekur. Je réponds dès que je suis dispo, et la commu salue régulièrement ma réactivité et mon écoute (voir <a href="avis.html">Avis &amp; Preuves</a>).</p>
+            </details>
+            <details>
+              <summary>Sur quelles plateformes ?</summary>
+              <p>Pour l'instant, uniquement sur PC.</p>
+            </details>
+            <details>
+              <summary>Comment payer ?</summary>
+              <p>PayPal, crypto (SOL / USDC) ou virement. Prix tout compris, sans frais ajoutés par 2DKR. Tout est expliqué sur <a href="paiements.html">Paiements &amp; garanties</a>.</p>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <footer>
-    &copy; 2026 2DKR by Dekur. All rights reserved.
+    <div class="wrap">
+      <div class="foot-cta">
+        <h2>Prêt ? On se voit<br>sur <em>le Discord.</em></h2>
+        <a class="btn btn-discord" href="https://discord.gg/sUAdU5v9aD" target="_blank"><i class="fa-brands fa-discord"></i> Rejoindre le Discord</a>
+      </div>
+      <div class="foot-row">
+        <a class="logo" href="index.html"><img src="logo-site.svg" alt="2DKR" width="65" height="28"></a>
+        <nav aria-label="Pied de page">
+          <a href="services.html">Services</a>
+          <a href="lobby.html">Lobby gratuit</a>
+          <a href="avis.html">Avis &amp; Preuves</a>
+          <a href="paiements.html">Paiements &amp; garanties</a>
+          <a href="https://www.youtube.com/@Dekur7" target="_blank">YouTube</a>
+        </nav>
+        <span>© 2026 2DKR by Dekur. Tous droits réservés.</span>
+      </div>
+    </div>
   </footer>
 
   <script>
-    (function () {
-      const badge = document.getElementById('version-badge');
-      const dlg = document.getElementById('changelog');
-      if (!badge || !dlg || !dlg.showModal) return;
-      const open = () => { dlg.classList.remove('is-closing'); dlg.showModal(); };
-      // Fermeture en douceur : on joue l'animation de sortie, puis on ferme
-      const fermer = () => {
-        if (!dlg.open || dlg.classList.contains('is-closing')) return;
-        dlg.classList.add('is-closing');
-        setTimeout(() => { dlg.classList.remove('is-closing'); dlg.close(); }, 250);
-      };
-      badge.addEventListener('click', open);
-      badge.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
-      dlg.addEventListener('click', (e) => { if (e.target === dlg) fermer(); });
-      dlg.addEventListener('cancel', (e) => { e.preventDefault(); fermer(); });
-      // Fenêtre ouverte : la page derrière ne bouge plus, et la molette
-      // fait défiler la fenêtre même quand la souris est sur le fond sombre
-      document.addEventListener('wheel', (e) => {
-        if (!dlg.open) return;
-        const r = dlg.getBoundingClientRect();
-        const dedans = e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom;
-        if (!dedans) { e.preventDefault(); dlg.scrollBy({ top: e.deltaY }); }
-      }, { passive: false });
-      new MutationObserver(() => {
-        document.documentElement.style.overflow = dlg.open ? 'hidden' : '';
-      }).observe(dlg, { attributes: true, attributeFilter: ['open'] });
-      dlg.querySelector('.changelog-close').addEventListener('click', fermer);
-    })();
-  </script>
+    // Recherche : index statique des pages du site.
+    const INDEX = [
+      ['Packs & tarifs', 'services.html', 'Services', 'pack bronze argent or platine ultime tarif prix boost argent niveau vehicule tenue option panier commande compte complet simple'],
+      ['Lobby découverte gratuit', 'lobby.html', 'Services', 'lobby gratuit free decouverte essai test offert 6m niveau 50 vehicules tenues'],
+      ['Mod menus', 'modmenus.html', 'Services', 'mod menu menus cherax yari lexis be battleye cle licence vie'],
+      ['Calculateur de prix', 'calculateur.html', 'Services', 'calculateur devis estimation prix sur mesure argent rang'],
+      ['Parrainage & codes promo', 'parrainage.html', 'Offres', 'parrainage parrain filleul code promo reduction bienvenue bienvenue10 remise potes'],
+      ['Avis & Preuves', 'avis.html', 'Confiance', 'avis preuve review client temoignage confiance vouch 5/5'],
+      ['Paiements & garanties', 'paiements.html', 'Paiement', 'paiement frais commission paypal crypto solana sol usdc virement banque payer prix'],
+      ['Garantie anti-ban', 'paiements.html#garanties', 'Paiement', 'garantie ban banni rembourse remboursement 7 jours securite conditions'],
+      ['Serveur Discord', 'https://discord.gg/sUAdU5v9aD', 'Communauté', 'discord communaute ticket support chat'],
+      ['Chaîne YouTube', 'https://www.youtube.com/@Dekur7', 'Communauté', 'youtube video chaine'],
+      ['Instant Gaming', 'https://www.instant-gaming.com/fr/?igr=Bydekur', 'Soutien', 'instant gaming jeu jeux cle key steam soutien affilie acheter'],
+      ['Nouveautés v0.6', '#changelog', 'Site', 'nouveautes changelog version mise a jour maj'],
+    ];
+    if (window.DKR && DKR.promoActive && DKR.promoActive()) INDEX.unshift([DKR.catalogue.promo.titre, 'services.html', 'Promo', 'promo reduction remise soldes']);
+    const norm = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+    const q = document.getElementById('q');
+    const list = document.getElementById('results');
+    let sel = -1;
 
-  <div id="copy-toast" class="toast">
-    <i class="fa-solid fa-check-circle"></i> <span>Adresse du wallet copiée !</span>
-  </div>
-
-  <script>
-    const WALLET_ADDRESS = "HzBYYLgE5aJ9cKG9FmxUv3tZfiMSayd6YdADkVYzQA29";
-
-    // Menu Mobile Burger
-    const menuToggle = document.getElementById('menu-toggle');
-    const navLinks = document.getElementById('nav-links');
-
-    if (menuToggle) {
-      menuToggle.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-      });
-
-      document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', () => {
-          navLinks.classList.remove('active');
-        });
-      });
+    function render() {
+      const terms = norm(q.value).split(/\s+/).filter(Boolean);
+      sel = -1;
+      if (!terms.length) { list.hidden = true; return; }
+      const hits = INDEX.filter(([t, , c, k]) => terms.every(w => norm(t + ' ' + c + ' ' + k).includes(w)));
+      list.innerHTML = hits.length
+        ? hits.map(([t, h, c]) => `<li><a href="${h}"><span>${t}</span><span class="mono">${c}</span></a></li>`).join('')
+        : '<li class="empty">Aucun résultat. Demande sur le Discord.</li>';
+      list.hidden = false;
     }
-
-    // Animation Fluide FAQ (Accordéon Pro)
-    document.querySelectorAll('.faq-item').forEach((el) => {
-      const summary = el.querySelector('summary');
-      const content = el.querySelector('.faq-content-wrapper');
-
-      summary.addEventListener('click', (e) => {
+    q.addEventListener('input', render);
+    q.addEventListener('keydown', e => {
+      const links = [...list.querySelectorAll('a')];
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
         e.preventDefault();
+        if (!links.length) return;
+        sel = (sel + (e.key === 'ArrowDown' ? 1 : -1) + links.length) % links.length;
+        links.forEach((a, i) => a.classList.toggle('on', i === sel));
+      } else if (e.key === 'Enter' && links.length) {
+        links[Math.max(sel, 0)].click();
+      } else if (e.key === 'Escape') {
+        q.value = ''; render(); q.blur();
+      }
+    });
+    document.addEventListener('keydown', e => {
+      const typing = /^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName);
+      if (((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') || (e.key === '/' && !typing)) {
+        e.preventDefault(); q.focus(); q.select();
+      }
+    });
+    document.addEventListener('click', e => {
+      if (!e.target.closest('.search')) list.hidden = true;
+      document.querySelectorAll('details.drop[open], details.burger[open], details.user[open]').forEach(d => { if (!d.contains(e.target)) d.open = false; });
+    });
 
-        if (el.open) {
-          const startHeight = el.offsetHeight;
-          const endHeight = summary.offsetHeight;
+    // Journal des changements : badge de version, lien #changelog
+    window.addEventListener('DOMContentLoaded', function () {
+      const dlg = document.getElementById('changelog');
+      if (!dlg || !dlg.showModal) return;
+      const open = () => { if (!dlg.open) dlg.showModal(); };
+      document.getElementById('version-badge').addEventListener('click', open);
+      dlg.querySelector('.cl-close').addEventListener('click', () => dlg.close());
+      dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
+      document.addEventListener('click', e => {
+        const a = e.target.closest('a[href="#changelog"]');
+        if (a) { e.preventDefault(); list.hidden = true; open(); }
+      });
+      if (location.hash === '#changelog') open();
+    });
 
-          el.classList.remove('is-open');
-
-          const animation = el.animate([
-            { height: `${startHeight}px` },
-            { height: `${endHeight}px` }
-          ], {
-            duration: 300,
-            easing: 'cubic-bezier(0.4, 0, 0.2, 1)'
-          });
-
-          animation.onfinish = () => {
-            el.open = false;
-            el.style.height = '';
-          };
-        } else {
-          el.open = true;
-          el.classList.add('is-open');
-
-          const startHeight = el.offsetHeight - content.offsetHeight;
-          const endHeight = el.offsetHeight;
-
-          el.style.height = `${startHeight}px`;
-
-          const animation = el.animate([
-            { height: `${startHeight}px` },
-            { height: `${endHeight}px` }
-          ], {
-            duration: 300,
-            easing: 'cubic-bezier(0.4, 0, 0.2, 1)'
-          });
-
-          animation.onfinish = () => {
-            el.style.height = '';
-          };
+    // Compte Discord : DKRAuth (assets/nav.js) dit si la connexion est active et qui est connecté
+    window.addEventListener('DOMContentLoaded', function () {
+      if (!window.DKRAuth) return;
+      DKRAuth.surChangement(function (etat) {
+        if (!etat.configured) return;
+        const login = document.getElementById('auth-login');
+        const loginM = document.getElementById('auth-login-m');
+        const user = document.getElementById('auth-user');
+        if (!etat.user) {
+          login.href = loginM.href = DKRAuth.urlConnexion();
+          login.hidden = loginM.hidden = false;
+          return;
         }
+        user.querySelector('img').src = etat.user.avatar;
+        user.querySelector('.pseudo').textContent = etat.user.nom;
+        user.querySelector('.info').textContent = etat.user.verifie ? 'Client vérifié ✓' : 'Connecté avec Discord';
+        user.querySelector('.logout').addEventListener('click', DKRAuth.deconnexion);
+        user.hidden = false;
       });
     });
 
-    // Copie Adresse Crypto
-    function copyCryptoAddress(event) {
-      if (event) event.stopPropagation();
-
-      const handleSuccess = () => {
-        const btnCrypto = document.getElementById("btn-crypto");
-        const originalContent = btnCrypto.innerHTML;
-
-        btnCrypto.innerHTML = '<i class="fa-solid fa-check"></i> <span>Copié !</span>';
-        const toast = document.getElementById("copy-toast");
-        toast.classList.add("show");
-
-        setTimeout(() => {
-          toast.classList.remove("show");
-          btnCrypto.innerHTML = originalContent;
-        }, 3000);
-      };
-
-      if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(WALLET_ADDRESS).then(handleSuccess).catch(err => {
-          console.error("Erreur lors de la copie : ", err);
-        });
-      } else {
-        const textarea = document.createElement("textarea");
-        textarea.value = WALLET_ADDRESS;
-        textarea.style.position = "fixed";
-        textarea.style.opacity = "0";
-        document.body.appendChild(textarea);
-        textarea.focus();
-        textarea.select();
-        try {
-          document.execCommand('copy');
-          handleSuccess();
-        } catch (err) {
-          console.error('Erreur fallback copie : ', err);
-        }
-        document.body.removeChild(textarea);
-      }
-    }
-
-    /* ===== v0.3.4 ===== */
-
-    // --- Thème (bleu / dark or)
-    (function () {
-      const root = document.documentElement;
-      const saved = localStorage.getItem('2dkr-theme') || 'blue';
-      const meta = document.querySelector('meta[name="theme-color"]');
-      const btn = document.getElementById('theme-toggle');
-
-      function apply(t, animate) {
-        root.setAttribute('data-theme', t);
-        if (meta) meta.setAttribute('content', t === 'gold' ? '#f0b94c' : '#38bdf8');
-        if (btn) btn.innerHTML = t === 'gold'
-          ? '<i class="fa-solid fa-crown"></i>'
-          : '<i class="fa-solid fa-moon"></i>';
-        if (animate && btn) {
-          btn.animate([{ transform: 'rotate(0) scale(1)' }, { transform: 'rotate(360deg) scale(1.15)' }, { transform: 'rotate(360deg) scale(1)' }], { duration: 480, easing: 'cubic-bezier(0.22,1,0.36,1)' });
-        }
-      }
-      apply(saved, false);
-      if (btn) btn.addEventListener('click', () => {
-        const next = root.getAttribute('data-theme') === 'gold' ? 'blue' : 'gold';
-        localStorage.setItem('2dkr-theme', next);
-        apply(next, true);
-      });
-    })();
-
-    // --- Index global du site (toutes les pages)
-    const SITE_INDEX = [
-      { t: 'Serveur Discord', s: 'Rejoindre la communauté 2DKR', u: 'https://discord.gg/sUAdU5v9aD', p: 'Accueil', k: 'discord communaute ticket support chat' },
-      { t: 'Paiements & garanties', s: 'PayPal, crypto, virement et frais', u: 'paiements.html', p: 'Paiements', k: 'paiement paiements frais commission paypal crypto solana virement banque carte argent' },
-      { t: 'Garanties', s: 'Garantie anti-ban : remboursé si ban sous 7 jours', u: 'paiements.html#garanties', p: 'Paiements', k: 'garantie garanties ban banni rembourse remboursement securite conditions' },
-      { t: 'Lobby découverte gratuit', s: '6M, niveau 50, 3 véhicules et 3 tenues moddés', u: 'lobby.html', p: 'Lobby', k: 'lobby gratuit free decouverte essai test offert' },
-      { t: 'Parrainage', s: '5 potes parrainés = -5 % à vie, et -5 % pour tes potes', u: 'parrainage.html', p: 'Parrainage', k: 'parrainage parrain filleul code promo reduction bienvenue bienvenue10 remise' },
-      { t: 'Mod menus', s: 'Cherax, Yari et Lexis (BE, à vie)', u: 'modmenus.html', p: 'Mod menus', k: 'mod menu menus cherax yari lexis be battleye cle licence lifetime vie injecter' },
-      { t: 'Instant Gaming', s: 'Achète tes jeux via mon lien et soutiens 2DKR', u: 'https://www.instant-gaming.com/fr/?igr=Bydekur', p: 'Accueil', k: 'instant gaming jeu jeux cle key steam pc soutien affilie acheter' },
-      { t: 'Pack Bronze', s: 'Pack d\'entrée lobby moddé', u: 'services.html', p: 'Services', k: 'pack bronze tarif prix lobby gta' },
-      { t: 'Pack Argent', s: 'Pack intermédiaire', u: 'services.html', p: 'Services', k: 'pack argent silver tarif prix lobby' },
-      { t: 'Pack Or', s: 'Pack avancé', u: 'services.html', p: 'Services', k: 'pack or gold tarif prix lobby' },
-      { t: 'Pack Platine', s: 'Pack haut de gamme', u: 'services.html', p: 'Services', k: 'pack platine platinum tarif prix lobby' },
-      { t: 'Pack Ultime', s: 'Le pack le plus complet', u: 'services.html', p: 'Services', k: 'pack ultime ultimate max tarif prix' },
-      { t: 'Compte Complet', s: 'Compte GTA Online prêt à jouer', u: 'services.html', p: 'Services', k: 'compte complet account gta rank argent' },
-      { t: 'Option Compte Simple', s: 'Formule compte allégée', u: 'services.html', p: 'Services', k: 'compte simple option account' },
-      ...(window.DKR && DKR.promoActive() ? [{ t: DKR.catalogue.promo.titre, s: 'Réduction en cours sur le catalogue', u: 'services.html', p: 'Services', k: 'promo reduction remise soldes' }] : []),
-      { t: 'Calculateur de prix', s: 'Estime ton pack sur mesure', u: 'calculateur.html', p: 'Calculateur', k: 'calculateur devis estimation prix sur mesure argent rang' },
-      { t: 'Avis & Preuves clients', s: 'Retours et preuves en direct', u: 'avis.html', p: 'Avis', k: 'avis preuve review client temoignage confiance vouch' }
-    ];
-
-    const QUICK = [
-      { t: 'Aller à l\'accueil', u: 'index.html', i: 'fa-house', k: 'accueil home index' },
-      { t: 'Voir les services & tarifs', u: 'services.html', i: 'fa-tags', k: 'service tarif prix pack catalogue' },
-      { t: 'Ouvrir le calculateur', u: 'calculateur.html', i: 'fa-calculator', k: 'calculateur devis estimation' },
-      { t: 'Voir les avis & preuves', u: 'avis.html', i: 'fa-star', k: 'avis preuve review' },
-      { t: 'Rejoindre le Discord', u: 'https://discord.gg/sUAdU5v9aD', i: 'fa-brands fa-discord', k: 'discord ticket support' },
-      { t: 'Chaîne YouTube', u: 'https://www.youtube.com/@Dekur7', i: 'fa-brands fa-youtube', k: 'youtube video chaine' },
-      { t: 'Paiements & garanties', u: 'paiements.html', i: 'fa-wallet', k: 'paiement frais paypal crypto virement' },
-      { t: 'Garanties', u: 'paiements.html#garanties', i: 'fa-shield-halved', k: 'garantie ban rembourse' },
-      { t: 'Parrainage et codes promo', u: 'parrainage.html', i: 'fa-handshake', k: 'parrainage code promo bienvenue' },
-      { t: 'Changer de thème (bleu / dark or)', u: '#theme', i: 'fa-palette', k: 'theme couleur dark or bleu mode' }
-    ];
-
-    const norm = (s) => (s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-
-    // --- Palette de commandes (Ctrl+K)
-    // Lancée une fois la page chargée : la fenêtre de recherche est placée après ce script
-    document.addEventListener('DOMContentLoaded', function () {
-      const overlay = document.getElementById('cmdk-overlay');
-      const input = document.getElementById('cmdk-input');
-      const list = document.getElementById('cmdk-list');
-      if (!overlay) return;
-      let items = [], sel = 0;
-
-      function render(q) {
-        const nq = norm(q);
-        const quick = QUICK.filter(o => !nq || norm(o.t + ' ' + o.k).includes(nq));
-        const pages = SITE_INDEX.filter(o => !nq || norm(o.t + ' ' + o.s + ' ' + o.k + ' ' + o.p).includes(nq));
-        items = [];
-        let html = '';
-        if (quick.length) {
-          html += '<div class="cmdk-group">Commandes rapides</div>';
-          quick.forEach(o => {
-            items.push(o.u);
-            html += '<div class="cmdk-item" data-u="' + o.u + '"><i class="fa-solid ' + o.i + '"></i><span class="cmdk-title">' + o.t + '</span></div>';
-          });
-        }
-        if (pages.length) {
-          html += '<div class="cmdk-group">Dans le site</div>';
-          pages.forEach(o => {
-            items.push(o.u);
-            html += '<div class="cmdk-item" data-u="' + o.u + '"><i class="fa-solid fa-arrow-right-long"></i><span><span class="cmdk-title">' + o.t + '</span><br><span class="cmdk-sub">' + o.s + '</span></span><span class="cmdk-tag">' + o.p + '</span></div>';
-          });
-        }
-        list.innerHTML = html || '<div class="cmdk-empty">Aucun résultat pour « ' + q +' »</div>';
-        sel = 0; mark();
-        list.querySelectorAll('.cmdk-item').forEach((el, idx) => {
-          el.addEventListener('mouseenter', () => { sel = idx; mark(); });
-          el.addEventListener('click', () => go(el.dataset.u));
-        });
-      }
-      function mark() {
-        list.querySelectorAll('.cmdk-item').forEach((el, idx) => el.classList.toggle('sel', idx === sel));
-        const cur = list.querySelector('.cmdk-item.sel');
-        if (cur) cur.scrollIntoView({ block: 'nearest' });
-      }
-      function go(u) {
-        if (u === '#theme') { close(); document.getElementById('theme-toggle').click(); return; }
-        if (u.startsWith('http')) window.open(u, '_blank', 'noopener');
-        else window.location.href = u;
-      }
-      function open() { overlay.classList.add('open'); input.value = ''; render(''); setTimeout(() => input.focus(), 40); }
-      function close() { overlay.classList.remove('open'); }
-
-      input.addEventListener('input', () => render(input.value));
-      input.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowDown') { e.preventDefault(); sel = Math.min(sel + 1, items.length - 1); mark(); }
-        else if (e.key === 'ArrowUp') { e.preventDefault(); sel = Math.max(sel - 1, 0); mark(); }
-        else if (e.key === 'Enter') { e.preventDefault(); if (items[sel]) go(items[sel]); }
-      });
-      overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
-      document.addEventListener('keydown', (e) => {
-        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); overlay.classList.contains('open') ? close() : open(); }
-        // « / » : ouvre aussi la recherche (sauf si on est en train d'écrire dans un champ)
-        else if (e.key === '/' && !e.ctrlKey && !e.metaKey && !e.altKey && !/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName) && !document.activeElement.isContentEditable && !overlay.classList.contains('open')) { e.preventDefault(); open(); }
-        else if (e.key === 'Escape') close();
-      });
-      window.openCmdk = open;
-      const fab = document.getElementById('cmdk-fab');
-      if (fab) fab.addEventListener('click', open);
-    });
-
-    // --- Chips de filtre + recherche globale
-    (function () {
-      const chips = document.querySelectorAll('.chip[data-cat]');
-      const cards = Array.from(document.querySelectorAll('.card.searchable'));
-      const input = document.getElementById('search-input');
-      let cat = 'all';
-
-      function refresh() {
-        const q = norm(input ? input.value : '');
-        let shown = 0;
-        cards.forEach(card => {
-          const okCat = cat === 'all' || card.dataset.cat === cat;
-          const okQ = !q || norm(card.textContent).includes(q);
-          const show = okCat && okQ;
-          if (show && card.classList.contains('is-hidden')) {
-            card.classList.remove('is-hidden');
-            card.classList.add('is-enter');
-            requestAnimationFrame(() => requestAnimationFrame(() => card.classList.remove('is-enter')));
-          } else if (!show) {
-            card.classList.add('is-hidden');
-          }
-          if (show) shown++;
-        });
-        suggest(q, shown);
-      }
-
-      // Si rien sur cette page, propose les résultats des autres pages
-      function suggest(q, shown) {
-        let box = document.getElementById('cross-results');
-        if (!q || q.length < 2 || shown > 0) { if (box) box.remove(); return; }
-        const hits = SITE_INDEX.filter(o => norm(o.t + ' ' + o.s + ' ' + o.k + ' ' + o.p).includes(q)).slice(0, 5);
-        if (!box) {
-          box = document.createElement('div');
-          box.id = 'cross-results';
-          box.className = 'cmdk';
-          box.style.cssText = 'max-width:620px;margin:22px auto 0;box-shadow:none;';
-          document.querySelector('.chips').after(box);
-        }
-        box.innerHTML = hits.length
-          ? '<div class="cmdk-group">Trouvé ailleurs sur le site</div>' + hits.map(o =>
-              '<a class="cmdk-item" href="' + o.u + '"><i class="fa-solid fa-arrow-right-long"></i><span><span class="cmdk-title">' + o.t + '</span><br><span class="cmdk-sub">' + o.s + '</span></span><span class="cmdk-tag">' + o.p + '</span></a>').join('')
-          : '<div class="cmdk-empty">Aucun résultat sur le site. <a href="https://discord.gg/sUAdU5v9aD" target="_blank" rel="noopener" style="color:var(--accent-blue)">Demande sur le Discord</a></div>';
-      }
-
-      // Les boutons ne cachent plus rien : ils font défiler jusqu'à la catégorie et la mettent en avant
-      function highlight(c) {
-        const on = c !== 'all';
-        let first = null;
-        cards.forEach(card => {
-          const match = on && (card.dataset.cat || '').split(' ').includes(c);
-          card.classList.toggle('is-focus', match);
-          card.classList.toggle('is-dim', on && !match);
-          DKRAnim.fade(card, on && !match ? 0.35 : 1);
-          if (match && !first && !card.classList.contains('is-hidden')) first = card;
-        });
-        if (first) DKRAnim.scrollTo(first.getBoundingClientRect().top + window.scrollY - 170, function () {
-          cards.forEach(card => { if (card.classList.contains('is-focus')) DKRAnim.pulse(card); });
-        });
-      }
-
-      chips.forEach(chip => chip.addEventListener('click', () => {
-        chips.forEach(c => c.classList.remove('active'));
-        chip.classList.add('active');
-        highlight(chip.dataset.cat);
-      }));
-
-      if (input) {
-        input.addEventListener('input', refresh);
-        input.addEventListener('keydown', (e) => { if (e.key === 'Enter' && window.openCmdk) { window.openCmdk(); } });
-      }
-    })();
-  </script>
-
-
-  <div class="cmdk-overlay" id="cmdk-overlay" role="dialog" aria-modal="true" aria-label="Commandes rapides">
-    <div class="cmdk">
-      <div class="cmdk-head">
-        <i class="fa-solid fa-terminal"></i>
-        <input type="text" id="cmdk-input" placeholder="Tape une commande, une page, un service..." autocomplete="off">
-        <span class="kbd">ESC</span>
-      </div>
-      <div class="cmdk-list" id="cmdk-list"></div>
-    </div>
-  </div>
-  <button class="cmdk-fab" id="cmdk-fab" title="Commandes rapides" aria-label="Commandes rapides"><i class="fa-solid fa-terminal"></i></button>
-  <script>
-    // FAQ : afficher / masquer les questions en plus
-    (function () {
-      var btn = document.getElementById('faq-toggle'), more = document.getElementById('faq-more');
-      if (!btn || !more) return;
-      var busy = false;
-      var ease = 'cubic-bezier(0.2, 0.8, 0.2, 1)';
-      btn.addEventListener('click', function () {
-        if (busy) return;
-        var open = more.hidden;
-        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-        btn.querySelector('span').textContent = open ? 'Voir moins' : 'Voir les autres questions';
-        if (!more.animate) { more.hidden = !open; return; }
-        busy = true;
-        var items = more.querySelectorAll('.faq-item');
-        if (open) {
-          // Ouverture : la zone se déplie, puis les questions arrivent une par une
-          more.hidden = false;
-          var h = more.scrollHeight;
-          more.style.overflow = 'hidden';
-          more.animate([{ height: '0px', opacity: 0 }, { height: h + 'px', opacity: 1 }], { duration: 420, easing: ease })
-            .onfinish = function () { more.style.overflow = ''; busy = false; };
-          items.forEach(function (it, i) {
-            it.animate([{ opacity: 0, transform: 'translateY(-10px)' }, { opacity: 1, transform: 'none' }],
-              { duration: 360, delay: 60 * i, easing: ease, fill: 'backwards' });
-          });
-        } else {
-          // Fermeture : les questions s'effacent, puis la zone se replie
-          var h2 = more.scrollHeight;
-          more.style.overflow = 'hidden';
-          items.forEach(function (it, i) {
-            it.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(-8px)' }],
-              { duration: 220, delay: 40 * (items.length - 1 - i), easing: 'ease-in', fill: 'forwards' });
-          });
-          more.animate([{ height: h2 + 'px', opacity: 1 }, { height: '0px', opacity: 0 }], { duration: 380, delay: 120, easing: ease, fill: 'forwards' })
-            .onfinish = function () {
-              more.hidden = true;
-              more.style.overflow = '';
-              more.getAnimations({ subtree: true }).forEach(function (a) { a.cancel(); });
-              busy = false;
-            };
-        }
-      });
-    })();
-  </script>
-  <script>
-    // Nombre de membres Discord en direct, sans les bots (sinon on garde « 130+ »).
+    // Nombre de membres Discord en direct, sans les bots (sinon on garde « 190+ »).
     // BOTS = nombre de bots sur le serveur : à changer si tu en ajoutes ou en retires un.
     var BOTS = 7;
     fetch('https://discord.com/api/v10/invites/sUAdU5v9aD?with_counts=true')
       .then(function (r) { return r.ok ? r.json() : null; })
-      .then(function (j) { if (j && j.approximate_member_count) document.getElementById('discord-members').textContent = j.approximate_member_count - BOTS; })
+      .then(function (j) {
+        if (j && j.approximate_member_count) document.querySelectorAll('.js-members').forEach(function (el) { el.textContent = j.approximate_member_count - BOTS; });
+      })
       .catch(function () {});
   </script>
+
+  <dialog class="changelog" id="changelog" aria-labelledby="cl-title">
+    <div class="cl-head">
+      <h2 id="cl-title">Nouveautés <em>v0.6</em></h2>
+      <button type="button" class="cl-close" aria-label="Fermer"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="cl-body">
+      <h3 class="mono">v0.6 — Nouvel accueil</h3>
+      <ul>
+        <li><strong>Accueil refait de zéro</strong> : nouveau style plus net, grands titres façon affiche, fini l'effet verre et les halos.</li>
+        <li><strong>Fiche « En bref »</strong> : statut, plateforme, délai de livraison, paiements et lobby gratuit d'un coup d'œil.</li>
+        <li><strong>Garantie anti-ban en grand</strong> : remboursé à 100 % si ban sous 7 jours, mise en avant dans un bandeau dédié.</li>
+        <li><strong>FAQ complète</strong> : les 8 questions sont visibles direct, plus besoin de « Voir les autres questions ».</li>
+        <li><strong>Recherche plus rapide</strong> : les résultats s'affichent sous la barre pendant que tu tapes, avec les flèches et Entrée. <strong>Ctrl + K</strong> ou <strong>/</strong> pour chercher.</li>
+        <li><strong>Menu téléphone refait</strong> : toutes les pages et la connexion Discord dans un seul menu.</li>
+        <li><strong>Compteur Discord en direct</strong> partout sur l'accueil.</li>
+        <li><strong>Thème</strong> : l'accueil passe en thème sombre unique. Le thème dark or reste sur les autres pages.</li>
+      </ul>
+      <h3 class="mono">v0.5</h3>
+      <ul>
+        <li><strong>Nouvelle interface, deux thèmes</strong> : un thème sobre en bleu et un thème néon noir et or.</li>
+        <li><strong>Nouveau logo</strong> : « 2DKR » incliné, aussi sur le serveur Discord et le bot.</li>
+        <li><strong>Connexion avec Discord</strong> : un bouton « Se connecter » dans le menu, sans mot de passe.</li>
+        <li><strong>Codes protégés</strong> : un code de 1re commande est lié à ton compte Discord. Il ne marche qu'une fois, et pas si tu as déjà le rôle Client Vérifié.</li>
+        <li><strong>Ticket plus clair</strong> : connecté, ton pseudo Discord est ajouté au récapitulatif de commande.</li>
+      </ul>
+      <h3 class="mono">v0.4.7</h3>
+      <ul>
+        <li><strong>Accueil plus clair</strong> : deux gros boutons sous le titre, « Voir les services » et « Rejoindre le Discord ».</li>
+        <li><strong>Moins d'encombrement</strong> : les filtres et l'astuce clavier de l'accueil sont retirés, la recherche reste là.</li>
+        <li><strong>Instant Gaming</strong> : le logo officiel remplace l'ancienne icône sur la carte.</li>
+      </ul>
+      <h3 class="mono">v0.4.6</h3>
+      <ul>
+        <li><strong>Mod menus</strong> : nouvelle page avec Cherax, Yari et Lexis (BE, à vie), ajout direct au panier.</li>
+        <li><strong>Barre code promo</strong> en haut de la page Services.</li>
+        <li><strong>Corrections</strong> : nouveau lien Discord, compteur de membres réparé, messages du code promo plus clairs.</li>
+      </ul>
+      <h3 class="mono">v0.4.5</h3>
+      <ul>
+        <li><strong>Parrainage</strong> : ramène 5 potes (15 € dépensés chacun) et gagne -5 % à vie. Tes potes ont -5 % sur leur 1re commande.</li>
+        <li><strong>Codes promo</strong> dans le panier et le calculateur, et le code <strong>BIENVENUE10</strong> (-10 % dès 10 €).</li>
+      </ul>
+      <h3 class="mono">v0.4.4 — v0.4.0</h3>
+      <ul>
+        <li><strong>FAQ, page 404</strong>, interface téléphone, lobby découverte gratuit, garantie anti-ban, page Paiements, tableau comparatif des packs, preuves Discord, panier commun, promos automatiques et aperçus de liens.</li>
+      </ul>
+      <p class="old mono">v0.3.4 — thèmes bleu / dark or, filtres, recherche et commandes rapides.</p>
+    </div>
+  </dialog>
 </body>
 </html>
