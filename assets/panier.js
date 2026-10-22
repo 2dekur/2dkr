@@ -211,7 +211,7 @@
     // Texte à coller dans le ticket Discord
     recap: function (articles) {
       articles = articles || panier;
-      var lignes = ['🛒 Commande 2DKR', ''];
+      var lignes = ['🛒 Commande DekurMods', ''];
       // Compte Discord connecté : le ticket indique tout de suite qui commande et son statut
       var compte = window.DKRAuth && DKRAuth.etat().user;
       if (compte) lignes.push('Discord : ' + compte.nom + (compte.verifie ? ' (Client vérifié)' : ''), '');

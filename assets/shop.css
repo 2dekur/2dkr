@@ -269,7 +269,7 @@
     .foot-row { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; padding: 28px 0; border-top: 1px solid var(--line); color: var(--muted); font-size: .95rem; }
     .foot-row nav { display: flex; flex-wrap: wrap; gap: 22px; }
     .foot-row a:hover { color: var(--paper); }
-    .wordmark { font: 900 clamp(8rem, 33vw, 30rem)/.74 var(--display); font-stretch: 62%; font-style: italic; letter-spacing: -.05em; color: var(--ink-2); text-align: center; white-space: nowrap; user-select: none; margin-bottom: -.1em; -webkit-text-stroke: 1px var(--line); }
+    .wordmark { font: 900 clamp(4rem, 17vw, 16rem)/.74 var(--display); font-stretch: 62%; font-style: italic; letter-spacing: -.05em; color: var(--ink-2); text-align: center; white-space: nowrap; user-select: none; margin-bottom: -.1em; -webkit-text-stroke: 1px var(--line); }
 
     /* apparition au défilement */
     .rv { opacity: 0; transform: translateY(28px); transition: opacity .7s cubic-bezier(.2, .7, .2, 1), transform .7s cubic-bezier(.2, .7, .2, 1); }

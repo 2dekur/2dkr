@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://2dkr.pages.dev/sitemap.xml
+Sitemap: https://dekurmods.com/sitemap.xml
