@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>2DKR — Site officiel de Dekur</title>
   <meta name="description" content="Espace officiel 2DKR by Dekur : communauté Discord, services GTA Online, offres et moyens de paiement.">
-  <meta name="theme-color" content="#0c0d0f">
+  <meta name="theme-color" content="#0a0a0b">
   <meta property="og:title" content="2DKR — Espace Officiel De Dekur">
   <meta property="og:description" content="Retrouve tous nos boosts GTA Online, véhicules moddés, tenues et packs sur mesure.">
   <meta property="og:type" content="website">
@@ -24,339 +24,34 @@
   <script src="assets/nav.js" defer></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,800;1,800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    :root {
-      --ink: #0c0d0f;
-      --ink-2: #131518;
-      --ink-3: #1b1e22;
-      --line: #282c32;
-      --paper: #efece6;
-      --muted: #9b9a94;
-      --accent: #38bdf8;
-      --ok: #3ddc84;
-      --discord: #5865f2;
-      --display: 'Barlow Condensed', Impact, sans-serif;
-      --body: 'Barlow', system-ui, sans-serif;
-      --mono: 'JetBrains Mono', ui-monospace, monospace;
-      --wrap: 1200px;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--ink);
-      color: var(--paper);
-      font: 400 1.0625rem/1.6 var(--body);
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-    }
-    a { color: inherit; text-decoration: none; }
-    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-    .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 24px; }
-    .mono { font-family: var(--mono); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; }
-
-    /* ---------- barre de statut ---------- */
-    .status {
-      border-bottom: 1px solid var(--line);
-      color: var(--muted);
-    }
-    .status .wrap { display: flex; gap: 24px; align-items: center; height: 34px; overflow-x: auto; white-space: nowrap; scrollbar-width: none; }
-    .status .wrap::-webkit-scrollbar { display: none; }
-    .status a:hover { color: var(--paper); }
-    .dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--ok); margin-right: 8px; vertical-align: 1px; box-shadow: 0 0 0 3px rgba(61, 220, 132, .15); }
-
-    /* ---------- nav ---------- */
-    header.nav {
-      position: sticky; top: 0; z-index: 50;
-      background: rgba(12, 13, 15, .92);
-      border-bottom: 1px solid var(--line);
-    }
-    @supports (backdrop-filter: blur(1px)) { header.nav { background: rgba(12, 13, 15, .8); backdrop-filter: blur(10px); } }
-    header.nav .wrap { display: flex; align-items: center; gap: 32px; height: 68px; }
-    .logo { display: block; line-height: 0; }
-    .logo img { height: 28px; width: auto; }
-    .status button.ver { background: none; border: 0; color: inherit; font: inherit; letter-spacing: inherit; text-transform: inherit; cursor: pointer; }
-    .status button.ver:hover { color: var(--accent); }
-    .status button.ver b { color: var(--accent); font-weight: 500; }
-
-    /* compte Discord (rempli par DKRAuth, assets/nav.js) */
-    .auth[hidden] { display: none; }
-    .user { position: relative; }
-    .user summary { list-style: none; display: flex; align-items: center; gap: 10px; height: 40px; padding: 0 12px; border: 1px solid var(--line); cursor: pointer; font-weight: 600; font-size: .9rem; }
-    .user summary::-webkit-details-marker { display: none; }
-    .user img { width: 24px; height: 24px; border-radius: 50%; }
-    .user .drop-menu { left: auto; right: 0; }
-    .user .drop-menu span { display: block; padding: 10px 12px; color: var(--ok); font-family: var(--mono); font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; }
-    .user .drop-menu button { width: 100%; text-align: left; background: none; border: 0; color: var(--paper); font: 500 .95rem var(--body); padding: 10px 12px; cursor: pointer; }
-    .user .drop-menu button:hover { background: var(--ink-3); }
-    .dkr-flash {
-      position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 20px); z-index: 200;
-      background: var(--paper); color: var(--ink); padding: 12px 18px; font-weight: 600;
-      opacity: 0; transition: opacity .3s, transform .3s;
-    }
-    .dkr-flash.show { opacity: 1; transform: translate(-50%, 0); }
-
-    /* changelog */
-    .changelog {
-      margin: auto; width: min(640px, calc(100% - 32px)); max-height: calc(100vh - 48px);
-      background: var(--ink-2); color: var(--paper); border: 1px solid var(--line); padding: 0;
-    }
-    .changelog::backdrop { background: rgba(0, 0, 0, .75); }
-    .cl-head { position: sticky; top: 0; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 20px 24px; background: var(--ink-2); border-bottom: 1px solid var(--line); }
-    .cl-head h2 { font: 800 2rem/1 var(--display); text-transform: uppercase; }
-    .cl-head h2 em { font-style: normal; color: var(--accent); }
-    .cl-close { width: 40px; height: 40px; background: none; border: 1px solid var(--line); color: var(--paper); cursor: pointer; font-size: 1rem; }
-    .cl-close:hover { border-color: var(--paper); }
-    .cl-body { padding: 8px 24px 28px; }
-    .cl-body h3 { margin: 24px 0 10px; color: var(--muted); }
-    .cl-body h3:first-child { color: var(--accent); }
-    .cl-body ul { list-style: none; display: grid; gap: 10px; }
-    .cl-body li { padding-left: 18px; position: relative; color: #c9c7c0; font-size: .95rem; }
-    .cl-body li::before { content: ""; position: absolute; left: 0; top: .65em; width: 8px; height: 1px; background: var(--muted); }
-    .cl-body li strong { color: var(--paper); font-weight: 600; }
-    .cl-body .old { margin-top: 24px; color: var(--muted); font-size: .9rem; }
-    .links { display: flex; gap: 4px; margin-right: auto; }
-    .links > a, .links summary {
-      display: block; padding: 8px 12px;
-      font-weight: 500; font-size: .95rem; color: var(--muted);
-      cursor: pointer; list-style: none; transition: color .15s; white-space: nowrap;
-    }
-    .links summary::-webkit-details-marker { display: none; }
-    .links > a:hover, .links summary:hover, .links a[aria-current] { color: var(--paper); }
-    .links summary i { font-size: .65rem; margin-left: 4px; }
-    .drop { position: relative; }
-    .drop-menu {
-      position: absolute; top: calc(100% + 10px); left: 0; min-width: 220px;
-      background: var(--ink-2); border: 1px solid var(--line); padding: 6px;
-    }
-    .drop-menu a { display: flex; justify-content: space-between; padding: 10px 12px; font-size: .95rem; }
-    .drop-menu a:hover { background: var(--ink-3); }
-    .drop-menu small { color: var(--ok); font-family: var(--mono); font-size: .7rem; }
-    .nav-end { display: flex; align-items: center; gap: 8px; }
-    .icon-btn { width: 40px; height: 40px; display: grid; place-items: center; color: var(--muted); transition: color .15s; }
-    .icon-btn:hover { color: var(--paper); }
-
-    /* ---------- boutons ---------- */
-    .btn {
-      display: inline-flex; align-items: center; gap: 10px;
-      height: 52px; padding: 0 22px;
-      font: 600 1rem/1 var(--body);
-      border: 1px solid var(--line); background: var(--ink-2);
-      cursor: pointer; transition: background .15s, border-color .15s, transform .15s;
-    }
-    .btn:hover { border-color: var(--paper); }
-    .btn:active { transform: translateY(1px); }
-    .btn-primary { background: var(--paper); color: var(--ink); border-color: var(--paper); }
-    .btn-primary:hover { background: #fff; }
-    .btn-discord { background: var(--discord); border-color: var(--discord); color: #fff; }
-    .btn-discord:hover { background: #4752e0; border-color: #4752e0; }
-    .btn-sm { height: 40px; padding: 0 14px; font-size: .9rem; }
-    .btn .fa-arrow-right { transition: transform .15s; }
-    .btn:hover .fa-arrow-right { transform: translateX(3px); }
-
-    /* ---------- hero ---------- */
-    .hero { padding: 72px 0 0; }
-    .hero-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 56px; align-items: end; }
-    .kicker { color: var(--accent); margin-bottom: 20px; }
-    h1 {
-      font: 800 clamp(4rem, 11vw, 9.5rem)/.86 var(--display);
-      text-transform: uppercase; letter-spacing: -.02em;
-    }
-    h1 em { font-style: italic; color: var(--accent); }
-    .lede { max-width: 30em; margin: 28px 0 32px; color: #c9c7c0; font-size: 1.15rem; }
-    .ctas { display: flex; flex-wrap: wrap; gap: 12px; }
-
-    .sheet { border: 1px solid var(--line); background: var(--ink-2); }
-    .sheet-head { display: flex; justify-content: space-between; padding: 14px 18px; border-bottom: 1px solid var(--line); color: var(--muted); }
-    .sheet dl { display: grid; grid-template-columns: auto 1fr; }
-    .sheet dt, .sheet dd { padding: 14px 18px; border-bottom: 1px solid var(--line); }
-    .sheet dt { color: var(--muted); }
-    .sheet dd { text-align: right; font-weight: 500; }
-    .sheet dl > :nth-last-child(-n+2) { border-bottom: 0; }
-    .sheet dd a { border-bottom: 1px solid var(--line); transition: border-color .15s; }
-    .sheet dd a:hover { border-color: var(--accent); }
-
-    /* recherche */
-    .search { position: relative; margin-top: 56px; }
-    .search label { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
-    .search input {
-      width: 100%; height: 60px; padding: 0 64px 0 52px;
-      background: transparent; border: 1px solid var(--line); color: var(--paper);
-      font: 500 1.05rem var(--body);
-      transition: border-color .15s;
-    }
-    .search input::placeholder { color: #6d6c67; }
-    .search input:focus { outline: none; border-color: var(--accent); }
-    .search kbd { position: absolute; right: 18px; top: 50%; transform: translateY(-50%); color: var(--muted); border: 1px solid var(--line); padding: 2px 7px; }
-    .results {
-      position: absolute; top: 100%; left: 0; right: 0; z-index: 20;
-      background: var(--ink-2); border: 1px solid var(--accent); border-top: 0;
-      list-style: none;
-    }
-    .results a { display: flex; justify-content: space-between; gap: 16px; padding: 14px 20px; }
-    .results a:hover, .results a.on { background: var(--ink-3); }
-    .results span:last-child { color: var(--muted); }
-    .results .empty { padding: 14px 20px; color: var(--muted); }
-
-    /* chiffres */
-    .stats { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 72px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-    .stats a { padding: 28px 24px; border-left: 1px solid var(--line); transition: background .15s; }
-    .stats a:first-child { border-left: 0; padding-left: 0; }
-    .stats a:hover { background: var(--ink-2); }
-    .stats strong { display: block; font: 800 clamp(2.6rem, 6vw, 4.5rem)/1 var(--display); }
-    .stats strong i { font-size: .45em; color: #f5c84b; vertical-align: .55em; margin-left: 6px; }
-    .stats span { color: var(--muted); }
-
-    /* ---------- garantie ---------- */
-    .guarantee { margin-top: 96px; background: var(--ok); color: #06140c; }
-    .guarantee .wrap { display: grid; grid-template-columns: auto 1fr auto; gap: 40px; align-items: center; padding-top: 40px; padding-bottom: 40px; }
-    .guarantee .big { font: 800 clamp(4.5rem, 10vw, 7.5rem)/.8 var(--display); letter-spacing: -.03em; }
-    .guarantee h2 { font: 800 2rem/1 var(--display); text-transform: uppercase; margin-bottom: 8px; }
-    .guarantee p { max-width: 36em; font-weight: 500; }
-    .guarantee .btn { background: #06140c; color: var(--ok); border-color: #06140c; }
-    .guarantee .btn:hover { background: #000; }
-
-    /* ---------- sections ---------- */
-    section.block { padding: 112px 0 0; }
-    .sec-head { display: flex; align-items: baseline; gap: 20px; padding-bottom: 20px; margin-bottom: 40px; border-bottom: 1px solid var(--line); }
-    .sec-head .mono { color: var(--accent); }
-    h2.title { font: 800 clamp(2.4rem, 5vw, 3.6rem)/1 var(--display); text-transform: uppercase; letter-spacing: -.01em; }
-
-    .duo { display: grid; grid-template-columns: 1.2fr 1fr; gap: 24px; }
-    .panel { padding: 36px; border: 1px solid var(--line); display: flex; flex-direction: column; gap: 16px; min-height: 340px; }
-    .panel h3 { font: 800 2.4rem/1 var(--display); text-transform: uppercase; }
-    .panel p { color: #c9c7c0; max-width: 32em; }
-    .panel .tag { opacity: .75; }
-    .panel .foot { margin-top: auto; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
-    .panel-discord { background: var(--discord); border-color: var(--discord); color: #fff; position: relative; overflow: hidden; }
-    .panel-discord p { color: rgba(255, 255, 255, .88); }
-    .panel-discord .fa-discord.bg { position: absolute; right: -40px; bottom: -60px; font-size: 18rem; opacity: .12; pointer-events: none; }
-    .panel-discord .btn { background: #fff; color: #1e2299; border-color: #fff; }
-    .panel-discord .members { font-family: var(--mono); font-size: .8rem; }
-    .panel-ig img { width: 44px; height: 44px; }
-    .aff { color: var(--muted); }
-
-    .why { display: grid; grid-template-columns: repeat(3, 1fr); counter-reset: why; }
-    .why article { padding: 0 32px 0 0; counter-increment: why; }
-    .why article + article { padding-left: 32px; border-left: 1px solid var(--line); }
-    .why article::before {
-      content: "0" counter(why);
-      display: block; font: 800 4rem/1 var(--display); color: var(--ink-3);
-      -webkit-text-stroke: 1px var(--line); margin-bottom: 20px;
-    }
-    .why .mono { color: var(--muted); }
-    .why h3 { font: 800 1.9rem/1.05 var(--display); text-transform: uppercase; margin: 6px 0 12px; }
-    .why p { color: #c9c7c0; }
-    .why .free h3 { color: var(--ok); }
-    .why a.inline { display: inline-flex; gap: 8px; align-items: center; margin-top: 16px; font-weight: 600; color: var(--ok); }
-
-    /* FAQ */
-    .faq { display: grid; grid-template-columns: 1fr 2fr; gap: 56px; }
-    .faq-side p { color: var(--muted); margin: 16px 0 24px; }
-    .faq details { border-bottom: 1px solid var(--line); }
-    .faq details:first-child { border-top: 1px solid var(--line); }
-    .faq summary {
-      display: flex; justify-content: space-between; gap: 24px; align-items: center;
-      padding: 22px 0; cursor: pointer; list-style: none;
-      font-weight: 600; font-size: 1.15rem; transition: color .15s;
-    }
-    .faq summary::-webkit-details-marker { display: none; }
-    .faq summary:hover { color: var(--accent); }
-    .faq summary::after { content: "+"; font: 500 1.6rem/1 var(--mono); color: var(--muted); transition: transform .2s; }
-    .faq details[open] summary::after { transform: rotate(45deg); color: var(--accent); }
-    .faq details p { padding: 0 48px 24px 0; color: #c9c7c0; }
-    .faq details p a { color: var(--paper); border-bottom: 1px solid var(--accent); }
-
-    /* ---------- footer ---------- */
-    footer { margin-top: 128px; border-top: 1px solid var(--line); }
-    .foot-cta { padding: 72px 0; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: end; gap: 32px; flex-wrap: wrap; }
-    .foot-cta h2 { font: 800 clamp(2.8rem, 7vw, 5.5rem)/.9 var(--display); text-transform: uppercase; }
-    .foot-cta h2 em { color: var(--accent); }
-    .foot-row { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; padding: 28px 0 40px; color: var(--muted); font-size: .95rem; }
-    .foot-row nav { display: flex; flex-wrap: wrap; gap: 20px; }
-    .foot-row a:hover { color: var(--paper); }
-
-    /* ---------- mobile ---------- */
-    .burger { display: none; }
-    .btn { white-space: nowrap; }
-    @media (max-width: 1080px) {
-      .links, .nav-end .icon-btn, .nav-end .login-label { display: none; }
-      .burger { display: block; margin-left: auto; }
-      .burger summary { list-style: none; cursor: pointer; }
-      .burger summary::-webkit-details-marker { display: none; }
-      .burger-menu {
-        position: absolute; left: 0; right: 0; top: 68px;
-        background: var(--ink); border-bottom: 1px solid var(--line);
-        padding: 8px 24px 24px; max-height: calc(100vh - 68px); overflow-y: auto;
-      }
-      .burger-menu a { display: block; padding: 14px 0; border-bottom: 1px solid var(--line); font-weight: 500; }
-      .burger-menu .sub { padding-left: 16px; color: var(--muted); }
-      .burger-menu .socials { display: flex; gap: 20px; padding-top: 20px; font-size: 1.3rem; }
-      .burger-menu .socials a { border: 0; padding: 0; }
-      header.nav .wrap { gap: 12px; }
-
-      .hero-grid { grid-template-columns: 1fr; gap: 40px; }
-      .guarantee .wrap { grid-template-columns: 1fr; gap: 20px; }
-      .duo { grid-template-columns: 1fr; }
-      .why { grid-template-columns: 1fr; gap: 40px; }
-      .why article, .why article + article { padding: 0; border: 0; }
-      .why article + article { padding-top: 40px; border-top: 1px solid var(--line); }
-      .faq { grid-template-columns: 1fr; gap: 24px; }
-    }
-    @media (max-width: 560px) {
-      .wrap { padding: 0 16px; }
-      .hero { padding-top: 48px; }
-      .stats { grid-template-columns: 1fr; }
-      .stats a { border-left: 0; border-top: 1px solid var(--line); padding: 20px 0; display: flex; align-items: baseline; gap: 16px; }
-      .stats a:first-child { border-top: 0; }
-      .ctas .btn { flex: 1 1 100%; justify-content: center; }
-      .panel { padding: 24px; min-height: 0; }
-      .search kbd { display: none; }
-      .search input { padding-right: 16px; }
-      .faq details p { padding-right: 0; }
-      section.block { padding-top: 80px; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      * { transition: none !important; }
-    }
-  </style>
+  <link rel="stylesheet" href="assets/shop.css">
 </head>
 <body>
 
   <div class="status mono">
     <div class="wrap">
       <span><i class="dot"></i>Services opérationnels</span>
-      <button type="button" class="ver" id="version-badge" aria-haspopup="dialog"><b>v0.6</b> — Nouveautés</button>
+      <button type="button" class="ver" id="version-badge" aria-haspopup="dialog"><b>v0.7</b> — Nouveautés</button>
       <span>PC uniquement</span>
       <span>PayPal · SOL / USDC · Virement</span>
     </div>
   </div>
 
-  <header class="nav">
+    <header class="nav">
     <div class="wrap">
       <a class="logo" href="index.html" aria-label="2DKR — Accueil"><img src="logo-site.svg" alt="2DKR" width="65" height="28"></a>
 
       <nav class="links" aria-label="Navigation principale">
-        <a href="index.html" aria-current="page">Accueil</a>
-        <details class="drop">
-          <summary>Services <i class="fa-solid fa-chevron-down"></i></summary>
-          <div class="drop-menu">
-            <a href="services.html">Packs &amp; tarifs</a>
-            <a href="lobby.html">Lobby gratuit <small>0 €</small></a>
-            <a href="modmenus.html">Mod menus</a>
-            <a href="calculateur.html">Calculateur</a>
-          </div>
-        </details>
-        <a href="parrainage.html">Parrainage</a>
+        <a href="#boutique">Boutique</a>
+        <a href="#commande">Comment ça marche</a>
         <a href="avis.html">Avis &amp; Preuves</a>
-        <a href="paiements.html">Paiements &amp; garanties</a>
+        <a href="paiements.html">Paiements</a>
+        <a href="#faq">FAQ</a>
       </nav>
 
       <div class="nav-end">
-        <a class="icon-btn" href="https://www.youtube.com/@Dekur7" target="_blank" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
         <a class="icon-btn" href="https://discord.gg/sUAdU5v9aD" target="_blank" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
         <a class="btn btn-sm auth" id="auth-login" href="/api/auth/login?retour=%2F" hidden><i class="fa-brands fa-discord"></i><span class="login-label">Se connecter</span></a>
         <details class="user auth" id="auth-user" hidden>
@@ -366,24 +61,20 @@
             <button type="button" class="logout"><i class="fa-solid fa-right-from-bracket"></i> Se déconnecter</button>
           </div>
         </details>
+        <button type="button" class="cart-btn" id="cart-open" aria-label="Ouvrir le panier"><i class="fa-solid fa-cart-shopping"></i><span class="cart-count" id="cart-count" hidden>0</span></button>
       </div>
 
       <details class="burger">
         <summary class="icon-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></summary>
         <nav class="burger-menu" aria-label="Menu mobile">
-          <a href="index.html">Accueil</a>
-          <a href="services.html">Services</a>
-          <a class="sub" href="services.html">Packs &amp; tarifs</a>
-          <a class="sub" href="lobby.html">Lobby gratuit — 0 €</a>
-          <a class="sub" href="modmenus.html">Mod menus</a>
-          <a class="sub" href="calculateur.html">Calculateur</a>
-          <a href="parrainage.html">Parrainage</a>
+          <a href="#boutique">Boutique</a>
+          <a href="#commande">Comment ça marche</a>
           <a href="avis.html">Avis &amp; Preuves</a>
-          <a href="paiements.html">Paiements &amp; garanties</a>
+          <a href="paiements.html">Paiements</a>
+          <a href="#faq">FAQ</a>
           <a class="auth" id="auth-login-m" href="/api/auth/login?retour=%2F" hidden><i class="fa-brands fa-discord"></i> Se connecter avec Discord</a>
           <div class="socials">
             <a href="https://discord.gg/sUAdU5v9aD" target="_blank" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
-            <a href="https://www.youtube.com/@Dekur7" target="_blank" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
           </div>
         </nav>
       </details>
@@ -392,149 +83,157 @@
 
   <main>
     <section class="hero">
+      <div class="slashes" aria-hidden="true"><i></i><i></i><i></i></div>
       <div class="wrap">
         <div class="hero-grid">
           <div>
-            <p class="kicker mono">Site officiel · by Dekur</p>
-            <h1>L'espace<br><em>2DKR</em></h1>
-            <p class="lede">Retrouve tous les accès à la communauté, aux services et aux moyens de paiement.</p>
-            <div class="ctas">
-              <a class="btn btn-primary" href="services.html">Voir les services <i class="fa-solid fa-arrow-right"></i></a>
+            <p class="kicker mono rv" style="--i:0">Revendeur · GTA V · PC</p>
+            <h1 class="rv" style="--i:1"><span>Les</span><em>Mod<br>menus</em></h1>
+            <p class="lede rv" style="--i:2">Cherax, Yari, Lexis… Achète ton menu via 2DKR : clé livrée dans ton ticket Discord, assistance à l'installation en option.</p>
+            <div class="ctas rv" style="--i:3">
+              <a class="btn btn-primary" href="#boutique">Voir les menus <i class="fa-solid fa-arrow-right"></i></a>
               <a class="btn btn-discord" href="https://discord.gg/sUAdU5v9aD" target="_blank"><i class="fa-brands fa-discord"></i> Rejoindre le Discord</a>
             </div>
           </div>
 
-          <aside class="sheet" aria-label="En bref">
+          <aside class="sheet rv" style="--i:4" aria-label="En bref">
             <div class="sheet-head mono"><span>En bref</span><span>2DKR</span></div>
             <dl>
-              <dt>Statut</dt><dd><i class="dot"></i>Opérationnel</dd>
-              <dt>Géré par</dt><dd>Dekur, en solo</dd>
-              <dt>Plateforme</dt><dd>PC</dd>
-              <dt>Livraison compte</dt><dd>&lt; 5 min</dd>
+              <dt>Jeu</dt><dd>GTA V · PC</dd>
+              <dt>Menus</dt><dd class="js-menu-names">—</dd>
+              <dt>Livraison</dt><dd>Clé dans ton ticket</dd>
+              <dt>Assistance</dt><dd>En option, <span class="js-assist-prix"></span></dd>
               <dt>Paiement</dt><dd><a href="paiements.html">PayPal, crypto, virement</a></dd>
-              <dt>Essai</dt><dd><a href="lobby.html">Lobby gratuit</a></dd>
+              <dt>Géré par</dt><dd>Dekur, en solo</dd>
             </dl>
           </aside>
         </div>
 
-        <form class="search" role="search" onsubmit="return false">
-          <label for="q"><i class="fa-solid fa-magnifying-glass"></i></label>
-          <input id="q" type="search" autocomplete="off" placeholder="Rechercher : packs, lobby, paiement…" aria-controls="results">
-          <kbd class="mono">/</kbd>
-          <ul class="results" id="results" hidden></ul>
-        </form>
-
-        <div class="stats">
-          <a href="avis.html"><strong>+60</strong><span>clients satisfaits</span></a>
-          <a href="avis.html"><strong>5/5<i class="fa-solid fa-star"></i></strong><span>de moyenne</span></a>
+        <div class="stats rv">
+          <a href="#boutique"><strong id="stat-menus">3</strong><span>menus disponibles</span></a>
+          <a href="avis.html"><strong>5/5<i class="fa-solid fa-star"></i></strong><span>de moyenne, avis sur Discord</span></a>
           <a href="https://discord.gg/sUAdU5v9aD" target="_blank"><strong class="js-members">190+</strong><span>membres Discord</span></a>
         </div>
       </div>
     </section>
 
-    <section class="guarantee" aria-labelledby="g-title">
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track" id="marquee"></div>
+    </div>
+
+    <section class="block" id="boutique" aria-labelledby="b-title">
       <div class="wrap">
-        <div class="big">100&nbsp;%</div>
-        <div>
-          <h2 id="g-title">Garantie anti-ban</h2>
-          <p>Banni dans les 7 jours après notre intervention ? On te rembourse à 100 % (dès 26 € dépensés dans la boutique).</p>
+        <div class="sec-head rv"><span class="n">01</span><h2 class="title" id="b-title">La boutique</h2></div>
+        <div class="shop-bar rv">
+          <div class="chips" id="chips" role="group" aria-label="Filtrer les menus">
+            <button type="button" class="chip on" data-f="tous">Tous</button>
+            <button type="button" class="chip" data-f="vie">À vie</button>
+            <button type="button" class="chip" data-f="be">BE</button>
+          </div>
+          <span class="mono shop-note">TVA selon ton pays · PC uniquement</span>
         </div>
-        <a class="btn" href="paiements.html#garanties">Voir les conditions <i class="fa-solid fa-arrow-right"></i></a>
+        <div class="menus" id="menus-grid"></div>
       </div>
     </section>
 
-    <section class="block" aria-labelledby="c-title">
+    <section class="block" id="commande" aria-labelledby="w-title">
       <div class="wrap">
-        <div class="sec-head"><span class="mono">01</span><h2 class="title" id="c-title">Communauté &amp; soutien</h2></div>
-        <div class="duo">
+        <div class="sec-head rv"><span class="n">02</span><h2 class="title" id="w-title">Comment ça marche</h2></div>
+        <div class="why rv">
+          <article>
+            <span class="mono">Étape 1</span>
+            <h3>Ajoute ton menu</h3>
+            <p>Mets-le au panier et choisis si tu veux l'assistance à l'installation (oui ou non), puis copie le récapitulatif.</p>
+          </article>
+          <article>
+            <span class="mono">Étape 2</span>
+            <h3>Ouvre un ticket et paie</h3>
+            <p>Colle le récap dans un ticket sur le Discord. Paiement par PayPal, crypto (SOL / USDC) ou virement.</p>
+          </article>
+          <article class="free">
+            <span class="mono">Étape 3</span>
+            <h3>Reçois ta clé</h3>
+            <p>Clé livrée dans ton ticket. Si tu as pris l'assistance (<span class="js-assist-prix"></span>), je t'aide à l'installer, en vocal si besoin.</p>
+          </article>
+        </div>
+
+        <div class="note rv">
+          <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
+          <div>
+            <h3>À savoir avant d'acheter</h3>
+            <ul>
+              <li>Utiliser un mod menu comporte un <strong>risque de ban</strong> sur GTA Online. 2DKR ne peut pas être tenu responsable d'une sanction de Rockstar.</li>
+              <li>Il n'y a pas de garantie anti-ban sur les mod menus.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" aria-labelledby="a-title">
+      <div class="wrap">
+        <div class="sec-head rv"><span class="n">03</span><h2 class="title" id="a-title">Avis clients</h2></div>
+        <div class="duo rv">
+          <article class="panel panel-ig quote">
+            <span class="tag mono">JD · 18/09/2026 · Menu &amp; Lobby</span>
+            <div class="stars" aria-label="5 étoiles sur 5"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+            <p class="q">« Allez-y les yeux fermés. Pour menu ou lobby, 10/10 parfait. »</p>
+            <div class="foot"><a class="btn" href="avis.html">Tous les avis &amp; preuves <i class="fa-solid fa-arrow-right"></i></a></div>
+          </article>
           <article class="panel panel-discord">
             <i class="fa-brands fa-discord bg" aria-hidden="true"></i>
             <span class="tag mono">Communauté</span>
             <h3>Serveur Discord</h3>
-            <p>Rejoins-nous sur Discord pour voir les nouveautés à propos du serveur, parler, suggérer ou ouvrir un ticket.</p>
+            <p>Nouveautés, suggestions, tickets : tout se passe là.</p>
             <div class="foot">
-              <a class="btn" href="https://discord.gg/sUAdU5v9aD" target="_blank">Rejoindre le Discord <i class="fa-solid fa-arrow-right"></i></a>
+              <a class="btn" href="https://discord.gg/sUAdU5v9aD" target="_blank">Rejoindre <i class="fa-solid fa-arrow-right"></i></a>
               <span class="members"><span class="js-members">190+</span> membres</span>
             </div>
           </article>
-          <article class="panel panel-ig">
-            <img src="img/instant-gaming-icon.png" alt="" width="44" height="44" onerror="this.remove()">
-            <span class="tag mono">Soutien</span>
-            <h3>Instant Gaming</h3>
-            <p>Tu achètes tes jeux sur Instant Gaming ? Passe par mon lien : ça ne te coûte rien de plus et ça soutient 2DKR. Merci à ceux qui l'utilisent !</p>
-            <div class="foot">
-              <a class="btn" href="https://www.instant-gaming.com/fr/?igr=Bydekur" target="_blank" rel="sponsored noopener">Acheter sur Instant Gaming <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-              <span class="aff mono">Lien affilié</span>
-            </div>
-          </article>
         </div>
       </div>
     </section>
 
-    <section class="block" aria-labelledby="w-title">
+    <section class="block" id="faq" aria-labelledby="f-title">
       <div class="wrap">
-        <div class="sec-head"><span class="mono">02</span><h2 class="title" id="w-title">Pourquoi 2DKR</h2></div>
-        <div class="why">
-          <article>
-            <span class="mono">Avantage</span>
-            <h3>Livraison rapide</h3>
-            <p>Prise en charge directe de tes demandes et tickets sur notre Discord dédié.</p>
-          </article>
-          <article>
-            <span class="mono">Sécurité</span>
-            <h3>Fiabilité &amp; support</h3>
-            <p>Un support réactif en français pour t'aider dans la configuration et l'utilisation.</p>
-          </article>
-          <article class="free">
-            <span class="mono">Gratuit</span>
-            <h3>Lobby découverte</h3>
-            <p>Teste 2DKR gratuitement : 6M, niveau 50, 3 véhicules et 3 tenues moddés. À demander par ticket sur le Discord.</p>
-            <a class="inline" href="lobby.html">Voir le lobby gratuit <i class="fa-solid fa-arrow-right"></i></a>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="block" aria-labelledby="f-title">
-      <div class="wrap">
-        <div class="sec-head"><span class="mono">03</span><h2 class="title" id="f-title">Questions</h2></div>
-        <div class="faq">
+        <div class="sec-head rv"><span class="n">04</span><h2 class="title" id="f-title">Questions</h2></div>
+        <div class="faq rv">
           <div class="faq-side">
             <p>Pas trouvé ta réponse ? Ouvre un ticket sur le Discord, je réponds dès que je suis dispo.</p>
             <a class="btn btn-discord" href="https://discord.gg/sUAdU5v9aD" target="_blank"><i class="fa-brands fa-discord"></i> Ouvrir un ticket</a>
           </div>
           <div>
             <details>
-              <summary>Comment passer commande ?</summary>
-              <p>Ajoute tes packs ou options au panier sur la page <a href="services.html">Services</a>, valide pour copier ton récapitulatif, puis ouvre un ticket sur le Discord et colle-le.</p>
+              <summary>Comment acheter un menu ?</summary>
+              <p>Ajoute-le au panier, copie le récapitulatif, ouvre un ticket sur le Discord et colle-le. Tu paies, puis tu reçois ta clé dans le ticket.</p>
             </details>
             <details>
               <summary>Quels sont les délais ?</summary>
-              <p>Dès que ta commande est effectuée, je m'y mets tout de suite. Les nouveaux comptes sont livrés en moins de 5 minutes ; pour les packs et options, le délai estimé est affiché sur chaque fiche.</p>
+              <p>Dès que ta commande est effectuée, je m'y mets tout de suite. La clé est livrée directement dans ton ticket.</p>
             </details>
             <details>
               <summary>Est-ce que je risque un ban ?</summary>
-              <p>Je teste mes méthodes très régulièrement sur mes propres comptes de test avant de les utiliser sur le tien : je sais exactement ce qu'il faut faire et ne pas faire. Résultat : aucun client banni à ce jour. Et tu restes couvert par la <a href="paiements.html#garanties">garantie anti-ban</a> (remboursé à 100 % sous 7 jours).</p>
+              <p>Oui, utiliser un mod menu comporte toujours un risque sur GTA Online. 2DKR ne peut pas être tenu responsable d'une sanction de Rockstar, et il n'y a pas de garantie anti-ban sur les menus.</p>
             </details>
             <details>
-              <summary>Tu as besoin de l'accès à mon compte ?</summary>
-              <p>Oui, le temps de la livraison. Tes identifiants ne sont pas gardés : change ton mot de passe une fois terminé.</p>
-            </details>
-            <details>
-              <summary>Le lobby gratuit, c'est vraiment gratuit ?</summary>
-              <p>Oui : 6M, niveau 50 (ou +50), 3 véhicules et 3 tenues moddés, une fois par compte. À demander par ticket, tous les détails sur la page <a href="lobby.html">Lobby gratuit</a>.</p>
-            </details>
-            <details>
-              <summary>Tu réponds vite ?</summary>
-              <p>2DKR est géré par une seule personne, Dekur. Je réponds dès que je suis dispo, et la commu salue régulièrement ma réactivité et mon écoute (voir <a href="avis.html">Avis &amp; Preuves</a>).</p>
+              <summary>Tu m'aides pour l'installation ?</summary>
+              <p>Oui, en option : dans le panier tu choisis oui (<span class="js-assist-prix"></span>) ou non. Avec l'assistance, je t'aide à installer et configurer ton menu, en vocal si besoin.</p>
             </details>
             <details>
               <summary>Sur quelles plateformes ?</summary>
               <p>Pour l'instant, uniquement sur PC.</p>
             </details>
             <details>
+              <summary>Il y a de la TVA ?</summary>
+              <p>La TVA dépend de ton pays, détecté automatiquement : elle s'affiche sur sa propre ligne (par exemple 20 % pour la France). Aucun frais n'est ajouté en plus.</p>
+            </details>
+            <details>
               <summary>Comment payer ?</summary>
-              <p>PayPal, crypto (SOL / USDC) ou virement. Prix tout compris, sans frais ajoutés par 2DKR. Tout est expliqué sur <a href="paiements.html">Paiements &amp; garanties</a>.</p>
+              <p>PayPal, crypto (SOL / USDC) ou virement. Tout est expliqué sur <a href="paiements.html">Paiements</a>.</p>
+            </details>
+            <details>
+              <summary>Tu as le menu que je cherche ?</summary>
+              <p>Demande-moi dans ton ticket, je te le propose.</p>
             </details>
           </div>
         </div>
@@ -551,168 +250,233 @@
       <div class="foot-row">
         <a class="logo" href="index.html"><img src="logo-site.svg" alt="2DKR" width="65" height="28"></a>
         <nav aria-label="Pied de page">
-          <a href="services.html">Services</a>
-          <a href="lobby.html">Lobby gratuit</a>
+          <a href="#boutique">Boutique</a>
           <a href="avis.html">Avis &amp; Preuves</a>
-          <a href="paiements.html">Paiements &amp; garanties</a>
-          <a href="https://www.youtube.com/@Dekur7" target="_blank">YouTube</a>
+          <a href="paiements.html">Paiements</a>
         </nav>
         <span>© 2026 2DKR by Dekur. Tous droits réservés.</span>
       </div>
     </div>
+    <div class="wordmark" aria-hidden="true">2DKR</div>
   </footer>
 
+  <!-- panier -->
+  <div class="cart-veil" id="cart-veil" hidden></div>
+  <aside class="cart" id="cart" aria-label="Panier" aria-hidden="true">
+    <div class="cart-head">
+      <h2>Panier</h2>
+      <button type="button" class="cl-close" id="cart-close" aria-label="Fermer le panier"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <ul class="cart-list" id="cart-list"></ul>
+    <p class="cart-empty" id="cart-empty">Ton panier est vide.</p>
+    <div class="cart-foot" id="cart-foot">
+      <fieldset class="assist" id="assist">
+        <legend>Assistance à l'installation <span class="req">obligatoire</span></legend>
+        <p>Je t'aide à installer et configurer ton menu, en vocal si besoin.</p>
+        <label class="opt"><input type="radio" name="assist" value="oui"><span>Oui, avec assistance <b>+<span class="js-assist-prix"></span></b></span></label>
+        <label class="opt"><input type="radio" name="assist" value="non"><span>Non, je m'en occupe</span></label>
+      </fieldset>
+      <p class="cart-pays" id="cart-pays">Pays détecté : …</p>
+      <div class="cart-lines" id="cart-lines"></div>
+      <div class="cart-total"><span>Total</span><strong id="cart-total">0€</strong></div>
+      <button type="button" class="btn btn-primary" id="cart-copy" disabled><i class="fa-regular fa-copy"></i> Copier le récap &amp; ouvrir un ticket</button>
+      <p class="cart-need" id="cart-need">Choisis l'assistance (oui ou non) pour continuer.</p>
+      <button type="button" class="cart-clear" id="cart-clear">Vider le panier</button>
+      <p class="cart-hint">Colle le récap dans un ticket sur le Discord. Tu paies là-bas, puis tu reçois ta clé.</p>
+    </div>
+  </aside>
+
+  <script src="assets/panier.js"></script>
   <script>
-    // Recherche : index statique des pages du site.
-    const INDEX = [
-      ['Packs & tarifs', 'services.html', 'Services', 'pack bronze argent or platine ultime tarif prix boost argent niveau vehicule tenue option panier commande compte complet simple'],
-      ['Lobby découverte gratuit', 'lobby.html', 'Services', 'lobby gratuit free decouverte essai test offert 6m niveau 50 vehicules tenues'],
-      ['Mod menus', 'modmenus.html', 'Services', 'mod menu menus cherax yari lexis be battleye cle licence vie'],
-      ['Calculateur de prix', 'calculateur.html', 'Services', 'calculateur devis estimation prix sur mesure argent rang'],
-      ['Parrainage & codes promo', 'parrainage.html', 'Offres', 'parrainage parrain filleul code promo reduction bienvenue bienvenue10 remise potes'],
-      ['Avis & Preuves', 'avis.html', 'Confiance', 'avis preuve review client temoignage confiance vouch 5/5'],
-      ['Paiements & garanties', 'paiements.html', 'Paiement', 'paiement frais commission paypal crypto solana sol usdc virement banque payer prix'],
-      ['Garantie anti-ban', 'paiements.html#garanties', 'Paiement', 'garantie ban banni rembourse remboursement 7 jours securite conditions'],
-      ['Serveur Discord', 'https://discord.gg/sUAdU5v9aD', 'Communauté', 'discord communaute ticket support chat'],
-      ['Chaîne YouTube', 'https://www.youtube.com/@Dekur7', 'Communauté', 'youtube video chaine'],
-      ['Instant Gaming', 'https://www.instant-gaming.com/fr/?igr=Bydekur', 'Soutien', 'instant gaming jeu jeux cle key steam soutien affilie acheter'],
-      ['Nouveautés v0.6', '#changelog', 'Site', 'nouveautes changelog version mise a jour maj'],
-    ];
-    if (window.DKR && DKR.promoActive && DKR.promoActive()) INDEX.unshift([DKR.catalogue.promo.titre, 'services.html', 'Promo', 'promo reduction remise soldes']);
-    const norm = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
-    const q = document.getElementById('q');
-    const list = document.getElementById('results');
-    let sel = -1;
+    (function () {
+      const $ = s => document.querySelector(s);
+      const menus = (DKR.catalogue.menus || []);
 
-    function render() {
-      const terms = norm(q.value).split(/\s+/).filter(Boolean);
-      sel = -1;
-      if (!terms.length) { list.hidden = true; return; }
-      const hits = INDEX.filter(([t, , c, k]) => terms.every(w => norm(t + ' ' + c + ' ' + k).includes(w)));
-      list.innerHTML = hits.length
-        ? hits.map(([t, h, c]) => `<li><a href="${h}"><span>${t}</span><span class="mono">${c}</span></a></li>`).join('')
-        : '<li class="empty">Aucun résultat. Demande sur le Discord.</li>';
-      list.hidden = false;
-    }
-    q.addEventListener('input', render);
-    q.addEventListener('keydown', e => {
-      const links = [...list.querySelectorAll('a')];
-      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
-        e.preventDefault();
-        if (!links.length) return;
-        sel = (sel + (e.key === 'ArrowDown' ? 1 : -1) + links.length) % links.length;
-        links.forEach((a, i) => a.classList.toggle('on', i === sel));
-      } else if (e.key === 'Enter' && links.length) {
-        links[Math.max(sel, 0)].click();
-      } else if (e.key === 'Escape') {
-        q.value = ''; render(); q.blur();
-      }
-    });
-    document.addEventListener('keydown', e => {
-      const typing = /^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName);
-      if (((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') || (e.key === '/' && !typing)) {
-        e.preventDefault(); q.focus(); q.select();
-      }
-    });
-    document.addEventListener('click', e => {
-      if (!e.target.closest('.search')) list.hidden = true;
-      document.querySelectorAll('details.drop[open], details.burger[open], details.user[open]').forEach(d => { if (!d.contains(e.target)) d.open = false; });
-    });
+      // --- groupes de menus (Cherax Standard + Premium = une carte)
+      const groupes = [];
+      menus.forEach(m => {
+        let g = groupes.find(x => x.nom === m.menu);
+        if (!g) { g = { nom: m.menu, be: !!m.be, vie: !!m.vie, items: [] }; groupes.push(g); }
+        g.items.push(m);
+      });
 
-    // Journal des changements : badge de version, lien #changelog
-    window.addEventListener('DOMContentLoaded', function () {
-      const dlg = document.getElementById('changelog');
-      if (!dlg || !dlg.showModal) return;
-      const open = () => { if (!dlg.open) dlg.showModal(); };
-      document.getElementById('version-badge').addEventListener('click', open);
-      dlg.querySelector('.cl-close').addEventListener('click', () => dlg.close());
-      dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
+      const ASSIST = (DKR.catalogue.assistance || {}).prix || 0;
+      document.querySelectorAll('.js-assist-prix').forEach(e => e.textContent = DKR.euros(ASSIST));
+      $('#stat-menus').textContent = groupes.length;
+      $('.js-menu-names').textContent = groupes.map(g => g.nom).join(', ');
+
+      // bandeau défilant (deux fois la liste, pour boucler sans saut)
+      const mots = groupes.map(g => g.nom).concat(['Clé dans ton ticket', 'Support FR', 'PC']);
+      const ligne = () => '<p>' + [].concat(mots, mots, mots).map(t => '<span>' + t + '</span><b></b>').join('') + '</p>';
+      $('#marquee').innerHTML = ligne() + ligne();
+
+      // --- boutique
+      const grid = $('#menus-grid');
+      function carte(g) {
+        const dessous = g.items.length > 1 ? 'dès ' + DKR.euros(Math.min.apply(null, g.items.map(i => i.prix))) : '';
+        return '<article class="mcard" data-vie="' + g.vie + '" data-be="' + g.be + '">' +
+          '<div class="mc-top"><h3>' + g.nom + '</h3><div class="badges">' +
+            (g.be ? '<span class="bd">BE</span>' : '') + (g.vie ? '<span class="bd ok">À vie</span>' : '') + '</div></div>' +
+          '<p class="mc-sub mono">' + (g.vie ? 'Licence à vie' : (dessous || 'Licence')) + '</p>' +
+          '<ul class="mc-rows">' + g.items.map(m =>
+            '<li><span>' + (m.formule || 'Licence') + '</span><b>' + DKR.euros(m.prix) + '</b>' +
+            '<button type="button" class="add" data-add="' + m.id + '" aria-label="Ajouter ' + m.nom + ' au panier"><i class="fa-solid fa-cart-plus"></i> Ajouter</button></li>').join('') +
+          '</ul></article>';
+      }
+      grid.innerHTML = groupes.map(carte).join('') +
+        '<article class="mcard mc-other"><div class="mc-top"><h3>Un autre menu&nbsp;?</h3></div><p class="mc-sub mono">Sur demande</p>' +
+        '<p class="mc-text">Demande-moi dans ton ticket, je te le propose.</p>' +
+        '<a class="btn btn-sm" href="https://discord.gg/sUAdU5v9aD" target="_blank">Demander</a></article>';
+
+      $('#chips').addEventListener('click', e => {
+        const b = e.target.closest('.chip'); if (!b) return;
+        document.querySelectorAll('.chip').forEach(c => c.classList.toggle('on', c === b));
+        const f = b.dataset.f;
+        grid.querySelectorAll('.mcard').forEach(c => {
+          c.hidden = f !== 'tous' && (c.classList.contains('mc-other') || c.dataset[f] !== 'true');
+        });
+      });
+
+      // --- panier
+      const cart = $('#cart'), veil = $('#cart-veil');
+      function ouvrir(o) {
+        cart.classList.toggle('open', o); cart.setAttribute('aria-hidden', !o);
+        veil.hidden = !o; document.body.style.overflow = o ? 'hidden' : '';
+        if (o) $('#cart-close').focus();
+      }
+      $('#cart-open').addEventListener('click', () => ouvrir(true));
+      $('#cart-close').addEventListener('click', () => ouvrir(false));
+      veil.addEventListener('click', () => ouvrir(false));
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') ouvrir(false); });
+
+      grid.addEventListener('click', e => {
+        const b = e.target.closest('[data-add]'); if (!b) return;
+        DKRPanier.ajouter(b.dataset.add);
+        ouvrir(true);
+      });
+
+      function choix() { const r = document.querySelector('[name=assist]:checked'); return r ? r.value : null; }
+      const TAXES = (DKR.catalogue.taxes || { libelle: 'TVA', pays: [] });
+      let pays = null;
+      const finPays = p => { pays = p; $('#cart-pays').textContent = 'Pays détecté : ' + p.nom + ' · ' + TAXES.libelle + ' ' + p.taux + ' %'; majTotal(); };
+      const parCode = code => TAXES.pays.find(x => x.code === code) || TAXES.autre;
+      const ctl = new AbortController(); setTimeout(() => ctl.abort(), 4000);
+      fetch('/api/pays', { signal: ctl.signal, cache: 'no-store' })
+        .then(r => r.ok ? r.json() : null)
+        .then(j => finPays(j && j.pays ? parCode(j.pays) : TAXES.defaut))
+        .catch(() => finPays(TAXES.defaut));
+      const arrondi = n => Math.round(n * 100) / 100;
+      function calcul() {
+        const liste = DKRPanier.liste(), p = pays;
+        const sous = DKRPanier.total(liste), ass = choix() === 'oui' ? ASSIST : 0;
+        const ht = arrondi(sous + ass), taux = p ? p.taux : 0, tva = arrondi(ht * taux / 100);
+        return { sous, ass, ht, taux, tva, total: arrondi(ht + tva), p };
+      }
+      function majTotal() {
+        const k = calcul();
+        let l = '<div><span>Sous-total</span><span>' + DKR.euros(k.sous) + '</span></div>';
+        if (k.ass) l += '<div><span>Assistance installation</span><span>' + DKR.euros(k.ass) + '</span></div>';
+        if (k.p && k.taux) l += '<div><span>' + TAXES.libelle + ' ' + k.taux + ' % (' + k.p.nom + ')</span><span>' + DKR.euros(k.tva) + '</span></div>';
+        $('#cart-lines').innerHTML = l;
+        $('#cart-total').textContent = DKR.euros(k.total);
+        const ok = !!choix() && !!k.p;
+        $('#cart-copy').disabled = !ok;
+        $('#cart-need').hidden = ok;
+      }
+      DKRPanier.surChangement(liste => {
+        const n = $('#cart-count'); n.textContent = liste.length; n.hidden = !liste.length;
+        $('#cart-empty').hidden = !!liste.length; $('#cart-foot').hidden = !liste.length;
+        $('#cart-list').innerHTML = liste.map((a, i) =>
+          '<li><span>' + a.nom + '</span><b>' + DKR.euros(a.prix) + '</b><button type="button" data-del="' + i + '" aria-label="Retirer ' + a.nom + '"><i class="fa-solid fa-trash-can"></i></button></li>').join('');
+        if (!liste.length) document.querySelectorAll('[name=assist]').forEach(r => r.checked = false);
+        majTotal();
+      });
+      $('#assist').addEventListener('change', majTotal);
+      $('#cart-list').addEventListener('click', e => {
+        const b = e.target.closest('[data-del]'); if (b) DKRPanier.retirer(+b.dataset.del);
+      });
+      $('#cart-clear').addEventListener('click', () => DKRPanier.vider());
+      $('#cart-copy').addEventListener('click', () => {
+        const k = calcul();
+        if (!choix() || !k.p) return;
+        const NL = String.fromCharCode(10);
+        const lignes = ['Assistance installation : ' + (k.ass ? 'OUI (+' + DKR.euros(ASSIST) + ')' : 'NON'), 'Pays : ' + k.p.nom];
+        if (k.taux) lignes.push(TAXES.libelle + ' ' + k.taux + ' % : +' + DKR.euros(k.tva));
+        lignes.push('Total : ' + DKR.euros(k.total));
+        const txt = DKRPanier.recap().replace(/Total : .*/, lignes.join(NL));
+        DKRPanier.copier(txt).then(ok => {
+          const b = $('#cart-copy');
+          b.innerHTML = ok ? '<i class="fa-solid fa-check"></i> Récap copié, colle-le dans ton ticket' : 'Copie le récap à la main puis ouvre un ticket';
+          window.open(DKRPanier.DISCORD, '_blank', 'noopener');
+        });
+      });
+      if (/(^|[?&])panier(=|&|$)/.test(location.search)) ouvrir(true);
+
+      // --- apparition au défilement
+      const els = document.querySelectorAll('.rv');
+      if (!('IntersectionObserver' in window)) els.forEach(e => e.classList.add('in'));
+      else {
+        const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .12 });
+        els.forEach(e => io.observe(e));
+      }
+
+      // --- journal des changements
+      window.addEventListener('DOMContentLoaded', function () {
+        const dlg = $('#changelog');
+        if (!dlg || !dlg.showModal) return;
+        const open = () => { if (!dlg.open) dlg.showModal(); };
+        $('#version-badge').addEventListener('click', open);
+        dlg.querySelector('.cl-close').addEventListener('click', () => dlg.close());
+        dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
+        if (location.hash === '#changelog') open();
+      });
+
+      // --- compte Discord (DKRAuth, assets/nav.js)
+      window.addEventListener('DOMContentLoaded', function () {
+        if (!window.DKRAuth) return;
+        DKRAuth.surChangement(function (etat) {
+          if (!etat.configured) return;
+          const login = $('#auth-login'), loginM = $('#auth-login-m'), user = $('#auth-user');
+          if (!etat.user) { login.href = loginM.href = DKRAuth.urlConnexion(); login.hidden = loginM.hidden = false; return; }
+          user.querySelector('img').src = etat.user.avatar;
+          user.querySelector('.pseudo').textContent = etat.user.nom;
+          user.querySelector('.info').textContent = etat.user.verifie ? 'Client vérifié ✓' : 'Connecté avec Discord';
+          user.querySelector('.logout').addEventListener('click', DKRAuth.deconnexion);
+          user.hidden = false;
+        });
+      });
       document.addEventListener('click', e => {
-        const a = e.target.closest('a[href="#changelog"]');
-        if (a) { e.preventDefault(); list.hidden = true; open(); }
+        document.querySelectorAll('details.burger[open], details.user[open]').forEach(d => { if (!d.contains(e.target)) d.open = false; });
+        if (e.target.closest('.burger-menu a')) document.querySelectorAll('details.burger[open]').forEach(d => d.open = false);
       });
-      if (location.hash === '#changelog') open();
-    });
 
-    // Compte Discord : DKRAuth (assets/nav.js) dit si la connexion est active et qui est connecté
-    window.addEventListener('DOMContentLoaded', function () {
-      if (!window.DKRAuth) return;
-      DKRAuth.surChangement(function (etat) {
-        if (!etat.configured) return;
-        const login = document.getElementById('auth-login');
-        const loginM = document.getElementById('auth-login-m');
-        const user = document.getElementById('auth-user');
-        if (!etat.user) {
-          login.href = loginM.href = DKRAuth.urlConnexion();
-          login.hidden = loginM.hidden = false;
-          return;
-        }
-        user.querySelector('img').src = etat.user.avatar;
-        user.querySelector('.pseudo').textContent = etat.user.nom;
-        user.querySelector('.info').textContent = etat.user.verifie ? 'Client vérifié ✓' : 'Connecté avec Discord';
-        user.querySelector('.logout').addEventListener('click', DKRAuth.deconnexion);
-        user.hidden = false;
-      });
-    });
-
-    // Nombre de membres Discord en direct, sans les bots (sinon on garde « 190+ »).
-    // BOTS = nombre de bots sur le serveur : à changer si tu en ajoutes ou en retires un.
-    var BOTS = 7;
-    fetch('https://discord.com/api/v10/invites/sUAdU5v9aD?with_counts=true')
-      .then(function (r) { return r.ok ? r.json() : null; })
-      .then(function (j) {
-        if (j && j.approximate_member_count) document.querySelectorAll('.js-members').forEach(function (el) { el.textContent = j.approximate_member_count - BOTS; });
-      })
-      .catch(function () {});
+      // --- membres Discord en direct, sans les bots (BOTS = nombre de bots du serveur)
+      const BOTS = 7;
+      fetch('https://discord.com/api/v10/invites/sUAdU5v9aD?with_counts=true')
+        .then(r => r.ok ? r.json() : null)
+        .then(j => { if (j && j.approximate_member_count) document.querySelectorAll('.js-members').forEach(el => el.textContent = j.approximate_member_count - BOTS); })
+        .catch(() => {});
+    })();
   </script>
 
   <dialog class="changelog" id="changelog" aria-labelledby="cl-title">
     <div class="cl-head">
-      <h2 id="cl-title">Nouveautés <em>v0.6</em></h2>
+      <h2 id="cl-title">Nouveautés <em>v0.7</em></h2>
       <button type="button" class="cl-close" aria-label="Fermer"><i class="fa-solid fa-xmark"></i></button>
     </div>
     <div class="cl-body">
-      <h3 class="mono">v0.6 — Nouvel accueil</h3>
+      <h3 class="mono">v0.7 — Boutique mod menus</h3>
       <ul>
-        <li><strong>Accueil refait de zéro</strong> : nouveau style plus net, grands titres façon affiche, fini l'effet verre et les halos.</li>
-        <li><strong>Fiche « En bref »</strong> : statut, plateforme, délai de livraison, paiements et lobby gratuit d'un coup d'œil.</li>
-        <li><strong>Garantie anti-ban en grand</strong> : remboursé à 100 % si ban sous 7 jours, mise en avant dans un bandeau dédié.</li>
-        <li><strong>FAQ complète</strong> : les 8 questions sont visibles direct, plus besoin de « Voir les autres questions ».</li>
-        <li><strong>Recherche plus rapide</strong> : les résultats s'affichent sous la barre pendant que tu tapes, avec les flèches et Entrée. <strong>Ctrl + K</strong> ou <strong>/</strong> pour chercher.</li>
-        <li><strong>Menu téléphone refait</strong> : toutes les pages et la connexion Discord dans un seul menu.</li>
-        <li><strong>Compteur Discord en direct</strong> partout sur l'accueil.</li>
-        <li><strong>Thème</strong> : l'accueil passe en thème sombre unique. Le thème dark or reste sur les autres pages.</li>
+        <li><strong>Accueil dédié aux mod menus</strong> : la boutique est en première page, avec filtres et panier.</li>
+        <li><strong>Panier intégré</strong> : ajoute ton menu, copie le récap et ouvre ton ticket en un clic.</li>
+        <li><strong>Nouveau style</strong> : titres en italique condensé, bandes bleues, tickets.</li>
+        <li>Les packs, le lobby gratuit, le calculateur et le parrainage sont retirés : le site est dédié aux mod menus.</li>
       </ul>
-      <h3 class="mono">v0.5</h3>
+      <h3 class="mono">v0.6</h3>
       <ul>
-        <li><strong>Nouvelle interface, deux thèmes</strong> : un thème sobre en bleu et un thème néon noir et or.</li>
-        <li><strong>Nouveau logo</strong> : « 2DKR » incliné, aussi sur le serveur Discord et le bot.</li>
-        <li><strong>Connexion avec Discord</strong> : un bouton « Se connecter » dans le menu, sans mot de passe.</li>
-        <li><strong>Codes protégés</strong> : un code de 1re commande est lié à ton compte Discord. Il ne marche qu'une fois, et pas si tu as déjà le rôle Client Vérifié.</li>
-        <li><strong>Ticket plus clair</strong> : connecté, ton pseudo Discord est ajouté au récapitulatif de commande.</li>
+        <li><strong>Accueil refait</strong>, fiche « En bref », FAQ complète, compteur Discord en direct.</li>
       </ul>
-      <h3 class="mono">v0.4.7</h3>
-      <ul>
-        <li><strong>Accueil plus clair</strong> : deux gros boutons sous le titre, « Voir les services » et « Rejoindre le Discord ».</li>
-        <li><strong>Moins d'encombrement</strong> : les filtres et l'astuce clavier de l'accueil sont retirés, la recherche reste là.</li>
-        <li><strong>Instant Gaming</strong> : le logo officiel remplace l'ancienne icône sur la carte.</li>
-      </ul>
-      <h3 class="mono">v0.4.6</h3>
-      <ul>
-        <li><strong>Mod menus</strong> : nouvelle page avec Cherax, Yari et Lexis (BE, à vie), ajout direct au panier.</li>
-        <li><strong>Barre code promo</strong> en haut de la page Services.</li>
-        <li><strong>Corrections</strong> : nouveau lien Discord, compteur de membres réparé, messages du code promo plus clairs.</li>
-      </ul>
-      <h3 class="mono">v0.4.5</h3>
-      <ul>
-        <li><strong>Parrainage</strong> : ramène 5 potes (15 € dépensés chacun) et gagne -5 % à vie. Tes potes ont -5 % sur leur 1re commande.</li>
-        <li><strong>Codes promo</strong> dans le panier et le calculateur, et le code <strong>BIENVENUE10</strong> (-10 % dès 10 €).</li>
-      </ul>
-      <h3 class="mono">v0.4.4 — v0.4.0</h3>
-      <ul>
-        <li><strong>FAQ, page 404</strong>, interface téléphone, lobby découverte gratuit, garantie anti-ban, page Paiements, tableau comparatif des packs, preuves Discord, panier commun, promos automatiques et aperçus de liens.</li>
-      </ul>
-      <p class="old mono">v0.3.4 — thèmes bleu / dark or, filtres, recherche et commandes rapides.</p>
+      <p class="old mono">Versions précédentes : voir l'historique du dépôt.</p>
     </div>
   </dialog>
 </body>
