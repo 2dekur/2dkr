@@ -1,4 +1,4 @@
-/* DekurMods — boutique, panier, TVA et éléments communs (accueil + boutique) */
+/* DekurMods — boutique, panier, commission et éléments communs (accueil + boutique) */
 (function () {
   const $ = s => document.querySelector(s);
   const menus = (DKR.catalogue.menus || []);
@@ -11,8 +11,10 @@
     g.items.push(m);
   });
 
-  const ASSIST = (DKR.catalogue.assistance || {}).prix || 0;
-  document.querySelectorAll('.js-assist-prix').forEach(e => e.textContent = DKR.euros(ASSIST));
+  const COM = DKR.catalogue.commission || { libelle: 'Commission', pourcent: 0, detail: '' };
+  const arrondi = n => Math.round(n * 100) / 100;
+  const avecCom = prix => arrondi(prix * (1 + COM.pourcent / 100));
+  document.querySelectorAll('.js-com').forEach(e => e.textContent = COM.pourcent + ' %');
   const dispo = groupes.filter(g => !g.bientot);
   if ($('#stat-menus')) $('#stat-menus').textContent = dispo.length;
   if ($('.js-menu-names')) $('.js-menu-names').textContent = dispo.map(g => g.nom).join(', ');
@@ -45,7 +47,7 @@
         (g.be ? '<span class="bd">BE</span>' : '') + (g.vie ? '<span class="bd ok">À vie</span>' : '') + '</div></div>' +
       '<p class="mc-sub mono">' + (g.vie ? 'Licence à vie' : (dessous || 'Licence')) + '</p>' +
       '<ul class="mc-rows">' + g.items.map(m =>
-        '<li><span>' + (m.formule || 'Licence') + '</span><b>' + DKR.euros(m.prix) + '</b>' +
+        '<li><span>' + (m.formule || 'Licence') + '</span><b>' + DKR.euros(m.prix) + '<small>' + DKR.euros(avecCom(m.prix)) + ' avec commission</small></b>' +
         '<button type="button" class="add" data-add="' + m.id + '" aria-label="Ajouter ' + m.nom + ' au panier"><i class="fa-solid fa-cart-plus"></i> Ajouter</button></li>').join('') +
       '</ul></article>';
   }
@@ -81,53 +83,34 @@
     ouvrir(true);
   });
 
-  function choix() { const r = document.querySelector('[name=assist]:checked'); return r ? r.value : null; }
-  const TAXES = (DKR.catalogue.taxes || { libelle: 'TVA', pays: [] });
-  let pays = null;
-  const finPays = p => { pays = p; $('#cart-pays').textContent = 'Pays détecté : ' + p.nom + ' · ' + TAXES.libelle + ' ' + p.taux + ' %'; majTotal(); };
-  const parCode = code => TAXES.pays.find(x => x.code === code) || TAXES.autre;
-  const ctl = new AbortController(); setTimeout(() => ctl.abort(), 4000);
-  fetch('/api/pays', { signal: ctl.signal, cache: 'no-store' })
-    .then(r => r.ok ? r.json() : null)
-    .then(j => finPays(j && j.pays ? parCode(j.pays) : TAXES.defaut))
-    .catch(() => finPays(TAXES.defaut));
-  const arrondi = n => Math.round(n * 100) / 100;
   function calcul() {
-    const liste = DKRPanier.liste(), p = pays;
-    const sous = DKRPanier.total(liste), ass = choix() === 'oui' ? ASSIST : 0;
-    const ht = arrondi(sous + ass), taux = p ? p.taux : 0, tva = arrondi(ht * taux / 100);
-    return { sous, ass, ht, taux, tva, total: arrondi(ht + tva), p };
+    const sous = DKRPanier.total(DKRPanier.liste());
+    const com = arrondi(sous * COM.pourcent / 100);
+    return { sous, com, total: arrondi(sous + com) };
   }
   function majTotal() {
     const k = calcul();
-    let l = '<div><span>Sous-total</span><span>' + DKR.euros(k.sous) + '</span></div>';
-    if (k.ass) l += '<div><span>Assistance installation</span><span>' + DKR.euros(k.ass) + '</span></div>';
-    if (k.p && k.taux) l += '<div><span>' + TAXES.libelle + ' ' + k.taux + ' % (' + k.p.nom + ')</span><span>' + DKR.euros(k.tva) + '</span></div>';
-    $('#cart-lines').innerHTML = l;
+    $('#cart-lines').innerHTML = '<div><span>Sous-total</span><span>' + DKR.euros(k.sous) + '</span></div>' +
+      (COM.pourcent ? '<div><span>' + COM.libelle + ' ' + COM.pourcent + ' % (' + COM.detail + ')</span><span>' + DKR.euros(k.com) + '</span></div>' : '');
     $('#cart-total').textContent = DKR.euros(k.total);
-    const ok = !!choix() && !!k.p;
-    $('#cart-copy').disabled = !ok;
-    $('#cart-need').hidden = ok;
   }
   DKRPanier.surChangement(liste => {
     const n = $('#cart-count'); n.textContent = liste.length; n.hidden = !liste.length;
     $('#cart-empty').hidden = !!liste.length; $('#cart-foot').hidden = !liste.length;
     $('#cart-list').innerHTML = liste.map((a, i) =>
       '<li><span>' + a.nom + '</span><b>' + DKR.euros(a.prix) + '</b><button type="button" data-del="' + i + '" aria-label="Retirer ' + a.nom + '"><i class="fa-solid fa-trash-can"></i></button></li>').join('');
-    if (!liste.length) document.querySelectorAll('[name=assist]').forEach(r => r.checked = false);
     majTotal();
   });
-  $('#assist').addEventListener('change', majTotal);
   $('#cart-list').addEventListener('click', e => {
     const b = e.target.closest('[data-del]'); if (b) DKRPanier.retirer(+b.dataset.del);
   });
   $('#cart-clear').addEventListener('click', () => DKRPanier.vider());
   $('#cart-copy').addEventListener('click', () => {
     const k = calcul();
-    if (!choix() || !k.p) return;
+    if (!k.sous) return;
     const NL = String.fromCharCode(10);
-    const lignes = ['Assistance installation : ' + (k.ass ? 'OUI (+' + DKR.euros(ASSIST) + ')' : 'NON'), 'Pays : ' + k.p.nom];
-    if (k.taux) lignes.push(TAXES.libelle + ' ' + k.taux + ' % : +' + DKR.euros(k.tva));
+    const lignes = ['Sous-total : ' + DKR.euros(k.sous)];
+    if (COM.pourcent) lignes.push(COM.libelle + ' ' + COM.pourcent + ' % (' + COM.detail + ') : +' + DKR.euros(k.com));
     lignes.push('Total : ' + DKR.euros(k.total));
     const txt = DKRPanier.recap().replace(/Total : .*/, lignes.join(NL));
     DKRPanier.copier(txt).then(ok => {

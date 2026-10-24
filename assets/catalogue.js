@@ -155,38 +155,15 @@ window.DKR_CATALOGUE = {
     // bientot : true = affiché « Bientôt disponible », pas encore au panier (mettre un prix et retirer bientot pour l'ouvrir)
     // exclusif : true = badge « Exclusif DekurMods »
     { id: 'golden', nom: 'Golden', menu: 'Golden', bientot: true, exclusif: true, sansCode: true },
-    { id: 'cherax-standard', nom: 'Cherax Standard', menu: 'Cherax', vie: true, formule: 'Standard', prix: 25, sansCode: true },
-    { id: 'cherax-premium',  nom: 'Cherax Premium',  menu: 'Cherax', vie: true, formule: 'Premium',  prix: 50, sansCode: true },
-    { id: 'yari',  nom: 'Yari (BE, à vie)',  menu: 'Yari',  be: true, vie: true, prix: 110, sansCode: true },
-    { id: 'lexis', nom: 'Lexis (BE, à vie)', menu: 'Lexis', be: true, vie: true, prix: 130, sansCode: true }
+    { id: 'cherax-standard', nom: 'Cherax Standard', menu: 'Cherax', vie: true, formule: 'Standard', prix: 21, sansCode: true },
+    { id: 'cherax-premium',  nom: 'Cherax Premium',  menu: 'Cherax', vie: true, formule: 'Premium',  prix: 42, sansCode: true },
+    { id: 'yari',  nom: 'Yari (BE, à vie)',  menu: 'Yari',  be: true, vie: true, prix: 92, sansCode: true },
+    { id: 'lexis', nom: 'Lexis (BE, à vie)', menu: 'Lexis', be: true, vie: true, prix: 109, sansCode: true }
   ],
 
-  // Assistance à l'installation (panier de la boutique) : le client doit choisir oui ou non.
-  //   prix : ajouté une seule fois par commande si le client dit oui.
-  assistance: { prix: 5 },
-
-  // TVA selon le pays du client, détecté tout seul (assets /api/pays, Cloudflare). Le client ne choisit pas.
-  //   code   : code pays à 2 lettres. Un pays absent de la liste reçoit « Autre pays ».
-  //   taux   : en %. 0 = pas de TVA.
-  //   defaut : appliqué si le pays n'a pas pu être détecté.
-  //   À vérifier avec ton comptable : les taux changent et la TVA dépend de ton statut.
-  taxes: {
-    libelle: 'TVA',
-    defaut: { nom: 'France', taux: 20 },
-    autre: { nom: 'Autre pays', taux: 0 },
-    pays: [
-      { code: 'FR', nom: 'France', taux: 20 },
-      { code: 'BE', nom: 'Belgique', taux: 21 },
-      { code: 'DE', nom: 'Allemagne', taux: 19 },
-      { code: 'ES', nom: 'Espagne', taux: 21 },
-      { code: 'IT', nom: 'Italie', taux: 22 },
-      { code: 'LU', nom: 'Luxembourg', taux: 17 },
-      { code: 'NL', nom: 'Pays-Bas', taux: 21 },
-      { code: 'PT', nom: 'Portugal', taux: 23 },
-      { code: 'GB', nom: 'Royaume-Uni', taux: 20 },
-      { code: 'CH', nom: 'Suisse', taux: 8.1 }
-    ]
-  },
+  // Commission DekurMods, ajoutée au total du panier (même taux pour tout le monde).
+  //   Elle inclut l'aide à l'installation du menu.
+  commission: { libelle: 'Commission', pourcent: 20, detail: "aide à l'installation incluse" },
 
   comptes: [
     {

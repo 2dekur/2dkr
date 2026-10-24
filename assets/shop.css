@@ -310,7 +310,8 @@
     .mc-rows { list-style: none; margin-top: auto; border-top: 1px dashed var(--line); }
     .mc-rows li { display: flex; align-items: center; gap: 12px; padding: 14px 0; border-bottom: 1px dashed var(--line); }
     .mc-rows li span { flex: 1; color: #c9c7c0; }
-    .mc-rows b { font: 900 1.6rem/1 var(--display); font-stretch: 75%; }
+    .mc-rows b { font: 900 1.6rem/1 var(--display); font-stretch: 75%; text-align: right; }
+    .mc-rows b small { display: block; margin-top: 4px; font: 500 .68rem var(--mono); letter-spacing: .02em; color: var(--muted); }
     .add { height: 40px; padding: 0 16px; background: var(--paper); color: var(--ink); border: 0; font: 700 .88rem var(--display); cursor: pointer; display: inline-flex; align-items: center; gap: 8px; clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%); transition: background .15s; }
     .add:hover { background: var(--accent); }
     .mc-other { background: transparent; border-style: dashed; }
