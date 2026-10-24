@@ -1,0 +1,6 @@
+# Les pages et les fichiers du site sont revérifiés à chaque visite
+# (le navigateur garde une copie mais demande au serveur si elle a changé).
+/*
+  Cache-Control: public, max-age=0, must-revalidate
+/og/*
+  Cache-Control: public, max-age=3600

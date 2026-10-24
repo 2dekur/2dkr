@@ -314,6 +314,15 @@
     .add { height: 40px; padding: 0 16px; background: var(--paper); color: var(--ink); border: 0; font: 700 .88rem var(--display); cursor: pointer; display: inline-flex; align-items: center; gap: 8px; clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%); transition: background .15s; }
     .add:hover { background: var(--accent); }
     .mc-other { background: transparent; border-style: dashed; }
+    .tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+    .tile { position: relative; display: grid; gap: 6px; padding: 22px 48px 22px 22px; background: var(--ink-2); border: 1px solid var(--line); transition: border-color .2s, transform .25s; }
+    .tile b { font: 900 2rem/1 var(--display); font-stretch: 62%; font-style: italic; text-transform: uppercase; }
+    .tile span { color: var(--muted); }
+    .tile i { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); color: var(--accent); transition: transform .2s; }
+    .tile:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .tile:hover i { transform: translate(4px, -50%); }
+    .tile-gold { border-color: rgba(245, 200, 75, .45); }
+    .tile-gold b, .tile-gold i { color: #f5c84b; }
     .mc-gold { border-color: rgba(245, 200, 75, .45); }
     .mc-gold::before { background: #f5c84b; }
     .mc-gold h3 { color: #f5c84b; }

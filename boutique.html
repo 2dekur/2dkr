@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boutique — DekurMods | Mod menus GTA V</title>
+  <meta name="description" content="Boutique de mod menus GTA V sur PC : Cherax, Yari, Lexis. Clé livrée dans ton ticket Discord, assistance à l'installation en option.">
+  <meta name="theme-color" content="#0a0a0b">
+  <meta property="og:title" content="Boutique — DekurMods">
+  <meta property="og:description" content="Cherax, Yari, Lexis : clé livrée dans ton ticket Discord, assistance à l'installation en option.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://dekurmods.com/boutique">
+  <meta property="og:site_name" content="DekurMods">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:image" content="https://dekurmods.com/og/accueil.png?v=6">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://dekurmods.com/boutique">
+  <link rel="icon" href="/favicon.svg?v=b1832d8d" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <script src="assets/catalogue.js?v=b21b4b44"></script>
+  <script src="assets/nav.js?v=47d4ffeb" defer></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="assets/shop.css?v=0ae4715b">
+</head>
+<body>
+
+  <div class="status mono">
+    <div class="wrap">
+      <span><i class="dot"></i>Services opérationnels</span>
+      <span>PC uniquement</span>
+      <span>PayPal · SOL / USDC · Virement</span>
+    </div>
+  </div>
+
+    <header class="nav">
+    <div class="wrap">
+      <a class="logo" href="index.html" aria-label="DekurMods — Accueil"><img src="logo-site.svg?v=8762a5f6" alt="DekurMods" width="124" height="28"></a>
+
+      <nav class="links" aria-label="Navigation principale">
+        <a href="boutique.html" aria-current="page">Boutique</a>
+        <a href="index.html#commande">Comment ça marche</a>
+        <a href="avis.html">Avis &amp; Preuves</a>
+        <a href="paiements.html">Paiements</a>
+        <a href="index.html#faq">FAQ</a>
+      </nav>
+
+      <div class="nav-end">
+        <a class="icon-btn" href="https://discord.gg/sUAdU5v9aD" target="_blank" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
+        <a class="btn btn-sm auth" id="auth-login" href="/api/auth/login?retour=%2F" hidden><i class="fa-brands fa-discord"></i><span class="login-label">Se connecter</span></a>
+        <details class="user auth" id="auth-user" hidden>
+          <summary><img alt="" width="24" height="24"><span class="login-label pseudo"></span><i class="fa-solid fa-chevron-down" style="font-size:.65rem"></i></summary>
+          <div class="drop-menu">
+            <span class="info"></span>
+            <button type="button" class="logout"><i class="fa-solid fa-right-from-bracket"></i> Se déconnecter</button>
+          </div>
+        </details>
+        <button type="button" class="cart-btn" id="cart-open" aria-label="Ouvrir le panier"><i class="fa-solid fa-cart-shopping"></i><span class="cart-count" id="cart-count" hidden>0</span></button>
+      </div>
+
+      <details class="burger">
+        <summary class="icon-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></summary>
+        <nav class="burger-menu" aria-label="Menu mobile">
+          <a href="boutique.html" aria-current="page">Boutique</a>
+          <a href="index.html#commande">Comment ça marche</a>
+          <a href="avis.html">Avis &amp; Preuves</a>
+          <a href="paiements.html">Paiements</a>
+          <a href="index.html#faq">FAQ</a>
+          <a class="auth" id="auth-login-m" href="/api/auth/login?retour=%2F" hidden><i class="fa-brands fa-discord"></i> Se connecter avec Discord</a>
+          <div class="socials">
+            <a href="https://discord.gg/sUAdU5v9aD" target="_blank" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
+          </div>
+        </nav>
+      </details>
+    </div>
+  </header>
+
+  <main>
+    <section class="phead">
+      <div class="slashes" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="wrap">
+        <p class="kicker mono rv">Mod menus · GTA V · PC</p>
+        <h1 class="rv">La <em>boutique</em></h1>
+        <p class="lede rv">Ajoute ton menu au panier, copie le récap et ouvre ton ticket sur le Discord.</p>
+      </div>
+    </section>
+
+    <section class="psec">
+      <div class="wrap">
+        <div class="shop-bar rv">
+          <div class="chips" id="chips" role="group" aria-label="Filtrer les menus">
+            <button type="button" class="chip on" data-f="tous">Tous</button>
+            <button type="button" class="chip" data-f="vie">À vie</button>
+            <button type="button" class="chip" data-f="be">BE</button>
+          </div>
+          <span class="mono shop-note">TVA selon ton pays · PC uniquement</span>
+        </div>
+        <div class="menus" id="menus-grid"></div>
+
+        <div class="note rv" style="margin-top:40px">
+          <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
+          <div>
+            <h3>À savoir avant d'acheter</h3>
+            <ul>
+              <li>Utiliser un mod menu comporte un <strong>risque de ban</strong> sur GTA Online. DekurMods ne peut pas être tenu responsable d'une sanction de Rockstar.</li>
+              <li>Il n'y a pas de garantie anti-ban sur les mod menus.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot-cta">
+        <h2>Prêt ? On se voit<br>sur <em>le Discord.</em></h2>
+        <a class="btn btn-discord" href="https://discord.gg/sUAdU5v9aD" target="_blank"><i class="fa-brands fa-discord"></i> Rejoindre le Discord</a>
+      </div>
+      <div class="foot-row">
+        <a class="logo" href="index.html"><img src="logo-site.svg?v=8762a5f6" alt="DekurMods" width="124" height="28"></a>
+        <nav aria-label="Pied de page">
+          <a href="boutique.html" aria-current="page">Boutique</a>
+          <a href="avis.html">Avis &amp; Preuves</a>
+          <a href="paiements.html">Paiements</a>
+        </nav>
+        <span>© 2026 DekurMods. Tous droits réservés.</span>
+      </div>
+    </div>
+    <div class="wordmark" aria-hidden="true">DekurMods</div>
+  </footer>
+
+  <!-- panier -->
+  <div class="cart-veil" id="cart-veil" hidden></div>
+  <aside class="cart" id="cart" aria-label="Panier" aria-hidden="true">
+    <div class="cart-head">
+      <h2>Panier</h2>
+      <button type="button" class="cl-close" id="cart-close" aria-label="Fermer le panier"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <ul class="cart-list" id="cart-list"></ul>
+    <p class="cart-empty" id="cart-empty">Ton panier est vide.</p>
+    <div class="cart-foot" id="cart-foot">
+      <fieldset class="assist" id="assist">
+        <legend>Assistance à l'installation <span class="req">obligatoire</span></legend>
+        <p>Je t'aide à installer et configurer ton menu, en vocal si besoin.</p>
+        <label class="opt"><input type="radio" name="assist" value="oui"><span>Oui, avec assistance <b>+<span class="js-assist-prix"></span></b></span></label>
+        <label class="opt"><input type="radio" name="assist" value="non"><span>Non, je m'en occupe</span></label>
+      </fieldset>
+      <p class="cart-pays" id="cart-pays">Pays détecté : …</p>
+      <div class="cart-lines" id="cart-lines"></div>
+      <div class="cart-total"><span>Total</span><strong id="cart-total">0€</strong></div>
+      <button type="button" class="btn btn-primary" id="cart-copy" disabled><i class="fa-regular fa-copy"></i> Copier le récap &amp; ouvrir un ticket</button>
+      <p class="cart-need" id="cart-need">Choisis l'assistance (oui ou non) pour continuer.</p>
+      <button type="button" class="cart-clear" id="cart-clear">Vider le panier</button>
+      <p class="cart-hint">Colle le récap dans un ticket sur le Discord. Tu paies là-bas, puis tu reçois ta clé.</p>
+    </div>
+  </aside>
+
+  <script src="assets/panier.js?v=8dc0661b"></script>
+  <script src="assets/boutique.js?v=34c141ba"></script>
+
+</body>
+</html>
