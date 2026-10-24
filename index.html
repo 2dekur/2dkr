@@ -296,23 +296,30 @@
       const groupes = [];
       menus.forEach(m => {
         let g = groupes.find(x => x.nom === m.menu);
-        if (!g) { g = { nom: m.menu, be: !!m.be, vie: !!m.vie, items: [] }; groupes.push(g); }
+        if (!g) { g = { nom: m.menu, be: !!m.be, vie: !!m.vie, bientot: !!m.bientot, exclusif: !!m.exclusif, items: [] }; groupes.push(g); }
         g.items.push(m);
       });
 
       const ASSIST = (DKR.catalogue.assistance || {}).prix || 0;
       document.querySelectorAll('.js-assist-prix').forEach(e => e.textContent = DKR.euros(ASSIST));
-      $('#stat-menus').textContent = groupes.length;
-      $('.js-menu-names').textContent = groupes.map(g => g.nom).join(', ');
+      const dispo = groupes.filter(g => !g.bientot);
+      $('#stat-menus').textContent = dispo.length;
+      $('.js-menu-names').textContent = dispo.map(g => g.nom).join(', ');
 
       // bandeau défilant (deux fois la liste, pour boucler sans saut)
-      const mots = groupes.map(g => g.nom).concat(['Clé dans ton ticket', 'Support FR', 'PC']);
+      const mots = groupes.map(g => g.bientot ? g.nom + ' · bientôt' : g.nom).concat(['Clé dans ton ticket', 'Support FR', 'PC']);
       const ligne = () => '<p>' + [].concat(mots, mots, mots).map(t => '<span>' + t + '</span><b></b>').join('') + '</p>';
       $('#marquee').innerHTML = ligne() + ligne();
 
       // --- boutique
       const grid = $('#menus-grid');
       function carte(g) {
+        if (g.bientot) return '<article class="mcard mc-gold" data-vie="false" data-be="false">' +
+          '<div class="mc-top"><h3>' + g.nom + '</h3><div class="badges">' +
+            (g.exclusif ? '<span class="bd gold">Exclusif</span>' : '') + '<span class="bd">Bientôt</span></div></div>' +
+          '<p class="mc-sub mono">' + (g.exclusif ? 'Uniquement chez DekurMods' : 'Bientôt disponible') + '</p>' +
+          '<p class="mc-text">Nouveau menu, bientôt disponible. ' + (g.exclusif ? 'DekurMods est le seul revendeur à le proposer.' : '') + ' Rejoins le Discord pour être prévenu de sa sortie.</p>' +
+          '<a class="btn btn-sm btn-gold" href="https://discord.gg/sUAdU5v9aD" target="_blank"><i class="fa-brands fa-discord"></i> Être prévenu</a></article>';
         const dessous = g.items.length > 1 ? 'dès ' + DKR.euros(Math.min.apply(null, g.items.map(i => i.prix))) : '';
         return '<article class="mcard" data-vie="' + g.vie + '" data-be="' + g.be + '">' +
           '<div class="mc-top"><h3>' + g.nom + '</h3><div class="badges">' +

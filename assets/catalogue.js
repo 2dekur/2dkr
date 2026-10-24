@@ -150,7 +150,11 @@ window.DKR_CATALOGUE = {
   // Mod menus (page Mod menus) : s'ajoutent au panier, mais les codes promo /
   // parrain ne s'y appliquent pas (sansCode: true).
   //   formule : précision affichée sous le nom · be : badge « BE » · vie : licence à vie
+  //   bientot : menu annoncé, pas encore en vente · exclusif : vendu seulement chez DekurMods
   menus: [
+    // bientot : true = affiché « Bientôt disponible », pas encore au panier (mettre un prix et retirer bientot pour l'ouvrir)
+    // exclusif : true = badge « Exclusif DekurMods »
+    { id: 'golden', nom: 'Golden', menu: 'Golden', bientot: true, exclusif: true, sansCode: true },
     { id: 'cherax-standard', nom: 'Cherax Standard', menu: 'Cherax', vie: true, formule: 'Standard', prix: 25, sansCode: true },
     { id: 'cherax-premium',  nom: 'Cherax Premium',  menu: 'Cherax', vie: true, formule: 'Premium',  prix: 50, sansCode: true },
     { id: 'yari',  nom: 'Yari (BE, à vie)',  menu: 'Yari',  be: true, vie: true, prix: 110, sansCode: true },
