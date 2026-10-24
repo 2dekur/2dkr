@@ -105,20 +105,6 @@
     const b = e.target.closest('[data-del]'); if (b) DKRPanier.retirer(+b.dataset.del);
   });
   $('#cart-clear').addEventListener('click', () => DKRPanier.vider());
-  $('#cart-copy').addEventListener('click', () => {
-    const k = calcul();
-    if (!k.sous) return;
-    const NL = String.fromCharCode(10);
-    const lignes = ['Sous-total : ' + DKR.euros(k.sous)];
-    if (COM.pourcent) lignes.push(COM.libelle + ' ' + COM.pourcent + ' % (' + COM.detail + ') : +' + DKR.euros(k.com));
-    lignes.push('Total : ' + DKR.euros(k.total));
-    const txt = DKRPanier.recap().replace(/Total : .*/, lignes.join(NL));
-    DKRPanier.copier(txt).then(ok => {
-      const b = $('#cart-copy');
-      b.innerHTML = ok ? '<i class="fa-solid fa-check"></i> Récap copié, colle-le dans ton ticket' : 'Copie le récap à la main puis ouvre un ticket';
-      window.open(DKRPanier.DISCORD, '_blank', 'noopener');
-    });
-  });
   if (/(^|[?&])panier(=|&|$)/.test(location.search)) ouvrir(true);
 
   // --- apparition au défilement

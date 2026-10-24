@@ -470,6 +470,66 @@
       .phead .slashes { opacity: .4; }
     }
 
+    /* ---------- page Commande ---------- */
+    main.co { padding: 56px 0 0; }
+    main.co [hidden] { display: none !important; }
+    .co-grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: 64px; align-items: start; }
+    .co-sum { position: sticky; top: 96px; padding: 28px; background: var(--ink-2); border: 1px solid var(--line); }
+    .co-h { display: flex; align-items: center; gap: 10px; color: var(--muted); margin-bottom: 20px; }
+    .co-n { display: inline-grid; place-items: center; min-width: 22px; height: 22px; padding: 0 6px; background: var(--accent); color: var(--ink); transform: skewX(var(--slant)); }
+    .co-empty { color: var(--muted); margin-bottom: 18px; }
+    .co-items { list-style: none; }
+    .co-items li { display: flex; justify-content: space-between; gap: 16px; padding: 16px 0; border-bottom: 1px dashed var(--line); }
+    .co-name { display: grid; gap: 4px; }
+    .co-name b { font: 900 1.5rem/1 var(--display); font-stretch: 70%; font-style: italic; text-transform: uppercase; }
+    .co-name .mono { color: var(--muted); text-transform: none; letter-spacing: .02em; }
+    .co-items strong { font: 900 1.4rem/1 var(--display); font-stretch: 75%; white-space: nowrap; }
+    .qty { display: flex; align-items: center; gap: 6px; margin-top: 6px; }
+    .qty button { width: 28px; height: 28px; background: var(--ink-3); border: 1px solid var(--line); color: var(--paper); cursor: pointer; font-weight: 700; }
+    .qty button:hover { border-color: var(--paper); }
+    .qty span { min-width: 20px; text-align: center; font-weight: 700; }
+    .qty .qty-x { width: auto; padding: 0 8px; background: none; border: 0; color: var(--muted); font: 500 .8rem var(--display); text-decoration: underline; }
+    .qty .qty-x:hover { color: #ff6b6b; }
+    .co-lines { display: grid; gap: 8px; padding: 16px 0; color: var(--muted); font-size: .92rem; }
+    .co-lines div { display: flex; justify-content: space-between; gap: 12px; }
+    .co-total { display: flex; justify-content: space-between; align-items: baseline; padding-top: 16px; border-top: 1px solid var(--line); }
+    .co-total strong { font: 900 2.8rem/1 var(--display); font-stretch: 70%; }
+    .co-back { display: inline-flex; gap: 8px; align-items: center; margin-top: 20px; color: var(--muted); font-size: .9rem; }
+    .co-back:hover { color: var(--paper); }
+    .co-title { font: 900 clamp(2.8rem, 6vw, 4.6rem)/.9 var(--display); font-stretch: 62%; font-style: italic; text-transform: uppercase; margin: 0; letter-spacing: -.02em; }
+    .co-title em { color: var(--accent); font-size: .55em; display: block; margin-top: 10px; }
+    .co-sub { color: var(--muted); margin: 12px 0 32px; }
+    .co-sub strong { color: var(--paper); }
+    .co-step { display: flex; align-items: center; gap: 12px; font: 800 1.15rem var(--display); margin: 28px 0 16px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+    .co-step span { display: grid; place-items: center; width: 28px; height: 28px; border: 1px solid var(--line); font: 700 .8rem var(--mono); }
+    .co-field { display: grid; gap: 8px; margin-bottom: 18px; font-weight: 700; font-size: .92rem; }
+    .co-field input, .co-field textarea { width: 100%; padding: 14px 16px; background: var(--ink-2); border: 1px solid var(--line); color: var(--paper); font: 500 1rem var(--display); resize: vertical; }
+    .co-field textarea { font: 500 .85rem/1.5 var(--mono); }
+    .co-field input:focus, .co-field textarea:focus { outline: none; border-color: var(--accent); }
+    .co-field input:user-invalid { border-color: #ff6b6b; }
+    .co-field small { color: var(--muted); font-weight: 400; font-size: .8rem; }
+    .co-pay { display: grid; gap: 10px; }
+    .co-pay .opt { padding: 16px 18px; gap: 16px; background: var(--ink-2); }
+    .co-pay .opt > i { font-size: 1.3rem; color: var(--accent); width: 24px; text-align: center; }
+    .co-pay .opt span { display: grid; gap: 2px; }
+    .co-pay .opt small { color: var(--muted); font-size: .8rem; }
+    .co-cgv { display: flex; gap: 12px; align-items: flex-start; margin: 26px 0 18px; color: #c9c7c0; font-size: .88rem; cursor: pointer; }
+    .co-cgv input { accent-color: var(--accent); width: 18px; height: 18px; margin-top: 2px; flex: none; }
+    .co-cgv a { color: var(--paper); border-bottom: 2px solid var(--accent); }
+    .co-btn { width: 100%; justify-content: center; height: 60px; font-size: 1.05rem; }
+    .co-note { margin-top: 14px; color: var(--muted); text-align: center; text-transform: none; letter-spacing: .02em; }
+    .co-done { max-width: 760px; }
+    .co-next { list-style: none; counter-reset: s; display: grid; gap: 12px; margin: 8px 0 28px; }
+    .co-next li { counter-increment: s; display: grid; gap: 8px; padding: 20px 22px 20px 64px; position: relative; background: var(--ink-2); border: 1px solid var(--line); }
+    .co-next li::before { content: counter(s); position: absolute; left: 20px; top: 18px; width: 28px; height: 28px; display: grid; place-items: center; background: var(--accent); color: var(--ink); font: 800 .9rem var(--mono); transform: skewX(var(--slant)); }
+    .co-next b { font: 900 1.3rem/1 var(--display); font-stretch: 70%; font-style: italic; text-transform: uppercase; }
+    .co-next span { color: #c9c7c0; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    .co-next span[hidden] { display: none; }
+    .legal { max-width: 820px; }
+    .legal p { color: #c9c7c0; margin-bottom: 14px; }
+    .legal a { color: var(--paper); border-bottom: 2px solid var(--accent); }
+    .legal .sh { margin-top: 40px; }
+
     /* ---------- mobile ---------- */
     .burger { display: none; }
     @media (max-width: 1080px) {
@@ -493,6 +553,8 @@
       .why article, .why article + article { padding: 32px 0; border-left: 0; border-bottom: 1px solid var(--line); }
       .faq { grid-template-columns: 1fr; gap: 28px; }
       .faq-side { position: static; }
+      .co-grid { grid-template-columns: 1fr; gap: 32px; }
+      .co-sum { position: static; }
     }
     @media (max-width: 560px) {
       .wrap { padding: 0 18px; }
