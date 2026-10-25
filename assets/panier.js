@@ -198,6 +198,16 @@
           ? ' ' + c.nom + ' a l\'avantage parrain à vie.'
           : ' (' + c.nom + ' : ' + c.filleuls + '/' + p.filleulsRequis + ' potes parrainés)') + horsMenus;
     },
+    totalAvecCommission: function (liste) {
+      liste = liste || panier;
+      var sous = DKRPanier.total(liste);
+      var base = somme(liste, 'prix') + somme(liste, 'frais');
+      var taux = (DKR.catalogue.commission || {}).pourcent || 0;
+      var total = liste.reduce(function (n, a) { return n + DKR.prixAvecCommission(a.prix + a.frais); }, 0);
+      // Les remises et frais de commande existants restent pris en compte.
+      total = Math.max(0, Math.ceil(total + (sous - base) * (1 + taux / 100) - 0.00000001));
+      return { sous: sous, com: Math.round((total - sous) * 100) / 100, total: total };
+    },
     ajouter: function (id) {
       var item = trouver(id);
       if (!item) return;

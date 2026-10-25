@@ -18,9 +18,7 @@
     return [...map.values()];
   }
   function calcul() {
-    const sous = DKRPanier.total(DKRPanier.liste());
-    const com = arrondi(sous * COM.pourcent / 100);
-    return { sous, com, total: arrondi(sous + com) };
+    return DKRPanier.totalAvecCommission();
   }
 
   function rendre() {
@@ -35,7 +33,7 @@
       '<button type="button" class="qty-x" data-tout="' + l.id + '" aria-label="Supprimer ' + esc(l.nom) + '">Supprimer</button></div></div>' +
       '<strong>' + DKR.euros(arrondi(l.prix * l.qte)) + '</strong></li>').join('');
     $('#co-sous').textContent = DKR.euros(k.sous);
-    $('#co-com-l').textContent = COM.libelle + ' ' + COM.pourcent + ' % (' + COM.detail + ')';
+    $('#co-com-l').textContent = 'Commission et arrondi (' + COM.detail + ')';
     $('#co-com').textContent = DKR.euros(k.com);
     $('#co-total').textContent = DKR.euros(k.total);
     $('#co-payer').innerHTML = '<i class="fa-solid fa-lock"></i> Valider la commande · ' + DKR.euros(k.total);
@@ -75,7 +73,7 @@
     const NL = String.fromCharCode(10);
     const txt = ['🛒 Commande DekurMods ' + num, '', 'Discord : ' + cmd.discord, 'E-mail : ' + cmd.email, 'Paiement : ' + cmd.paiement, '']
       .concat(ls.map(l => '• ' + l.nom + (l.qte > 1 ? ' ×' + l.qte : '') + ' — ' + DKR.euros(arrondi(l.prix * l.qte))))
-      .concat(['', 'Sous-total : ' + DKR.euros(k.sous), COM.libelle + ' ' + COM.pourcent + ' % (' + COM.detail + ') : +' + DKR.euros(k.com), 'Total : ' + DKR.euros(k.total)])
+      .concat(['', 'Sous-total : ' + DKR.euros(k.sous), 'Commission et arrondi (' + COM.detail + ') : +' + DKR.euros(k.com), 'Total : ' + DKR.euros(k.total)])
       .join(NL);
 
     const btn = $('#co-payer'); btn.disabled = true;

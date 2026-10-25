@@ -12,8 +12,7 @@
   });
 
   const COM = DKR.catalogue.commission || { libelle: 'Commission', pourcent: 0, detail: '' };
-  const arrondi = n => Math.round(n * 100) / 100;
-  const avecCom = prix => arrondi(prix * (1 + COM.pourcent / 100));
+  const avecCom = DKR.prixAvecCommission;
   document.querySelectorAll('.js-com').forEach(e => e.textContent = COM.pourcent + ' %');
   const dispo = groupes.filter(g => !g.bientot);
   if ($('#stat-menus')) $('#stat-menus').textContent = dispo.length;
@@ -27,7 +26,7 @@
   // --- aperçu sur l'accueil : une tuile par menu, qui mène à la page Boutique
   const teaser = $('#menus-teaser');
   if (teaser) teaser.innerHTML = groupes.map(g => {
-    const prix = g.bientot ? 'Bientôt' : 'dès ' + DKR.euros(Math.min.apply(null, g.items.map(i => i.prix)));
+    const prix = g.bientot ? 'Bientôt' : 'dès ' + DKR.euros(Math.min.apply(null, g.items.map(i => avecCom(i.prix)))) + ' · commission comprise';
     return '<a class="tile' + (g.bientot ? ' tile-gold' : '') + '" href="boutique.html"><b>' + g.nom + '</b><span class="mono">' +
       (g.exclusif ? 'Exclusif · ' : '') + prix + '</span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>';
   }).join('');
@@ -41,13 +40,13 @@
       '<p class="mc-sub mono">' + (g.exclusif ? 'Uniquement chez DekurMods' : 'Bientôt disponible') + '</p>' +
       '<p class="mc-text">Nouveau menu, bientôt disponible. ' + (g.exclusif ? 'DekurMods est le seul revendeur à le proposer.' : '') + ' Rejoins le Discord pour être prévenu de sa sortie.</p>' +
       '<a class="btn btn-sm btn-gold" href="https://discord.gg/sUAdU5v9aD" target="_blank"><i class="fa-brands fa-discord"></i> Être prévenu</a></article>';
-    const dessous = g.items.length > 1 ? 'dès ' + DKR.euros(Math.min.apply(null, g.items.map(i => i.prix))) : '';
+    const dessous = g.items.length > 1 ? 'dès ' + DKR.euros(Math.min.apply(null, g.items.map(i => avecCom(i.prix)))) : '';
     return '<article class="mcard" data-vie="' + g.vie + '" data-be="' + g.be + '">' +
       '<div class="mc-top"><h3>' + g.nom + '</h3><div class="badges">' +
         (g.be ? '<span class="bd">BE</span>' : '') + (g.vie ? '<span class="bd ok">À vie</span>' : '') + '</div></div>' +
       '<p class="mc-sub mono">' + (g.vie ? 'Licence à vie' : (dessous || 'Licence')) + '</p>' +
       '<ul class="mc-rows">' + g.items.map(m =>
-        '<li><span>' + (m.formule || 'Licence') + '</span><b>' + DKR.euros(m.prix) + '<small>' + DKR.euros(avecCom(m.prix)) + ' avec commission</small></b>' +
+        '<li><span>' + (m.formule || 'Licence') + '</span><b>' + DKR.euros(avecCom(m.prix)) + '<small>commission et arrondi compris</small></b>' +
         '<button type="button" class="add" data-add="' + m.id + '" aria-label="Ajouter ' + m.nom + ' au panier"><i class="fa-solid fa-cart-plus"></i> Ajouter</button></li>').join('') +
       '</ul></article>';
   }
@@ -84,14 +83,12 @@
   });
 
   function calcul() {
-    const sous = DKRPanier.total(DKRPanier.liste());
-    const com = arrondi(sous * COM.pourcent / 100);
-    return { sous, com, total: arrondi(sous + com) };
+    return DKRPanier.totalAvecCommission();
   }
   function majTotal() {
     const k = calcul();
     $('#cart-lines').innerHTML = '<div><span>Sous-total</span><span>' + DKR.euros(k.sous) + '</span></div>' +
-      (COM.pourcent ? '<div><span>' + COM.libelle + ' ' + COM.pourcent + ' % (' + COM.detail + ')</span><span>' + DKR.euros(k.com) + '</span></div>' : '');
+      (COM.pourcent ? '<div><span>Commission et arrondi (' + COM.detail + ')</span><span>' + DKR.euros(k.com) + '</span></div>' : '');
     $('#cart-total').textContent = DKR.euros(k.total);
   }
   DKRPanier.surChangement(liste => {

@@ -32,7 +32,7 @@ window.DKR_CATALOGUE = {
     detail: "Les commandes passées avant cette date gardent l'ancien prix.",
     prix: {
       bronze: 8, argent: 13, or: 19, platine: 26, ultime: 70,
-      'compte-simple': 23, 'compte-complet': 35,
+      'compte-simple': 16, 'compte-complet': 22,
       m20: 5, m30: 7, m50: 10
     }
   },
@@ -89,21 +89,21 @@ window.DKR_CATALOGUE = {
       id: 'argent', nom: 'Pack Argent', badge: 'Argent', style: 'silver',
       prix: 10, prixPromo: 7,
       argent: '100 000 000$', delai: '4 jours', vehicules: 10, tenues: 10, rp: '200', stats: true,
-      bonus: ['Déblocages RP'],
+      bonus: ['Déblocages RP', 'Toutes les armes'],
       info: 'Réalisé sur votre compte'
     },
     {
       id: 'or', nom: 'Pack Or', badge: 'Or', style: 'gold',
       prix: 15, prixPromo: 11,
       argent: '150 000 000$', delai: '5 jours', vehicules: 15, tenues: 15, rp: 'Au choix', stats: true,
-      bonus: ['Déblocages', 'Toutes les armes'],
+      bonus: ['Déblocages RP', 'Toutes les armes', 'Business'],
       info: 'Réalisé sur votre compte'
     },
     {
       id: 'platine', nom: 'Pack Platine', badge: 'Platine', style: 'plat',
       prix: 20, prixPromo: 14,
       argent: '200 000 000$', delai: '7 jours', vehicules: 20, tenues: '20 (max)', rp: 'Au choix', stats: true,
-      bonus: ['Tous déblocages', 'Manoirs', 'Armes', 'Business'],
+      bonus: ['Tous déblocages', 'Déblocages RP', 'Toutes les armes', 'Manoirs', 'Business'],
       info: 'Réalisé sur votre compte'
     },
     {
@@ -167,13 +167,13 @@ window.DKR_CATALOGUE = {
   comptes: [
     {
       id: 'compte-complet', nom: 'Compte Complet',
-      description: 'Compte fourni avec jeu inclus + 30M offerts + RP 120.',
-      prix: 30, prixPromo: 22
+      description: 'Compte fourni avec jeu inclus + 30M GTA$ + RP 120 + stats max.',
+      prix: 22
     },
     {
       id: 'compte-simple', nom: 'Option Compte Simple',
       description: 'Compte fourni avec le jeu inclus.',
-      prix: 20, prixPromo: 14
+      prix: 16
     }
   ]
 };
@@ -258,6 +258,12 @@ window.DKR = {
     if (!max && !cf.fixeCommande) return 'Le prix affiché est celui que tu paies : <strong>aucun frais</strong> n\'est ajouté.';
     if (DKR.fraisActifs()) return 'Il y a ' + regle + '. Ils sont affichés dans une bulle à côté de chaque prix, et le total est toujours indiqué.';
     return '<strong>Aucun frais</strong> pour le moment. ' + c.nouveauxTarifs.annonce.replace(/^Nouveaux tarifs à partir/, 'À partir') + ', il y aura ' + regle + ', affichés à côté de chaque prix.';
+  },
+
+  // Prix final arrondi par article : identique sur les cartes et pour plusieurs unités au panier.
+  prixAvecCommission: function (prix) {
+    var taux = (window.DKR_CATALOGUE.commission || {}).pourcent || 0;
+    return Math.ceil(prix * (1 + taux / 100) - 0.00000001);
   },
 
   // Affichage d'un montant : "9€" ou "9,27€"
