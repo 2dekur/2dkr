@@ -1,5 +1,5 @@
 // POST /api/resend-verification  body: { email }
-import { json, aleatoire } from '../../../lib/auth.js';
+import { json, aleatoire } from '../../lib/auth.js';
 
 export async function onRequestPost({ request, env }) {
   if (!env.DB) return json({ ok: false, error: 'db_missing' }, 500);
