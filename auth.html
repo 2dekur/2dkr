@@ -342,7 +342,7 @@
       const res = await fetch('/api/login', {
         method: 'POST', credentials: 'same-origin',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password: pass })
+        body: JSON.stringify({ email, password: pass, remember: document.getElementById('remember-me').checked })
       });
       const d = await res.json();
       if (res.ok && d.ok) {

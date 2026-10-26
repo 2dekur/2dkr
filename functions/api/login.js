@@ -1,4 +1,6 @@
-// POST /api/login  body: { email, password }
+// POST /api/login  body: { email, password, remember? }
+// remember=true  → persistent cookie 14 days
+// remember=false → session cookie (expires on browser close)
 import { json, signerSession, creerCookie, CONFIG } from '../../lib/auth.js';
 
 const ENC = new TextEncoder();
@@ -19,8 +21,9 @@ export async function onRequestPost({ request, env }) {
   let body;
   try { body = await request.json(); } catch { return json({ ok: false, error: 'invalid_json' }, 400); }
 
-  const email = String(body.email || '').toLowerCase().trim();
+  const email    = String(body.email    || '').toLowerCase().trim();
   const password = String(body.password || '');
+  const remember = !!body.remember;
 
   if (!email || !password) return json({ ok: false, error: 'invalid_credentials' }, 400);
 
@@ -34,7 +37,8 @@ export async function onRequestPost({ request, env }) {
   const hash = await hashPwd(password, row.password_salt);
   if (hash !== row.password_hash) return json({ ok: false, error: 'invalid_credentials' }, 401);
 
-  const exp = Math.floor(Date.now() / 1000) + CONFIG.SESSION_SECONDES;
+  const sessionSec = remember ? CONFIG.SESSION_SECONDES : 2 * 3600;
+  const exp = Math.floor(Date.now() / 1000) + sessionSec;
   const token = await signerSession({
     id: row.id,
     nom: row.name,
@@ -44,7 +48,10 @@ export async function onRequestPost({ request, env }) {
     exp
   }, env.SESSION_SECRET);
 
-  const cookie = creerCookie(CONFIG.SESSION_COOKIE, token, { secondes: CONFIG.SESSION_SECONDES });
+  // remember=true → Max-Age 14 days; remember=false → session cookie (no Max-Age)
+  const cookie = remember
+    ? creerCookie(CONFIG.SESSION_COOKIE, token, { secondes: sessionSec })
+    : `${CONFIG.SESSION_COOKIE}=${token}; Path=/; HttpOnly; Secure; SameSite=Lax`;
 
   return json({ ok: true }, 200, { 'Set-Cookie': cookie });
 }
