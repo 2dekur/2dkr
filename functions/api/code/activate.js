@@ -57,6 +57,7 @@ export async function onRequestPost({ request, env }) {
     if (used) return json({ ok: false, error: 'key_already_used' }, 400);
   }
 
+  const k = code.replace(/-/g, '').toUpperCase();
   const displayKey    = k.slice(0,8)+'-'+k.slice(8,16)+'-'+k.slice(16,24)+'-'+k.slice(24);
   const key_expires_at = expiry === LIFETIME ? null : Number(expiry);
   const updated = { ...session, verifie: true, active_key: displayKey, key_expires_at };
