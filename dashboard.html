@@ -370,10 +370,11 @@ body { background: var(--bg); color: var(--text); font-family: 'Archivo', sans-s
         <div class="stat-val" id="stat-role">—</div>
         <div class="stat-label">Ton rôle</div>
       </div>
-      <div class="stat-card">
+      <div class="stat-card" id="stat-card-keys" style="cursor:pointer" onclick="nav(document.querySelector('[data-page=keys]'))">
         <div class="stat-icon"><i class="fa-solid fa-key"></i></div>
         <div class="stat-val" id="stat-keys">—</div>
-        <div class="stat-label">Clés actives</div>
+        <div class="stat-label">Clé valide</div>
+        <div id="stat-keys-btn" style="display:none;margin-top:8px;font-size:.75rem;color:var(--gold);text-decoration:underline">Activer ma clé →</div>
       </div>
       <div class="stat-card">
         <div class="stat-icon"><i class="fa-solid fa-circle-check"></i></div>
@@ -529,14 +530,36 @@ function copyKey(key) {
   setTimeout(() => { event.target.textContent = 'Copier'; }, 1500);
 }
 
-function activateKey() {
+async function activateKey() {
   const val = document.getElementById('key-input').value.trim().toUpperCase();
   const msg = document.getElementById('key-msg');
   if (!val) { msg.style.color = '#e55'; msg.textContent = 'Saisis une clé.'; return; }
   msg.style.color = 'var(--muted)';
   msg.textContent = 'Vérification…';
-  // TODO: POST /api/code/check then /api/code/use
-  setTimeout(() => { msg.style.color = '#e55'; msg.textContent = 'Clé invalide ou déjà utilisée.'; }, 800);
+  try {
+    const chk = await fetch('/api/code/check', {
+      method: 'POST', credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code: val })
+    }).then(r => r.json());
+    if (!chk.ok) {
+      const raisons = { connexion: 'Connecte-toi pour activer.', client_verifie: 'Clé déjà activée sur ce compte.', deja_utilise: 'Code déjà utilisé.' };
+      msg.style.color = '#e55';
+      msg.textContent = raisons[chk.raison] || 'Clé invalide ou déjà utilisée.';
+      return;
+    }
+    await fetch('/api/code/use', {
+      method: 'POST', credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code: val })
+    });
+    msg.style.color = 'var(--gold)';
+    msg.textContent = '✓ Clé activée ! Recharge la page.';
+    document.getElementById('key-input').value = '';
+  } catch {
+    msg.style.color = '#e55';
+    msg.textContent = 'Erreur réseau. Réessaie.';
+  }
 }
 
 function logout() {
@@ -560,7 +583,14 @@ fetch('/api/me', { credentials: 'same-origin', cache: 'no-store' })
     document.getElementById('sb-tier').textContent = u.verifie ? 'Vérifié' : 'Standard';
     document.getElementById('w-name').textContent = u.nom || '—';
     document.getElementById('stat-role').textContent = u.verifie ? 'Vérifié' : 'Standard';
-    document.getElementById('stat-keys').textContent = '0';
+    if (u.verifie) {
+      document.getElementById('stat-keys').textContent = 'Active';
+      document.getElementById('stat-keys').style.color = 'var(--gold)';
+    } else {
+      document.getElementById('stat-keys').textContent = 'Aucune clé';
+      document.getElementById('stat-keys').style.color = 'var(--muted)';
+      document.getElementById('stat-keys-btn').style.display = 'block';
+    }
     document.getElementById('stat-verified').textContent = (u.email_verified || u.verifie) ? '✓ Vérifié' : 'En attente';
     document.getElementById('set-name').textContent = u.nom || '—';
     document.getElementById('set-email').textContent = u.email || '—';
