@@ -537,25 +537,21 @@ async function activateKey() {
   msg.style.color = 'var(--muted)';
   msg.textContent = 'Vérification…';
   try {
-    const chk = await fetch('/api/code/check', {
+    const res = await fetch('/api/code/activate', {
       method: 'POST', credentials: 'same-origin',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ code: val })
     }).then(r => r.json());
-    if (!chk.ok) {
-      const raisons = { connexion: 'Connecte-toi pour activer.', client_verifie: 'Clé déjà activée sur ce compte.', deja_utilise: 'Code déjà utilisé.' };
+    if (!res.ok) {
+      const msgs = { not_logged_in: 'Connecte-toi d\'abord.', invalid_key: 'Clé invalide.', key_expired: 'Clé expirée.' };
       msg.style.color = '#e55';
-      msg.textContent = raisons[chk.raison] || 'Clé invalide ou déjà utilisée.';
+      msg.textContent = msgs[res.error] || 'Erreur : ' + (res.error || 'inconnue');
       return;
     }
-    await fetch('/api/code/use', {
-      method: 'POST', credentials: 'same-origin',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ code: val })
-    });
     msg.style.color = 'var(--gold)';
-    msg.textContent = '✓ Clé activée ! Recharge la page.';
+    msg.textContent = '✓ Licence activée ! Recharge la page.';
     document.getElementById('key-input').value = '';
+    setTimeout(() => location.reload(), 1500);
   } catch {
     msg.style.color = '#e55';
     msg.textContent = 'Erreur réseau. Réessaie.';
