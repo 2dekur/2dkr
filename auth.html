@@ -340,15 +340,41 @@
     setTimeout(() => { window.location.href = '/dashboard'; }, 1200);
   }
 
-  function handleRegister(e) {
+  async function handleRegister(e) {
     e.preventDefault();
+    const first = document.getElementById('reg-first').value.trim();
+    const last  = document.getElementById('reg-last').value.trim();
+    const name  = (first + (last ? ' ' + last : '')).trim();
     const email = document.getElementById('reg-email').value.trim();
     const pass  = document.getElementById('reg-pass').value;
     const pass2 = document.getElementById('reg-pass2').value;
+    if (!name) { showAlert('First name required.', 'error'); return; }
     if (pass !== pass2) { showAlert('Passwords do not match.', 'error'); return; }
     if (pass.length < 8) { showAlert('Password must be at least 8 characters.', 'error'); return; }
-    // Stub: replace with real API call → POST /api/register { email, password }
-    showVerify(email);
+    const btn = e.target.querySelector('button[type=submit]');
+    const origText = btn ? btn.textContent : '';
+    if (btn) { btn.disabled = true; btn.textContent = 'Creating account…'; }
+    try {
+      const res = await fetch('/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, password: pass })
+      });
+      const d = await res.json();
+      if (d.ok) {
+        showVerify(email);
+      } else {
+        const msgs = {
+          email_taken: 'This email is already registered.',
+          email_invalid: 'Invalid email address.',
+          password_too_short: 'Password must be at least 8 characters.',
+          name_required: 'First name required.',
+          email_failed: 'Account created but email failed — try resending.'
+        };
+        showAlert(msgs[d.error] || 'Registration failed. Try again.', 'error');
+      }
+    } catch { showAlert('Connection error. Try again.', 'error'); }
+    finally { if (btn) { btn.disabled = false; btn.textContent = origText; } }
   }
 
   function showVerify(email) {
@@ -363,7 +389,7 @@
   }
 
   function resendVerif() {
-    // Stub: POST /api/resend-verification { email: window._verifyEmail }
+    fetch('/api/resend-verification', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ email: window._verifyEmail }) }).then(r=>r.json()).then(d=>{ if(d.ok) showAlert('Email resent!','ok'); else showAlert('Failed to resend.','error'); }).catch(()=>showAlert('Connection error.','error'));
     const n = document.querySelector('.resend-note');
     n.innerHTML = '<span style="color:var(--green)">Link resent! Check your inbox.</span>';
     setTimeout(() => { n.innerHTML = 'Didn\'t receive it? Check spam or <a onclick="resendVerif()">resend</a>.'; }, 4000);
