@@ -176,7 +176,7 @@ fetch('/api/me', { credentials: 'same-origin', cache: 'no-store' })
   .then(r => r.ok ? r.json() : { user: null })
   .catch(() => ({ user: null }))
   .then(d => {
-    if (d && d.user && d.user.verified) {
+    if (d && d.user && d.user.verified || d.user.email_verified) {
       document.getElementById('locked').hidden = true;
       document.getElementById('dl-section').hidden = false;
       // TODO: set actual download URL once KorzenLoader.exe is hosted
