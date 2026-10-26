@@ -68,6 +68,8 @@ export async function onRequestPost({ request, env }) {
   if (env.KEYS_KV) {
     const ttlSec = expiry === LIFETIME ? 10 * 365 * 86400 : Number(expiry - nowSec);
     await env.KEYS_KV.put(nonceKey, '1', { expirationTtl: ttlSec });
+    // Store active key by user ID so old session tokens can discover it via /api/me
+    await env.KEYS_KV.put('ak:' + session.id, JSON.stringify({ active_key: displayKey, key_expires_at }), { expirationTtl: ttlSec });
   }
 
   return json({ ok: true }, 200, { 'Set-Cookie': cookie });
