@@ -2,7 +2,7 @@
 // Env vars requis (Cloudflare Pages → Settings → Variables and Secrets) :
 //   RESEND_API_KEY   clé API Resend
 //   DB               base D1 liée au projet
-import { json, aleatoire } from '../../../lib/auth.js';
+import { json, aleatoire } from '../../lib/auth.js';
 
 const ENC = new TextEncoder();
 
