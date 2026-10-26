@@ -587,6 +587,31 @@ fetch('/api/me', { credentials: 'same-origin', cache: 'no-store' })
       document.getElementById('stat-keys').style.color = 'var(--muted)';
       document.getElementById('stat-keys-btn').style.display = 'block';
     }
+    // Clés actives
+    if (u.active_key) {
+      const isLifetime = u.key_expires_at === null || u.key_expires_at === undefined;
+      let typeLabel = 'Lifetime';
+      if (!isLifetime && u.key_expires_at) {
+        const diff = u.key_expires_at - Math.floor(Date.now() / 1000);
+        if (diff > 0) {
+          const d = Math.floor(diff / 86400), h = Math.floor((diff % 86400) / 3600);
+          typeLabel = d > 0 ? `${d}j ${h}h restants` : `${h}h restantes`;
+        } else { typeLabel = 'Expirée'; }
+      }
+      document.getElementById('keys-list').innerHTML =
+        `<div class="key-display"><span>${u.active_key}</span>
+         <button class="btn-copy" onclick="navigator.clipboard.writeText('${u.active_key}');this.textContent='Copié!';setTimeout(()=>this.textContent='Copier',1500)">Copier</button></div>
+         <div class="key-meta"><span>Statut<strong>Active</strong></span><span>Type<strong>${typeLabel}</strong></span></div>`;
+      // Locker le formulaire uniquement si lifetime
+      if (isLifetime) {
+        const ki = document.getElementById('key-input');
+        const kb = document.querySelector('[onclick="activateKey()"]');
+        if (ki) ki.disabled = true;
+        if (kb) kb.disabled = true;
+        document.getElementById('key-msg').style.color = 'var(--gold)';
+        document.getElementById('key-msg').textContent = 'Clé lifetime active — remplacement impossible.';
+      }
+    }
     document.getElementById('stat-verified').textContent = (u.email_verified || u.verifie) ? '✓ Vérifié' : 'En attente';
     document.getElementById('set-name').textContent = u.nom || '—';
     document.getElementById('set-email').textContent = u.email || '—';

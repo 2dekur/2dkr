@@ -8,7 +8,8 @@ export async function onRequestGet({ request, env }) {
   if (s.provider === 'email') {
     return json({ configured: true, user: {
       nom: s.nom, email: s.email, email_verified: !!s.email_verified,
-      avatar: urlAvatar(null), membre: false, verifie: !!s.verifie
+      avatar: urlAvatar(null), membre: false, verifie: !!s.verifie,
+      active_key: s.active_key || null, key_expires_at: s.key_expires_at ?? null
     } });
   }
   return json({
