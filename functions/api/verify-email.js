@@ -1,5 +1,5 @@
 // GET /api/verify-email?token=xxx
-import { json, redirection } from '../../../lib/auth.js';
+import { json, redirection } from '../../lib/auth.js';
 
 export async function onRequestGet({ request, env }) {
   if (!env.DB) return json({ ok: false, error: 'db_missing' }, 500);
