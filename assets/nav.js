@@ -149,7 +149,18 @@ window.DKRAuth = (function () {
     .catch(function () { return { configured: false }; })
     .then(function (d) {
       etat = { pret: true, configured: !!d.configured, user: d.user || null };
-      monter();
+      if (!etat.configured) {
+        ['auth-login', 'auth-login-m'].forEach(function (id) {
+          var el = document.getElementById(id);
+          if (!el) return;
+          el.href = '/auth.html';
+          var ico = el.querySelector('.fa-discord');
+          if (ico) { ico.className = 'fa-solid fa-user'; }
+          el.removeAttribute('hidden');
+        });
+      } else {
+        monter();
+      }
       notifier();
       return etat;
     });
