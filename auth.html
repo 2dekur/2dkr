@@ -330,14 +330,33 @@
     document.getElementById('alert').className = 'alert';
   }
 
-  function handleLogin(e) {
+  async function handleLogin(e) {
     e.preventDefault();
     const email = document.getElementById('login-email').value.trim();
     const pass  = document.getElementById('login-password').value;
     if (!email || !pass) { showAlert('Email and password are required.', 'error'); return; }
-    // Stub: replace with real API call
-    showAlert('Signed in successfully! Redirecting...', 'success');
-    setTimeout(() => { window.location.href = '/dashboard'; }, 1200);
+    const btn = e.target.querySelector('button[type=submit]');
+    const origText = btn ? btn.textContent : '';
+    if (btn) { btn.disabled = true; btn.textContent = 'Signing in…'; }
+    try {
+      const res = await fetch('/api/login', {
+        method: 'POST', credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password: pass })
+      });
+      const d = await res.json();
+      if (res.ok && d.ok) {
+        window.location.href = '/dashboard';
+      } else {
+        const msgs = {
+          invalid_credentials: 'Incorrect email or password.',
+          email_unverified: 'Verify your email before signing in.',
+          not_configured: 'Sign-in is temporarily unavailable.'
+        };
+        showAlert(msgs[d.error] || 'Sign-in failed. Try again.', 'error');
+      }
+    } catch { showAlert('Connection error. Try again.', 'error'); }
+    finally { if (btn) { btn.disabled = false; btn.textContent = origText; } }
   }
 
   async function handleRegister(e) {

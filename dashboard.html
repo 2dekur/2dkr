@@ -561,10 +561,10 @@ fetch('/api/me', { credentials: 'same-origin', cache: 'no-store' })
     document.getElementById('w-name').textContent = u.nom || '—';
     document.getElementById('stat-role').textContent = u.verifie ? 'Vérifié' : 'Standard';
     document.getElementById('stat-keys').textContent = '0';
-    document.getElementById('stat-verified').textContent = u.verifie ? '✓ Vérifié' : 'En attente';
+    document.getElementById('stat-verified').textContent = (u.email_verified || u.verifie) ? '✓ Vérifié' : 'En attente';
     document.getElementById('set-name').textContent = u.nom || '—';
-    document.getElementById('set-email').textContent = '—'; // not exposed via /api/me
-    document.getElementById('set-verified').textContent = u.verifie ? 'Compte vérifié ✓' : 'Email non vérifié';
+    document.getElementById('set-email').textContent = u.email || '—';
+    document.getElementById('set-verified').textContent = (u.email_verified || u.verifie) ? 'Compte vérifié ✓' : 'Email non vérifié';
   });
 </script>
 </body>

@@ -3,17 +3,7 @@
 //   RESEND_API_KEY   clé API Resend
 //   DB               base D1 liée au projet
 import { json, aleatoire } from '../../lib/auth.js';
-
-const ENC = new TextEncoder();
-
-async function hashPwd(password, salt) {
-  const key = await crypto.subtle.importKey('raw', ENC.encode(password), 'PBKDF2', false, ['deriveBits']);
-  const bits = await crypto.subtle.deriveBits(
-    { name: 'PBKDF2', hash: 'SHA-256', salt: ENC.encode(salt), iterations: 100000 },
-    key, 256
-  );
-  return btoa(String.fromCharCode(...new Uint8Array(bits)));
-}
+import { hashPwd } from '../../lib/password.js';
 
 async function initTable(db) {
   await db.prepare(`CREATE TABLE IF NOT EXISTS korzen_users (
