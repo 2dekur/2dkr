@@ -19,6 +19,12 @@
 
 window.DKR_CATALOGUE = {
 
+  halloween: {
+    debut: '2026-10-25T00:00:00+02:00',
+    fin: '2026-11-01T00:00:00+01:00',
+    reduction: 10
+  },
+
   promo: {
     titre: 'Promo Septembre',
     reduction: "jusqu'à -30%",
@@ -258,6 +264,25 @@ window.DKR = {
     if (!max && !cf.fixeCommande) return 'Le prix affiché est celui que tu paies : <strong>aucun frais</strong> n\'est ajouté.';
     if (DKR.fraisActifs()) return 'Il y a ' + regle + '. Ils sont affichés dans une bulle à côté de chaque prix, et le total est toujours indiqué.';
     return '<strong>Aucun frais</strong> pour le moment. ' + c.nouveauxTarifs.annonce.replace(/^Nouveaux tarifs à partir/, 'À partir') + ', il y aura ' + regle + ', affichés à côté de chaque prix.';
+  },
+
+  halloweenActif: function (instant) {
+    var h = window.DKR_CATALOGUE.halloween;
+    var t = instant == null ? Date.now() : instant;
+    return !!h && t >= Date.parse(h.debut) && t < Date.parse(h.fin);
+  },
+
+  halloweenEligible: function (item) {
+    var c = window.DKR_CATALOGUE;
+    return c.packs.concat(c.comptes).some(function (a) { return a.id === item.id; }) ||
+      c.options.some(function (g) { return g.items.some(function (a) { return a.id === item.id; }); });
+  },
+
+  prixFinalArticle: function (item) {
+    var normal = DKR.prixAvecCommission(DKR.prixDe(item) + DKR.fraisDe(item));
+    if (!DKR.halloweenActif() || !DKR.halloweenEligible(item)) return normal;
+    // Arrondi en faveur du client : au moins 10 %, sans réintroduire de centimes.
+    return Math.floor(normal * (1 - window.DKR_CATALOGUE.halloween.reduction / 100) + 0.00000001);
   },
 
   // Prix final arrondi par article : identique sur les cartes et pour plusieurs unités au panier.

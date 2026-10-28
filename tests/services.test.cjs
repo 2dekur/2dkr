@@ -22,6 +22,7 @@ context.window = context;
 context.addEventListener = () => {};
 for (const f of ['assets/catalogue.js', 'assets/panier.js', 'assets/services.js']) {
   vm.runInContext(fs.readFileSync(path.join(root, f), 'utf8'), context, { filename: f });
+  if (f === 'assets/catalogue.js') context.DKR.halloweenActif = () => false;
 }
 assert.equal((node('#sv-packs').innerHTML.match(/<article /g) || []).length, 5);
 for (const total of ['10€', '16€', '23€', '32€', '84€']) {

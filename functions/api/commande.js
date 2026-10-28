@@ -26,7 +26,7 @@ export async function onRequestPost({ request, env }) {
       { name: 'E-mail', value: email, inline: true },
       { name: 'Paiement', value: court(c.paiement, 40) || '—', inline: true },
       { name: 'Articles', value: lignes || '—' },
-      { name: 'Total', value: euros(c.total) + ' (dont commission ' + euros(c.commission) + ')' }
+      { name: 'Total', value: euros(c.total) + ' (dont commission ' + euros(c.commission) + ')' + (Number(c.reductionHalloween) > 0 ? '\nRemise Halloween : −' + euros(c.reductionHalloween) : '') }
     ],
     timestamp: new Date().toISOString()
   };

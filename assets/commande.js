@@ -35,6 +35,11 @@
     $('#co-sous').textContent = DKR.euros(k.sous);
     $('#co-com-l').textContent = 'Commission et arrondi (' + COM.detail + ')';
     $('#co-com').textContent = DKR.euros(k.com);
+    const discountRow = $('#co-discount-row');
+    if (discountRow) {
+      discountRow.hidden = !k.reductionHalloween;
+      $('#co-discount').textContent = '−' + DKR.euros(k.reductionHalloween);
+    }
     $('#co-total').textContent = DKR.euros(k.total);
     $('#co-payer').innerHTML = '<i class="fa-solid fa-lock"></i> Valider la commande · ' + DKR.euros(k.total);
   }
@@ -48,6 +53,7 @@
     if (b.dataset.tout) { let i; while ((i = DKRPanier.liste().map(a => a.id).lastIndexOf(b.dataset.tout)) > -1) DKRPanier.retirer(i); }
   });
   DKRPanier.surChangement(rendre);
+  document.addEventListener('dkr:seasonchange', rendre);
 
   // Pseudo Discord déjà connu si le client est connecté avec Discord
   window.addEventListener('DOMContentLoaded', () => {
@@ -68,12 +74,14 @@
     const moyen = f.paiement.value;
     const cmd = {
       numero: num, email: f.email.value.trim(), discord: f.discord.value.trim(), paiement: MOYENS[moyen],
-      articles: ls.map(l => ({ nom: l.nom, prix: l.prix, qte: l.qte })), sous: k.sous, commission: k.com, total: k.total
+      articles: ls.map(l => ({ nom: l.nom, prix: l.prix, qte: l.qte })), sous: k.sous, commission: k.com, reductionHalloween: k.reductionHalloween, total: k.total
     };
     const NL = String.fromCharCode(10);
     const txt = ['🛒 Commande DekurMods ' + num, '', 'Discord : ' + cmd.discord, 'E-mail : ' + cmd.email, 'Paiement : ' + cmd.paiement, '']
       .concat(ls.map(l => '• ' + l.nom + (l.qte > 1 ? ' ×' + l.qte : '') + ' — ' + DKR.euros(arrondi(l.prix * l.qte))))
-      .concat(['', 'Sous-total : ' + DKR.euros(k.sous), 'Commission et arrondi (' + COM.detail + ') : +' + DKR.euros(k.com), 'Total : ' + DKR.euros(k.total)])
+      .concat(['', 'Sous-total : ' + DKR.euros(k.sous), 'Commission et arrondi (' + COM.detail + ') : +' + DKR.euros(k.com)])
+      .concat(k.reductionHalloween ? ['Remise Halloween : −' + DKR.euros(k.reductionHalloween)] : [])
+      .concat(['Total : ' + DKR.euros(k.total)])
       .join(NL);
 
     const btn = $('#co-payer'); btn.disabled = true;

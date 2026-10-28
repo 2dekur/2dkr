@@ -88,7 +88,8 @@
   function majTotal() {
     const k = calcul();
     $('#cart-lines').innerHTML = '<div><span>Sous-total</span><span>' + DKR.euros(k.sous) + '</span></div>' +
-      (COM.pourcent ? '<div><span>Commission et arrondi (' + COM.detail + ')</span><span>' + DKR.euros(k.com) + '</span></div>' : '');
+      (COM.pourcent ? '<div><span>Commission et arrondi (' + COM.detail + ')</span><span>' + DKR.euros(k.com) + '</span></div>' : '') +
+      (k.reductionHalloween ? '<div class="hw-discount-line"><span>Remise Halloween</span><span>−' + DKR.euros(k.reductionHalloween) + '</span></div>' : '');
     $('#cart-total').textContent = DKR.euros(k.total);
   }
   DKRPanier.surChangement(liste => {
@@ -98,6 +99,7 @@
       '<li><span>' + a.nom + '</span><b>' + DKR.euros(a.prix) + '</b><button type="button" data-del="' + i + '" aria-label="Retirer ' + a.nom + '"><i class="fa-solid fa-trash-can"></i></button></li>').join('');
     majTotal();
   });
+  document.addEventListener('dkr:seasonchange', majTotal);
   $('#cart-list').addEventListener('click', e => {
     const b = e.target.closest('[data-del]'); if (b) DKRPanier.retirer(+b.dataset.del);
   });

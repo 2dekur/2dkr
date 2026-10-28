@@ -203,10 +203,14 @@
       var sous = DKRPanier.total(liste);
       var base = somme(liste, 'prix') + somme(liste, 'frais');
       var taux = (DKR.catalogue.commission || {}).pourcent || 0;
-      var total = liste.reduce(function (n, a) { return n + DKR.prixAvecCommission(a.prix + a.frais); }, 0);
+      var normal = liste.reduce(function (n, a) { return n + DKR.prixAvecCommission(a.prix + a.frais); }, 0);
+      var reductionHalloween = liste.reduce(function (n, a) {
+        return n + DKR.prixAvecCommission(a.prix + a.frais) - DKR.prixFinalArticle(a);
+      }, 0);
       // Les remises et frais de commande existants restent pris en compte.
-      total = Math.max(0, Math.ceil(total + (sous - base) * (1 + taux / 100) - 0.00000001));
-      return { sous: sous, com: Math.round((total - sous) * 100) / 100, total: total };
+      normal = Math.max(0, Math.ceil(normal + (sous - base) * (1 + taux / 100) - 0.00000001));
+      var total = Math.max(0, normal - reductionHalloween);
+      return { sous: sous, com: Math.round((normal - sous) * 100) / 100, reductionHalloween: reductionHalloween, total: total };
     },
     ajouter: function (id) {
       var item = trouver(id);

@@ -4,11 +4,16 @@
   const money = DKR.euros;
   const esc = v => String(v).replace(/[&<>"']/g, x => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[x]));
   const commission = (c.commission || {}).pourcent || 0;
-  const total = item => DKR.prixAvecCommission(DKR.prixDe(item) + DKR.fraisDe(item));
+  const total = DKR.prixFinalArticle;
   const add = item => '<button class="btn sv-add" type="button" data-service-add="' + esc(item.id) + '">Ajouter au panier <i class="fa-solid fa-plus" aria-hidden="true"></i></button>';
-  const price = item => '<div class="sv-price"><strong>' + money(total(item)) + '</strong><span>commission comprise</span><small>' + money(DKR.prixDe(item)) + ' + commission et arrondi</small></div>';
+  const price = item => {
+    const normal = DKR.prixAvecCommission(DKR.prixDe(item) + DKR.fraisDe(item));
+    const reduced = total(item) < normal;
+    return '<div class="sv-price">' + (reduced ? '<div class="hw-price-before"><s>' + money(normal) + '</s><span>−10 %</span></div>' : '') + '<strong>' + money(total(item)) + '</strong><span>commission comprise</span><small>' + (reduced ? 'Offre Halloween · jusqu’au 31 octobre inclus' : money(DKR.prixDe(item)) + ' + commission et arrondi') + '</small></div>';
+  };
   const feature = (label, value) => '<li><span>' + label + '</span><b>' + esc(value) + '</b></li>';
 
+  function rendre() {
   document.querySelector('#sv-packs').innerHTML = c.packs.map((p,i) => '<article class="sv-pack sv-' + esc(p.style) + '">' +
     '<div class="sv-pack-top"><span class="mono">FORMULE 0' + (i+1) + '</span><span class="sv-tier">' + (p.compteNeuf ? 'Compte + jeu inclus' : 'Ton compte') + '</span></div>' +
     '<h3>' + esc(p.nom.replace('Pack ','')) + '</h3><p class="sv-cash">' + esc(p.argent.replace(' 000 000$', 'M')) + '<span> GTA$</span></p>' +
@@ -23,6 +28,9 @@
   document.querySelector('#sv-accounts').innerHTML = c.comptes.map(a=>'<article class="sv-account"><div><span class="mono">Compte fourni</span><h3>'+esc(a.nom)+'</h3><p>'+esc(a.description)+'</p></div><div>'+price(a)+add(a)+'</div></article>').join('');
   document.querySelectorAll('.sv-commission').forEach(e=>e.textContent=commission+' %');
   document.querySelector('#sv-from').textContent=money(Math.min(...c.packs.map(total)));
+  }
+  rendre();
+  document.addEventListener('dkr:seasonchange', rendre);
 
   document.querySelector('main').addEventListener('click', e => {
     const b=e.target.closest('[data-service-add]');
