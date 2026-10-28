@@ -1,0 +1,622 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — Korzen</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon-or.svg?v=b1832d8d" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root {
+  --gold: #d4af37;
+  --gold-hi: #f0cd55;
+  --gold-dim: rgba(212,175,55,.12);
+  --gold-border: rgba(212,175,55,.2);
+  --bg: #080705;
+  --bg2: #0e0c08;
+  --bg3: #141208;
+  --sidebar-w: 220px;
+  --text: #e8dfc8;
+  --muted: #6b6045;
+  color-scheme: dark;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--text); font-family: 'Archivo', sans-serif; min-height: 100dvh; display: flex; }
+
+/* ── Sidebar ── */
+.sidebar {
+  width: var(--sidebar-w);
+  min-height: 100dvh;
+  background: var(--bg2);
+  border-right: 1px solid var(--gold-border);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  z-index: 100;
+  overflow-y: auto;
+}
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 24px 20px 20px;
+  border-bottom: 1px solid var(--gold-border);
+  margin-bottom: 8px;
+}
+.sidebar-logo svg { width: 32px; height: 32px; flex-shrink: 0; }
+.sidebar-logo-name { font-weight: 800; font-size: 1.1rem; letter-spacing: .12em; color: var(--gold); text-transform: uppercase; }
+.sidebar-logo-sub { font-size: .65rem; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
+
+.nav-section-label {
+  font-size: .65rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 16px 20px 6px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: .875rem;
+  font-weight: 500;
+  border-radius: 0;
+  transition: color .15s, background .15s;
+  cursor: pointer;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+}
+.nav-item:hover { color: var(--text); background: var(--gold-dim); }
+.nav-item.active { color: var(--gold); background: var(--gold-dim); border-left: 2px solid var(--gold); }
+.nav-item i { width: 16px; text-align: center; font-size: .85rem; }
+
+.sidebar-user {
+  margin-top: auto;
+  padding: 16px 20px;
+  border-top: 1px solid var(--gold-border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.avatar {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--gold-dim);
+  border: 1px solid var(--gold-border);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; color: var(--gold); font-size: .85rem;
+  flex-shrink: 0;
+}
+.user-info { min-width: 0; }
+.user-name { font-size: .85rem; font-weight: 600; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.user-tier { font-size: .7rem; color: var(--gold); font-family: 'JetBrains Mono', monospace; }
+.btn-logout {
+  margin-left: auto;
+  background: none; border: none; color: var(--muted); cursor: pointer; font-size: .85rem;
+  padding: 4px; border-radius: 4px; transition: color .15s;
+}
+.btn-logout:hover { color: #e55; }
+
+/* ── Main ── */
+.main {
+  margin-left: var(--sidebar-w);
+  flex: 1;
+  padding: 32px 36px;
+  max-width: 1200px;
+}
+.page { display: none; }
+.page.active { display: block; }
+
+/* ── Dashboard page ── */
+.welcome {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: var(--bg2);
+  border: 1px solid var(--gold-border);
+  border-radius: 14px;
+  padding: 28px 32px;
+  margin-bottom: 28px;
+}
+.welcome-icon { flex-shrink: 0; }
+.welcome-icon svg { width: 56px; height: 56px; }
+.welcome-sub { font-size: .8rem; color: var(--muted); font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 4px; }
+.welcome h2 { font-size: 1.8rem; font-weight: 800; }
+.welcome h2 span { color: var(--gold); }
+
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 28px;
+}
+.stat-card {
+  background: var(--bg2);
+  border: 1px solid var(--gold-border);
+  border-radius: 12px;
+  padding: 20px 22px;
+  text-align: center;
+}
+.stat-icon { font-size: 1rem; color: var(--gold); margin-bottom: 10px; opacity: .7; }
+.stat-val { font-size: 1.4rem; font-weight: 800; color: var(--text); margin-bottom: 2px; }
+.stat-label { font-size: .72rem; color: var(--muted); }
+
+.section-title {
+  font-size: .7rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-family: 'JetBrains Mono', monospace;
+  margin-bottom: 14px;
+  padding-left: 4px;
+  border-left: 2px solid var(--gold);
+  padding-left: 10px;
+}
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 28px;
+}
+.quick-card {
+  background: var(--bg2);
+  border: 1px solid var(--gold-border);
+  border-radius: 12px;
+  padding: 22px;
+  cursor: pointer;
+  transition: border-color .15s, background .15s;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+.quick-card:hover { border-color: var(--gold); background: var(--bg3); }
+.quick-card-icon {
+  width: 38px; height: 38px;
+  background: var(--gold-dim);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--gold); font-size: .9rem;
+  margin-bottom: 14px;
+}
+.quick-card h3 { font-size: .9rem; font-weight: 700; margin-bottom: 4px; }
+.quick-card p { font-size: .75rem; color: var(--muted); }
+
+/* ── Download page ── */
+.dl-hero {
+  background: var(--bg2);
+  border: 1px solid var(--gold-border);
+  border-radius: 14px;
+  padding: 40px;
+  margin-bottom: 24px;
+  text-align: center;
+}
+.dl-hero h2 { font-size: 1.6rem; font-weight: 800; color: var(--gold); margin-bottom: 8px; }
+.dl-hero p { color: var(--muted); margin-bottom: 28px; }
+.dl-info-row { display: flex; justify-content: center; gap: 24px; margin-bottom: 28px; flex-wrap: wrap; }
+.dl-info-item { font-size: .78rem; }
+.dl-info-item span { color: var(--muted); }
+.dl-info-item strong { color: var(--text); margin-left: 6px; }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 32px;
+  background: var(--gold); color: var(--bg);
+  border: none; border-radius: 8px;
+  font-family: 'Archivo', sans-serif; font-size: .95rem; font-weight: 700;
+  cursor: pointer; text-decoration: none;
+  transition: background .15s;
+}
+.btn-primary:hover { background: var(--gold-hi); }
+.dl-note { font-size: .75rem; color: var(--muted); margin-top: 12px; }
+.dl-note a { color: var(--gold); text-decoration: none; }
+.changelog {
+  background: var(--bg2); border: 1px solid var(--gold-border);
+  border-radius: 12px; padding: 24px;
+}
+.changelog h3 { font-size: .85rem; font-weight: 700; margin-bottom: 16px; color: var(--gold); font-family: 'JetBrains Mono', monospace; }
+.changelog-item { display: flex; gap: 12px; margin-bottom: 12px; font-size: .82rem; }
+.cl-ver { color: var(--gold); font-family: 'JetBrains Mono', monospace; font-size: .7rem; white-space: nowrap; padding-top: 1px; }
+.cl-text { color: var(--muted); line-height: 1.5; }
+.cl-text strong { color: var(--text); }
+
+/* ── Keys page ── */
+.key-card {
+  background: var(--bg2); border: 1px solid var(--gold-border);
+  border-radius: 12px; padding: 24px; margin-bottom: 14px;
+}
+.key-card h3 { font-size: .85rem; color: var(--muted); margin-bottom: 12px; font-family: 'JetBrains Mono', monospace; }
+.key-display {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--bg3); border: 1px solid var(--gold-border);
+  border-radius: 8px; padding: 12px 16px;
+  font-family: 'JetBrains Mono', monospace; font-size: .85rem; color: var(--gold);
+  margin-bottom: 14px;
+}
+.key-display span { flex: 1; letter-spacing: .04em; }
+.btn-copy {
+  background: var(--gold-dim); border: 1px solid var(--gold-border); color: var(--gold);
+  padding: 6px 14px; border-radius: 6px; font-size: .75rem; cursor: pointer; font-family: 'Archivo', sans-serif;
+  transition: background .15s;
+}
+.btn-copy:hover { background: var(--gold); color: var(--bg); }
+.key-meta { display: flex; gap: 20px; font-size: .78rem; }
+.key-meta span { color: var(--muted); }
+.key-meta strong { color: var(--text); margin-left: 4px; }
+.badge-gold { display: inline-block; background: var(--gold-dim); border: 1px solid var(--gold-border); color: var(--gold); padding: 2px 8px; border-radius: 4px; font-size: .7rem; font-family: 'JetBrains Mono', monospace; }
+
+/* ── Status page ── */
+.status-grid { display: flex; flex-direction: column; gap: 12px; }
+.status-item {
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--bg2); border: 1px solid var(--gold-border);
+  border-radius: 10px; padding: 16px 20px;
+}
+.status-left { display: flex; align-items: center; gap: 12px; }
+.status-dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 8px #22c55e80; }
+.status-name { font-size: .88rem; font-weight: 600; }
+.status-desc { font-size: .74rem; color: var(--muted); margin-top: 2px; }
+.status-tag { font-size: .72rem; font-family: 'JetBrains Mono', monospace; color: #22c55e; }
+
+/* ── Settings page ── */
+.settings-section { background: var(--bg2); border: 1px solid var(--gold-border); border-radius: 12px; padding: 24px; margin-bottom: 14px; }
+.settings-section h3 { font-size: .8rem; font-weight: 700; color: var(--gold); margin-bottom: 18px; font-family: 'JetBrains Mono', monospace; }
+.setting-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--gold-border); }
+.setting-row:last-child { border-bottom: none; }
+.setting-label { font-size: .85rem; }
+.setting-sub { font-size: .74rem; color: var(--muted); }
+.setting-val { font-size: .82rem; color: var(--gold); font-family: 'JetBrains Mono', monospace; }
+
+/* ── Page header ── */
+.page-header { margin-bottom: 24px; }
+.page-header h1 { font-size: 1.4rem; font-weight: 800; }
+.page-header p { color: var(--muted); font-size: .85rem; margin-top: 4px; }
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .sidebar { width: 60px; }
+  .sidebar-logo-name, .sidebar-logo-sub, .nav-item span, .nav-section-label, .user-info { display: none; }
+  .nav-item { justify-content: center; padding: 12px; }
+  .nav-item i { width: auto; }
+  .sidebar-user { padding: 12px 8px; justify-content: center; }
+  .btn-logout { margin-left: 0; }
+  .main { margin-left: 60px; padding: 20px 16px; }
+  .stats-row, .cards-grid { grid-template-columns: 1fr 1fr; }
+  .welcome { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="32" height="32" rx="7" fill="#d4af37"/>
+      <path d="M8 7h4.5v7.5L19 7h5.5l-8 8.5 8.5 9.5H19.5l-6.5-7V25H8V7Z" fill="#080705"/>
+    </svg>
+    <div>
+      <div class="sidebar-logo-name">Korzen</div>
+      <div class="sidebar-logo-sub">Dashboard</div>
+    </div>
+  </div>
+
+  <nav>
+    <a class="nav-item active" data-page="home" onclick="nav(this)">
+      <i class="fa-solid fa-house"></i><span>Dashboard</span>
+    </a>
+    <a class="nav-item" data-page="download" onclick="nav(this)">
+      <i class="fa-solid fa-download"></i><span>Loader</span>
+    </a>
+    <a class="nav-item" data-page="keys" onclick="nav(this)">
+      <i class="fa-solid fa-key"></i><span>Clés</span>
+    </a>
+    <div class="nav-section-label">Support</div>
+    <a class="nav-item" href="https://discord.gg/sUAdU5v9aD" target="_blank">
+      <i class="fa-brands fa-discord"></i><span>Discord</span>
+    </a>
+    <a class="nav-item" data-page="status" onclick="nav(this)">
+      <i class="fa-solid fa-signal"></i><span>Statut</span>
+    </a>
+    <div class="nav-section-label">Légal</div>
+    <a class="nav-item" href="/conditions.html" target="_blank">
+      <i class="fa-solid fa-file-lines"></i><span>Conditions</span>
+    </a>
+    <a class="nav-item" data-page="settings" onclick="nav(this)">
+      <i class="fa-solid fa-gear"></i><span>Paramètres</span>
+    </a>
+  </nav>
+
+  <div class="sidebar-user">
+    <div class="avatar" id="sb-avatar">?</div>
+    <div class="user-info">
+      <div class="user-name" id="sb-name">—</div>
+      <div class="user-tier" id="sb-tier">—</div>
+    </div>
+    <button class="btn-logout" id="btn-logout" title="Se déconnecter">
+      <i class="fa-solid fa-right-from-bracket"></i>
+    </button>
+  </div>
+</aside>
+
+<main class="main">
+
+  <!-- ── Dashboard ── -->
+  <div class="page active" id="page-home">
+    <div class="welcome">
+      <div class="welcome-icon">
+        <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="56" height="56" rx="12" fill="rgba(212,175,55,.1)" stroke="rgba(212,175,55,.2)"/>
+          <path d="M16 15h9v15l12-15h10l-15 16.5 16 18H38l-13-14V47H16V15Z" fill="#d4af37"/>
+        </svg>
+      </div>
+      <div class="welcome">
+        <div class="welcome-sub">Welcome back</div>
+        <h2>Hello, <span id="w-name">—</span> !</h2>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fa-solid fa-crown"></i></div>
+        <div class="stat-val" id="stat-role">—</div>
+        <div class="stat-label">Ton rôle</div>
+      </div>
+      <div class="stat-card" id="stat-card-keys" style="cursor:pointer" onclick="nav(document.querySelector('[data-page=keys]'))">
+        <div class="stat-icon"><i class="fa-solid fa-key"></i></div>
+        <div class="stat-val" id="stat-keys">—</div>
+        <div class="stat-label">Clé valide</div>
+        <div id="stat-keys-btn" style="display:none;margin-top:8px;font-size:.75rem;color:var(--gold);text-decoration:underline">Activer ma clé →</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fa-solid fa-circle-check"></i></div>
+        <div class="stat-val" id="stat-verified">—</div>
+        <div class="stat-label">Compte</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fa-solid fa-shield-halved"></i></div>
+        <div class="stat-val">Online</div>
+        <div class="stat-label">Statut services</div>
+      </div>
+    </div>
+
+    <div class="section-title">Accès rapide</div>
+    <div class="cards-grid">
+      <a class="quick-card" onclick="nav(document.querySelector('[data-page=download]'))">
+        <div class="quick-card-icon"><i class="fa-solid fa-download"></i></div>
+        <h3>Loader</h3>
+        <p>Télécharge la dernière version</p>
+      </a>
+      <a class="quick-card" href="https://discord.gg/sUAdU5v9aD" target="_blank">
+        <div class="quick-card-icon"><i class="fa-brands fa-discord"></i></div>
+        <h3>Support</h3>
+        <p>Ouvre un ticket Discord</p>
+      </a>
+      <a class="quick-card" onclick="nav(document.querySelector('[data-page=keys]'))">
+        <div class="quick-card-icon"><i class="fa-solid fa-key"></i></div>
+        <h3>Clés</h3>
+        <p>Gérer tes licences</p>
+      </a>
+      <a class="quick-card" onclick="nav(document.querySelector('[data-page=status]'))">
+        <div class="quick-card-icon"><i class="fa-solid fa-signal"></i></div>
+        <h3>Statut</h3>
+        <p>État des services</p>
+      </a>
+    </div>
+
+    <div class="section-title">Support &amp; compte</div>
+    <div class="cards-grid">
+      <a class="quick-card" href="https://discord.gg/sUAdU5v9aD" target="_blank">
+        <div class="quick-card-icon"><i class="fa-solid fa-ticket"></i></div>
+        <h3>Tickets</h3>
+        <p>Aide depuis le Discord</p>
+      </a>
+      <a class="quick-card" href="/boutique.html" target="_blank">
+        <div class="quick-card-icon"><i class="fa-solid fa-bag-shopping"></i></div>
+        <h3>Boutique</h3>
+        <p>Acheter un menu</p>
+      </a>
+      <a class="quick-card" onclick="nav(document.querySelector('[data-page=status]'))">
+        <div class="quick-card-icon"><i class="fa-solid fa-tower-broadcast"></i></div>
+        <h3>Système</h3>
+        <p>Voir le statut en direct</p>
+      </a>
+      <a class="quick-card" onclick="nav(document.querySelector('[data-page=settings]'))">
+        <div class="quick-card-icon"><i class="fa-solid fa-gear"></i></div>
+        <h3>Paramètres</h3>
+        <p>Profil &amp; sécurité</p>
+      </a>
+    </div>
+  </div>
+
+  <!-- ── Loader ── -->
+  <div class="page" id="page-download">
+    <div class="page-header"><h1>Loader</h1><p>Télécharge KorzenLoader — le launcher officiel.</p></div>
+    <div class="dl-hero">
+      <h2>KorzenLoader v1.0.0</h2>
+      <p>Lance et met à jour Korzen automatiquement. Nécessite une clé de licence valide.</p>
+      <div class="dl-info-row">
+        <div class="dl-info-item"><span>Plateforme</span><strong>Windows x64</strong></div>
+        <div class="dl-info-item"><span>Jeu</span><strong>GTA V PC</strong></div>
+        <div class="dl-info-item"><span>Taille</span><strong>~2 MB</strong></div>
+        <div class="dl-info-item"><span>Version</span><strong>v1.0.0</strong></div>
+      </div>
+      <a class="btn-primary" href="#" id="dl-btn">
+        <i class="fa-solid fa-download"></i> Télécharger KorzenLoader.exe
+      </a>
+      <div class="dl-note">Antivirus : ajoute une exclusion pour <code>KorzenLoader.exe</code> (faux positif courant).<br>En téléchargeant tu acceptes les <a href="/conditions.html">conditions de vente</a>.</div>
+    </div>
+    <div class="changelog">
+      <h3>Changelog</h3>
+      <div class="changelog-item"><div class="cl-ver">v1.0.0</div><div class="cl-text"><strong>Lancement initial</strong> — authentification email, injection automatique, mise à jour silencieuse.</div></div>
+    </div>
+  </div>
+
+  <!-- ── Clés ── -->
+  <div class="page" id="page-keys">
+    <div class="page-header"><h1>Clés de licence</h1><p>Tes licences Korzen actives.</p></div>
+    <div class="key-card">
+      <h3>CLÉS ACTIVES</h3>
+      <div id="keys-list">
+        <div style="color:var(--muted);font-size:.85rem">Aucune clé trouvée. Achète un menu sur <a href="/boutique.html" style="color:var(--gold)">la boutique</a>.</div>
+      </div>
+    </div>
+    <div class="key-card">
+      <h3>ACTIVER UNE CLÉ</h3>
+      <div style="display:flex;gap:10px;margin-top:4px">
+        <input id="key-input" type="text" placeholder="XXXXXXXX-XXXXXXXX-XXXXXXXX-XXXXXXXX"
+          style="flex:1;background:var(--bg3);border:1px solid var(--gold-border);border-radius:8px;padding:11px 14px;color:var(--gold);font-family:'JetBrains Mono',monospace;font-size:.85rem;outline:none">
+        <button class="btn-primary" onclick="activateKey()" style="padding:11px 22px">
+          <i class="fa-solid fa-plus"></i> Activer
+        </button>
+      </div>
+      <p id="key-msg" style="margin-top:10px;font-size:.8rem;color:var(--muted)"></p>
+    </div>
+  </div>
+
+  <!-- ── Statut ── -->
+  <div class="page" id="page-status">
+    <div class="page-header"><h1>Statut des services</h1><p>État en temps réel des services Korzen.</p></div>
+    <div class="status-grid">
+      <div class="status-item"><div class="status-left"><div class="status-dot"></div><div><div class="status-name">API Korzen</div><div class="status-desc">Authentification &amp; licences</div></div></div><div class="status-tag">Opérationnel</div></div>
+      <div class="status-item"><div class="status-left"><div class="status-dot"></div><div><div class="status-name">Loader</div><div class="status-desc">Téléchargement &amp; mise à jour</div></div></div><div class="status-tag">Opérationnel</div></div>
+      <div class="status-item"><div class="status-left"><div class="status-dot"></div><div><div class="status-name">GTA V Legacy</div><div class="status-desc">Support mod menu version legacy</div></div></div><div class="status-tag">Opérationnel</div></div>
+      <div class="status-item"><div class="status-left"><div class="status-dot"></div><div><div class="status-name">GTA V Enhanced</div><div class="status-desc">Support mod menu version enhanced</div></div></div><div class="status-tag">Opérationnel</div></div>
+      <div class="status-item"><div class="status-left"><div class="status-dot"></div><div><div class="status-name">Discord</div><div class="status-desc">Serveur communautaire</div></div></div><div class="status-tag">Opérationnel</div></div>
+    </div>
+  </div>
+
+  <!-- ── Paramètres ── -->
+  <div class="page" id="page-settings">
+    <div class="page-header"><h1>Paramètres</h1><p>Profil et sécurité du compte.</p></div>
+    <div class="settings-section">
+      <h3>PROFIL</h3>
+      <div class="setting-row"><div><div class="setting-label">Nom d'affichage</div></div><div class="setting-val" id="set-name">—</div></div>
+      <div class="setting-row"><div><div class="setting-label">Adresse email</div></div><div class="setting-val" id="set-email">—</div></div>
+      <div class="setting-row"><div><div class="setting-label">Statut du compte</div></div><div class="badge-gold" id="set-verified">—</div></div>
+    </div>
+    <div class="settings-section">
+      <h3>DANGER</h3>
+      <div class="setting-row">
+        <div><div class="setting-label">Se déconnecter</div><div class="setting-sub">Ferme la session sur cet appareil.</div></div>
+        <button class="btn-copy" id="btn-logout2" style="border-color:#e55;color:#e55">Se déconnecter</button>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script>
+function nav(el) {
+  if (!el || !el.dataset.page) return;
+  document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const target = document.getElementById('page-' + el.dataset.page);
+  if (target) target.classList.add('active');
+}
+
+function copyKey(key) {
+  navigator.clipboard.writeText(key).catch(() => {});
+  event.target.textContent = 'Copié !';
+  setTimeout(() => { event.target.textContent = 'Copier'; }, 1500);
+}
+
+async function activateKey() {
+  const val = document.getElementById('key-input').value.trim().toUpperCase();
+  const msg = document.getElementById('key-msg');
+  if (!val) { msg.style.color = '#e55'; msg.textContent = 'Saisis une clé.'; return; }
+  msg.style.color = 'var(--muted)';
+  msg.textContent = 'Vérification…';
+  try {
+    const res = await fetch('/api/code/activate', {
+      method: 'POST', credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code: val })
+    }).then(r => r.json());
+    if (!res.ok) {
+      const msgs = { not_logged_in: 'Connecte-toi d\'abord.', invalid_key: 'Clé invalide.', key_expired: 'Clé expirée.' };
+      msg.style.color = '#e55';
+      msg.textContent = msgs[res.error] || 'Erreur : ' + (res.error || 'inconnue');
+      return;
+    }
+    msg.style.color = 'var(--gold)';
+    msg.textContent = '✓ Licence activée ! Recharge la page.';
+    document.getElementById('key-input').value = '';
+    setTimeout(() => location.reload(), 1500);
+  } catch {
+    msg.style.color = '#e55';
+    msg.textContent = 'Erreur réseau. Réessaie.';
+  }
+}
+
+function logout() {
+  fetch('/api/auth/logout', { method: 'POST', credentials: 'same-origin' })
+    .finally(() => { location.href = '/auth.html'; });
+}
+
+document.getElementById('btn-logout').addEventListener('click', logout);
+document.getElementById('btn-logout2').addEventListener('click', logout);
+
+// Load user
+fetch('/api/me', { credentials: 'same-origin', cache: 'no-store' })
+  .then(r => r.ok ? r.json() : { user: null })
+  .catch(() => ({ user: null }))
+  .then(d => {
+    if (!d || !d.user) { location.href = '/auth.html'; return; }
+    const u = d.user;
+    const initial = (u.nom || '?')[0].toUpperCase();
+    document.getElementById('sb-avatar').textContent = initial;
+    document.getElementById('sb-name').textContent = u.nom || '—';
+    document.getElementById('sb-tier').textContent = u.verifie ? 'Vérifié' : 'Standard';
+    document.getElementById('w-name').textContent = u.nom || '—';
+    document.getElementById('stat-role').textContent = u.verifie ? 'Vérifié' : 'Standard';
+    if (u.verifie) {
+      document.getElementById('stat-keys').textContent = 'Active';
+      document.getElementById('stat-keys').style.color = 'var(--gold)';
+    } else {
+      document.getElementById('stat-keys').textContent = 'Aucune clé';
+      document.getElementById('stat-keys').style.color = 'var(--muted)';
+      document.getElementById('stat-keys-btn').style.display = 'block';
+    }
+    // Clés actives
+    if (u.active_key) {
+      const isLifetime = u.key_expires_at === null || u.key_expires_at === undefined;
+      let typeLabel = 'Lifetime';
+      if (!isLifetime && u.key_expires_at) {
+        const diff = u.key_expires_at - Math.floor(Date.now() / 1000);
+        if (diff > 0) {
+          const d = Math.floor(diff / 86400), h = Math.floor((diff % 86400) / 3600);
+          typeLabel = d > 0 ? `${d}j ${h}h restants` : `${h}h restantes`;
+        } else { typeLabel = 'Expirée'; }
+      }
+      document.getElementById('keys-list').innerHTML =
+        `<div class="key-display"><span>${u.active_key}</span>
+         <button class="btn-copy" onclick="navigator.clipboard.writeText('${u.active_key}');this.textContent='Copié!';setTimeout(()=>this.textContent='Copier',1500)">Copier</button></div>
+         <div class="key-meta"><span>Statut<strong>Active</strong></span><span>Type<strong>${typeLabel}</strong></span></div>`;
+      // Locker le formulaire uniquement si lifetime
+      if (isLifetime) {
+        const ki = document.getElementById('key-input');
+        const kb = document.querySelector('[onclick="activateKey()"]');
+        if (ki) ki.disabled = true;
+        if (kb) kb.disabled = true;
+        document.getElementById('key-msg').style.color = 'var(--gold)';
+        document.getElementById('key-msg').textContent = 'Clé lifetime active — remplacement impossible.';
+      }
+    }
+    document.getElementById('stat-verified').textContent = (u.email_verified || u.verifie) ? '✓ Vérifié' : 'En attente';
+    document.getElementById('set-name').textContent = u.nom || '—';
+    document.getElementById('set-email').textContent = u.email || '—';
+    document.getElementById('set-verified').textContent = (u.email_verified || u.verifie) ? 'Compte vérifié ✓' : 'Email non vérifié';
+  });
+</script>
+</body>
+</html>
