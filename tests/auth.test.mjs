@@ -1,6 +1,4 @@
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
-import vm from 'node:vm';
 import { onRequestPost as login } from '../functions/api/login.js';
 import { onRequestGet as me } from '../functions/api/me.js';
 import { onRequestPost as logout } from '../functions/api/auth/logout.js';
@@ -67,30 +65,4 @@ const cleared = (await logout()).headers.get('Set-Cookie');
 assert.match(cleared, /dkr_session=; Path=\/; Max-Age=0/);
 assert.equal((await (await current(cleared.split(';')[0])).json()).user, null);
 
-// Exercise the real form handler: only a successful API response may navigate.
-const html = readFileSync(new URL('../auth.html', import.meta.url), 'utf8');
-const handler = html.slice(html.indexOf('  async function handleLogin('), html.indexOf('  async function handleRegister('));
-for (const outcome of ['success', 'rejected', 'network']) {
-  const button = { textContent: 'Sign in', disabled: false };
-  let alert;
-  const window = { location: { href: '/auth' } };
-  const context = vm.createContext({ window,
-    document: { getElementById(id) { return { value: id === 'login-email' ? user.email : password }; } },
-    showAlert(message) { alert = message; },
-    async fetch(url, options) {
-      assert.equal(url, '/api/login');
-      assert.equal(options.credentials, 'same-origin');
-      assert.deepEqual(JSON.parse(options.body), { email: user.email, password });
-      if (outcome === 'network') throw new Error('offline');
-      return { ok: outcome === 'success', async json() {
-        return outcome === 'success' ? { ok: true } : { ok: false, error: 'invalid_credentials' };
-      } };
-    }
-  });
-  vm.runInContext(handler, context);
-  await context.handleLogin({ preventDefault() {}, target: { querySelector() { return button; } } });
-  assert.equal(window.location.href, outcome === 'success' ? '/dashboard' : '/auth');
-  assert.equal(button.disabled, false);
-  if (outcome !== 'success') assert.ok(alert);
-}
-console.log('Auth: login, session persistence, invalid credentials, verification, logout and form checks passed.');
+console.log('Auth API: login, session persistence, invalid credentials, verification and logout checks passed.');

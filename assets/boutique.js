@@ -125,22 +125,8 @@
     if (location.hash === '#changelog') open();
   });
 
-  // --- compte Discord (DKRAuth, assets/nav.js)
-  window.addEventListener('DOMContentLoaded', function () {
-    if (!window.DKRAuth) return;
-    DKRAuth.surChangement(function (etat) {
-      if (!etat.configured) return;
-      const login = $('#auth-login'), loginM = $('#auth-login-m'), user = $('#auth-user');
-      if (!etat.user) { login.href = loginM.href = DKRAuth.urlConnexion(); login.hidden = loginM.hidden = false; return; }
-      user.querySelector('img').src = etat.user.avatar;
-      user.querySelector('.pseudo').textContent = etat.user.nom;
-      user.querySelector('.info').textContent = etat.user.verifie ? 'Client vérifié ✓' : 'Connecté avec Discord';
-      user.querySelector('.logout').addEventListener('click', DKRAuth.deconnexion);
-      user.hidden = false;
-    });
-  });
   document.addEventListener('click', e => {
-    document.querySelectorAll('details.burger[open], details.user[open]').forEach(d => { if (!d.contains(e.target)) d.open = false; });
+    document.querySelectorAll('details.burger[open]').forEach(d => { if (!d.contains(e.target)) d.open = false; });
     if (e.target.closest('.burger-menu a')) document.querySelectorAll('details.burger[open]').forEach(d => d.open = false);
   });
 

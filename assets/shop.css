@@ -55,15 +55,6 @@
     .logo img { height: 28px; width: auto; transition: transform .25s; }
     .logo:hover img { transform: skewX(-6deg) translateX(2px); }
 
-    .auth[hidden] { display: none; }
-    .user { position: relative; }
-    .user summary { list-style: none; display: flex; align-items: center; gap: 10px; height: 40px; padding: 0 12px; border: 1px solid var(--line); cursor: pointer; font-weight: 600; font-size: .9rem; }
-    .user summary::-webkit-details-marker { display: none; }
-    .user img { width: 24px; height: 24px; border-radius: 50%; }
-    .user .drop-menu { left: auto; right: 0; }
-    .user .drop-menu span { display: block; padding: 10px 12px; color: var(--ok); font-family: var(--mono); font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; }
-    .user .drop-menu button { width: 100%; text-align: left; background: none; border: 0; color: var(--paper); font: 500 .95rem var(--display); padding: 10px 12px; cursor: pointer; }
-    .user .drop-menu button:hover { background: var(--ink-3); }
     .dkr-flash { position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 20px); z-index: 400; background: var(--paper); color: var(--ink); padding: 12px 18px; font-weight: 600; opacity: 0; transition: opacity .3s, transform .3s; }
     .dkr-flash.show { opacity: 1; transform: translate(-50%, 0); }
 
@@ -533,7 +524,7 @@
     /* ---------- mobile ---------- */
     .burger { display: none; }
     @media (max-width: 1080px) {
-      .links, .nav-end .icon-btn, .nav-end .login-label { display: none; }
+      .links, .nav-end .icon-btn { display: none; }
       .nav-end { margin-left: auto; }
       .burger { display: block; }
       .burger summary { list-style: none; cursor: pointer; }
