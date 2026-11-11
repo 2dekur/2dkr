@@ -1,6 +1,19 @@
-# Les pages et les fichiers du site sont revérifiés à chaque visite
-# (le navigateur garde une copie mais demande au serveur si elle a changé).
+# Sécurité
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; connect-src 'self'; frame-ancestors 'none'
+
+# Pages HTML : revérifiées à chaque visite
 /*
   Cache-Control: public, max-age=0, must-revalidate
+
+# Assets versionnés (query string ?v=hash) : immuables
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# OG images : 1 heure
 /og/*
   Cache-Control: public, max-age=3600

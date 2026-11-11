@@ -25,29 +25,11 @@ window.DKR_CATALOGUE = {
     reduction: 10
   },
 
-  promo: {
-    titre: 'Promo Septembre',
-    reduction: "jusqu'à -30%",
-    texte: 'sur tous les packs, tout le mois de septembre !',
-    fin: '2026-09-30T23:59:59+02:00'
-  },
-
-  nouveauxTarifs: {
-    date: '2026-10-07T00:00:00+02:00',
-    annonce: 'Nouveaux tarifs à partir du mercredi 7 octobre',
-    detail: "Les commandes passées avant cette date gardent l'ancien prix.",
-    prix: {
-      bronze: 8, argent: 13, or: 19, platine: 26, ultime: 70,
-      'compte-simple': 16, 'compte-complet': 22,
-      m20: 5, m30: 7, m50: 10
-    }
-  },
+  // promo: { titre: '', reduction: '', texte: '', fin: '' },  // décommenter pour la prochaine promo
 
   // Garantie anti-ban : montant minimum dépensé dans la boutique pour être couvert.
-  //   minimumNouveauxTarifs s'applique tout seul à partir de nouveauxTarifs.date.
   garantie: {
-    minimum: 30,
-    minimumNouveauxTarifs: 26
+    minimum: 26
   },
 
   // Codes promo et parrainage (un seul code par commande).
@@ -86,35 +68,35 @@ window.DKR_CATALOGUE = {
   packs: [
     {
       id: 'bronze', nom: 'Pack Bronze', badge: 'Bronze', style: 'bronze',
-      prix: 5, prixPromo: 3,
+      prix: 8,
       argent: '50 000 000$', delai: '2 jours', vehicules: 5, tenues: 5, rp: '120', stats: true,
       bonus: [],
       info: 'Réalisé sur votre compte'
     },
     {
       id: 'argent', nom: 'Pack Argent', badge: 'Argent', style: 'silver',
-      prix: 10, prixPromo: 7,
+      prix: 13,
       argent: '100 000 000$', delai: '4 jours', vehicules: 10, tenues: 10, rp: '200', stats: true,
       bonus: ['Déblocages RP', 'Toutes les armes'],
       info: 'Réalisé sur votre compte'
     },
     {
       id: 'or', nom: 'Pack Or', badge: 'Or', style: 'gold',
-      prix: 15, prixPromo: 11,
+      prix: 19,
       argent: '150 000 000$', delai: '5 jours', vehicules: 15, tenues: 15, rp: 'Au choix', stats: true,
       bonus: ['Déblocages RP', 'Toutes les armes', 'Business'],
       info: 'Réalisé sur votre compte'
     },
     {
       id: 'platine', nom: 'Pack Platine', badge: 'Platine', style: 'plat',
-      prix: 20, prixPromo: 14,
+      prix: 26,
       argent: '200 000 000$', delai: '7 jours', vehicules: 20, tenues: '20 (max)', rp: 'Au choix', stats: true,
       bonus: ['Tous déblocages', 'Déblocages RP', 'Toutes les armes', 'Manoirs', 'Business'],
       info: 'Réalisé sur votre compte'
     },
     {
       id: 'ultime', nom: 'Pack Ultime', badge: 'Ultime · Populaire', style: 'ultimate', populaire: true,
-      prix: 60, prixPromo: 50,
+      prix: 70,
       argent: '300 000 000$', delai: '10 jours', vehicules: 30, tenues: 20, rp: 'Au choix', stats: true,
       bonus: ['Tous déblocages', 'Déblocages RP', 'Toutes les armes', 'Manoirs', 'Business'],
       compteNeuf: true,
@@ -129,9 +111,9 @@ window.DKR_CATALOGUE = {
       items: [
         { id: 'm5',   nom: '+5M GTA$',   detail: '+5 000 000$',   delai: '24h',     prix: 2, nouveau: true },
         { id: 'm10',  nom: '+10M GTA$',  detail: '+10 000 000$',  delai: '24h',     prix: 3 },
-        { id: 'm20',  nom: '+20M GTA$',  detail: '+20 000 000$',  delai: '24h',     prix: 4 },
-        { id: 'm30',  nom: '+30M GTA$',  detail: '+30 000 000$',  delai: '24h',     prix: 5 },
-        { id: 'm50',  nom: '+50M GTA$',  detail: '+50 000 000$',  delai: '48h',     prix: 7 },
+        { id: 'm20',  nom: '+20M GTA$',  detail: '+20 000 000$',  delai: '24h',     prix: 5 },
+        { id: 'm30',  nom: '+30M GTA$',  detail: '+30 000 000$',  delai: '24h',     prix: 7 },
+        { id: 'm50',  nom: '+50M GTA$',  detail: '+50 000 000$',  delai: '48h',     prix: 10 },
         { id: 'm100', nom: '+100M GTA$', detail: '+100 000 000$', delai: '4 jours', prix: 18 },
         { id: 'm200', nom: '+200M GTA$', detail: '+200 000 000$', delai: '7 jours', prix: 30 }
       ]
