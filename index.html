@@ -35,7 +35,7 @@
   <div class="status mono">
     <div class="wrap">
       <span><i class="dot"></i>Services opérationnels</span>
-      <button type="button" class="ver" id="version-badge" aria-haspopup="dialog"><b>v0.7.5</b> — Nouveautés</button>
+      <button type="button" class="ver" id="version-badge" aria-haspopup="dialog"><b>v0.7.6</b> — Nouveautés</button>
       <span>PC uniquement</span>
       <span>PayPal · SOL / USDC · Virement</span>
     </div>
@@ -275,10 +275,11 @@
 
   <dialog class="changelog" id="changelog" aria-labelledby="cl-title">
     <div class="cl-head">
-      <h2 id="cl-title">Nouveautés <em>v0.7.5</em></h2>
+      <h2 id="cl-title">Nouveautés <em>v0.7.6</em></h2>
       <button type="button" class="cl-close" aria-label="Fermer"><i class="fa-solid fa-xmark"></i></button>
     </div>
     <div class="cl-body">
+      <h3 class="mono">v0.7.6 — Sécurité &amp; nettoyage</h3><ul><li><strong>Vérification des prix côté serveur</strong> : le total de chaque commande est recalculé par le worker avant l’envoi Discord. Une alerte orange apparaît si le montant envoyé par le client est anormalement bas.</li><li><strong>CORS</strong> : l’API de commande accepte uniquement les requêtes provenant de dekurmods.com et 2dkr.pages.dev.</li><li><strong>En-têtes de sécurité</strong> : X-Frame-Options, CSP, X-Content-Type-Options, Referrer-Policy et Permissions-Policy ajoutés sur toutes les pages.</li><li><strong>Cache des assets</strong> : les fichiers versionnés (/assets/*) sont mis en cache un an.</li><li><strong>Prix consolidés</strong> : les nouveaux tarifs d’octobre sont intégrés directement dans le catalogue. Les blocs temporaires (promo septembre, nouveauxTarifs) sont supprimés.</li></ul>
       <h3 class="mono">v0.7.5 — Halloween</h3><ul><li>Thème Halloween sur toutes les pages : orange, violet, citrouilles et curseur personnalisé.</li><li>−10 % sur packs, options lobby et comptes. Prix remisés arrondis à l’euro inférieur.</li><li>Fin automatique le 1er novembre 2026 à 00 h, heure de Paris. Les mod menus ne sont pas concernés par la remise.</li></ul>
       <h3 class="mono">v0.7.4 — Packs &amp; lobbys</h3>
       <ul>
