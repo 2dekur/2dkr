@@ -25,6 +25,12 @@ window.DKR_CATALOGUE = {
     reduction: 10
   },
 
+  // Event GTA VI — bannière + thème pendant 24h dès la sortie PC. Mettre à jour la date.
+  gta6: {
+    debut: '2026-11-19T00:00:00+01:00',
+    duree: 24
+  },
+
   promo: {
     titre: 'Promo Novembre',
     reduction: "jusqu'à −40%",
@@ -252,6 +258,14 @@ window.DKR = {
     if (!max && !cf.fixeCommande) return 'Le prix affiché est celui que tu paies : <strong>aucun frais</strong> n\'est ajouté.';
     if (DKR.fraisActifs()) return 'Il y a ' + regle + '. Ils sont affichés dans une bulle à côté de chaque prix, et le total est toujours indiqué.';
     return '<strong>Aucun frais</strong> pour le moment. ' + c.nouveauxTarifs.annonce.replace(/^Nouveaux tarifs à partir/, 'À partir') + ', il y aura ' + regle + ', affichés à côté de chaque prix.';
+  },
+
+  gta6Actif: function (instant) {
+    var g = window.DKR_CATALOGUE.gta6;
+    if (!g || !g.debut) return false;
+    var t = instant == null ? DKR.maintenant() : instant;
+    var debut = Date.parse(g.debut);
+    return t >= debut && t < debut + (g.duree || 24) * 3600000;
   },
 
   halloweenActif: function (instant) {
