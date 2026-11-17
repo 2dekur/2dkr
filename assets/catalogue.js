@@ -25,7 +25,12 @@ window.DKR_CATALOGUE = {
     reduction: 10
   },
 
-  // promo: { titre: '', reduction: '', texte: '', fin: '' },  // décommenter pour la prochaine promo
+  promo: {
+    titre: 'Promo Novembre',
+    reduction: "jusqu'à −40%",
+    texte: 'sur les packs, options et comptes, commission offerte !',
+    fin: '2026-11-30T23:59:59+01:00'
+  },
 
   // Garantie anti-ban : montant minimum dépensé dans la boutique pour être couvert.
   garantie: {
@@ -68,35 +73,35 @@ window.DKR_CATALOGUE = {
   packs: [
     {
       id: 'bronze', nom: 'Pack Bronze', badge: 'Bronze', style: 'bronze',
-      prix: 8,
+      prix: 8, prixPromo: 6,
       argent: '50 000 000$', delai: '2 jours', vehicules: 5, tenues: 5, rp: '120', stats: true,
       bonus: [],
       info: 'Réalisé sur votre compte'
     },
     {
       id: 'argent', nom: 'Pack Argent', badge: 'Argent', style: 'silver',
-      prix: 13,
+      prix: 13, prixPromo: 10,
       argent: '100 000 000$', delai: '4 jours', vehicules: 10, tenues: 10, rp: '200', stats: true,
       bonus: ['Déblocages RP', 'Toutes les armes'],
       info: 'Réalisé sur votre compte'
     },
     {
       id: 'or', nom: 'Pack Or', badge: 'Or', style: 'gold',
-      prix: 19,
+      prix: 19, prixPromo: 13,
       argent: '150 000 000$', delai: '5 jours', vehicules: 15, tenues: 15, rp: 'Au choix', stats: true,
       bonus: ['Déblocages RP', 'Toutes les armes', 'Business'],
       info: 'Réalisé sur votre compte'
     },
     {
       id: 'platine', nom: 'Pack Platine', badge: 'Platine', style: 'plat',
-      prix: 26,
+      prix: 26, prixPromo: 17,
       argent: '200 000 000$', delai: '7 jours', vehicules: 20, tenues: '20 (max)', rp: 'Au choix', stats: true,
       bonus: ['Tous déblocages', 'Déblocages RP', 'Toutes les armes', 'Manoirs', 'Business'],
       info: 'Réalisé sur votre compte'
     },
     {
       id: 'ultime', nom: 'Pack Ultime', badge: 'Ultime · Populaire', style: 'ultimate', populaire: true,
-      prix: 70,
+      prix: 70, prixPromo: 42,
       argent: '300 000 000$', delai: '10 jours', vehicules: 30, tenues: 20, rp: 'Au choix', stats: true,
       bonus: ['Tous déblocages', 'Déblocages RP', 'Toutes les armes', 'Manoirs', 'Business'],
       compteNeuf: true,
@@ -109,28 +114,28 @@ window.DKR_CATALOGUE = {
     {
       id: 'argent', titre: 'Argent supplémentaire', titreCalc: 'Argent GTA Online', icone: 'fa-coins', unique: true,
       items: [
-        { id: 'm5',   nom: '+5M GTA$',   detail: '+5 000 000$',   delai: '24h',     prix: 2, nouveau: true },
-        { id: 'm10',  nom: '+10M GTA$',  detail: '+10 000 000$',  delai: '24h',     prix: 3 },
-        { id: 'm20',  nom: '+20M GTA$',  detail: '+20 000 000$',  delai: '24h',     prix: 5 },
-        { id: 'm30',  nom: '+30M GTA$',  detail: '+30 000 000$',  delai: '24h',     prix: 7 },
-        { id: 'm50',  nom: '+50M GTA$',  detail: '+50 000 000$',  delai: '48h',     prix: 10 },
-        { id: 'm100', nom: '+100M GTA$', detail: '+100 000 000$', delai: '4 jours', prix: 18 },
-        { id: 'm200', nom: '+200M GTA$', detail: '+200 000 000$', delai: '7 jours', prix: 30 }
+        { id: 'm5',   nom: '+5M GTA$',   detail: '+5 000 000$',   delai: '24h',     prix: 2,  prixPromo: 2,  nouveau: true },
+        { id: 'm10',  nom: '+10M GTA$',  detail: '+10 000 000$',  delai: '24h',     prix: 3,  prixPromo: 3 },
+        { id: 'm20',  nom: '+20M GTA$',  detail: '+20 000 000$',  delai: '24h',     prix: 5,  prixPromo: 4 },
+        { id: 'm30',  nom: '+30M GTA$',  detail: '+30 000 000$',  delai: '24h',     prix: 7,  prixPromo: 6 },
+        { id: 'm50',  nom: '+50M GTA$',  detail: '+50 000 000$',  delai: '48h',     prix: 10, prixPromo: 8 },
+        { id: 'm100', nom: '+100M GTA$', detail: '+100 000 000$', delai: '4 jours', prix: 18, prixPromo: 14 },
+        { id: 'm200', nom: '+200M GTA$', detail: '+200 000 000$', delai: '7 jours', prix: 30, prixPromo: 23 }
       ]
     },
     {
       id: 'niveau', titre: 'Niveau & Stats', titreCalc: 'Niveau & Statistiques', icone: 'fa-chart-line', unique: false,
       items: [
-        { id: 'niveau', nom: 'Niveau au choix', detail: 'Niveau au choix', prix: 5 },
-        { id: 'stats',  nom: 'Stats max',       detail: 'Stats max (Course, Tir, Apnée...)', prix: 2 }
+        { id: 'niveau', nom: 'Niveau au choix', detail: 'Niveau au choix', prix: 5, prixPromo: 4 },
+        { id: 'stats',  nom: 'Stats max',       detail: 'Stats max (Course, Tir, Apnée...)', prix: 2, prixPromo: 2 }
       ]
     },
     {
       id: 'vehicules', titre: 'Véhicules & Tenues', titreCalc: 'Véhicules & Tenues', icone: 'fa-car', unique: false,
       items: [
-        { id: 'v10', nom: '10 Véhicules moddés', prix: 10 },
-        { id: 't5',  nom: '5 Tenues moddées',    prix: 5, groupe: 'tenues' },
-        { id: 't20', nom: '20 Tenues (Max)',     prix: 20, groupe: 'tenues' }
+        { id: 'v10', nom: '10 Véhicules moddés', prix: 10, prixPromo: 8 },
+        { id: 't5',  nom: '5 Tenues moddées',    prix: 5,  prixPromo: 4, groupe: 'tenues' },
+        { id: 't20', nom: '20 Tenues (Max)',      prix: 20, prixPromo: 15, groupe: 'tenues' }
       ]
     }
   ],
@@ -150,18 +155,19 @@ window.DKR_CATALOGUE = {
 
   // Commission DekurMods, ajoutée au total du panier (même taux pour tout le monde).
   //   Elle inclut l'aide à l'installation du menu.
-  commission: { libelle: 'Commission', pourcent: 20, detail: "aide à l'installation incluse" },
+  // Commission offerte pendant la promo novembre — remettre à 20 le 1er décembre
+  commission: { libelle: 'Commission', pourcent: 0, detail: "offerte jusqu'au 30 novembre" },
 
   comptes: [
     {
       id: 'compte-complet', nom: 'Compte Complet',
       description: 'Compte fourni avec jeu inclus + 30M GTA$ + RP 120 + stats max.',
-      prix: 22
+      prix: 22, prixPromo: 18
     },
     {
       id: 'compte-simple', nom: 'Option Compte Simple',
       description: 'Compte fourni avec le jeu inclus.',
-      prix: 16
+      prix: 16, prixPromo: 15
     }
   ]
 };
