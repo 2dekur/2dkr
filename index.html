@@ -1,13 +1,13 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DekurMods — Pack & Mod menus GTA V | Cherax, Yari, Lexis</title>
-  <meta name="description" content="Boutique de mod menus GTA V sur PC : Cherax, Yari, Lexis. Clé livrée dans ton ticket Discord, aide à l'installation incluse.">
+  <title>DekurMods — Packs GTA Online | Argent, RP, Véhicules</title>
+  <meta name="description" content="Packs GTA Online sur PC : argent, RP, véhicules et tenues moddés. Prestation réalisée sur ton compte, livraison confirmée dans ton ticket Discord.">
   <meta name="theme-color" content="#0a0a0b">
-  <meta property="og:title" content="DekurMods — Mod menus GTA V">
-  <meta property="og:description" content="Cherax, Yari, Lexis : clé livrée dans ton ticket Discord, aide à l'installation incluse.">
+  <meta property="og:title" content="DekurMods — Packs GTA Online">
+  <meta property="og:description" content="Argent, RP, véhicules et tenues moddés. Prestation réalisée sur ton compte, livraison confirmée dans ton ticket Discord.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://dekurmods.com/">
   <meta property="og:site_name" content="DekurMods">
@@ -29,6 +29,8 @@
   <link rel="stylesheet" href="assets/shop.css?v=10150554">
   <link rel="stylesheet" href="assets/halloween.css?v=27a5773c">
   <script src="assets/halloween.js?v=d21e5645"></script>
+  <link rel="stylesheet" href="assets/promo.css?v=1">
+  <script src="assets/promo.js?v=1"></script>
 </head>
 <body>
 
@@ -46,7 +48,6 @@
       <a class="logo" href="index.html" aria-label="DekurMods — Accueil"><img src="logo-site.svg?v=8762a5f6" alt="DekurMods" width="124" height="28"></a>
 
       <nav class="links" aria-label="Navigation principale">
-        <a href="boutique.html">Mod menus</a>
         <a href="services.html">Packs &amp; lobbys</a>
         <a href="#commande">Comment ça marche</a>
         <a href="avis.html">Avis &amp; Preuves</a>
@@ -63,7 +64,6 @@
       <details class="burger">
         <summary class="icon-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></summary>
         <nav class="burger-menu" aria-label="Menu mobile">
-          <a href="boutique.html">Mod menus</a>
         <a href="services.html">Packs &amp; lobbys</a>
           <a href="#commande">Comment ça marche</a>
           <a href="avis.html">Avis &amp; Preuves</a>
@@ -84,11 +84,11 @@
       <div class="wrap">
         <div class="hero-grid">
           <div>
-            <p class="kicker mono rv" style="--i:0">Revendeur · GTA V · PC</p>
-            <h1 class="rv" style="--i:1"><span>Les</span><em>Mod<br>menus</em></h1>
-            <p class="lede rv" style="--i:2">Cherax, Yari, Lexis… Achète ton menu via DekurMods : clé livrée dans ton ticket Discord, aide à l'installation incluse.</p>
+            <p class="kicker mono rv" style="--i:0">Prestation · GTA V · PC</p>
+            <h1 class="rv" style="--i:1"><span>Les</span><em>Packs<br>GTA Online</em></h1>
+            <p class="lede rv" style="--i:2">Argent, RP, véhicules, tenues… Commande ton pack GTA Online via DekurMods : prestation réalisée sur ton compte, livraison confirmée dans ton ticket Discord.</p>
             <div class="ctas rv" style="--i:3">
-              <a class="btn btn-primary" href="boutique.html">Voir les menus <i class="fa-solid fa-arrow-right"></i></a>
+              <a class="btn btn-primary" href="services.html#packs">Voir les packs <i class="fa-solid fa-arrow-right"></i></a>
               <a class="btn btn-discord" href="https://discord.gg/sUAdU5v9aD" target="_blank"><i class="fa-brands fa-discord"></i> Rejoindre le Discord</a>
             </div>
           </div>
@@ -97,9 +97,9 @@
             <div class="sheet-head mono"><span>En bref</span><span>DekurMods</span></div>
             <dl>
               <dt>Jeu</dt><dd>GTA V · PC</dd>
-              <dt>Menus</dt><dd class="js-menu-names">—</dd>
-              <dt>Livraison</dt><dd>Clé dans ton ticket</dd>
-              <dt>Installation</dt><dd>Aide incluse</dd>
+              <dt>Packs</dt><dd>Bronze → Ultime</dd>
+              <dt>Argent max</dt><dd>300 M GTA$</dd>
+              <dt>Livraison</dt><dd>Ticket Discord</dd>
               <dt>Paiement</dt><dd><a href="paiements.html">PayPal, crypto, virement</a></dd>
               <dt>Géré par</dt><dd>Dekur, en solo</dd>
             </dl>
@@ -107,7 +107,7 @@
         </div>
 
         <div class="stats rv">
-          <a href="boutique.html"><strong id="stat-menus">3</strong><span>menus disponibles</span></a>
+          <a href="services.html#packs"><strong>5</strong><span>packs disponibles</span></a>
           <a href="avis.html"><strong>5/5<i class="fa-solid fa-star"></i></strong><span>de moyenne, avis sur Discord</span></a>
           <a href="https://discord.gg/sUAdU5v9aD" target="_blank"><strong class="js-members">190+</strong><span>membres Discord</span></a>
         </div>
@@ -118,22 +118,14 @@
       <div class="marquee-track" id="marquee"></div>
     </div>
 
-    <section class="block" id="boutique" aria-labelledby="b-title">
-      <div class="wrap">
-        <div class="sec-head rv"><span class="n">01</span><h2 class="title" id="b-title">La boutique</h2></div>
-        <div class="tiles rv" id="menus-teaser"></div>
-        <div class="rv" style="margin-top:24px"><a class="btn btn-primary" href="boutique.html">Voir la boutique <i class="fa-solid fa-arrow-right"></i></a></div>
-      </div>
-    </section>
-
     <section class="block" id="commande" aria-labelledby="w-title">
       <div class="wrap">
-        <div class="sec-head rv"><span class="n">02</span><h2 class="title" id="w-title">Comment ça marche</h2></div>
+        <div class="sec-head rv"><span class="n">01</span><h2 class="title" id="w-title">Comment ça marche</h2></div>
         <div class="why rv">
           <article>
             <span class="mono">Étape 1</span>
-            <h3>Ajoute ton menu</h3>
-            <p>Mets-le au panier, puis copie le récapitulatif.</p>
+            <h3>Choisis ton pack</h3>
+            <p>Ajoute ton pack au panier sur la page <a href="services.html">Packs &amp; lobbys</a>, puis copie le récapitulatif.</p>
           </article>
           <article>
             <span class="mono">Étape 2</span>
@@ -142,20 +134,9 @@
           </article>
           <article class="free">
             <span class="mono">Étape 3</span>
-            <h3>Reçois ta clé</h3>
-            <p>Clé livrée dans ton ticket, et je t'aide à l'installer, en vocal si besoin.</p>
+            <h3>Profite de ton compte</h3>
+            <p>La prestation est réalisée après paiement. Les détails sont convenus dans ton ticket Discord.</p>
           </article>
-        </div>
-
-        <div class="note rv">
-          <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
-          <div>
-            <h3>À savoir avant d'acheter</h3>
-            <ul>
-              <li>Utiliser un mod menu comporte un <strong>risque de ban</strong> sur GTA Online. DekurMods ne peut pas être tenu responsable d'une sanction de Rockstar.</li>
-              <li>Il n'y a pas de garantie anti-ban sur les mod menus.</li>
-            </ul>
-          </div>
         </div>
       </div>
     </section>
@@ -194,36 +175,28 @@
           </div>
           <div>
             <details>
-              <summary>Comment acheter un menu ?</summary>
-              <p>Ajoute-le au panier, copie le récapitulatif, ouvre un ticket sur le Discord et colle-le. Tu paies, puis tu reçois ta clé dans le ticket.</p>
+              <summary>Comment commander un pack ?</summary>
+              <p>Ajoute ton pack au panier sur la page <a href="services.html">Packs &amp; lobbys</a>, copie le récapitulatif, ouvre un ticket sur le Discord et colle-le. On confirme les détails, tu paies, et la prestation est réalisée.</p>
             </details>
             <details>
               <summary>Quels sont les délais ?</summary>
-              <p>Dès que ta commande est effectuée, je m'y mets tout de suite. La clé est livrée directement dans ton ticket.</p>
+              <p>Les délais indiqués sur chaque pack sont estimatifs. Le créneau exact est confirmé dans ton ticket avant paiement.</p>
             </details>
             <details>
-              <summary>Est-ce que je risque un ban ?</summary>
-              <p>Oui, utiliser un mod menu comporte toujours un risque sur GTA Online. DekurMods ne peut pas être tenu responsable d'une sanction de Rockstar, et il n'y a pas de garantie anti-ban sur les menus.</p>
+              <summary>C’est compatible avec ma version du jeu ?</summary>
+              <p>Oui, sur PC uniquement. Précise ta version de GTA Online (Legacy ou Enhanced) dans le ticket, la compatibilité est confirmée avant paiement.</p>
             </details>
             <details>
-              <summary>Tu m'aides pour l'installation ?</summary>
-              <p>Oui, c'est compris dans la commission : je t'aide à installer et configurer ton menu, en vocal si besoin.</p>
-            </details>
-            <details>
-              <summary>Sur quelles plateformes ?</summary>
-              <p>Pour l'instant, uniquement sur PC.</p>
-            </details>
-            <details>
-              <summary>Il y a des frais ?</summary>
-              <p>La commission de <span class="js-com">20 %</span> est suivie d’un arrondi à l’euro supérieur par article. Elle comprend mon aide pour installer et configurer ton menu. Le total est affiché avant de commander.</p>
+              <summary>Il y a des frais en plus ?</summary>
+              <p>Pendant la promo, la commission est offerte. Hors promo, une commission de 20 % est ajoutée, suivie d’un arrondi à l’euro supérieur. Le total est affiché avant de commander.</p>
             </details>
             <details>
               <summary>Comment payer ?</summary>
               <p>PayPal, crypto (SOL / USDC) ou virement. Tout est expliqué sur <a href="paiements.html">Paiements</a>.</p>
             </details>
             <details>
-              <summary>Tu as le menu que je cherche ?</summary>
-              <p>Demande-moi dans ton ticket, je te le propose.</p>
+              <summary>Qu’est-ce qui est inclus dans le pack ?</summary>
+              <p>Chaque pack détaille l’argent GTA$, le niveau RP, les véhicules et tenues moddés, et les options incluses. Consulte la page <a href="services.html">Packs &amp; lobbys</a> pour le comparatif complet.</p>
             </details>
           </div>
         </div>
@@ -240,8 +213,7 @@
       <div class="foot-row">
         <a class="logo" href="index.html"><img src="logo-site.svg?v=8762a5f6" alt="DekurMods" width="124" height="28"></a>
         <nav aria-label="Pied de page">
-          <a href="boutique.html">Mod menus</a>
-        <a href="services.html">Packs &amp; lobbys</a>
+          <a href="services.html">Packs &amp; lobbys</a>
           <a href="avis.html">Avis &amp; Preuves</a>
           <a href="paiements.html">Paiements</a>
           <a href="conditions.html">Conditions de vente</a>
@@ -271,7 +243,6 @@
   </aside>
 
   <script src="assets/panier.js?v=56dde66e"></script>
-  <script src="assets/boutique.js?v=2484d779"></script>
 
   <dialog class="changelog" id="changelog" aria-labelledby="cl-title">
     <div class="cl-head">

@@ -1,0 +1,23 @@
+/* ---- Bannière promo ---- */
+.promo-banner { background:linear-gradient(90deg,#0a1f0a,#142814);color:#86efac;border-bottom:1px solid #166534;position:relative;z-index:51; }
+.promo-banner .wrap { display:flex;justify-content:space-between;align-items:center;gap:20px;min-height:64px;padding-top:10px;padding-bottom:10px; }
+.promo-banner span { display:flex;align-items:center;gap:12px;font:800 .8rem var(--mono);letter-spacing:.06em;color:#4ade80; }
+.promo-banner a { font-size:.9rem;text-align:right;color:#bbf7d0; }
+.promo-banner b { color:#4ade80;font-size:1.05em; }
+.promo-banner small { display:block;font-size:.72rem;color:#86efac; }
+.promo-banner a:hover { text-decoration:underline;text-underline-offset:4px; }
+@media(max-width:700px) { .promo-banner .wrap { flex-direction:column;gap:4px;padding:8px 16px; }.promo-banner span { font-size:.66rem; }.promo-banner a { text-align:center;font-size:.78rem; } }
+
+/* ---- Mini barre sous nav ---- */
+.promo-mini { display:flex;align-items:center;justify-content:center;gap:10px;min-height:34px;padding:5px 14px;background:#082808;color:#86efac;border-top:1px solid #15531a;font-size:.75rem;line-height:1.4; }
+.promo-mini b { color:#4ade80; }
+.promo-mini:hover { background:#0d3a0d; }
+@media(max-width:520px) { .promo-mini { gap:6px;font-size:.65rem; } }
+
+/* ---- Prix barré dans le tableau comparatif ---- */
+.sv-tbl-old { display:block;font-size:.72rem;color:var(--muted);text-decoration:line-through;margin-top:3px; }
+
+/* ---- Légende "prix avant promo" en bas-gauche du card ---- */
+.sv-promo-legend { font-size:.75rem;color:var(--muted);margin-bottom:12px;display:flex;align-items:center;gap:7px; }
+.sv-promo-legend s { text-decoration-color:var(--muted); }
+.sv-promo-legend::before { content:'';display:inline-block;width:7px;height:7px;border-radius:50%;background:#4ade80;flex:none; }
