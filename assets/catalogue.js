@@ -118,6 +118,12 @@ window.DKR_CATALOGUE = {
   // unique: true = une seule option de ce groupe à la fois dans le calculateur
   options: [
     {
+      id: 'express', titre: 'Livraison express', titreCalc: 'Livraison express', icone: 'fa-bolt', unique: true,
+      items: [
+        { id: 'express', nom: 'Livraison express', detail: 'Prioritaire — délai réduit de 3 jours', prix: 5, prixPromo: 5 }
+      ]
+    },
+    {
       id: 'argent', titre: 'Argent supplémentaire', titreCalc: 'Argent GTA Online', icone: 'fa-coins', unique: true,
       items: [
         { id: 'm5',   nom: '+5M GTA$',   detail: '+5 000 000$',   delai: '24h',     prix: 2,  prixPromo: 2,  nouveau: true },
