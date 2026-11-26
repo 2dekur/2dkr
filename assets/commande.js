@@ -33,7 +33,7 @@
       '<button type="button" class="qty-x" data-tout="' + l.id + '" aria-label="Supprimer ' + esc(l.nom) + '">Supprimer</button></div></div>' +
       '<strong>' + DKR.euros(arrondi(l.prix * l.qte)) + '</strong></li>').join('');
     $('#co-sous').textContent = DKR.euros(k.sous);
-    $('#co-com-l').textContent = 'Commission et arrondi (' + COM.detail + ')';
+    $('#co-com-l').textContent = k.com ? 'Commission (' + COM.pourcent + ' %)' : 'Commission offerte';
     $('#co-com').textContent = DKR.euros(k.com);
     const discountRow = $('#co-discount-row');
     if (discountRow) {
@@ -79,7 +79,8 @@
     const NL = String.fromCharCode(10);
     const txt = ['🛒 Commande DekurMods ' + num, '', 'Discord : ' + cmd.discord, 'E-mail : ' + cmd.email, 'Paiement : ' + cmd.paiement, '']
       .concat(ls.map(l => '• ' + l.nom + (l.qte > 1 ? ' ×' + l.qte : '') + ' — ' + DKR.euros(arrondi(l.prix * l.qte))))
-      .concat(['', 'Sous-total : ' + DKR.euros(k.sous), 'Commission et arrondi (' + COM.detail + ') : +' + DKR.euros(k.com)])
+      .concat(['', 'Sous-total : ' + DKR.euros(k.sous)])
+      .concat(k.com ? ['Commission (' + COM.pourcent + ' %) : +' + DKR.euros(k.com)] : [])
       .concat(k.reductionHalloween ? ['Remise Halloween : −' + DKR.euros(k.reductionHalloween)] : [])
       .concat(['Total : ' + DKR.euros(k.total)])
       .join(NL);

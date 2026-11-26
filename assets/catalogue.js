@@ -25,12 +25,6 @@ window.DKR_CATALOGUE = {
     reduction: 10
   },
 
-  // Event GTA VI — bannière + thème pendant 24h dès la sortie PC. Mettre à jour la date.
-  gta6: {
-    debut: '2026-11-19T00:00:00+01:00',
-    duree: 24
-  },
-
   promo: {
     titre: 'Promo Novembre',
     reduction: "jusqu'à −40%",
@@ -40,7 +34,7 @@ window.DKR_CATALOGUE = {
 
   // Garantie anti-ban : montant minimum dépensé dans la boutique pour être couvert.
   garantie: {
-    minimum: 26
+    minimum: 40
   },
 
   // Codes promo et parrainage (un seul code par commande).
@@ -80,35 +74,35 @@ window.DKR_CATALOGUE = {
     {
       id: 'bronze', nom: 'Pack Bronze', badge: 'Bronze', style: 'bronze',
       prix: 8, prixPromo: 6,
-      argent: '50 000 000$', delai: '2 jours', vehicules: 5, tenues: 5, rp: '120', stats: true,
+      argent: '50 000 000$', delai: '2 jours', delaiExpress: '1 jour', vehicules: 5, tenues: 5, rp: '120', stats: true,
       bonus: [],
       info: 'Réalisé sur votre compte'
     },
     {
       id: 'argent', nom: 'Pack Argent', badge: 'Argent', style: 'silver',
       prix: 13, prixPromo: 10,
-      argent: '100 000 000$', delai: '4 jours', vehicules: 10, tenues: 10, rp: '200', stats: true,
+      argent: '100 000 000$', delai: '4 jours', delaiExpress: '2 jours', vehicules: 10, tenues: 10, rp: '200', stats: true,
       bonus: ['Déblocages RP', 'Toutes les armes'],
       info: 'Réalisé sur votre compte'
     },
     {
       id: 'or', nom: 'Pack Or', badge: 'Or', style: 'gold',
       prix: 19, prixPromo: 13,
-      argent: '150 000 000$', delai: '5 jours', vehicules: 15, tenues: 15, rp: 'Au choix', stats: true,
+      argent: '150 000 000$', delai: '5 jours', delaiExpress: '3 jours', vehicules: 15, tenues: 15, rp: 'Au choix', stats: true,
       bonus: ['Déblocages RP', 'Toutes les armes', 'Business'],
       info: 'Réalisé sur votre compte'
     },
     {
       id: 'platine', nom: 'Pack Platine', badge: 'Platine', style: 'plat',
       prix: 26, prixPromo: 17,
-      argent: '200 000 000$', delai: '7 jours', vehicules: 20, tenues: '20 (max)', rp: 'Au choix', stats: true,
+      argent: '200 000 000$', delai: '7 jours', delaiExpress: '4 jours', vehicules: 20, tenues: '20 (max)', rp: 'Au choix', stats: true,
       bonus: ['Tous déblocages', 'Déblocages RP', 'Toutes les armes', 'Manoirs', 'Business'],
       info: 'Réalisé sur votre compte'
     },
     {
       id: 'ultime', nom: 'Pack Ultime', badge: 'Ultime · Populaire', style: 'ultimate', populaire: true,
       prix: 70, prixPromo: 42,
-      argent: '300 000 000$', delai: '10 jours', vehicules: 30, tenues: 20, rp: 'Au choix', stats: true,
+      argent: '300 000 000$', delai: '10 jours', delaiExpress: '6 jours', vehicules: 30, tenues: 20, rp: 'Au choix', stats: true,
       bonus: ['Tous déblocages', 'Déblocages RP', 'Toutes les armes', 'Manoirs', 'Business'],
       compteNeuf: true,
       info: 'Prêt à jouer'
@@ -168,7 +162,7 @@ window.DKR_CATALOGUE = {
   // Commission DekurMods, ajoutée au total du panier (même taux pour tout le monde).
   //   Elle inclut l'aide à l'installation du menu.
   // Commission offerte pendant la promo novembre — remettre à 20 le 1er décembre
-  commission: { libelle: 'Commission', pourcent: 0, detail: "offerte jusqu'au 30 novembre" },
+  commission: { libelle: 'Commission', pourcent: 20 },
 
   comptes: [
     {
@@ -295,7 +289,7 @@ window.DKR = {
 
   // Prix final arrondi par article : identique sur les cartes et pour plusieurs unités au panier.
   prixAvecCommission: function (prix) {
-    var taux = (window.DKR_CATALOGUE.commission || {}).pourcent || 0;
+    var taux = DKR.promoActive() ? 0 : ((window.DKR_CATALOGUE.commission || {}).pourcent || 0);
     return Math.ceil(prix * (1 + taux / 100) - 0.00000001);
   },
 

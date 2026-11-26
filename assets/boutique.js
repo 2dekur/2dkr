@@ -88,7 +88,7 @@
   function majTotal() {
     const k = calcul();
     $('#cart-lines').innerHTML = '<div><span>Sous-total</span><span>' + DKR.euros(k.sous) + '</span></div>' +
-      (COM.pourcent ? '<div><span>Commission et arrondi (' + COM.detail + ')</span><span>' + DKR.euros(k.com) + '</span></div>' : '') +
+      (k.com ? '<div><span>Commission (' + COM.pourcent + ' %)</span><span>' + DKR.euros(k.com) + '</span></div>' : '') +
       (k.reductionHalloween ? '<div class="hw-discount-line"><span>Remise Halloween</span><span>−' + DKR.euros(k.reductionHalloween) + '</span></div>' : '');
     $('#cart-total').textContent = DKR.euros(k.total);
   }

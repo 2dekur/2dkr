@@ -20,7 +20,7 @@
   <link rel="icon" href="/favicon.svg?v=b1832d8d" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
-  <script src="assets/catalogue.js?v=nov-express"></script>
+  <script src="assets/catalogue.js?v=v078"></script>
   <script src="assets/nav.js?v=1c8ea6f9" defer></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -39,7 +39,7 @@
   <div class="status mono">
     <div class="wrap">
       <span><i class="dot"></i>Services opérationnels</span>
-      <button type="button" class="ver" id="version-badge" aria-haspopup="dialog"><b>v0.7.7</b> — Nouveautés</button>
+      <button type="button" class="ver" id="version-badge" aria-haspopup="dialog"><b>v0.7.8</b> — Nouveautés</button>
       <span>PC uniquement</span>
       <span>PayPal · SOL / USDC · Virement</span>
     </div>
@@ -200,6 +200,14 @@
               <summary>Qu’est-ce qui est inclus dans le pack ?</summary>
               <p>Chaque pack détaille l’argent GTA$, le niveau RP, les véhicules et tenues moddés, et les options incluses. Consulte la page <a href="services.html">Packs &amp; lobbys</a> pour le comparatif complet.</p>
             </details>
+            <details>
+              <summary>Est-ce que je risque un ban ?</summary>
+              <p>Non. Des tests massifs et constants sont réalisés pour s’assurer que les méthodes utilisées sont sûres. Aucun incident signalé à ce jour sur les comptes clients. Pour toute commande à partir de <span class="guar-min">40 €</span>, une garantie anti-ban est incluse.</p>
+            </details>
+            <details>
+              <summary>La livraison express, c’est quoi ?</summary>
+              <p>L’option express (+5€) donne la priorité à ta commande. Le délai est réduit : Bronze 1 jour, Argent 2 jours, Or 3 jours, Platine 4 jours, Ultime 6 jours. Elle s’ajoute au panier en même temps que ton pack, sur la page <a href="services.html">Packs &amp; lobbys</a>.</p>
+            </details>
           </div>
         </div>
       </div>
@@ -249,10 +257,11 @@
 
   <dialog class="changelog" id="changelog" aria-labelledby="cl-title">
     <div class="cl-head">
-      <h2 id="cl-title">Nouveautés <em>v0.7.7</em></h2>
+      <h2 id="cl-title">Nouveautés <em>v0.7.8</em></h2>
       <button type="button" class="cl-close" aria-label="Fermer"><i class="fa-solid fa-xmark"></i></button>
     </div>
     <div class="cl-body">
+      <h3 class="mono">v0.7.8 — Délai express &amp; FAQ</h3><ul><li><strong>Délai express dynamique</strong> : quand la livraison express est au panier, les délais des packs se mettent à jour automatiquement (Bronze 1 j, Argent 2 j, Or 3 j, Platine 4 j, Ultime 6 j).</li><li><strong>FAQ enrichie</strong> : trois nouvelles questions sur les lobbys modifiés, les risques de ban et l'option express.</li><li><strong>Nettoyage catalogue</strong> : bloc GTA VI retiré après l'événement du 19 novembre.</li></ul>
       <h3 class="mono">v0.7.7 — Événement GTA VI &amp; countdown promo</h3><ul><li><strong>Countdown promo en direct</strong> : la bannière promo affiche le temps restant en temps réel (J-X · Xh Xmin), mis à jour automatiquement.</li><li><strong>Événement GTA VI</strong> : le 19 novembre à minuit, le site passe en thème Vice City pendant 24 h avec une bannière dédiée. Les services GTA V continuent normalement.</li><li><strong>Livraison express</strong> : nouvelle option à la carte +5 € pour passer en prioritaire avec un délai réduit de 3 jours.</li></ul>
       <h3 class="mono">v0.7.6 — Sécurité &amp; nettoyage</h3><ul><li><strong>Vérification des prix côté serveur</strong> : le total de chaque commande est recalculé par le worker avant l’envoi Discord. Une alerte orange apparaît si le montant envoyé par le client est anormalement bas.</li><li><strong>CORS</strong> : l’API de commande accepte uniquement les requêtes provenant de dekurmods.com et 2dkr.pages.dev.</li><li><strong>En-têtes de sécurité</strong> : X-Frame-Options, CSP, X-Content-Type-Options, Referrer-Policy et Permissions-Policy ajoutés sur toutes les pages.</li><li><strong>Cache des assets</strong> : les fichiers versionnés (/assets/*) sont mis en cache un an.</li><li><strong>Prix consolidés</strong> : les nouveaux tarifs d’octobre sont intégrés directement dans le catalogue. Les blocs temporaires (promo septembre, nouveauxTarifs) sont supprimés.</li></ul>
       <h3 class="mono">v0.7.5 — Halloween</h3><ul><li>Thème Halloween sur toutes les pages : orange, violet, citrouilles et curseur personnalisé.</li><li>−10 % sur packs, options lobby et comptes. Prix remisés arrondis à l’euro inférieur.</li><li>Fin automatique le 1er novembre 2026 à 00 h, heure de Paris. Les mod menus ne sont pas concernés par la remise.</li></ul>
